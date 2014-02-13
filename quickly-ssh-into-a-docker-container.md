@@ -64,7 +64,7 @@ I gave into annoyance and wrote a straightforward Python script to automatically
 
 You might notice it makes some assumptions which will crash the script if they’re not followed. There needs to be an argument for the container ID or name. In the example above I could use either "e53a722096f0" or "es-b" as the argument. There also has to be an sshd process port listening on 22, and a configured container to forward that port.
 
-也许你注意到了，这个脚本中我们假设的一些条件如果不满足，脚本就会崩溃。我们需要一个参数来表示容器的 ID 或者名称。咱上面的例子中我可以指定参数为 "e53a722096f0"或 者 "es-b"。同时还必须有一个 SSHD 进程监听 22 端口，还要配置一个容器来转发 22 端口。
+也许你注意到了，这个脚本中我们假设的一些条件如果不满足，脚本就会崩溃。我们需要一个参数来表示容器的 ID 或者名称。在上面的例子中我可以指定参数为 "e53a722096f0"或 者 "es-b"。同时还必须有一个 SSHD 进程监听 22 端口，还要配置一个容器来转发 22 端口。
 
 The output of docker inspect is a handy JSON string coming straight from the Docker Remote API. This in turn gives us the port we need. We then simply run subprocess.call and suddenly you’re in the container.
 
