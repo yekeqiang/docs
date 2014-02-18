@@ -1,7 +1,9 @@
 #Run Several Processes in Docker Container
+
 #在Docker容器中运行多个进程
 
 What I like the most about Docker project is new opportunity to deploy and distribute software. Many times I’ve been to situation when I wanted to play with some software and get exited about, but after I read installation manual my excitement totally gone. Non trivial applications, requires quite a lot dependencies: runtimes, libraries, databases.
+
 我最喜欢Docker的地方就是它那全新的软件部署和发布方式。我经常会看到令人兴奋的软件，兴冲冲的准备研究一下，然后被其安装说明在第一时间扼杀掉我的兴趣。稍微大一点的软件往往都需要很多依赖：运行时，库，数据库。
 
 With docker, the installation instruction got reduced to something like:
@@ -11,12 +13,15 @@ With docker, the installation instruction got reduced to something like:
     $ docker run vendor/package
 
 Simply like that, forget about missing Java Runtime on your server. It suits perfectly for TCP/HTTP applications.
+
 基本上就是这么几行命令了，不需要你在服务器上装什么Java运行时，非常适合TCP/HTTP程序。
 
 Being messing around [Seismo](https://github.com/seismolabs/seismo) project I realized, I want to go exactly same way. Since it has few dependencies now, MongoDB and NodeJS – it should be easier to anyone to try it, even if they do not use that setup. I was happy to see, that GitHub currently offers great support for Docker. Namely, if you have repo with Dockerfile inside, each time you push the code, docker image got rebuild and pushed to public [index](https://index.docker.io/).
+
 被自己的Seismo项目搞的焦头烂额后，***I want to go exactly same way 我还是希望能够按原计划把它实现***。因为这个项目的依赖很少，只有MongoDB和NodeJS，任何人都可以很轻松的上手，***even if they do not use that setup***。令人开心的是，Github现在对Docker提供了很好地支持，它会检测你的项目，如果发现其中有`Dockerfile`，那么当你push代码的时候，Docker镜像会自动重建然后Github会把新的镜像push到Docker的[公共镜像列表](https://index.docker.io/)中。
 
 I’ve created `Dockerfile` that would build up image, ready to have Seismo run inside.
+
 我创建了一个`Dockerfile`，可以构建一个运行着Seismo的镜像。
 
     FROM    ubuntu:latest
@@ -49,20 +54,25 @@ I’ve created `Dockerfile` that would build up image, ready to have Seismo run 
     ENTRYPOINT ["./bin/run.sh"]
     
 It’s based on latest Ubuntu server, installs Git, MongoDB and NodeJS runtime and clones Seismo itself inside image.
+
 这个镜像基于最新的服务器版Ubuntu，安装了Git，MongoDB和NodeJS的运行环境，并且把Seismo的库克隆到镜像内部。
 
 But, I’ve met a problem to start few processes inside the container. Since I need both MongoDB for storage and NodeJS for API server, it’s required both be running inside one container. If shell script just starts one, mongod for example, node app.js is not executed.
+
 但是，在容器内部启动多个进程的时候，我遇到了一些问题。因为我需要MongoDB作为存储，还需要NodeJS做API服务器，需要在容器中同时运行这两个程序。如果shell脚本只启动了一个，比如，只启动了`mongod`，那么`node app.js`就不会执行。
 
 
 I was a little worried, thinking it’s not possible to run more that one process inside container.
+
 我有点儿小慌张，以为容器内部无法同时运行多个进程。
 
 But solution was found. I’ve created another shell script that starts mongod as background process and starts node after.
+
 但我还是找到了解决方案。我重新写了脚本，把mongod作为后台进程开起来，然后再启动nodejs。
 
     #!/bin/bash
     mongod & node ./source/server.js
 
 That worked as charm.
+
 完美解决问题！
