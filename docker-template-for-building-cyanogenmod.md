@@ -20,11 +20,11 @@ Here is a Docker container for running an environment which contains everything 
 NOTE: You will need to install Docker to proceed: [https://www.docker.io/gettingstarted/](https://www.docker.io/gettingstarted/)
 
 NOTE：你需要按照根据 Docker 的文档先安装 Docker：[https://www.docker.io/gettingstarted/](https://www.docker.io/gettingstarted/)
+
 ***
 
 
 How to build:
-
 
 编译：
 
@@ -38,17 +38,20 @@ cd docker-cyanogenmod
 
 How to run:
 
-
 运行
+
 ***
+
 ```
 cd docker-cyanogenmod
 ./run.sh
 ```
+
 ***
 How to build CyanogenMod for your device:
 
-为你的设备编译编译 CyanogenMode：
+为你的设备编译 CyanogenMode：
+
 ***
 
 ```
@@ -59,15 +62,23 @@ source build/envsetup.sh
 breakfast <device codename>   # example: breakfast grouper
 brunch <device codename>      # example: brunch grouper
 ```
+
 ***
 
 Download:
 
+下载：
+
 Github URL: https://github.com/stucki/docker-cyanogenmod
 
+Github 库地址：[https://github.com/stucki/docker-cyanogenmod](https://github.com/stucki/docker-cyanogenmod)
+
 ***
+
 ChangeLog:
+
 ***
+
 ```
 2014-02-20
 
@@ -77,6 +88,7 @@ ChangeLog:
 
 * Initial release
 ```
+
 ***
 
 Any feedback is welcome. Enjoy!
