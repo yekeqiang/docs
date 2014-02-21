@@ -19,10 +19,9 @@ Here is a Docker container for running an environment which contains everything 
 
 NOTE: You will need to install Docker to proceed: [https://www.docker.io/gettingstarted/](https://www.docker.io/gettingstarted/)
 
-NOTE：你需要按照根据 Docker 的文档先安装 Docker：[https://www.docker.io/gettingstarted/](https://www.docker.io/gettingstarted/)
+注意：你需要根据 Docker 的文档先安装 Docker ：[https://www.docker.io/gettingstarted/](https://www.docker.io/gettingstarted/)
 
 ***
-
 
 How to build:
 
@@ -38,7 +37,7 @@ cd docker-cyanogenmod
 
 How to run:
 
-运行
+运行：
 
 ***
 
@@ -92,3 +91,5 @@ ChangeLog:
 ***
 
 Any feedback is welcome. Enjoy!
+
+欢迎提交反馈。
