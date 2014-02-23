@@ -1,4 +1,2 @@
-Dockboard Docs
+Dockboard Docs Repository
 ========
-
-The backup of dockboard.org contents. 
