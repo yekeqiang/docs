@@ -35,6 +35,7 @@ Each pid namespace has its own process numbering. Different pid namespaces form 
 - if a pseudo-filesystem like proc is mounted by a process within a pid namespace, it will only show the processes belonging to the namespace;
 - since the numbering is different in each namespace, it means that a process in a child namespace will have multiple PIDs: one in its own namespace, and a different PID in its parent namespace.
 
+
 - 每一个pid namespace都有自己的，像/sbin/init一样pid=1的进程；
 - 每个namespace中的进程不能用类似kill或ptrace这样的系统调用来影响父，或兄弟namespace，因为进程id仅在指定的namespace内部才有意义。
 - 如果一个像proc这样的pseudo-filesystem被一个pid namespace中的进程挂载了，/proc目录只会显示这个namespace中的进程。
@@ -72,7 +73,7 @@ In case you were wondering: each net namespace has its own routing table, but al
 
 顺便提一下：每一个net namespace都有自己的路由表，自己的iptables的chains和rules。
 
-## The ipc namespace
+### The ipc namespace
 
 This one won’t appeal a lot to you; unless you passed your UNIX 101 a long time ago, when they still taught about IPC (InterProcess Communication)!
 
@@ -96,7 +97,7 @@ Introduce the ipc namespace: processes within a given ipc namespace cannot acces
 
 现在我们引入ipc namespace：在一个ipc namespace中的进程无法访问（甚至看到）位于其他ipc namespace中的IPC资源。现在你可以在每个容器中安全的运行PostgreSQL，而不用担心会发生IPC key冲突了。
 
-## The mnt namespace
+### The mnt namespace
 
 You might already be familiar with chroot, a mechanism allowing to sandbox a process (and its children) within a given directory. The mnt namespace takes that concept one step further.
 
@@ -126,7 +127,7 @@ The mnt namespace makes the situation much cleaner, allowing each container to h
 
 使用mnt namespace能允许每个容器拥有自己的mountpoints，并且在/proc/mounts里只包含这些已经将路径转换为当前namespace根目录的mountpoints。
 
-## The uts namespace
+### The uts namespace
 
 Finally, the uts namespace deals with one little detail: the hostname that will be “seen” by a group of processes.
 
