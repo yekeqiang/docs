@@ -10,19 +10,22 @@ This article will serve as a very basic hands on tutorial of docker commandline.
 ###本文中我们要做什么？
 
 Run Apache http server inside a docker container and access it from host machine.
+
 在Docker容器中运行Apache http服务器，并从Docker所在的主机访问该服务器。
 
 ###What is the purpose?
 ###本文的目的为何？
 
 Familiarize ourself with basic docker commands and feel its power.
+
 本文的目的在于让读者熟悉基本的Docker命令，感受Docker的强大。
 
 ###Where am i running everything?
-###本文内容的软件运行环境是什么？
+###本文中软件的运行环境是什么？
 
 I am running everything on my Mac, We will first be creating a CentOS VM using [Vagrant](http://www.vagrantup.com/). Within CentOS VM, we will be installing docker and then run apache http server inside a docker container. (You don't have to necessarily run docker in VM, you can directly run it on your machine. If you decide to run it directly on your machine, please ignore Step 1 below)
-文中所有内容都是在我的Mac上完成的，我们首先要用Vagrant来创建一个CentOS虚拟机。在虚拟机中，我们安装Docker，然后在Docker容器中运行Apache http服务器（虚拟机不是必须的，你也可以在自己的机器上直接安装Docker，忽略第一个步骤）。
+
+文中所有内容都是在我的Mac上完成的，我们首先要用[Vagrant](http://www.vagrantup.com/)来创建一个CentOS虚拟机。在虚拟机中，我们安装Docker，然后在Docker容器中运行Apache HTTP服务器（读者也可以在自己的机器上直接安装Docker，跳过第一个步骤）。
 
 ######**译者注：Windows和Mac系统暂时都无法直接安装Docker，如果读者想直接安装Docker，需要选择一个适当的Linux发行版，具体请参考[Docker官方文档](http://docs.docker.io/en/latest/)中的Installation一节**
 
@@ -31,13 +34,15 @@ I am running everything on my Mac, We will first be creating a CentOS VM using [
 
 You should have Oracle Virtual Box and Vagrant installed on your machine (only if you decide to run docker inside VM).
 Let's get started.
+
 您需要在电脑中安装[Oracle Virtual Box](https://www.virtualbox.org/)和[Vagrant](http://www.vagrantup.com/)。如果已经装好，那我们就开始吧！
 
 ###Step 1: Create a CentOS VM 
 ###步骤1：创建CentOS虚拟机
 
 Inside a directory on your machine (~/vagarnt in my case), create a file named Vagrantfile with following contents
-在任意本地目录（本文中使用~/vagrant目录）中创建`Vagrantfile`文件，内容如下：
+
+在本地目录（本文中使用~/vagrant目录）中创建一个`Vagrantfile`文件，内容如下：
 
     # -*- mode: ruby -*-
     # vi: set ft=ruby :
@@ -51,11 +56,13 @@ Inside a directory on your machine (~/vagarnt in my case), create a file named V
     end
     
 I am not going to explain What Vagrant and Vagrantfile does, if you are not aware of them, please read about them. Also create a directory called htdocs parallel to Vagrantfile and inside htdocs directory create a file index.html with following contents.
-在这里，我就不解释Vagrant和Vagrantfile了。`Vagrantfile`创建好后，在Vagrantfile所在目录中再创建一个`htdocs`目录，`htdocs`目录中创建一个`index.html`文件，html文件内容如下：
+
+在这里，我就不解释Vagrant和Vagrantfile了。`Vagrantfile`创建好后，在Vagrantfile所在目录中再创建一个`htdocs`目录并在其中创建一个`index.html`文件，html文件内容如下：
 
     This file is being server by http server running inside docker container
 
 Once Vagrantfile and htdocs directory is ready. Execute following commands
+
 Vagrantfile文件和htdocs目录都创建好了，现在我们来执行下面的命令：
 
     vagrant up # 启动虚拟机，这一步可能会让我们选择网卡
@@ -64,6 +71,7 @@ Vagrantfile文件和htdocs目录都创建好了，现在我们来执行下面的
 ###Step 2: Install docker 
 ###步骤2：安装docker
 Run following commands to install docker
+
 执行下面的命令来安装docker：
 
     sudo yum -y update # Update Installed packages
@@ -73,25 +81,28 @@ Run following commands to install docker
 ###Step 3: Setup Docker
 ###步骤3：设置Docker
 Docker needs a base image to work. This is the image from which all our containers will be running (either directly or indirectly). To pull the base image
-Docker需要一个基本的镜像才能运行，我们的所有容器都是（直接或间接）基于这样一个镜像来运行的，下面的命令把一个镜像pull到本地：
+
+Docker需要一个基本的镜像才能运行，我们的所有容器都是（直接或间接）基于这样一个镜像来运行的，下面的命令把一个基本镜像pull到本地：
 
     sudo docker pull centos # Download base image
     
 ###Step 4: Create first custom container image
-###步骤4：创建第一个容器的镜像
+###步骤4：为我们的容器创建第一个镜像
     
     # 以centos镜像作为基础镜像，我们启动自己的容器并在其中执行/bin/bash命令
     # 注：-t -i参数用于创建一个虚拟的命令行。
     sudo docker run -t -i centos /bin/bash 
     
 You have successfully started your first docker container and you are inside the container. Execute following commands inside the container
-现在我们已经成功的运行了我们的第一个容器，并且进入到容器的命令行界面中，这时，我们执行下面的命令：
+
+现在我们已经成功的运行了自己的第一个容器，并且进入到容器的命令行界面中。在容器中，我们执行下面的命令：
 
     yum -y update # 更新软件包
     yum install which # 安装which命令
     yum install git # 安装Git
     
 Press Ctrl + d to kill the container.
+
 安装完成后，按`Ctrl + d`来退出容器的命令行。
 
     #执行sudo docker ps -a，可以看到被我们终止的容器
@@ -99,12 +110,14 @@ Press Ctrl + d to kill the container.
     da9031d3568f        centos:6.4          /bin/bash           5 minutes ago.....
     
 Commit our changes to a new container
+
 把我们所做的改变提交到一个新的容器：
 
     # 这里我们创建一个自己的基础容器，容器中安装好了文章中所需的常用工具。读者的容器id可能与文章中的有所不同，以上一步docker ps -a的结果为准。
     sudo docker commit da90 custom/base
     
 Once new container is committed
+
 容器成功提交后，执行`sudo docker images`，我们会看到刚才提交的容器（如下面的结果所示）。我们就以这个容器为基础容器，再来创建一个新的容器。
     
     REPOSITORY          TAG                 IMAGE ID            CREATED            
@@ -124,6 +137,7 @@ Once new container is committed
 ###步骤6：再次提交新的容器
 
 Press Ctrl + d to kill the container.
+
 按`Ctrl + d `来退出容器的命令行，然后执行命令：
 
     # This will commit our httpd related changes of step 5 and create a new base container image called custom/httpd. Container id will be different for you, execute sudo docker ps -a to find the container id. 
@@ -132,7 +146,8 @@ Press Ctrl + d to kill the container.
     sudo docker commit aa6e2fc0b94c custom/httpd 
 
 I am sure you have already realized that we have just created a reusable container image with http server installed on it. This idea can be used for anything and everything. You can create container for each component of your technology stack and they can be used on developer machine as well as production environment.
-你应该已经发现了，我们创建了一个带有http服务器的容器镜像，这个镜像可以在任何场合下复用。你可以根据这种思想，为自己所需的每个组件都创建一个容器，然后把这些容器用于开发环境或者生产环境。
+
+你应该已经发现了，我们创建了一个带有http服务器并可以复用的容器镜像。你可以根据这种思想，为自己所需的每个组件都创建一个容器，然后把这些容器复用于开发环境或者生产环境。
 
 ###Step 7: Running http server
 ###步骤7：运行http服务器
@@ -150,7 +165,8 @@ I am sure you have already realized that we have just created a reusable contain
 ###步骤8：在浏览器中测试
 
 Hit http://localhost:8080; you should see the index.html we created in step 1.
-在浏览器中浏览http://localhost:8080，你应该可以看到步骤1创建的html文件的内容。
+
+在浏览器中浏览http://localhost:8080，你应该可以看到步骤1中html文件的内容。
 
 ###Conclusion:
 ###总结
