@@ -8,7 +8,7 @@ Making things simple is a lot of work. At dotCloud, we package terribly complex 
 
 This is the 1st installment of a series of posts exploring the architecture and internals of platorm-as-a-service in general, and dotCloud in particular. For our first episode, we will introduce namespaces, a specific feature of the Linux kernel used by the dotCloud platform to isolate applications from each other.
 
-这个系列的文章探索了PaaS的架构和内部实现，包括了广义的PaaS和狭义的dotCloud。这是第一篇文章，我们会介绍名称空间（namespaces），这是一个dotCloud平台用来隔离应用程序的Linux内核的特性。
+这个系列的文章探索了一般认为的PaaS的架构和内部实现，以dotCloud平台为示例。在这第一篇文章中，我们会介绍名称空间（namespaces），这是一个dotCloud平台用来隔离应用程序的Linux内核的特性。
 
 ## Part 1: Namespaces
 
@@ -38,7 +38,7 @@ Each pid namespace has its own process numbering. Different pid namespaces form 
 
 - 每一个pid namespace都有自己的，像/sbin/init一样pid=1的进程；
 - 每个namespace中的进程不能用类似kill或ptrace这样的系统调用来影响父，或兄弟namespace，因为进程id仅在指定的namespace内部才有意义。
-- 如果一个像proc这样的pseudo-filesystem被一个pid namespace中的进程挂载了，/proc目录只会显示这个namespace中的进程。
+- 如果一个像proc这样的伪文件系统被一个pid namespace中的进程挂载了，/proc目录只会显示这个namespace中的进程。
 - 因为每个namespace中的进程编号是独立的，所以一个子namespace中的进程会有多个不同的pid——在自己namespace中的pid和在父namespace中的pid。
 
 The last item means that from the top-level pid namespace, you will be able to see all processes running in all namespaces, but with different PIDs. Of course, a process can have more than 2 PIDs if there are more than two levels of hierarchy in the namespaces.
@@ -61,7 +61,7 @@ It is possible to create pairs of special interfaces, which will appear in two d
 
 A typical container will have its own loopback interface (lo), as well as one end of such a special interface, generally named eth0. The other end of the special interface will be in the “original” namespace, and will bear a poetic name like veth42xyz0. It is then possible to put those special interfaces together within an Ethernet bridge (to achieve switching between containers), or route packets between them, etc. (If you are familiar with the Xen networking model, this is probably no news to you!)
 
-一个典型的容器会有自己的loopback接口（lo），和一个特殊的接口，一般叫eth0。eth0的另一端会连接到最顶层的namespace，并且具有一个诗意的名字，如veth42xyz0。然后用桥接的方法把所有的这些eth0和主机连接起来，这样就能实现容器之间的切换，和在容器之间路由数据包等等。（如果你了解Xen的网络模型，那你应该对此感到很熟悉！）
+一个典型的容器会有自己的loopback接口（lo），和一个特殊的接口，一般叫eth0。eth0的另一端会连接到最顶层的namespace，并且具有一个诗意的名字，如veth42xyz0。然后用桥接的方法把所有的这些eth0和主机连接起来(来实现容器间的数据交换)，和在容器之间路由数据包等等。（如果你了解Xen的网络模型，那你应该对此感到很熟悉！）
 
 ######**译者注：docker默认采用veth方式，lxc的5种网络类型可见http://manpages.ubuntu.com/manpages/precise/man5/lxc.conf.5.html
 
@@ -89,9 +89,9 @@ While still supported by virtually all UNIX flavors, those features are consider
 
 What’s the connection with namespaces? Well, each IPC resources are accessed through a unique 32-bits ID. IPC implement permissions on resources, but nonetheless, one application could be surprised if it failed to access a given resource because it has already been claimed by another process in a different container.
 
-这些和namespaces有什么关系？唔，每个IPC资源都是通过一个唯一的32-bits的ID来访问的。IPC implement permissions on resources，但尽管如此，如果你的程序无法使用某个资源，是因为在其他容器中的某个进程使用了同样的资源，这会让人感到很意外。
+这些和namespaces有什么关系？唔，每个IPC资源都是通过一个唯一的32-bits的ID来访问的。IPC实现了资源的访问控制，但尽管如此，如果你的程序无法使用某个资源，是因为在其他容器中的某个进程使用了同样的资源，这会让人感到很意外。
 
-######**IPC implement permissions on resources这句不会翻。。
+######**译者注: IPC准确地说不仅实现了资源访问的控制，更是进程间数据交互的通信机制。
 
 Introduce the ipc namespace: processes within a given ipc namespace cannot access (or even see at all) IPC resources living in other ipc namespaces. And now you can safely run a PostgreSQL instance in each container without fearing IPC key collisions!
 
@@ -101,7 +101,7 @@ Introduce the ipc namespace: processes within a given ipc namespace cannot acces
 
 You might already be familiar with chroot, a mechanism allowing to sandbox a process (and its children) within a given directory. The mnt namespace takes that concept one step further.
 
-你也许已经很熟悉chroot，chroot是一个能把在某个目录下的进程（包括他的子进程）装进一个沙盒的机制。mnt namespace进一步地发展这个概念。
+你也许已经很熟悉chroot，chroot是一个可以让进程(及其子进程)在指定目录下以沙箱的方式运行。mnt namespace进一步地发展这个概念。
 
 As its name implies, the mnt namespace deals with mountpoints.
 
@@ -122,6 +122,8 @@ At a second glance, is it really that useful? After all, if each container is ch
 Inspecting /proc/mounts in a container will show the mountpoints of all containers. Also, those mountpoints will be relative to the original namespace, which can give some hints about the layout of your system – and maybe confuse some applications which would rely on the paths in /proc/mounts.
 
 在一个容器下查看/proc/mounts会显示所有容器的mountpoints。而且，这些mountpoints的路径会和顶层的namespace相关，这可能会泄露出一些关于你的系统结构的线索，并且可能会让一些依赖/proc/mounts内路径的程序感到迷惑。
+
+######**译者注:此处的容器是指用chroot形成的沙箱环境。
 
 The mnt namespace makes the situation much cleaner, allowing each container to have its own mountpoints, and see only those mountpoints, with their path correctly translated to the actual root of the namespace.
 
@@ -161,8 +163,6 @@ Each namespace? Not quite. Up to (and including) kernel 3.4, only ipc, net, and 
 It is also possible to “enter” a namespace, by attaching a process to an existing namespace. Why would one want to do that? Generally, to run an arbitrary command within the namespace. Here are a few examples:
 
 通过把一个进程附加（attach）到到一个现有的namespace，可以让我们“进入”到一个namespace。为什么会想要这么做呢？一般情况，是为了在namespace中运行某个命令。下面是一些例子：
-
-######**译者注:attach也就是sudo docker run -i -t ubuntu /bin/bash
 
 - you want to setup network interfaces “from outside”, without relying on scripts inside the container;
 - you want to run an arbitrary command to retrieve some information about the container: you could generally obtain the same information by peeking at the container “from outside”, but sometimes, it might require specially patched tools (e.g. if you want to execute netstat);
