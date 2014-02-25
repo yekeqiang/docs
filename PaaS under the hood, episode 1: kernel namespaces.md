@@ -71,3 +71,135 @@ Note that each net namespace has its own meaning for INADDR_ANY, a.k.a. 0.0.0.0;
 In case you were wondering: each net namespace has its own routing table, but also its own iptables chains and rules.
 
 顺便提一下：每一个net namespace都有自己的路由表，自己的iptables的chains和rules。
+
+## The ipc namespace
+
+This one won’t appeal a lot to you; unless you passed your UNIX 101 a long time ago, when they still taught about IPC (InterProcess Communication)!
+
+这个部分不会很吸引你，除非你是在很久以前通过你的UNIX基础课程，那时候，他们还在教IPC（InterProcess Communication）！
+
+IPC provides semaphores, message queues, and shared memory segments.
+
+IPC提供信号量（semaphores），消息队列（message queues）和共享内存（shared memory segments）的特性。
+
+While still supported by virtually all UNIX flavors, those features are considered by many people as obsolete, and superseded by POSIX semaphores, POSIX message queues, and mmap. Nonetheless, some programs – including PostgreSQL – still use IPC.
+
+尽管几乎所有的UNIX版本都还支持这些特性，但有有很多人觉得这些特性已经过时，可以被POSIX semaphores，POSIX message queues，和mmap所取代。尽管如此，有一些程序 —— 包括PostgreSQL —— 仍然在使用IPC。
+
+What’s the connection with namespaces? Well, each IPC resources are accessed through a unique 32-bits ID. IPC implement permissions on resources, but nonetheless, one application could be surprised if it failed to access a given resource because it has already been claimed by another process in a different container.
+
+这些和namespaces有什么关系？唔，每个IPC资源都是通过一个唯一的32-bits的ID来访问的。IPC implement permissions on resources，但尽管如此，如果你的程序无法使用某个资源，是因为在其他容器中的某个进程使用了同样的资源，这会让人感到很意外。
+
+######**IPC implement permissions on resources这句不会翻。。
+
+Introduce the ipc namespace: processes within a given ipc namespace cannot access (or even see at all) IPC resources living in other ipc namespaces. And now you can safely run a PostgreSQL instance in each container without fearing IPC key collisions!
+
+现在我们引入ipc namespace：在一个ipc namespace中的进程无法访问（甚至看到）位于其他ipc namespace中的IPC资源。现在你可以在每个容器中安全的运行PostgreSQL，而不用担心会发生IPC key冲突了。
+
+## The mnt namespace
+
+You might already be familiar with chroot, a mechanism allowing to sandbox a process (and its children) within a given directory. The mnt namespace takes that concept one step further.
+
+你也许已经很熟悉chroot，chroot是一个能把在某个目录下的进程（包括他的子进程）装进一个沙盒的机制。mnt namespace进一步地发展这个概念。
+
+As its name implies, the mnt namespace deals with mountpoints.
+
+就像名字所暗示的，mnt namespace处理mountpoints的问题。
+
+Processes living in different mnt namespaces can see different sets of mounted filesystems – and different root directories. If a filesystem is mounted in a mnt namespace, it will be accessible only to those processes within that namespace; it will remain invisible for processes in other namespaces.
+
+在不同mnt namespace下的进程可以看到不同的挂载文件系统，和不同的root目录。一个挂载在某个nmt namespace下的文件系统，只能被同一个namespace下的进程所访问，并且对其他namespace下的进程不可见。
+
+At first, it sounds useful, since it allows to sandbox each container within its own directory, hiding other containers.
+
+咋看之下，这样好像挺好用，因为这样可以把每个容器自己的目录结构做成一个沙盒，和其他容器隔离开来。
+
+At a second glance, is it really that useful? After all, if each container is chroot‘ed in a different directory, container C1 won’t be able to access or see the filesystem of container C2, right? Well, that’s right, but there are side effects.
+
+但仔细想想，真的有那么好用么？毕竟，如果把每个容器放在不同的目录下，然后分别使用chroot，这样容器C1就没法看到或访问容器C2的文件目录了，对吧？是的，没错，但这样做会有一些副作用：
+
+Inspecting /proc/mounts in a container will show the mountpoints of all containers. Also, those mountpoints will be relative to the original namespace, which can give some hints about the layout of your system – and maybe confuse some applications which would rely on the paths in /proc/mounts.
+
+在一个容器下查看/proc/mounts会显示所有容器的mountpoints。而且，这些mountpoints的路径会和顶层的namespace相关，这可能会泄露出一些关于你的系统结构的线索，并且可能会让一些依赖/proc/mounts内路径的程序感到迷惑。
+
+The mnt namespace makes the situation much cleaner, allowing each container to have its own mountpoints, and see only those mountpoints, with their path correctly translated to the actual root of the namespace.
+
+使用mnt namespace能允许每个容器拥有自己的mountpoints，并且在/proc/mounts里只包含这些已经将路径转换为当前namespace根目录的mountpoints。
+
+## The uts namespace
+
+Finally, the uts namespace deals with one little detail: the hostname that will be “seen” by a group of processes.
+
+最后，uts namespace处理一个小细节：容器内的进程所看到的hostname。
+
+
+Each uts namespace will hold a different hostname, and changing the hostname (through the sethostname system call) will only change it for processes running in the same namespace.
+
+每个uts namespace会有一个不同的hostname，改变hostname（通过sethostname系统命令）只会影响到同一个namespace中的进程。
+
+######**译者注：uts namespace还处理每个容器看到的domainname，这篇文章作者写于12年11月，Linux3.8是13年2月发布的，实现了一个新的user namespace，可参考：http://lwn.net/Articles/531114/
+
+## Creating namespaces
+
+Namespace creation is achieved with the clone system call. This system call supports a number of flags, allowing to specify “I want the new process to run within its own pid, net, ipc, mnt, and uts namespaces”. When creating a container, this is exactly what happens: a new process, with new namespaces, is created; its network interfaces (including the special pair of interfaces to talk with the outside world) are configured; and it executes an init-like process.
+
+通过clone这个系统调用可以创建namespace。这个系统调用支持许多标志，让用户可以指定：“我希望新进程可以使用自己的pid，net，ipc，mnt和uts namespace”。创建一个容器的过程是这样的：首先创建一个带有许多新的namespace的进程；然后配置它网络接口（包括那个用于连接外部网络的特殊接口对）；最后执行一个类似init的进程。
+
+When the last process within a namespace exits, the associated resources (IPC, network interfaces…) are automatically reclaimed. If, for some reason, you want those resources to survive after the termination of the last process of the namespace, there is a way. Each namespace is materialized by a special file in /proc/$PID/ns. Using mount --bind on one of those special files, each namespace can be retained for future use.
+
+当一个namespace中最后一个进程退出之后，相关的资源（IPC，网络接口等等……）会自动被回收。如果因为某些原因，你不希望在这时回收资源的话，是有一个方法。namespace中的每个进程都有一个/proc/$PID/ns目录，里面的每个文件对应一个namespace类型。用mount --bind来挂载其中的某个文件，这样，对应的namespace就可以被保留，即使其中的所有进程都退出了。
+
+######**译者注：这里译者根据http://lwn.net/Articles/531381/，对原文的意思稍加扩充。
+
+Each namespace? Not quite. Up to (and including) kernel 3.4, only ipc, net, and uts namespaces appear here; mnt and pid namespaces do not. This can be a problem in some specific cases, as we will see in the next paragraph.
+
+######**译者注：以上这段过时了，说的是Linux3.4内核下只看得到ipc，net，和uts namespace，在Linux3.8中已经修复了。具体参见：http://lwn.net/Articles/531381/
+
+## Attaching to existing namespaces
+
+It is also possible to “enter” a namespace, by attaching a process to an existing namespace. Why would one want to do that? Generally, to run an arbitrary command within the namespace. Here are a few examples:
+
+通过把一个进程附加（attach）到到一个现有的namespace，可以让我们“进入”到一个namespace。为什么会想要这么做呢？一般情况，是为了在namespace中运行某个命令。下面是一些例子：
+
+######**译者注:attach也就是sudo docker run -i -t ubuntu /bin/bash
+
+- you want to setup network interfaces “from outside”, without relying on scripts inside the container;
+- you want to run an arbitrary command to retrieve some information about the container: you could generally obtain the same information by peeking at the container “from outside”, but sometimes, it might require specially patched tools (e.g. if you want to execute netstat);
+- you want to obtain a shell within the container.
+
+- 你想要从容器外设置容器的网络接口，而又不想依赖容器内的脚本。
+- 你想要运行某个命令来得到容器的一些信息：一般情况下，你可以从外部查询容器而得到相同的信息，但有时，你还是会需要一些特殊的工具（比如需要查看netstat的信息）。
+- 你想要在容器内获得一个shell
+
+Attaching a process to existing namespaces requires two things:
+
+把进程附加到现有的namespace需要这样两件事：
+
+- the setns system call (which exists only since kernel 3.0, or with patches for older kernels);
+- the namespace must appear in /proc/$PID/ns.
+
+- setns 系统调用（只在内核3.0版本之后才有，老版本内核需要补丁）；
+- namespace需要出现在/proc/$PID/ns
+
+Wait, we mentioned those special files in the previous paragraph, and we told that only ipc, net, and uts namespaces were listed under /proc/$PID/ns! So how can we attach to existing mnt and pid namespaces? We can’t – unless we use a patched kernel.
+
+Combining the necessary patches can be fairly tricky, and explaining how to resolve conflicts between AUFS and GRSEC could almost require a blog post by itself. So, if you don’t want to run an overly patched kernel, here are some workarounds.
+
+- You can run sshd in your containers, and pre-authorize a special SSH key to execute your commands. This is one of the easiest solutions, but if sshd crashes, or is stopped (intentionally or by accident), you’re locked out of the container. Also, if you want to squeeze the memory footprint of your containers as much as possible, you might want to get rid of sshd. If the latter is your main concern, you can run a low profile SSH server like dropbear, or you can start the SSH service from inetd or a similar service.
+- If you want something simpler than SSH (or if you want something different than SSH, to avoid interferences with sshd custom configurations), you can open a backdoor. An example would be to run socat TCP-LISTEN:222,fork,reuseaddr EXEC:/bin/bash,stderr from init in your containers (but make sure that port 222/tcp is correctly firewalled then).
+- An even better solution is to embed this “control channel” within your init process. Before changing its root directory, the init process could setup a UNIX socket on a path located outside the container root directory. When it will change its root directory, it will retain its open file descriptors – and therefore, the control socket.
+
+######**译者注：上面这些讲的是/proc/$PID/ns中没有mnt和pid namespace的对应文件，用怎样的变通方法来解决问题。在Linux3.8中已经不存在这个问题。
+
+## How dotCloud uses namespaces
+## dotCloud怎样使用namespaces
+
+In its early age, the dotCloud platform used plain LXC (Linux Containers), and therefore, made implicit use of namespaces.
+
+dotCloud平台的早期，我们使用纯LXC（Linux Containers），因此，隐式地使用namespaces。
+
+Very early, we deployed patched kernels, allowing us to attach arbitrary processes into existing namespaces – because we found it to be the most convenient and reliable way to deploy, control, and orchestrate containers. The platform evolved, and while the original “containers” are being stripped down (and bearing less and less similarity with usual Linux Containers), we still use namespaces to isolate applications from each other.
+
+更早的时候，我们部署打补丁的内核，这允许我们把任意进程依附到现有的namespace上——因为我们发现这是部署，控制和协调容器最方便，且最可靠的方法。在平台升级，和最早的容器被越来越多的定制化之后（变得越来越不像通常的Linux Containers），我们仍然使用namespace来隔离不同的应用。
+
+######**这段好像有点诡异。。
