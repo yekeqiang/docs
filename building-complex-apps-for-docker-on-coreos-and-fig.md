@@ -193,3 +193,4 @@ X-ConditionMachineOf=db.1.service
 与此同时，你也知道我没有在骗你，看这个[youtube上2分钟的关于CoreOS Fleet的视频](http://www.youtube.com/watch?v=u91DnN-yaJ8)来了解一个真实的关于部署多主机CoreOS服务的例子。你可以在这个简单的视频中发现CoreOS和Fleet的强大。但是现在还没法把所有的组件组合在一起来重现视频中的例子。
 
 ### 小结
+我们已经非常接近向您展示如何部署一个多主机的Docker应用到一个云生产环境中。每周我都通过不断向您展示一些复杂的例子来带领你越来越接近这个目标。CoreOS和Fig只是两个基于Docker技术开发的用来部署复杂应用的工具。未来我们将向您展示另外的工具比如[Flynn](https://flynn.io/)和[Deis](http://deis.io/)，它们也可以用来实现相同的目的。
