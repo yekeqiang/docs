@@ -1,13 +1,13 @@
 ##A reveal.js Docker Base Image with ONBUILD
-##使用ONBUILD构建reveal.js的Docker镜像
+##使用 ONBUILD 构建 reveal.js 的 Docker 镜像
 
 Docker 0.8 introduced the ONBUILD instruction for Dockerfiles. I'll admit, when I read the release announcement, I glossed right over this new feature. Now that I've had time to read more about it, I can see its potential for creating build environments.
 
-Docker0.8发布了Dockerfile的一个新的指令ONBUILD。我必须承认，当我在阅读[发布公告](http://blog.docker.io/2014/02/docker-0-8-quality-new-builder-features-btrfs-storage-osx-support/)的时候，我忽视了这个新的特性。现在我有充分的时间[再读一遍它](http://docs.docker.io/en/latest/reference/builder/#onbuild)，我发现了它在构建环境上的潜力。
+Docker 0.8 发布了 Dockerfile 的一个新的指令 ONBUILD。我必须承认，当我在阅读[发布公告](http://blog.docker.io/2014/02/docker-0-8-quality-new-builder-features-btrfs-storage-osx-support/)的时候，我忽视了这个新的特性。现在我有充分的时间[再读一遍它](http://docs.docker.io/en/latest/reference/builder/#onbuild)，我发现了它在构建环境上的潜力。
 
 Let me show you by containerizing reveal.js.
 
-让我通过把reveal.js容器化来向您展示这个新特性。
+让我通过把 reveal.js 容器化来向您展示这个新特性。
 
 ###The Base Image
 
@@ -15,7 +15,7 @@ Let me show you by containerizing reveal.js.
 
 Reveal.js bills itself as "a framework for easily creating beautiful presentations using HTML." Most reveal.js features work just fine when we load the presentation directly from the filesystem. But some features, like Markdown support, require that we load the presentation from a running web server. A Docker container can tie everything up in one tidy package that we can move and run anywhere.
 
-[Reveal.js](http://lab.hakim.se/reveal-js/#/)把自己定义为“使用HTML技术来展示漂亮幻灯片的一个简易框架”。当我们直接从文件系统装在幻灯片的时候，reveal.js的大多数的特性是正常工作的。但是有些特性，比如Markdown的支持，需要我们通过一个Web服务器来装载幻灯片。一个Docker的容器可以把所有东西装载到一个盒子里，方便我们在任何地方移动和执行。
+[Reveal.js](http://lab.hakim.se/reveal-js/#/) 把自己定义为“使用 HTML 技术来展示漂亮幻灯片的一个简易框架”。当我们直接从文件系统装载幻灯片的时候，reveal.js 的大多数特性是正常工作的。但是有些特性，比如 Markdown 的支持，需要我们通过一个 Web 服务器来装载幻灯片。 Docker 可以把所有东西装载到一个容器里，方便我们在任何地方移动和执行。
 
 We could write a Dockerfile that installs NodeJS, downloads reveal.js, installs its npm dependencies, and inserts our Markdown slides into the container on build. We could then copy and build this Dockerfile everywhere we want to develop or run a slideshow server. Or we could keep cramming new markdown files into a single container by rebuilding or scping them in a backdoor. Or we could build a generic image that, when run, requires us to volume mount our slides from the host or another container.
 
