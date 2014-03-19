@@ -64,11 +64,11 @@ ONBUILD 指令只在构建 cpuguy83/echo_here 镜像时才执行。
 
 ONBUILD gets run just after the FROM and before any other instructions in a child image.
 
-ONBUILD 指令 FROM 命令后执行，但早于子镜像的任何命令。
+ONBUILD 指令在 FROM 命令后执行，但早于子镜像的任何命令。
 
 You can also have multiple ONBUILD instructions.
 
-ONBUILD 指令可以指定多个。
+你也可以指定多个 ONBUILD 指令。
 
 Why would you want this? It turns out it’s pretty darn awesome, and powerful. I have a demo github repo setup for this: [Docker ONBUILD Demo](https://github.com/cpuguy83/docker-onbuild_demo)
 
@@ -76,7 +76,7 @@ Why would you want this? It turns out it’s pretty darn awesome, and powerful. 
 
 Before diving into this, I just want to say I’ve probably used ONBUILD a bit excessively here in order to get the point across for what ONBUILD does and what it can do, it’s up to you how to use it in your projects.
 
-在看 Demo 之前，我先声明，为了演示ONBUILD的功能，我在Demo中可能有点儿过度的使用了 ONBUILD 了。大家在自己的项目中要酌情使用。
+在看 Demo 之前，我先声明，为了演示ONBUILD的功能，我在 Demo 中可能有点儿过度使用 ONBUILD 了。大家在自己的项目中要酌情使用。
 
 ```
 # Dockerfile
@@ -212,7 +212,7 @@ WAT?? This Dockerfile is a grand total of one line. It’s only one line because
 
 Remember, this aggressive use of ONBUILD may not be optimal for your project and is for demo purposes… not to say it’s not ok 
 
-请注意，这种过度使用 ONBUILD 的方式不一定适合你的项目，我在这里也是为了 Demo ，当然，也并不是说这种方式一定不OK。嘿嘿
+请注意，这种过度使用 ONBUILD 的方式不一定适合你的项目，我在这里也是为了 Demo ，当然，也并不是说这种方式一定不 OK 。嘿嘿
 
 
 So let’s run this:
@@ -237,7 +237,7 @@ So let’s run this:
     
 Then we can run the rails_demo image and have the rails server fire right up
 
-构建完成后，我们就可以启动 rails_demo 景象了，其中的 rails 服务器也随着启动了。
+构建完成后，我们就可以启动 rails_demo 镜像了，其中的 rails 服务器也随之启动了。
     
     docker run -i -t cpuguy83/rails_demo
      
@@ -251,7 +251,7 @@ Then we can run the rails_demo image and have the rails server fire right up
     
 TLDR; ONBUILD… awesome. Use it to defer build instructions to images built from a base image. Use it to more easily build images from a common base but differ in some way, such as different git branches, or different projects entirely.
 
-此处省略两万五千字... ONBUILD ，嗯，很棒的命令。用它把镜像中指定的命令延迟到子镜像中去执行。用 ONBUILD 可以从一个通用的父镜像中更方便的衍生出某些方面有所不同的子镜像，例如子镜像可以有不同分支，或者整个项目都是全新的。
+此处省略两万五千字... ONBUILD ，嗯，很棒的命令，可以用它把镜像中指定的命令延迟到子镜像中去执行。用 ONBUILD 可以从一个通用的父镜像中更方便的衍生出某些方面有所不同的子镜像，例如子镜像可以有不同分支，或者整个项目都是全新的。
 
 With great power comes great responsibility.
 
