@@ -23,7 +23,8 @@ Docker 中文社区是一个开放的社区，目前的内容工作集中在翻�
 * 文章发布时需要在翻译的最后加入版权声明。
 * 文章发布时需要在版权声明后加入译者的信息及联系方式。
 
-###版权声明
-这篇文章由[name](作者Twitter、Github、博客等的URL，任选其一)发表，[译者姓名](译者Twitter、Github、博客、微博等URL，任选其一)。点击[此处](英文原文URL)可查阅原文。
+###加入并组织 meetup
 
-The article was contributed by [name](作者Twitter、Github、博客的url), click [here](文章URL) to read the original publication.﻿
+我们使用 meetup.com 作为线下 meetup 活动的组织、发布工具。如果您有意在本地组织 Meetup 活动或参与 Meetup 的组织可以邮件与我们联系，确认后您所在城市将出现在 meetup.com 上。
+
+目前我们已经有两个 meetup 群组：[Docker Beijing](http://www.meetup.com/Docker-Beijing/) 和 [Docker Shanghai](http://www.meetup.com/Docker-Shanghai/) ，我们欢迎更多的城市和开发者加入这个充满活力的生态系统。
