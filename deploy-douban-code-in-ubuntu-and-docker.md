@@ -89,9 +89,10 @@
     $ sudo pip install virtualenv
     ```
     
-    激活virtualenv： 
+    创建并激活Python虚拟环境： 
     ```
     # 激活后，命令行的前面会加上（venv）
+    $ virtualenv venv
     $ . venv/bin/activate
     ```
     
