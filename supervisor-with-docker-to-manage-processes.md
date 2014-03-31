@@ -110,7 +110,6 @@
 
 	CMD supervisord -c /etc/supervisor.conf
 
-In this code, the variables for elasticsearch (a search index), are set because the Supervisor configuration for Tomcat prepends all variables to the /etc/default/tomcat7 file at start-up time. Of course, we would need to start the webapp with a link to the elasticsearch container: e.g.
 这段代码里，elasticsearch的相关环境变量（搜索索引）已经被设置了，因为supervisor关于Tomcat的配置，会在启动时将所有环境变量添加到/etc/default/tomcat7。当然，我们在启动网络应用镜像时需要关联到elasticsearch containter，比如：
 
 	docker run -link name_of_elasticsearch_instance:elasticsearch -d name_of_webapp_image "supervisor -c /etc/supervisor.conf"
@@ -119,4 +118,4 @@ In this code, the variables for elasticsearch (a search index), are set because 
 
 	elastic.unicast.hosts=${ELASTICSEARCH_SERVER_URL}
 
-这样就可以将配置暴露给你的应用程序。如果你是个Java开发者，并且也阅读了前一篇文章，希望这让你能开始一段愉快的代码之旅。
+这样就可以将配置暴露给你的应用程序。如果你是个Java开发者，并且也阅读了前一篇文章，希望本文的技术能让你开始一段愉快的代码之旅。
