@@ -1,28 +1,43 @@
 # Docker vs LXC/Ansible?
 ---
 
-### 为什么有这个问题？
+### 为什么提出这问题？
 
-[@GrzegorzNosek](https://twitter.com/GrzegorzNosek)问了这样一个好问题: 为什么要选择Docker来替代LXC/Ansible?
-在最近一期DevOPS交流会上.
+During last DevOPS meetup @GrzegorzNosek asked very good question – why should one use Docker instead of pure LXC/Ansible?
 
-老实说我已经尝试回答这个问题有一段时了，我确实回答一些(包含在我的一次演讲在交流会上[http://www.slideshare.net/d0cent/docker-rhel](http://www.slideshare.net/d0cent/docker-rhel)); 它是关于开发者在docker上开发是如此的容易。
+Honestly I’ve been trying to answer myself this question for a while. I did in some part (included this in my talk I gave during that meetup: http://www.slideshare.net/d0cent/docker-rhel); while it’s about developers running development envs Docker is just so much easier to use.
 
-但是针对我自己，为什么会用docker呢? 因为我是一个sysadmin(系统管理人员)，我喜欢更底层的东西，因此LXC对于我来说
-更自然的做事方式。
+But how should I explain using Docker for myself? I’m sysadmin and I love low-level – so LXC for me is just natural way of doing things :)
 
-### 你的脸，你的屁股？有什么区别?
+在最近一期 DevOPS 交流会上， [@GrzegorzNosek](https://twitter.com/GrzegorzNosek) 问了这样一个好问题: 为什么要选择 Docker 来替代 LXC/Ansible ?
 
-(如果你对于这个标题感到感概或者厌恶，请回到18年前，想一想[毁灭公爵](https://en.wikiquote.org/wiki/Duke_Nukem))
+老实说我也一直尝试回答此问题，并且回答了部分（参见我在那次交流会上的 [演讲](http://www.slideshare.net/d0cent/docker-rhel](http://www.slideshare.net/d0cent/docker-rhel) )。演讲主题是 Docker 让开发者运行开发环境十分简单。
 
-有一件关于我的事情，你应该知道，我正在为FedoraProject做贡献；最近我在捣鼓一个项目 Fedora-Dockerfiles project(https://git.fedorahosted.org/cgit/dockerfiles.git/). 我做它是为好玩，但是我也想学习更多的关于Dokcer, 当我和一些朋友
-开启一些开源项目时，必须找到一种简单的方式去管理我们的开发环境。在这种情况下，答案就是Docker。
+就我本人而言，为什么会用 docker 呢? 身为一个 sysadmin （系统管理人员），我喜欢更底层的东西，自然而然地就使用 LXC 了。
 
-当我用docker为那些根本不懂DevOPS/SysOPping准备开发环境时，写Dockerfiles是一件如此有趣的事(有些时候有些大坑的)。LXC如何呢？
-和Ansible一起用，我可以管理多个服务器的资源(像VPN, DNS, 一些webservice等). 它也很有趣，也很快，并且如此稳定，让是做起事情来
-如此容易。
+### 脸还是屁股？有何区别?
 
-### 赢家是哪位呢？
+(If you feel embarassed / disgusted somehow with this header please rewind 18 years and remember that: https://en.wikiquote.org/wiki/Duke_Nukem)
+
+One thing you should know about me – I’m contributing to FedoraProject; lately I’ve been poking around Fedora-Dockerfiles project (https://git.fedorahosted.org/cgit/dockerfiles.git/) – I’m doing it for fun and also I wanted to learn more about Docker as I’m running some Open-Source projects with friends and had to find a easy way for them to rollup own development envs. Docker is the answer in this case.
+
+So – currently I’m using Docker to prepare dev-envs for guys who knows nothing about DevOPS / SysOPping; writing Dockerfiles is so much fun (and sometimes so big hell :) ). And LXC? Together with Ansible I’m managing some servers’ resources (like VPN, DNS, some webservices etc). It’s also fun, it’s fast, rather reliable and it makes things so much easy to live with.
+
+
+(如果你觉得这个标题令人尴尬或者心生厌恶，不妨回想一下 18 年前的 [毁灭公爵](https://en.wikiquote.org/wiki/Duke_Nukem) 维基词条)
+
+你们都知道我正在为 FedoraProject 做贡献；最近我在捣鼓一个项目 [Fedora-Dockerfiles project](https://git.fedorahosted.org/cgit/dockerfiles.git/) 。鼓捣这个项目纯粹是出于好玩，同时我也想对 Dokcer 了解更多。 当我和朋友们开始一些开源项目时，必须找到一种简单的方式去管理我们的开发环境。在这种情况下，答案就是 Docker 。
+
+目前我在用 Docker 为哪些对 DevOPS/SysOPping 一无所知的人们准备开发环境，而编写 Dockerfiles 充满乐趣（不过偶尔也会有大坑） :)) 。LXC 表现如何呢？通过搭配 Ansible 使用，我能管理多个服务器资源（比如 VPN 、 DNS 、一些网页服务等）。有趣又快速，并且非常稳定，让工作和生活简单多了。
+
+### 谁是赢家呢？
+
+But still – for me as guy who use rather fdisk than gparted (or virsh than virt-manager ;) ) Docker is not the case for managing services. And honestly I’m still looking for an answer for the question from subject of this blogpost. For now after couple of weeks poking around Docker (and months with LXC) I can tell this one obvious thing that when You know LXC than Docker is just so easy (e.g. running some daemons inside spartan-like Docker images can be a tough fight whe some libs or dependencies are missing). Also creating and running Dockerfiles is very easy – just like creating Ansible playbooks.
+
+I think that I’m gonna do this one thing that I did couple of years ago when XEN and KVM were running shoulder to shoulder in the FOSS full-virt race. I’m just gonna use them both – Docker and LXC and see how things will develop. Docker is very great and easy to manage apps only (so Continuous Development with Docker is killing feature) and I’ll LXC/Ansible within some basic services (GitLab, DNS, VPN etc). But for more fun – I’m gonna keep both tracks, so e.g. when deploying GitLab within LXC I’ll create also Dockerfile for this.
+
+This way I think that I will have a really good answer in just a couple of weeks and this should be nice subject for some conference talk?
+
 对于我一个用fdisk而不是gparted(或者virsh而不是virt-manager;)来说，Docker不是一个管理服务的好例子。老实来讲，我依然在找寻这个
 标题的答案。对于现在，经过了几个星期对于Dokcer研究(几个月对于LXC的研究)，我可以告诉你一件明显的事，当你知道LXC, 了解Docker就是非常简单的一件事(跑一些精灵进程在斯巴达样的Dokcer镜像里面可能是件艰苦的战争，特别是有些库或者是依赖缺失的情况), 创建和跑起Dockerfiles也是一件容易的事，就像创建Ansible palybooks一样。
 
