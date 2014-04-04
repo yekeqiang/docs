@@ -1,5 +1,5 @@
 ##USING NGINX, CONFD, AND DOCKER FOR ZERO-DOWNTIME WEB UPDATES
-##使用nginx，Confd以及Docker实现零停机Web更新
+##使用 Nginx，Confd 以及 Docker 实现零停机 Web 更新
 
 ***
 
@@ -9,7 +9,7 @@ Update March 5, 2014:  Added drone.io continuous delivery to this process, for g
 
 I’ve been really enjoying working with Docker recently, but one of my pain points has been how to update a website running in a docker container with no downtime.  There are apps like [https://github.com/dotcloud/hipache](https://github.com/dotcloud/hipache) which uses a custom node.js proxy that gets configuration from a redis instance.  I don’t really want to maintain something so “heavy” for just a small website, so I’ve been searching for a better solution for a while.  I even considered writing one of my own, and started a few times, only to stop — thinking that this was a wheel that didn’t need to be reinvented.
 
-最近我一直非常喜欢和 Docker 一起工作，但是让我痛苦的是如何在不停机的情况下更新运行在 Docker 容器中的 web 应用。有这样一个[应用]，它使用了一个从 Redis 实例中获取配置的自定义的 Node.js 代理。我真的不想为一个小小的网站维护如此“重量级”的东西，所以我花了一段时间去查找更好的方案。我甚至考虑为自己实现一个类似的东西，在开始了一段时间后，考虑到那仅仅是一个“轮子”，没有必要彻底重写，所以停止了。
+最近我一直非常喜欢和 Docker 一起工作，但是让我痛苦的是如何在不停机的情况下更新运行在 Docker 容器中的 web 应用。有这样一个 [https://github.com/dotcloud/hipache](https://github.com/dotcloud/hipache) 应用，它使用了一个从 Redis 实例中获取配置的自定义的 Node.js 代理。我真的不想为一个小小的网站维护如此“重量级”的东西，所以我花了一段时间去查找更好的方案。我甚至考虑为自己实现一个类似的东西，在开始了一段时间后，考虑到那仅仅是一个“轮子”，没有必要彻底重写，所以停止了。
 
 ***
 
@@ -48,7 +48,7 @@ sudo docker run -d -p 4001:4001 -p 7001:7001 coreos/etcd
 
 Now you have an instance of etcd running locally.  Optionally, download the etcd release locally and copy the file `etcdctl` to /usr/local/bin or somewhere else in your path, it’ll be useful for watching as you set all this up.  etcdctl allows you to read, set, and remove keys from the command line.
 
-现在你就有了一个在本地的 etcd 的实例。或者，把 etcd 下载到本地，将`etcdctl`拷贝到`/usr/local/bin`或`PATH`中的其它位置，当你设置好这一切将对观察etcd非常有用。`etcdctl`允许你通过命令行去读取，设置以及删除键值。
+现在你就有了一个在本地的 etcd 的实例。或者，把 etcd 下载到本地，将 `etcdctl` 拷贝到 `/usr/local/bin` 或 `PATH` 中的其它位置，当你设置好这一切将对观察 etcd 非常有用。`etcdctl`允 许你通过命令行去读取，设置以及删除键值。
 
 ***
 
@@ -124,7 +124,16 @@ Lastly, I wrote a bash script to wire the whole thing together.  The general wor
 5. stop old containers
 6. run confd to remove old containers from nginx configurations
 
+1. 获取正在运行 gophercon 的容器的 IDs
+2. 启动新的 gophercon 容器
+3. 注册新的 gophercon 容器到 etcd
+4. 运行 Confd 去重新配置 nginx
+5. 停止运行旧容器
+6. 运行 Confd，从 nginx 配置中移除旧容器的配置
+
 Here’s what that script looks like:
+
+脚本如下所示：
 
 ```
 #!/bin/bash
