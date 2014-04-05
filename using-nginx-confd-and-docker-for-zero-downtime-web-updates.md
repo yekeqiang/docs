@@ -9,14 +9,14 @@ Update March 5, 2014:  Added drone.io continuous delivery to this process, for g
 
 I’ve been really enjoying working with Docker recently, but one of my pain points has been how to update a website running in a docker container with no downtime.  There are apps like [https://github.com/dotcloud/hipache](https://github.com/dotcloud/hipache) which uses a custom node.js proxy that gets configuration from a redis instance.  I don’t really want to maintain something so “heavy” for just a small website, so I’ve been searching for a better solution for a while.  I even considered writing one of my own, and started a few times, only to stop — thinking that this was a wheel that didn’t need to be reinvented.
 
-最近我一直非常喜欢和 Docker 一起工作，但是让我痛苦的是如何在不停机的情况下更新运行在 Docker 容器中的 web 应用。有这样一个 [https://github.com/dotcloud/hipache](https://github.com/dotcloud/hipache) 应用，它使用了一个从 Redis 实例中获取配置的自定义的 Node.js 代理。我真的不想为一个小小的网站维护如此“重量级”的东西，所以我花了一段时间去查找更好的方案。我甚至考虑为自己实现一个类似的东西，在开始了一段时间后，考虑到那仅仅是一个“轮子”，没有必要彻底重写，所以停止了。
+最近我非常喜欢在工作中使用 Docker ，但一个痛点是如何在不停机的情况下更新正在运行的 Docker 容器中的 Web 应用。有这样一个像 [https://github.com/dotcloud/hipache](https://github.com/dotcloud/hipache) 的应用，它是从一个 Redis 实例中获取配置的自定义 Node.js 代理程序。我真的不想为一个小小的网站维护如此 “重量级” 的东西，所以我花了一段时间去查找更好的解决方案。我甚至考虑为自己实现一个类似的东西，在开始了一段时间后，考虑到那仅仅是一个“轮子”，没有必要彻底重写，所以停止了。
 
 ***
 
 Recently I came across [confd](https://github.com/kelseyhightower/confd) from Kelsey Hightower, which is a really slick tool that watches [etcd](https://github.com/coreos/etcd) for changes, then emits configuration file(s) based on the contents of the keys you’re watching in etcd.  It occurred to me that this could be a way to generate a proxy configuration file for one of the web proxies like haproxy or nginx that already knows how to do reverse proxy tasks well.  Just recently, Kelsey merged in support for iteration, which sealed the deal.  Now you can iterate over a list of keys and generate a configuration file to dynamically configure your proxy server.
 
 
-最近我从 kelsey Hightower 了解到 Confd，它真是一个观察 etcd 变化，然后发出基于从 etcd 观察到 keys 的内容的配置文件的好工具。对与我来说，这可能是一种为网络代理（如haproxy或nginx可以很好的处理反向代理任务）产生代理配置文件的方式。就在最近，Kelsey为迭代添加了支持，它可以帮你搞定一切。现在，你可以遍历一个链表的keys，并且产生一个配置文件去动态的配置你的代理服务器。
+最近我从 Kelsey Hightower 了解到 [confd](https://github.com/kelseyhightower/confd)，它是一个观察  [etcd](https://github.com/coreos/etcd)， 基于从 etcd 的 Keys 内容 变化发出配置文件的好工具。我忽然意识到这可能是一种为网络代理程序（如 HAProxy 或 Nginx 可以很好的处理反向代理任务）产生配置文件的方式。就在最近 Kelsey 添加了 iteration 支持，它可以帮你搞定一切。现在你可以遍历一个链表的 Keys，并且产生一个配置文件去动态配置你的代理服务器。
 
 ***
 
@@ -30,15 +30,15 @@ I set aside a few hours this morning to try it out, and I’m very pleasantly su
 2. You need etcd running on that host.
 3. You need confd – the latest release doesn’t include iteration support so I built it locally and installed it.
 
-1. 你需要一个运行 Docker 的服务器。
+1. 你需要一个运行 Docker 的服务器，从价廉物美的 DigitalOcean.com 只需要选择预装了 Docker 的镜像创建就可以。
 2. 你需要一个运行 etcd 的主机。
-3. 你需要 Confd －最新的版本并不包含迭代支持，所以我在本地构建和安装了 Confd。
+3. 你需要 confd ，最新的发布版本并不包含 iteration 支持，所以我在本地构建和安装了 Confd。
 
 ***
 
 To install etcd, I ran the following command on my docker enabled server:
 
-在运行Docker的服务器上运行如下命令安装 etcd：
+在运行 Docker 的服务器上运行如下命令安装 etcd：
 
 ***
 
@@ -48,7 +48,7 @@ sudo docker run -d -p 4001:4001 -p 7001:7001 coreos/etcd
 
 Now you have an instance of etcd running locally.  Optionally, download the etcd release locally and copy the file `etcdctl` to /usr/local/bin or somewhere else in your path, it’ll be useful for watching as you set all this up.  etcdctl allows you to read, set, and remove keys from the command line.
 
-现在你就有了一个在本地的 etcd 的实例。或者，把 etcd 下载到本地，将 `etcdctl` 拷贝到 `/usr/local/bin` 或 `PATH` 中的其它位置，当你设置好这一切将对观察 etcd 非常有用。`etcdctl`允 许你通过命令行去读取，设置以及删除键值。
+现在你就有了一个在本地的 etcd 的实例。或者把 etcd 下载到本地，将 `etcdctl` 拷贝到 `/usr/local/bin` 或 `PATH` 路径中的其它位置，当你设置好这一切将对观察 etcd 非常有用。`etcdctl` 允许你通过命令行去读取，设置以及删除键值。
 
 ***
 
@@ -56,7 +56,7 @@ Next, I installed Go so I could compile and run confd.  I’ll leave this as an 
 
 With confd available, I created the configuration and template directories required to run confd.
 
-接下来，我安装了`Go`以至于可以编译及运行Confd。我将此留做练习，根据[golang.org]的安装说明,对与你那将不是难事。在克隆和编译 Confd 后，我将它拷贝到`/usr/local/bin`目录下以至于随处可用。然后，通过如下命令创建了运行Confd所必需的配置和模版目录：
+接下来，我安装了 `Go` 以至于可以编译及运行 confd。我将此留做练习，根据 [golang.org] 的安装说明,对与你那将不是难事。在克隆和编译 confd 后，我将它拷贝到 `/usr/local/bin` 目录下以至于随处可用。然后，通过如下命令创建了运行 confd 所必需的配置和模版目录：
 
 ```
 sudo mkdir -p /etc/confd/conf.d
@@ -67,24 +67,24 @@ sudo mkdir -p /etc/confd/templates
 
 Next I made a template for nginx to use as the reverse proxy configuration.  Here’s what it looks like:
 
-然后，我为 nginx 制作了一个用来反向代理配置的模版。如下所示：
+然后，我为 Nginx 制作了一个用来反向代理配置的模版。如下所示：
 
 ```
-
 upstream myapp {
-{{range $server := .gophercon_upstream}}
-server {{$server.Value}};
-{{end}}
+  {{range $server := .gophercon_upstream}}
+  server {{$server.Value}};
+  {{end}}
 }
+
 server {
-server_name http://www.gophercon.com gophercon.com;
-location / {
-proxy_pass http://myapp;
-proxy_redirect off;
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-}
+  server_name http://www.gophercon.com gophercon.com;
+  location / {
+    proxy_pass http://myapp;
+    proxy_redirect off;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
 }
 ```
 
@@ -99,7 +99,7 @@ Next, I created the configuration file to tell confd which keys to watch.   Here
 ```
 [template]
 keys = [
-"gophercon/upstream",
+  "gophercon/upstream",
 ]
 owner = “nginx”
 mode = “0644″
@@ -111,7 +111,7 @@ reload_cmd = “/usr/sbin/service nginx reload”
 
 Note that it references the configuration file we created above.  Save this file as `/etc/confd/conf.d/gophercon-nginx.toml`  The particularly cool part about this configuration is that it has commands to check the configuration and reload nginx if the configuration passes.
 
-注意：它引用了我们上一步创建的配置文件。将这个文件保存为`/etc/confd/conf.d/gophercon-nginx.toml`。这个配置文件特别酷的部分是它有命令去检查配置，如果配置没有问题，那么会重载 nginx。
+注意：它引用了我们上一步创建的配置文件。将这个文件保存为 `/etc/confd/conf.d/gophercon-nginx.toml` 。这个配置文件特别酷的部分是它有命令去检查配置，如果配置没有问题，那么会重载 Nginx。
 
 Lastly, I wrote a bash script to wire the whole thing together.  The general workflow looks like this:
 
@@ -137,10 +137,9 @@ Here’s what that script looks like:
 
 ```
 #!/bin/bash
-if [ -z "$1" ]
-then
-echo “usage : gophercon.sh 3 — start three new instances”
-exit -1
+if [ -z "$1" ] then
+  echo “usage : gophercon.sh 3 — start three new instances”
+  exit -1
 fi
 
 echo “Getting currently running gophercon containers”
@@ -148,19 +147,18 @@ OLDPORTS=( `docker ps | grep gophercon | awk ‘{print $1}’` )
 
 echo “starting new containers”
 for i in `seq 1 $1` ; do
-echo “inside loop $1″
-JOB=`docker run -d -p 9003 gophercon | cut -c1-12`
-echo $JOB
-PORT=`docker inspect $JOB | grep HostPort | cut -d ‘”‘ -f 4 | head -1`
-curl http://127.0.0.1:4001/v2/keys/gophercon/upstream/$JOB -XPUT -d value=”127.0.0.1:$PORT”
+  echo “inside loop $1″
+  JOB=`docker run -d -p 9003 gophercon | cut -c1-12`
+  echo $JOB
+  PORT=`docker inspect $JOB | grep HostPort | cut -d ‘”‘ -f 4 | head -1`
+  curl http://127.0.0.1:4001/v2/keys/gophercon/upstream/$JOB -XPUT -d value=”127.0.0.1:$PORT”
 done
 
 echo “removing old containers”
-for i in ${OLDPORTS[@]}
-do
-etcdctl rm /gophercon/upstream/$i
-confd -onetime
-docker kill $i
+for i in ${OLDPORTS[@]} ; do
+  etcdctl rm /gophercon/upstream/$i
+  confd -onetime
+  docker kill $i
 done
 ```
 
