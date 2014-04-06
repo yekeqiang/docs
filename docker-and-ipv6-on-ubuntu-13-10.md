@@ -1,8 +1,13 @@
 ##Docker and IPv6 on Ubuntu 13.10   Saucy  Salamander
 ##在Ubuntu 13.10 上的Docker and IPv6  Saucy  Salamander
-  After making myself familiar with Docker I wanted to use it on a more recent Ubuntu 13.10 release. I still didn't install Docker natively on my pc, but use a Vagrant box to play with fresh releases. After downloading a fresh Ubuntu 13.10 image, creating a VirtualBox image and installing the current Docker release 0.8.0, I tried to use my other little toys CouchDB and Elasticsearch in Docker containers. Sadly, I couldn't connect to the exposed ports anymore.
 
-  随着我对Doker的渐渐熟悉，我想把它用在最新发布的Ubuntu 13.10上。现在我仍然没有将Docker安装在我的个人电脑上，但是我常用VB去浏览最新资讯。在我下载了最新版的Ubuntu的镜像文件之后，我创建了一个VB的镜像并且安装了通用版Docker0.8.0。我试着将我的另一些小玩意儿CouchDB和 Elasticsearch在Docker containers上运行，不一会儿外设就再也没法儿用了。
+***
+
+After making myself familiar with Docker I wanted to use it on a more recent Ubuntu 13.10 release. I still didn't install Docker natively on my pc, but use a Vagrant box to play with fresh releases. After downloading a fresh Ubuntu 13.10 image, creating a VirtualBox image and installing the current Docker release 0.8.0, I tried to use my other little toys CouchDB and Elasticsearch in Docker containers. Sadly, I couldn't connect to the exposed ports anymore.
+
+随着我对 Docker 的渐渐熟悉，我想把它用在最新发布的 Ubuntu 13.10 上。现在我仍然没有将 Docker Native  安装在我的个人电脑上，但是我经常用 Vagrant 去尝试最新的版本。在我下载了最新版的 Ubuntu 的镜像文件之后，我创建了一个 VirtualBox 的镜像并且安装了 Docker0.8.0。我试着将我的另一些小玩意儿 CouchDB 和 Elasticsearch 在 Docker containers 上运行，不一会儿外设就再也没法儿用了。
+
+***
 
   The Docker installation docs for Ubuntu Linux 13.04 and 13.10 mention the configuration of UFW to modify the DEFAULT_FORWARD_POLICY to accept all traffic. Well, the UFW wasn't enabled. So the usual digging began, searching on StackOverflow, GitHub and developer blogs. Most hints mentioned disabling the IPv6 support via sysctl, but a quite clear statement of Jérôme Petazzoni at a StackOverflow answer made me search for alternatives.
 
