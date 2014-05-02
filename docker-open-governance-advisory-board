@@ -1,13 +1,24 @@
- DOCKER OPEN GOVERNANCE ADVISORY BOARD
-This morning, the Docker project leadership [announced](http://www.businesswire.com/news/home/20140430005529/en/Open-Source-Docker-Project-Announces-Open-Governance#.U2D7FfldV8E) a proposal for a Docker Governance Advisory Board (or DGAB), as a next step towards a fully open governance model for [Docker](http://docker.io/).
+DOCKER OPEN GOVERNANCE ADVISORY BOARD
+This morning, the Docker project leadership [announced](http://www.businesswire.com/news/home/20140430005529/en/Open-Source-Docker-Project-Announces-Open-Governance) a proposal for a Docker Governance Advisory Board (or DGAB), as a next step towards a fully open governance model for [Docker](http://docker.io/).
+
+美国太平洋时间4月30日早上， Docker 项目领导团队 [提议](http://www.businesswire.com/news/home/20140430005529/en/Open-Source-Docker-Project-Announces-Open-Governance) 成立 Docker Governance Advisory Board （ Docker 管理咨询委员会，简称 DGAB ），进而打造一个完全开放的 Docker(http://docker.io) 管理模型。 
 
 The short story is that the Docker Governance Advisory Board will provide input to the Docker project leadership on a broad range of topics, including the project roadmap, policies and procedures around contribution, core criteria for Docker-compliant products, and the long term governance structure of the Docker project. Membership on the advisory board will be open to individuals, corporations and users alike, and will be determined transparently by code contribution and other objective factors. No sponsorship or fee will be required to join the advisory board. Board membership criteria and selection, and all output from board meetings, will be made public.
 
+Docker 管理咨询委员会将在包括项目路线图、贡献者政策与流程、 Docker 衍生产品的核心标准、 Docker 项目的长期管理结构等广泛的议题中为 Docker 项目管理团队提供建议与咨询。管理咨询委员会面向个人、企业和用户开放，基于代码贡献和其他客观因素公开决定。加入委员会无需任何赞助或费用。成员资格的标准和选举由委员会会议作出并公示。
+
 The full text of our proposal is available at http://docker.io/governance. We will be taking feedback and comments on the proposal, as well as nominations for membership, over the next three weeks. However, I’d like to explain a little bit about what we are hoping to accomplish with the DGAB.
+
+完整的提议内容可以在 http://docker.io/governance 查看。接下来的三周内，在我们将就此提议接收反馈和评论，同时也欢迎提名成员名单。我也乐意在这里说明成立 DGAB 的愿景。
 
 ##WHY WE ARE FORMING THE BOARD
 
+##为什么要成立委员会
+
+
 In the 13 months since the Docker project launched, Docker – and the ecosystem around it – have experienced phenomenal growth. As of today, we have over [400 contributors](https://github.com/dotcloud/docker/graphs/contributors) to the project, over 11,000 “Dockerized” apps in the library, and Docker containers have been downloaded over 1.5 M times. More than just a project, Docker has become an ecosystem and, increasingly, a platform on which thousands of organizations and individuals are building and making long term bets.
+
+自从 Docker 项目启动已有13个月， Docker 以及围绕其建立的生态系统已经取得了惊人的成长。截至目前，我们在 Github 上已有超过 [400名贡献者](https://github.com/dotcloud/docker/graphs/contributors) ，在库中有超过 11,000 个“ Dockerized ”的应用，而 Docker 容器也下载超过一百五十万次。 Docker 不仅只是个项目，而是发展成为一个生态系统，一个由成千上万个组织和个人搭建起来的平台。
 
 There are now over [5,500 projects](https://github.com/search?q=docker&ref=cmdform) on GitHub with the word “Docker” in their title. A wide range of companies have announced integration of Docker into their products. And, an increasing number of organizations are building Docker into the plans for their next generation data centers. While we’re very proud of how “open” Docker is already, we wanted to make sure that we provided the people and organizations who are making a long-term bet on Docker with a way to provide coordinated input into the future of Docker.
 
