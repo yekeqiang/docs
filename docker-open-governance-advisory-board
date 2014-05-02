@@ -95,10 +95,18 @@ Beyond the effort needed in the code base itself, the Docker ecosystem as a whol
 
 ####5. 确保项目和生态系统的自我成长
 
-
+除了贡献代码外， Docker 生态系统需要全方位投入：维护大量公有 Docker image 、创作培训材料、原生项目与衍生项目、执行商标保护等。我们相信与依赖资金捐献相比，现有项目管理团队/所有者的努力更能保障这些长期投入。
 
 ####6) Create a level playing field, avoid “Docker washing”
 If Docker is to be an effective platform, we think it is important that projects that use the Docker trademark adhere to certain core criteria. We want the DGAB and the community as a whole to help define the specifics of these criteria. General items that we think are important to discuss include: use of standard APIs, consistent behaviors expected of Docker containers, trademark guidelines, provenance, upstream contribution models, and alternative distributions.
 
+####6. 
+
+如果 Docker 要发展成为一个高效的平台，使用 Docker 商标的项目需要坚守某些核心原则。这点至关重要。我们希望 DGAB 和西区能够作为一个整体来明确这些原则。我们认为有讨论价值的话题包括：标准 API 的使用、符合 Docker 容器使用规范的行为、商标使用准则、起源、上游贡献模型、以及其他替代方法等。
+
 ##IN CONCLUSION
 We’d really like to thank the members of the community, as well as corporate partners like IBM, Rackspace, and Red Hat, who have provided guidance and support throughout this process. As a reminder, we are looking for comments on the proposal itself, as well as nominations for membership. For more detail, please go to docker.io/governance.
+
+##结语
+
+
