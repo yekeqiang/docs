@@ -1,0 +1,53 @@
+ DOCKER OPEN GOVERNANCE ADVISORY BOARD
+This morning, the Docker project leadership [announced](http://www.businesswire.com/news/home/20140430005529/en/Open-Source-Docker-Project-Announces-Open-Governance#.U2D7FfldV8E) a proposal for a Docker Governance Advisory Board (or DGAB), as a next step towards a fully open governance model for [Docker](http://docker.io/).
+
+The short story is that the Docker Governance Advisory Board will provide input to the Docker project leadership on a broad range of topics, including the project roadmap, policies and procedures around contribution, core criteria for Docker-compliant products, and the long term governance structure of the Docker project. Membership on the advisory board will be open to individuals, corporations and users alike, and will be determined transparently by code contribution and other objective factors. No sponsorship or fee will be required to join the advisory board. Board membership criteria and selection, and all output from board meetings, will be made public.
+
+The full text of our proposal is available at http://docker.io/governance. We will be taking feedback and comments on the proposal, as well as nominations for membership, over the next three weeks. However, I’d like to explain a little bit about what we are hoping to accomplish with the DGAB.
+
+##WHY WE ARE FORMING THE BOARD
+
+In the 13 months since the Docker project launched, Docker – and the ecosystem around it – have experienced phenomenal growth. As of today, we have over [400 contributors](https://github.com/dotcloud/docker/graphs/contributors) to the project, over 11,000 “Dockerized” apps in the library, and Docker containers have been downloaded over 1.5 M times. More than just a project, Docker has become an ecosystem and, increasingly, a platform on which thousands of organizations and individuals are building and making long term bets.
+
+There are now over [5,500 projects](https://github.com/search?q=docker&ref=cmdform) on GitHub with the word “Docker” in their title. A wide range of companies have announced integration of Docker into their products. And, an increasing number of organizations are building Docker into the plans for their next generation data centers. While we’re very proud of how “open” Docker is already, we wanted to make sure that we provided the people and organizations who are making a long-term bet on Docker with a way to provide coordinated input into the future of Docker.
+
+##WHAT WILL THE BOARD DO
+The primary purpose of the DGAB is to advise the Docker project leadership on matters related to supporting the long term governance, structure, and roadmap of the Docker project.
+
+The following main areas are included in this charter:
+
+1. Provide a forum for individuals, users, and companies to discuss the issues and formulate recommendations for those issues.
+2. Provide guidance and input to the project’s leadership, and where possible, present a consistent and consolidated opinion from the broader Docker community.
+3. Produce a formal, twice yearly, report to the project leadership and broader Docker community of the status of and progress made in all areas under the purview of the DGAB.
+4. Promote and support the use of Docker in manner consistent with Guiding Principles of the project and the Core Criteria.
+
+###SOME GUIDING PRINCIPLES FOR THE DESIGN OF THE BOARD
+In designing the initial proposal,  we looked carefully at a number of other governance approaches. While we found things that we liked and didn’t like in almost every model (in general, we really like the Linux Kernel model), we think that Docker is at a unique stage in its lifecycle, and we want to craft a model that is appropriate for where we are as a project. Here are some of the considerations:
+
+####1) First, do no harm. Make sure governance stays both open and effective
+As mentioned above, we designed Docker to be a very open project from the outset. We use one of the most permissive licenses (Apache 2.0). We encourage broad participation (over 95% of contributors don’t work for Docker, Inc., including some of the core maintainers). We have an open design philosophy, use a common set of open tools for all contributions & contributors, and use the lightweight DCO process, rather than requiring CLAs.
+
+Partially as a result, we’ve gotten very broad-based participation in Docker as a project, and a huge amount of momentum in the ecosystem as the whole. The project itself is advancing at an amazing clip (66 releases comprising over 7700 commits in the past year), and the last thing we want to do is weigh the project down with bureaucracy.
+
+As a result, we are not looking to create a foundation or governance board now.  The project leadership (including Docker creator and chief maintainer [Solomon Hykes](https://twitter.com/solomonstre) and the core maintainer team), will continue to set the priorities and make the final decisions about the direction of the project. But, the advisory group will provide a strong, coordinated, and public voice for the project’s important constituencies. We should also make it clear that the DGAB is intended to enhance – and not substitute for – the current mechanisms for community input. We are committed to open governance and effective governance. We think this step strikes the right balance for this stage of the project.
+
+####2) Do things in the open
+The proposal and documentation behind the DGAB, the selection criteria & process, and the output of meetings will all be public and available for comment.
+
+####3) Represent the various constituencies
+The DGAB has seats reserved for the various constituencies who are making long term investments in Docker, this includes:
+
+The individuals who are investing time and effort to contribute to the project.
+Users who are deploying Docker (and providing use cases describing their experiences).
+Companies that are incorporating Docker into their products and services.
+####4) Contribute-to-play vs. pay-to-play
+Membership on the DGAB (and influence on the project in general), comes from contribution. There is no fee to join the board. The top contributors (and maintainers) are automatically given a seat on the board. Companies can only get on the board if they are both top contributors and agree to implement Docker-based solutions in a manner consistent with the project as a whole.
+
+####5) Keep the project and ecosystem self sustaining
+Beyond the effort needed in the code base itself, the Docker ecosystem as a whole needs investment: to maintain a large index of publicly available Docker images, to produce training materials, to on-board and enable derivative projects, to enforce trademarks, etc. We think that this long-term investment is better assured under the current project leadership/ownership than by making the project dependent on financial donations.
+
+####6) Create a level playing field, avoid “Docker washing”
+If Docker is to be an effective platform, we think it is important that projects that use the Docker trademark adhere to certain core criteria. We want the DGAB and the community as a whole to help define the specifics of these criteria. General items that we think are important to discuss include: use of standard APIs, consistent behaviors expected of Docker containers, trademark guidelines, provenance, upstream contribution models, and alternative distributions.
+
+##IN CONCLUSION
+We’d really like to thank the members of the community, as well as corporate partners like IBM, Rackspace, and Red Hat, who have provided guidance and support throughout this process. As a reminder, we are looking for comments on the proposal itself, as well as nominations for membership. For more detail, please go to docker.io/governance.
