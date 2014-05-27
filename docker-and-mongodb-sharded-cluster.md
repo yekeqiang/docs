@@ -6,13 +6,13 @@ How Docker helps to create a complex MongoDB setup
 
 This article describes how to create a Mongo DB Sharded Cluster using Docker. We will go through the creation of Dockerfiles and instanciation of the differnt moving parts of the cluster (replica sets, config servers and routers).
 
+如何使用 docker 创建复杂的 mongodb 集群
+
+本文描述了如何使用 docker 创建 mongodb shard 集群。我们将直接展示 mongodb 集群不同组件(副本集 replica sets 、配置服务器 config servers 以及资源路由 routes )所对应 dockerfile 文件以及容器的实例化过程。
+
 ##Create the Dockerfiles
 
 First we need to create two Dockerfiles - one for mongod and another one for mongos. Let’s start with mongod.
-
-如何使用 docker 创建复杂的 mongodb 集群
-
-本文描述了如何使用 docker 创建 mongodb shard 集群。我们将直接展示 mongodb 集群不同组件(副本集 replica sets 、配置服务器 config servers 以及资源路由 routes )的对应 dockerfile 文件以及实例化过程。
 
 ##创建Dockerfile文件
 
@@ -74,13 +74,24 @@ sudo docker build \
   -t dev24/mongodb mongos
 ```
 
+> 译注：此处作者的操作步骤有问题，上面的地一条语句使用 mongod/Dockerfile 建立了名为 dev24/mongodb 的镜像，当使用 docker run 运行该镜像时，根据 dockerfile 定义，会默认启动 /usr/bin/mongod 。而第二条语句在 dev24/mongodb 镜像的基础上将默认启动设置为 /usr/bin/mongos 并将新生成的镜像命名为 dev24/mongodb 从而覆盖了第一个镜像。本人亲测在启动副本集的时候会出错，因此本人在此将上述两句代码修改为以下的形式，生成 dev24/mongodb 以及 dev24/mongos 两个镜像，如果读者对此有不同意见，可以留言或与译者沟通，非常感谢。
+
+```
+sudo docker build \
+  -t dev24/mongodb mongod
+
+#译者更正
+sudo docker build \
+  -t dev24/mongos mongos
+```
+
 ##Create the Replica Sets
 
 For our shard we need some replica sets. We will create two of them consisting of three nodes each. These commands will instantiate three mongod containers and assign them to replica set rs1. The parameters --noprealloc and --smallfiles are optional to avoid MongoDB is consuming lots of memory (useful while testing).
 
 ##创建副本集Replica Sets
 
-集群中，每个分片都需要副本集以保证数据可靠性。在这里我们需要为每个分片创建两个副本以构成三个节点的副本集。这些命令将会实例化三个 mongod 容器并且将他们组成副本集 rs1 。参数 --noprealloc 和 --smallfiles 是可选项，用来避免 mongodb 消耗掉过多内存(在测试时十分有效)。
+集群中，每个分片都需要副本集以保证数据可靠性。在这里我们需要为每个分片创建两个副本以构成三个节点的副本集。以下这些命令将会实例化三个 mongod 容器并且将他们组成副本集 rs1 。参数 --noprealloc 和 --smallfiles 是可选项，用来避免 mongodb 消耗掉过多内存(在测试时十分有效)。
 
 ```
 sudo docker run \
@@ -267,6 +278,7 @@ sudo docker run \
     <IP_of_container_cfg1>:27017, \
     <IP_of_container_cfg2>:27017, \
     <IP_of_container_cfg3>:27017
+    
 ```
 
 ##Initialize the Shard
