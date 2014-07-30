@@ -10,7 +10,7 @@
 我所做的就是为这个机器人创建一个简单的 Docker 镜像, 其中包含所有它运行所需要的东西.
 把这个镜像上传到 Tutum 的私有仓库并利用一段 bash 脚本和`crontab`每 30 分钟执行它一次.
 
-每次这个机器人会工作 3~5 分钟, 之后这个容器就会被销毁.
+libgrabber 每次会工作 3 ~ 5 分钟, 之后这个容器就会被销毁.
 我使用的是一个"Small"大小的容器并将计费周期从 30 分钟转为 10 分钟.
 (即每次 Tutum 会收取从容器启动开始 10 分钟的使用费用, 超出的时间会按分钟收费)
 
@@ -30,7 +30,7 @@
   2. 从返回的 JSON 响应中获取容器 ID
   3. 使用容器 ID 发送一个启动命令
 
-我非常固执地想要用一些真正的语言来解析 JSON, 所以我想在 bash 下完成上述过程.
+我想要用一些真正的语言来解析 JSON, 比如在 bash 下完成上述过程.
 
 最简单的方法是使用
 [jsawk](https://github.com/micha/jsawk),
@@ -38,11 +38,9 @@
 我的解决方法是:
 
 ```bash
-uuid=$(curl -s -H "Authorization: ApiKey username: YOURKEY"
--H "Content-Type: application/json" -d
-'{"image":"r.tutum.co/user/image", "name":"libgrabber", "autodestroy":"ALWAYS",
-"container_size":"S"}' https://app.tutum.co/api/v1/container/ | grep -Po
-'"'"uuid"'"\s*:\s*"\K([^"]*)' $1)
+uuid=$(curl -s -H "Authorization: ApiKey username: YOURKEY" -H "Content-Type: application/json" -d
+'{"image":"r.tutum.co/user/image", "name":"libgrabber", "autodestroy":"ALWAYS", "container_size":"S"}'
+https://app.tutum.co/api/v1/container/ | grep -Po '"'"uuid"'"\s*:\s*"\K([^"]*)' $1)
 
 curl -s -H "Authorization: ApiKey username: YOURKEY" -X POST
 https://app.tutum.co/api/v1/container/${uuid}/start/
@@ -51,4 +49,5 @@ https://app.tutum.co/api/v1/container/${uuid}/start/
 大功告成! 现在你可以保存这个脚本并创建一个`cronjob`以随时执行它.
 
 > 原文由 Dmitriy Akulov 发表, [原文链接](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/)
+
 > 译 sina weibo: http://weibo.com/hexteto, mail: hexteto@tsinghua.edu.cn
