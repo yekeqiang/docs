@@ -256,7 +256,7 @@ b2f8001164b0
 
 你还想在WildFly的Docker镜像包含什么？给我们提问题吧：<https://github.com/jboss/dockerfiles/issues>。
 
-<http://jboss.org/docker>上一些其他可用的镜像有：
+<http://jboss.org/docker>上有一些其他可用的镜像：
 
 * [KeyCloak](http://keycloak.org/)
 * [TorqueBox](http://torquebox.org/)
