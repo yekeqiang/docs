@@ -52,7 +52,7 @@ RUN echo "[PUBLIC KEY HERE]" >> /root/.ssh/authorized_keys
 RUN chmod 400 /root/.ssh/authorized_keys
 ```
 
-再花几个小时写了一个简单的bash脚本，这个脚本利用了VNS3的API，还从密钥服务器下载公钥，作为概念验证程序(proof-of-concept)。
+花几个小时写了一个简单的bash脚本，这个脚本利用了VNS3的API，还从密钥服务器下载公钥，作为概念验证程序(proof-of-concept)。
 
 这样只用了几行简单的代码，就能在VNS3内部安全的创建，更重要的是安全的销毁，一个定制的Docker容器。用户不需要花很多时间和钱去搞一个大型的方案解决去他们的问题。[Security and control](http://www.cohesiveft.com/products/vns3/)
 
