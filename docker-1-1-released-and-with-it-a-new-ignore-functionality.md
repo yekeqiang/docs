@@ -21,7 +21,7 @@ Docker 就会忽略 `.dockerignore` 中列出的具体文件和路径。
 具体情况，请看[详细示例](https://github.com/docker/docker/blob/master/.dockerignore)。
 其他方面的更新包括：
 
-* commit提交一个运行的容器时，该容器会被暂停
+* commit 提交一个运行的容器时，该容器会被暂停
 * 对容器的日志文件，开发人员可以从指定的位置进行跟踪
 * tar 归档文件可以作为 `docker build` 的上下文
 
@@ -34,7 +34,7 @@ Docker 就会忽略 `.dockerignore` 中列出的具体文件和路径。
 
 
 
-[Space Monkey](https://www.spacemonkey.com/) 的 [Murphy Randle](http://murphyrandle.svbtle.com/vittles-for-developing-nodejs-apps-in-docker)
+[Space Monkey](https://www.spacemonkey.com/) 的 [Murphy Randle](http://murphyrandle.svbtle.com/vittles-for-developing-nodejs-apps-in-docker) 
 在博客中描述了如何避免 NFS mounts/volumes 带来的痛苦，在使用 Docker 开发应用时通常需要这样。
 这时，他决定专门为小一点的应用创建一个开发环境，但是不能用于较大的应用。
 问题来了，使用 Dockerfile 构建 Docker image 的过程是[自动的](https://www.digitalocean.com/community/articles/docker-explained-using-dockerfiles-to-automate-building-of-images)。
@@ -43,12 +43,12 @@ Docker 就会忽略 `.dockerignore` 中列出的具体文件和路径。
 Randle 在五月份被采访时说，当 `docker build` 命令被发出，
  docker client 会把  docker file 所在文件夹中的全部内容 上传 到 docker daemon。
 “当只有少量源码时，这个过程还是很快的。但是当应用依赖数以兆计的 node_modules 时，
-整个过程就需要花费大量时间。” 这个问题在[GitHub](https://github.com/docker/docker/issues/2224) 上有一长串的讨论，最终导致了 `.dockerignore `
+整个过程就需要花费大量时间。” 这个问题在 [GitHub](https://github.com/docker/docker/issues/2224)  上有一长串的讨论，最终导致了 `.dockerignore `
 的产生。讨论的导火索是这样的：
 
 ![](http://thenewstack.io/wp-content/uploads/2014/06/dockerignore.png)
 
- 在Docker的整个生态系统中， Docker 都做了改进，包括对 Docker Engine , Docker Hub 以及它的文档都做了更新。
+ 在 Docker 的整个生态系统中， Docker 都做了改进，包括对 Docker Engine , Docker Hub 以及它的文档都做了更新。
  总体来说，这并不是主要版本更新，但更多的是对这个仍处于发展阶段的开源技术的评述。
  
  
