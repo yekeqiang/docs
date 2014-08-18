@@ -9,6 +9,8 @@
 
 ***
 
+![](http://thenewstack.io/wp-content/uploads/2014/04/homepage-docker-logo.png)
+
 在今年6月份 Docker 1.0 版本被发布之前，dotCloud的CEO及创始人 Solomon Hykes 就曾经对我说，
 在 Docker 1.1 版本中将增加 .dockerignore 功能。
 目前，[Docker 1.1 版本](http://blog.docker.com/2014/07/announcing-docker-1-1/)已经被发布，
