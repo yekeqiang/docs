@@ -3,9 +3,9 @@
 
 ***
 
-作者：[Alex Williams](http://thenewstack.io/docker-1-1-released-and-with-it-a-new-ignore-functionality/)
+#####作者：[Alex Williams](https://twitter.com/alexwilliams)
 
-译者：[moonatcs](https://code.csdn.net/moonatcs)
+#####译者：[moonatcs](https://code.csdn.net/moonatcs)
 
 ***
 
@@ -30,7 +30,7 @@ Docker 就会忽略 `.dockerignore` 中列出的具体文件和路径。
 
 无论是与开发人员交流，还是在 GitHub 上阅读关于当前项目的评论，都提出了一些问题，特别是如何对上传到 Docker 开发环境的文件进行管理，以及在生产环境中管理容器的复杂性。
 
-来自 [Space Monkey](https://www.spacemonkey.com/) 的 [Murphy Randle](http://murphyrandle.svbtle.com/vittles-for-developing-nodejs-apps-in-docker) 在博客中描述了如何避免在使用 Docker 开发应用时， NFS mounts/volumes 带来的痛苦。于是他决定创建一个开发环境，对于小型应用具有实用价值，并不适用于大型应用。问题渐渐浮出水面。使用 Dockerfile 构建 Docker image 的过程是 [自动的](https://www.digitalocean.com/community/articles/docker-explained-using-dockerfiles-to-automate-building-of-images) ，但是 Randle 注意到当加载多个 node_modules 目录时，速度会变得相当慢。
+来自 [Space Monkey](https://www.spacemonkey.com/) 的 [Murphy Randle](http://murphyrandle.svbtle.com/vittles-for-developing-nodejs-apps-in-docker) 在博客中描述了如何避免在使用 Docker 开发应用时 NFS mounts/volumes 带来的痛苦。于是他决定创建一个开发环境，对于小型应用具有实用价值，并不适用于大型应用。问题渐渐浮出水面。使用 Dockerfile 构建 Docker image 的过程是 [自动的](https://www.digitalocean.com/community/articles/docker-explained-using-dockerfiles-to-automate-building-of-images) ，但是 Randle 注意到当加载多个 node_modules 目录时，速度会变得相当慢。
 
 Randle 在五月份接受采访时说，当 `docker build` 命令被发出， docker client 会把  docker file 所在文件夹中的全部内容上传到 docker daemon。“当只有少量源码时，这个过程还是很快的。但是当应用依赖数以兆计的 node_modules 时，整个过程就需要花费大量时间。” 这个问题在 [GitHub](https://github.com/docker/docker/issues/2224)  上有一长串的讨论，最终导致了 `.dockerignore ` 的产生。讨论的导火索是这样的：
 
@@ -39,5 +39,11 @@ Randle 在五月份接受采访时说，当 `docker build` 命令被发出， do
 Docker  has made improvements throughout the Docker ecosystem, including updates to Docker Engine, Docker Hub, and its documentation. Overall, not a major release, but more so a commentary on a still developing open source technology.
 
 Docker 已经对整个 Docker 生态系统中做了改进，包括更新了 Docker Engine 、 Docker Hub 以及文档。总体来说，这并非主要版本更新，更多的是对这个仍处于发展阶段的开源技术的评述。
+
+***
+
+#####这篇文章由 [Alex Williams](https://twitter.com/alexwilliams) 撰写，[moonatcs](https://code.csdn.net/moonatcs) 翻译。点击 [这里](http://thenewstack.io/docker-1-1-released-and-with-it-a-new-ignore-functionality/) 阅读原文。
+
+#####The article was contributed by [Alex Williams](https://twitter.com/alexwilliams) , click [here](http://thenewstack.io/docker-1-1-released-and-with-it-a-new-ignore-functionality/) to read the original publication.
  
  
