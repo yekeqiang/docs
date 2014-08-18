@@ -1,4 +1,4 @@
-{<1>}![alt](http://docker.u.qiniudn.com/komodo-x11-ssh.png)
+[](http://docker.u.qiniudn.com/komodo-x11-ssh.png)
 
 #####作者：[Nathan Rijksen](https://twitter.com/NathanRijksen)
 
