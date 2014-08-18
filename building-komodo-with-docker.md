@@ -1,10 +1,15 @@
-[](http://docker.u.qiniudn.com/komodo-x11-ssh.png)
+#使用 Docker 构建 Komodo
+
+[image of komodo](http://docker.u.qiniudn.com/komodo-x11-ssh.png)
+
 
 #####作者：[Nathan Rijksen](https://twitter.com/NathanRijksen)
 
 #####译者：[Fiona Feng](https://twitter.com/usuede)
 
 ***
+
+
 
 今天又是周一，也就是“周一宏”博客更新的日子。由于忙着构建 Komodo ，我这次没有准备关于宏的文章，不过有篇替代文章：使 Komodo 构建运行，以及我是如何无意当中让 Komodo 的构建变得更简单的。很抱歉这次没有宏的文章，我保证下周会写！
 
