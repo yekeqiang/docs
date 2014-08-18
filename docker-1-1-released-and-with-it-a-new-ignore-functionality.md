@@ -11,13 +11,13 @@
 
 ![](http://thenewstack.io/wp-content/uploads/2014/04/homepage-docker-logo.png)
 
-在今年6月份 Docker 1.0 版本被发布之前，dotCloud的CEO及创始人 Solomon Hykes 就曾经对我说，
+在今年6月份 Docker 1.0 版本被发布之前， dotCloud 的 CEO 及创始人 Solomon Hykes 就曾经对我说，
 在 Docker 1.1 版本中将增加 .dockerignore 功能。
 目前，[Docker 1.1 版本](http://blog.docker.com/2014/07/announcing-docker-1-1/)已经被发布，
 Solomon Hykes 所说的话也被验证成真。
 现在，开发人员可以在 `Dockerfile` 旁边创建一个 `.dockerignore` 文件，
 当给 docker daemon 发送构建上下文的命令时，
-Docker就会忽略 `.dockerignore` 中列出的具体文件和路径。
+Docker 就会忽略 `.dockerignore` 中列出的具体文件和路径。
 具体情况，请看[详细示例](https://github.com/docker/docker/blob/master/.dockerignore)。
 其他方面的更新包括：
 
@@ -40,15 +40,15 @@ Docker就会忽略 `.dockerignore` 中列出的具体文件和路径。
 问题来了，使用 Dockerfile 构建 Docker image 的过程是[自动的](https://www.digitalocean.com/community/articles/docker-explained-using-dockerfiles-to-automate-building-of-images)。
 但是 Randle 写到， 当加载多个 node_modules 目录时，速度会变得相当慢。
 
-Randle在五月份被采访时说，当 `docker build` 命令被发出，
-docker client会把  docker file 所在文件夹中的全部内容 上传 到 docker daemon。
+Randle 在五月份被采访时说，当 `docker build` 命令被发出，
+ docker client 会把  docker file 所在文件夹中的全部内容 上传 到 docker daemon。
 “当只有少量源码时，这个过程还是很快的。但是当应用依赖数以兆计的 node_modules 时，
 整个过程就需要花费大量时间。” 这个问题在[GitHub](https://github.com/docker/docker/issues/2224) 上有一长串的讨论，最终导致了 `.dockerignore `
 的产生。讨论的导火索是这样的：
 
 ![](http://thenewstack.io/wp-content/uploads/2014/06/dockerignore.png)
 
- 在Docker的整个生态系统中，Docker都做了改进，包括对 Docker Engine, Docker Hub 以及它的文档都做了更新。
+ 在Docker的整个生态系统中， Docker 都做了改进，包括对 Docker Engine , Docker Hub 以及它的文档都做了更新。
  总体来说，这并不是主要版本更新，但更多的是对这个仍处于发展阶段的开源技术的评述。
  
  
