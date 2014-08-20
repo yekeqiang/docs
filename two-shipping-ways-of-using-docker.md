@@ -5,7 +5,7 @@
 译者：[Chenia](http://weibo.com/u/1716255775)
 ***
 
-[docker](http://www.docker.com) 为开发人员和系统管理员提供了一个可供开发，分发(ship)和运行应用的平台。**将Docker化的应用及其依赖环境不需要经过任何修改就可以分发到任何地方--提供给QA，团队成员或者分发到云平台中**。这是使用Docker的一个很重要的目的。
+[docker](http://www.docker.com) 为开发人员和系统管理员提供了一个可供开发，分发(ship)和运行应用的平台。**将 Docker化 的应用及其依赖环境不需要经过任何修改就可以分发到任何地方--提供给 QA 、团队成员或者分发到云平台中**。这是使用 Docker 的一个很重要的目的。
 
 在 [Vernon Stinebaker](https://blogs.perficient.com/multi-shoring/blog/author/vstinebaker/) 之前的文章 [“Docker, mobile, and putting things in boxes”](http://blogs.perficient.com/multi-shoring/blog/2014/07/03/docker-mobile-and-putting-things-in-boxes/) 中，他介绍了 library system 的背景和因此产生的手机应用（Android版本和iOS 版本），以及对此进行 docker 化的必要。作为“ Library in a box ”项目的成员之一，我主要研究的部分是“把东西放进盒子里”。 
 
