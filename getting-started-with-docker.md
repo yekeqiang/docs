@@ -1,57 +1,57 @@
-# 开始使用Docker(Tech Tip #39)
+#开始使用 Docker
 
-***
-作者：[Arun Gupta](http://blog.arungupta.me/2014/07/getting-started-with-docker/) 
+
+作者：[Arun Gupta](https://twitter.com/arungupta) 
 
 译者：[我不围观](http://weibo.com/ooutman)
 ***
 
-如果把来自不同会议、微博(tweets)和其他相关的文章、聚会和演讲稿都算上的话，好像Docker有解决世界饥荒的节奏了。真是这样的话真真是极好的，现实显然还不行。但是Docker确实能很好的解决一些问题。
+如果把来自不同会议和 meetup 上的演讲、 twitter 上的推文 、还有其它演讲稿累加，好像 Docker 有解决世界饥荒的节奏了。真是这样的话真真是极好的，不过显然还不行。但是 Docker 确实能很好的解决一些问题。
 
-我们来听听Docker项目的发起人[@solomonbstre](http://twitter.com/solomonstre)咋说：
+我们来听听 Docker 项目的发起人 [Solomon Hykes](http://twitter.com/solomonstre) 是如何阐述的：
 
-<iframe src="www.youtube.com/embed/ZzQfxoMFH0U" height="360" width="640" allowfullscreen="" frameborder="0"></iframe>
+<embed src="http://player.youku.com/player.php/sid/XNzI3ODg2NTM2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 
-简单来说，Docker简化了软件的分发过程，它主要使制作和共享包含软件环境的镜像文件，或者说叫**应用程序操作系统**，简单了。
+简单来说， Docker 简化了软件的分发过程，它使制作和共享包含软件环境的镜像文件变得简单了。这些镜像文件也叫**应用程序操作系统** 
 
-##那究竟什么是应用操作系统？
+##什么是应用操作系统？
 
-你的应用程序一般都需要特定版本的操作系统、应用服务器、JDK、数据库服务器，还可能需要调整配置文件和其他一些依赖关系。应用程序可能需要绑定到指定的端口和一定量的内存。这些运行应用程序所需要的组件和配置就是所说的应用程序操作系统。
+你的应用程序一般都需要特定版本的操作系统、应用服务器、 JDK 、数据库服务器，还可能需要调整配置文件和其他一些依赖关系。应用程序可能需要绑定到指定的端口和一定量的内存。这些运行应用程序所需要的组件和配置就是所说的应用程序操作系统。
 
-你当然可以写一个包含下载和安装这些组件的安装脚本。Docker简化了这个流程，实现方式是通过创建一个包含应用程序和基础设施的镜像(image)，当作一个组件进行管理。这些镜像可以创建Docker*容器(container)*，容器运行在Docker提供的*容器虚拟化平台*上。
+你当然可以写一个包含下载和安装这些组件的安装脚本。 Docker 简化了这个流程，通过创建一个包含应用程序和基础设施的镜像(image)，当作一个组件进行管理。这些镜像可以创建 Docker *容器(container)*，容器运行在 Docker 提供的*容器虚拟化平台*上。
 
 ##Docker的主要组件有哪些？
 
-Docker有两个主要组件：
+Docker 有两个主要组件：
 
 * Docker：开源的容器虚拟化平台
-* Docker Hub：共享和管理Docker镜像的Saas平台
+* Docker Hub：共享和管理 Docker 镜像的 Saas 平台
 
-Docker采用[Linux容器](https://linuxcontainers.org/)来提供隔离、沙箱、复制、资源限制、快照和其他的一些优势。详细的可以看看[excellent piece at InfoQ on Docker Containers](http://www.infoq.com/articles/docker-containers)。
+Docker 采用 [Linux 容器](https://linuxcontainers.org/) 来提供隔离、沙箱、复制、资源限制、快照和其他的一些优势。详细信息的可以看 [excellent piece at InfoQ on Docker Containers](http://www.infoq.com/articles/docker-containers) 了解。
 
-镜像是Docker的“构建组件”，也是应用操作系统的只读模版。容器是从镜像创建出来的运行状态。它们是Docker的“运行组件”。容器是可以运行、启动、停止、移动和删除的。镜像保存的仓库是Docker的“分发组件”。
+镜像是 Docker 的“构建组件”，也是应用操作系统的只读模版。容器是从镜像创建出来的运行状态，是 Docker 的“运行组件”。容器是可以运行、启动、停止、移动和删除的。镜像保存的仓库是 Docker 的“分发组件”。
 
-Docker**按启动顺序**包含两个组件：
+Docker **按启动顺序**包含两个组件：
 
 
-* 服务端：运行在宿主机上，负责构建、运行和分发Docker容器等重要工作
-* 客户端：Docker二进制程序，接收用户的命令和服务程序进行通信
+* 服务端：运行在宿主机上，负责构建、运行和分发 Docker 容器等重要工作
+* 客户端：Docker 二进制程序，接收用户的命令和服务程序进行通信
 
 ##这些组件怎么一起工作？
 
-客户端可以和服务端运行在一台主机上，也可以在不同的主机上。服务端需要用[pull](https://docs.docker.com/reference/commandline/cli/#pull)命令从仓库中拉一个镜像下来。服务端可以从Docker Hub或者其他配置的仓库中下载镜像。服务端主机可以从仓库中下载和安装多个镜像。
+客户端可以和服务端运行在一台主机上，也可以在不同的主机上。服务端需要用 [pull](https://docs.docker.com/reference/commandline/cli/#pull) 命令从仓库中拉一个镜像下来。服务端可以从 Docker Hub 或者其他配置的仓库中下载镜像。服务端主机可以从仓库中下载和安装多个镜像。
 
-![](http://img0.tuicool.com/MzQvqy.png)
+{<1>}![](http://img0.tuicool.com/MzQvqy.png)
 
-然后客户端就可以用[run命令](https://docs.docker.com/reference/commandline/cli/#run)来启动容器，完整的客户端命令列表可以看[这里](https://docs.docker.com/reference/commandline/cli/)。
+然后客户端就可以用 [run命令](https://docs.docker.com/reference/commandline/cli/#run) 来启动容器。完整的客户端命令列表可以看 [这里](https://docs.docker.com/reference/commandline/cli/) 。
 
-客户端和服务端通过socket或者REST API进行通信。
+客户端和服务端通过 socket 或者 REST API 进行通信。
 
-##因为Docker使用了Linux内核特性，是不是说只能在基于Linux的系统上使用？
+##因为 Docker 使用了 Linux 内核特性，是不是说只能在基于 Linux 的系统上使用？
 
-不同操作系统的Docker服务端和客户端都可以从<https://docs.docker.com/installation>安装。你也看到了，其实Docker是可以在很多平台上安装的，包括Mac和Windows上。
+不同操作系统的 Docker 服务端和客户端都可以从 <https://docs.docker.com/installation> 安装。你也看到了，其实 Docker 是可以在很多平台上安装的，包括 Mac 和 Windows 上。
 
-对于非Linux的系统，需要安装一个轻量级的虚拟机，在虚拟机上安装docker服务程序。同时会安装一个原生的客户程序，可以和服务程序进行通信。下面是一个Mac上启动docker服务程序的日志：
+对于非 Linux 的系统，需要安装一个轻量级的虚拟机，在虚拟机上安装 docker 服务程序。同时会安装一个原生的客户程序，可以和服务程序进行通信。下面是一个 Mac 上启动 docker 服务程序的日志：
 
 ```
 
@@ -85,7 +85,7 @@ Go version (server): go1.2.1
 Git commit (server): bd609d2
 ```
 
-举个例子，在Mac上可以按照[这个教程](https://docs.docker.com/installation/mac)安装Docker服务端和客户端。
+举个例子，在 Mac 上可以按照 [这个教程](https://docs.docker.com/installation/mac) 安装 Docker 服务端和客户端。
 
 可以通过下面这个命令停止虚拟机：
 
@@ -105,7 +105,7 @@ boot2docker boot
 boot2docker ssh
 ```
 
-完整的boot2docker命令列表可以在帮助上看到：
+完整的 boot2docker 命令列表可以在帮助上看到：
 
 
 ```
@@ -132,9 +132,9 @@ Commands:
     version                 Display version information.
 ```
 
-##光说不练，来个例子呗？
+##光说不练，举个栗子呗？
 
-一些JBoss项目可以在<www.jboss.org/docker>上找到Docker镜像，在页面上还可以看到安装的详细命令。比如，WildFly的Docker镜像就可以这么安装：
+一些 JBoss 项目可以在 [这里](www.jboss.org/docker) 找到 Docker 镜像，在页面上还可以看到安装的详细命令。比如， WildFly 的 Docker 镜像就可以这么安装：
 
 ```
 ~> docker pull jboss/wildfly
@@ -169,9 +169,9 @@ jboss/wildfly       latest              2f170f17c904        8 hours ago         
 docker run jboss/wildfly
 ```
 
-默认情况下，Docker容器是不提供交互shell的，也不提供标准输入。如果WildFly的Docker容器用上面的命令启动的话，就不能用Ctrl+C来停止了。可以指定-i选项来使其可交互，-t选项分配一个伪终端。
+默认情况下， Docker 容器是不提供交互 shell 的，也不提供标准输入。如果 WildFly 的 Docker 容器用上面的命令启动的话，就不能用 Ctrl+C 来停止了。可以指定 -i 选项来使其可交互， -t 选项分配一个伪终端。
 
-另外，我们通常还想在容器外能够访问8080端口，比如运行容器的宿主机上。可以通过指定-p 80:8080来完成，其中80是宿主机的端口，8080是容器的端口。 
+另外，我们通常还想在容器外能够访问8080端口，比如运行容器的宿主机上。可以通过指定 -p 80:8080 来完成，其中80是宿主机的端口，8080是容器的端口。 
 
 我们就可以这样运行：
 
@@ -223,7 +223,7 @@ docker run -i -t -p 80:8080 jboss/wildfly
 22:08:34,845 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015874: WildFly 8.1.0.Final "Kenny" started in 5259ms - Started 184 of 233 services (81 services are lazy, passive or on-demand)
 ```
 
-容器的IP地址可以这样看：
+容器的 IP 地址可以这样看：
 
 ```
 ~> boot2docker ip
@@ -239,24 +239,24 @@ CONTAINER ID        IMAGE                  COMMAND                CREATED       
 b2f8001164b0        jboss/wildfly:latest   /opt/wildfly/bin/sta   46 minutes ago      Up 12 minutes       8080/tcp, 9990/tcp   sharp_pare
 ```
 
-现在可以在本地机器上通过<http://192.168.59.103>来访问WildFly服务器，结果就像这样：
+现在可以在本地机器上通过 <http://192.168.59.103> 来访问 WildFly 服务器，结果就像这样：
 
-![](http://img1.tuicool.com/iE7neu.png)
+{<2>}![](http://img1.tuicool.com/iE7neu.png)
 
-最后，容器可以通过Ctrl+C来停止了，或者用如下的命令：
+最后，容器可以通过 Ctrl+C 来停止，或者用如下命令：
 
 ```
 ~> docker stop b2f8001164b0
 b2f8001164b0
 ```
 
-命令中的容器id(b2f8001164b0)可以通过“docker ps”来得到。
+命令中的容器 id(b2f8001164b0) 可以通过“ docker ps ”来得到。
 
-更多的镜像使用指南，比如启动域名模式、部署应用等可以在[这里](https://github.com/jboss/dockerfiles/blob/master/wildfly/README.md)找到。
+更多的镜像使用指南，比如启动域名模式、部署应用等可以在 [这里](https://github.com/jboss/dockerfiles/blob/master/wildfly/README.md) 找到。
 
-你还想在WildFly的Docker镜像包含什么？给我们提问题吧：<https://github.com/jboss/dockerfiles/issues>。
+你还想知道 WildFly 的 Docker 镜像包含什么？欢迎给我们提问题，在我们的 [Github](https://github.com/jboss/dockerfiles/issues) 页面留言。
 
-<http://jboss.org/docker>上有一些其他可用的镜像：
+<http://jboss.org/docker> 上有一些其他可用的镜像：
 
 * [KeyCloak](http://keycloak.org/)
 * [TorqueBox](http://torquebox.org/)
@@ -266,10 +266,11 @@ b2f8001164b0
 
 ![](http://img2.tuicool.com/zue6jq.png) ![](http://static.jboss.org/immutant/images/immutant_200x150.png) ![](http://static.jboss.org/torquebox/images/torquebox_200x150.png) ![](http://static.jboss.org/keycloak/images/keycloak_200x150.png)
 
-你知道Red Hat是在[Docker贡献者中名列前茅](http://thenewstack.io/who-are-the-docker-developers/)吗，有来自[Project Atomic](http://www.projectatomic.io/)的5个红帽子呢？
+你知道 Red Hat 在 [Docker 贡献者中名列前茅](http://thenewstack.io/who-are-the-docker-developers/) 吗？有5名来自 [Project Atomic](http://www.projectatomic.io/) 的红帽子参与其中。
 
 ***
-这篇文章由 [Arun Gupta](http://blog.arungupta.me/2014/07/getting-started-with-docker/)  撰写，[我不围观](http://weibo.com/ooutman) 翻译。点击 [这里](http://blog.arungupta.me/2014/07/getting-started-with-docker/) 阅读原文。
-***
+#####这篇文章由 [Arun Gupta](https://twitter.com/arungupta)   撰写，[我不围观](http://weibo.com/ooutman) 翻译。点击 [这里](http://blog.arungupta.me/2014/07/getting-started-with-docker/) 阅读原文。
 
+#####The article was contributed by [Arun Gupta](https://twitter.com/arungupta) , click [here](http://blog.arungupta.me/2014/07/getting-started-with-docker/) to read the original publication.
+***
 
