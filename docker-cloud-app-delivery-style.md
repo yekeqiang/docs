@@ -37,7 +37,7 @@ Docker 项目始于2013年3月，由当时的 PaaS 服务提供商 dotCloud 开�
 
 容器技术在云计算时代已经被大量使用。Google 公司的 Joe Beda 在今年5月做了一次题为 *[Containers At Scale — At Google, the Google Cloud Platform and Beyond](https://speakerdeck.com/jbeda/containers-at-scale)* 的演讲，在其中提到“ Everything at Google runs in a container ”，每周启动容器次数竟然多达20亿次。
 
-很多 PaaS 平台都是基于容器技术实现的，比如目前最成功的 PaaS 平台 Heroku 。此外，还有比较著名的开源 PaaS 平台 Cloud Foundry 的 Warden 以及 Google的 [Lmctfy](http://github.com/google/lmctfy)(Let Me Contain That For You) 等。
+很多 PaaS 平台都是基于容器技术实现的，比如目前最成功的 PaaS 平台 Heroku 。此外，还有比较著名的开源 PaaS 平台 Cloud Foundry 的 Warden 以及 Google的 [Lmctfy](http://github.com/google/lmctfy) (Let Me Contain That For You) 等。
 
 ###1.3.2. LXC
 
