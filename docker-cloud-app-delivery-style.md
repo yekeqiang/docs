@@ -393,7 +393,7 @@ Docker Hub 的目的之一就是要成为应用程序交换的中转站，它还
 
 配置自动构建很简单，只需要在 Docker Hub 中绑定 GitHub 或者 Bitbucket 账号就可以了，如何具体操作这里不做详细说明了。
 
-###3.3.3. 使用Packer
+###3.3.3. 使用 Packer
 
 [Packer](http://www.packer.io/) 是一个通过配置文件创建一致机器镜像（ identical machine images ）的非常方便的工具。 Packer 同样出自 Vagrant 的作者 Mitchell Hashimoto 之手。它支持虚拟机 VirtualBox 和 VMWare 等虚拟机软件，以及 Amazon EC2 、 DigitalOcean 、 GCE 以及 OpenStack 等云平台，最新版的 Packer 也增加了对 Docker 的支持。
 
@@ -403,7 +403,7 @@ Packer 的使用也比较简单，这里我们就不举例说明了，读者可�
 
 如果你愿意，还可以将在本地制作镜像 push 到 Docker Hub 上和其他人分享你的工作成果。
 
-首先你要有一个 Docker Hub 账号并已经为登录状态，这样才能往 Docker Hub 上 push 镜像文件。注册 Docker Hub 账号只能通过 [网站](https://hub.docker.com/) 注册，这里我们假设各位读者已经拥有了 Docker Hub 账号。
+首先你要有一个 Docker Hub 账号并已经为登录状态，这样才能往 Docker Hub 上 push 镜像文件。 Docker Hub 账号只能通过 [网站](https://hub.docker.com/) 注册，这里我们假设各位读者已经拥有了 Docker Hub 账号。
 
 登录 Docker Hub 通过 docker login 命令。
 
@@ -419,7 +419,7 @@ Packer 的使用也比较简单，这里我们就不举例说明了，读者可�
 
 首届 Docker 大会（ DockerCon14 ）于当地时间6月9日~6月10日在旧金山举行。相对于计划中的 500 个参会名额，最终有超过 900 人报名，并提交了超过 150 个演讲申请。
 
-关于这次 Docker 大会的更多信息可以参考其官方网站：http://www.dockercon.com/。
+关于这次 Docker 大会的更多信息可以参考其官方网站：http://www.dockercon.com/ 。
 
 ##4.1. Docker 官方发布的产品和服务
 
@@ -490,9 +490,9 @@ Red Hat Enterprise Linux 7 版将内置 Docker ，虽然版本还是 0.11 ，不
 
 ##5.1. 生态系统
 
-Docker 的发展离不开其生态系统[^3]，我们学习 Docker 也同样需对其生态系统有所了解。我们可以从下面三点来审视一下Docker当前的发展状况。
+Docker 的发展离不开其生态系统，我们学习 Docker 也同样需对其生态系统有所了解。我们可以从下面三点来审视一下 Docker 当前的发展状况。
 
-3. 关于 Docker 的生态环境，大家也可以参考网上有人制作的一份 [思维导图]( http://www.mindmeister.com/389671722/docker-ecosystem) 。
+>*作者注：关于 Docker 的生态环境，大家也可以参考网上有人制作的一份 [思维导图]( http://www.mindmeister.com/389671722/docker-ecosystem) 。*
 
 ###5.1.1. 厂商支持
 
@@ -506,35 +506,39 @@ Docker 的发展离不开其生态系统[^3]，我们学习 Docker 也同样需�
 
 PaaS 平台大多基于容器技术， Docker 天生就适合做 PaaS 。
 
-- [Flynn](https://flynn.io/)
+- **[Flynn](https://flynn.io/)**
 
 Flynn 是一个高度模块化的下一代开源 PaaS 实现。  Flynn 分为两层， Layer 0 是底层，也叫资源层，基于[ Google 的 Omega 论文](http://eurosys2013.tudos.org/wp-content/uploads/2013/paper/Schwarzkopf.pdf) 开发，这一层也包括服务发现。 Layer 1 则用来进行部署、管理应用程序。 Flynn 目前开发比较活跃，是一个值得关注的开源项目，而且今年夏天很可能就会发布 1.0 的版本了。
 
-- [Deis](http://deis.io/)
+- **[Deis](http://deis.io/)**
+
 Deis 是一个支持公有和私有 PaaS 的开源实现。它支持运行使用 Ruby 、 Python 、 Node.js 、 Java 、 PHP 和 Go 等语言进行应用开发，并能部署到 AWS 、 Rackspace 和 DigitalOcean 等云上。
 
 ####CI/CD（持续集成/持续部署）
 
 由于 Docker 的沙箱性、创建速度快等特性，它与生俱来也适合进行 CI/CD 。很多基于 Docker 的 CI/CD 开源方案和服务如雨后春笋般的涌现出来。
 
-- [Drone](https://drone.io/)
+- **[Drone](https://drone.io/)**
+
 开源的支持各种语言的 CI 工具，并且提供了 CI/CD 服务 Drone.io 。
 
-- [Strider CD](http://stridercd.com/)
+- **[Strider CD](http://stridercd.com/)**
+
 开源的 CI/CD 方案，集成 GitHub 。
 
 ####私有仓库托管（ Registry ）/容器托管
 
 这类服务主要进行私有仓库的托管，根据用户的托管仓库数量收费。 Docker Hub也提供私有仓库的收费套餐。
 
-- [Quay](https://quay.io/)
+- **[Quay](https://quay.io/)**
+
 Quay 除了能托管私有镜像之外，还能和 GitHub 集成，使用 Dockerfile 进行镜像构建。
 
-- [Shippable](https://www.shippable.com/)
+- **[Shippable](https://www.shippable.com/)**
 
 Shippable 支持 Github 和 Bitbucket ，并且提供100%免费的服务，包括私有仓库。
 
-- [Orchard](https://www.orchardup.com/)
+- **[Orchard](https://www.orchardup.com/)**
 
 Orchard 也是一个和 StackDock 类似的 Docker 托管服务，它提供了便捷的命令行工具来运行各种 Docker 命令。同时它也提供免费的私有 Registry 服务，前面介绍的 Fig 工具就是此公司开发的。
 
@@ -544,11 +548,12 @@ Orchard 也是一个和 StackDock 类似的 Docker 托管服务，它提供了�
 
 软件工程师天生就是闲不住和想尽一切办法要提高自己效率的一群人。这里我们简单介绍两个方便进行 Docker 开发的工具。
 
-- [Shipyard](https://github.com/shipyard/shipyard)
+- **[Shipyard](https://github.com/shipyard/shipyard)**
 
 Shipyard 是一个 Docker 镜像和容器管理工具，除了基本的镜像构建，容器启动等功能之外，它还具有在浏览器中attach到容器的功能，并通过 [hipache](https://github.com/dotcloud/hipache) ( Hipache: a distributed HTTP and websocket proxy ) 来进行容器之间的连接。同时它也支持跨节点的 Docker 管理和容器 Metrics 采集。
  
-- [Fig](http://orchardup.github.io/fig/index.html)
+- **[Fig](http://orchardup.github.io/fig/index.html)**
+
 Fig 是一个为了提高基于 Docker 开发的效率而创建的工具，它通过一个配置文件来管理多个 Docker 容器，非常适合组合使用多个容器进行开发的场景。
 
 ###5.1.3. 社区
@@ -610,17 +615,17 @@ Docker 开发社区非常活跃，除了 35 名全职员工（外加一只乌龟
 
 在松耦合的分布式环境下，应用程序不一定跑在同一台机上，甚至是跨越数据中心的。这时候服务发现就显得格外重要了。
 
-- [Zookeeper](http://zookeeper.apache.org/)
+- **[Zookeeper](http://zookeeper.apache.org/)**
 
 [Chubby](http://research.google.com/archive/chubby.html) 可以称得上是很多服务发现、集群管理软件的鼻祖了，包括 Zookeeper 。这些软件都提供数据存储、 leader 选举、元数据存储、分布式锁、事件监听（或 watch ，监视）等功能。
 
-- [etcd](https://github.com/coreos/etcd)
+- **[etcd](https://github.com/coreos/etcd)**
 
 etcd 很新也很轻量，安装很简单，配置也不复杂，所以非常适合入门。etcd 存储的是 key-value 格式的数据。
 
 etcd 是 CoreOS 的一个组件。同时 CoreOS 提供了一个基于公有云的服务发现服务 discovery.etcd.io 。
  
-- 此外，我们还可以有 [Skydns/Skydock](https://github.com/crosbymichael/skydock)  、[Discoverd](https://github.com/flynn/discoverd) 等选择。
+- 此外，我们还可以有 **[Skydns/Skydock](https://github.com/crosbymichael/skydock) ** 、**[Discoverd](https://github.com/flynn/discoverd)** 等选择。
 
 >*作者注：Skydns/Skydock 是基于 DNS 的服务发现。*
 
@@ -630,7 +635,7 @@ etcd 是 CoreOS 的一个组件。同时 CoreOS 提供了一个基于公有云�
 
 围绕 Docker 使用场景的开源集群管理软件有很多，比如 Geard、Fleet、Consul及 Serf 等，这些软件都是随着 Docker 应运而生的；此外还有很多老牌的集群管理软件，比如 Mesos 等也可以很好的结合 Docker 使用。
 
-- [Serf](http://www.serfdom.io/) 和 [Consul](http://www.consul.io/)
+- **[Serf](http://www.serfdom.io/)** 和 **[Consul](http://www.consul.io/)**
 
 Serf 是一个基于 Gossip 协议去中心的服务器发现和集群管理工具，它非常轻量，高可用并具备容错机制。
 
@@ -638,15 +643,15 @@ Consul 是一个服务发现和集群配置共享的软件，除了K/V store功�
 
 这两个软件都是 Vagrant 作者所在公司 [HashiCorp](http://www.hashicorp.com/products) 发布的产品，这个公司也值得大家关注。
 
-- Apache Mesos & Marathon & deimos & etc.
+- **Apache Mesos & Marathon & deimos & etc**
 
 Mesos 用于对多个节点的资源进行管理，它将多台服务器作为一台“虚拟机”看待，并在这台虚拟机上分配资源，用户通过使用 framework 进行资源管理。 Marathon 是一个 Mesos 的 framework ，用来启动、管理需要长时间运行的任务。deimos 则是一个为 Mesos 准备的 Docker 插件。
 
 - 其它工具
 
-Cloud Foundry 在5月份发布的 Docker 版的 BOSH 工具，有兴趣的读者可以参考一下 [Decker](http://www.cloudcredo.com/decker-docker-cloud-foundry/) 项目。
+Cloud Foundry 在5月份发布的 Docker 版的 BOSH 工具，有兴趣的读者可以参考一下 **[Decker](http://www.cloudcredo.com/decker-docker-cloud-foundry/)** 项目。
 
-另外 [Clocker](https://github.com/brooklyncentral/clocker) 这个项目也比较有意思，它基于 Apache Brooklyn（目前还在孵化器中），能在多云环境下基于 Docker 容器进行应用部署。这个项目的扩展性很好，非常方便自己定制。不过项目还太年轻，要想使用的话恐怕还需要些时日。
+另外 **[Clocker](https://github.com/brooklyncentral/clocker) **这个项目也比较有意思，它基于 Apache Brooklyn（目前还在孵化器中），能在多云环境下基于 Docker 容器进行应用部署。这个项目的扩展性很好，非常方便自己定制。不过项目还太年轻，要想使用的话恐怕还需要些时日。
  
 ###5.3.2. 和 OS 的深度结合
 
@@ -654,7 +659,7 @@ Cloud Foundry 在5月份发布的 Docker 版的 BOSH 工具，有兴趣的读者
 
 >*作者注： systemd 是用来替代 Linux 中 init 系统的系统软件，目前已经在 Fedora/RHEL 等中采用。*
 
-Docker 除了能在各种主流 Linux 上使用之外，还出现了有专为运行 Docker 容器而定制的 OS 了，比如 [CoreOS](https://coreos.com)， RedHat 的 [Atomic](http://www.projectatomic.io/)。
+Docker 除了能在各种主流 Linux 上使用之外，还出现了有专为运行 Docker 容器而定制的 OS 了，比如 [CoreOS](https://coreos.com) 、 RedHat 的 [Atomic](http://www.projectatomic.io/)。
 
 ####CoreOS
 
