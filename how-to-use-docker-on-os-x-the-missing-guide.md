@@ -1,15 +1,15 @@
-#操作指南：在 OS X 系统上部署 Docker
+# 操作指南：在 OS X 系统上部署 Docker
+
 ***
 
-#####作者：[CHRIS JONES](http://viget.com/about/team/cjones)
-
-#####译者：[moonatcs](http://blog.yege.me/)
+##### 作者：[CHRIS JONES](http://viget.com/about/team/cjones)
+##### 译者：[moonatcs](http://blog.yege.me/)
 
 ***
 
 你知道 [Docker](https://www.docker.com/) 吗？很可能你已经听说过它了，很多人在谈论它，Docker 越来越火了。 甚至像我父亲这样的人都会问，“Docker 是什么东西啊？我看到很多人在 Facebook 上提到它。”
 
-Docker 很大程度上简化了容器（[containers](http://en.wikipedia.org/wiki/Software_container)）的运行和管理。它具有从各个方面改变服务端应用程序（server-side applications）的潜力，从开发和测试到部署和扩展。
+Docker 很大程度上简化了 [containers](http://en.wikipedia.org/wiki/Software_container) 的运行和管理。它具有从各个方面改变服务端应用程序（server-side applications）的潜力，从开发和测试到部署和扩展。
 
 最近，我仔细翻阅了 [The Docker Book](http://dockerbook.com/) 这本书。这是一本相当好的书，我强烈的推荐它。但是，当我在 OS X 上运行书上的示例时，发现会存在一些问题。因为，在书里假定我们使用的是 Linux 系统，而且跳过了一些额外的配置。但是，如果要在 OS X 上运行书上的示例， 这些配置却是必不可少的。这并不是这本书的错，相反，它提到了如何在 OS X 上运行 Docker 这一潜在的问题。
 
@@ -17,7 +17,7 @@ Docker 很大程度上简化了容器（[containers](http://en.wikipedia.org/wik
 
 首先我们来谈一下 Docker 是如何工作的以及为什么在 OS X 上运行它会存在问题。
 
-##Docker 如何工作
+## Docker 如何工作
 
 Docker 是一个  client-server 应用。 Docker  **server**  是一个后台进程（daemon），要完成所有重要的工作： 建立和下载 images 、开始和结束 containers 等等。 它提供了用于远程管理的 REST API。
 
@@ -49,7 +49,7 @@ DOCKING ON OS X
 
 能理解吗？ 现在，让我们来安装 DAT 软件。
 
-##INSTALLATION
+## 安装 Docker 环境
 
 
 ### Step 1： 安装 VirtualBox
@@ -63,7 +63,7 @@ DOCKING ON OS X
 	> brew install docker
 	> brew install boot2docker
 
-###Step 3: 初始化和启动 boot2docker
+### Step 3: 初始化和启动 boot2docker
 
 首先，初始化 boot2docker （只需要做这一次）
 
@@ -90,7 +90,7 @@ Docker client 会以为 Docker host 是当前的机器，我们需要对`DOCKER_
 
 *Your VM might have a different IP address—use whatever boot2docker up told you to use. You probably want to add that environment variable to your shell config.*
 
-### Step 5: Profit
+### Step 5: 测试和使用 Docker
 
 测试一下：
 
@@ -112,15 +112,16 @@ Docker client 会以为 Docker host 是当前的机器，我们需要对`DOCKER_
 
 大功告成。总结一下这个过程，首先安装了一个运行 boot2docker 的 VirtualBox VM；然后在 VM 中启动 Docker server；最后通过 OS X 上的 Docker client 与 server 进行通信。
 
-让我们做一些 containers。
+我们可以启动 containers 了。
 
-##通常的问题
+## 通常存在的问题
 
 
 我们有了一个可以“工作的” Docker 平台，那么来看一下它在哪里会出问题并如果解决这些问题。
 
 ### Problem #1: 端口映射（Port Forwarding）
-**问题：**Docker 从 containers 到 host 的端口映射，这个 host 是 boot2docker 而不是 OS X。
+
+**问题：** Docker 从 containers 到 host 的端口映射，这个 host 是 boot2docker 而不是 OS X。
 
 让我们启动一个容器来运行 [nginx]( http://nginx.com/ ) ：
 
@@ -130,7 +131,7 @@ Docker client 会以为 Docker host 是当前的机器，我们需要对`DOCKER_
         [ ... ]
     0092c03e1eba5da5ccf9f858cf825af307aa24431978e75c1df431e22e03b4c3
 
-这个命令启动了一个新的 container 作为后台进程（daemon(`-d`)），自动映射到 image(`-P`) 中特定端口，容器命名为 ‘web’(`--name web`) ，并且使用`nginx` image ，新 container 唯一标识是 `0092c03e1eba....` 。
+这个命令启动了一个新的 container 作为后台进程（daemon(`-d`)），自动映射到 image(`-P`) 中特定端口，容器命名为 ‘web’(`--name web`) ，并且使用`nginx` image ，新 container 的唯一标识是 `0092c03e1eba....` 。
 
 验证 container 运行：
 
@@ -309,18 +310,20 @@ boot2docker 并不支持 VirtualBox Guest Additions , 不允许我们那样做�
 
 
 ### PROBLEM #3: 进入容器的内部
-**问题：**如何进入容器内部？
+
+**问题：** 如何进入容器内部？
+
 现在，你已经将新建的 container 运行起来了， 端口映射已经成功， 挂载卷也已经完成。貌似所有事情都妥妥的了，但是当你想启动 container 中的一个 shell 并且敲几个命令行时，你会发现这个还做不到。
 
-**解决方法；**Linux Magic
+**解决方法：** Linux Magic
 
 请看 [nsenter](https://github.com/jpetazzo/nsenter)。nsenter 允许你在 内核命名空间中运行命令行。 因为 每个 container 都是一个运行在它自己的内核命名空间中的进程，而我们也正需要在容器的内部启动一个 shell 。
 
 *This part deals with shells running in three different places. Trés confusing. I’ll use a different prompt to distinguish each*
 
-* `>` for OS X
-* `$` for the boot2docker VM
-* `%` for inside a Docker container
+* `>` *for OS X*
+* `$` *for the boot2docker VM*
+* `%` *for inside a Docker container*
 
 首先，建立一个ssh连接，来访问 boot2docker VM ：
 
