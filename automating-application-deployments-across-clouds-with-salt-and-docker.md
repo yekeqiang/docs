@@ -1,18 +1,21 @@
-# 基于云使用 salt 和 docker 自动化部署应用 
+#基于云使用 salt 和 docker 自动化部署应用
 
-标签（空格分隔）： docker salt automating
+![alt](http://resource.docker.cn/saltstack-logo.png)
 
----
+***
 
-![enter image description here][1] 如果你还没有机会使用 [Salt][2]的话，那我简单介绍下，Salt 是一个非常强大的配置管理系统，它是一个非常容易运行，并且能支持分布式命令执行和复杂的配置文件管理，具有高可扩展性，能同时支持上千台服务器运行。
+#####作者：[James Thomason](https://twitter.com/fef1f0)  
+#####译者：[叶可强](http://weibo.com/1224591704)
 
-> 注： SaltStack 的进一步学习和了解可以加入 [SaltStack 中国用户组][3]，SaltStack 确实是一个非常强大的工具，用 Python 编写的，可以通过 API 进行二次开发
+如果你还没有机会使用 [Salt](https://github.com/saltstack/salt) 的话，那我简单介绍下。 Salt 是一个非常强大的配置管理系统，它容易运行，并且能支持分布式命令执行和复杂的配置文件管理，具有高可扩展性，能同时支持上千台服务器运行。
 
-最近，我在写一篇关于一个事实上的集装箱化标准怎么成为[新一代的管理工具][4]的文章。回到一月，[SaltStack][5] 宣布了 ```Salt 2014.1.0``` 版本[一些非常好的新特性][6]，包括支持 [Docker 容器生命周期的管理][7]。SaltStack 早期就得到了 Docker 的支持，Docker 自己认为还没有准备好（tell that to Yelp and Spotify），但是这些工具为固定不变的基础设施提供了一个开箱即用的解决方案。
+> #####译者注： 希望进一步学习和了解 SaltStack 的同学可以加入 [SaltStack 中国用户组](http://www.saltstack.cn/)。SaltStack 确实是一个非常强大的工具，用 Python 编写的，可以通过 API 进行二次开发。
 
-在一年前，通过使用多个公共云横跨多个虚拟机来部署和管理一个应用，会被认为是非常难的使用案例。像 Google , FaceBook 和 Ning 这些公司为了解决扩展性难题，划分了他们很多年来发展内部的 orchestration 技术。今天，使用 Docker 容器结合 [Salt-Cloud][8]，还有一些 Salt 状态， 我们只需要花费几十分钟就能处理好。并且，因为我们使用了 SaltStack 的声明式配置管理，我们能在实际生产环境中按照以下模式操作。
+最近，我撰写了一篇如何将实际存在的集装箱化标准转化为 [新一代的管理工具](http://thomason.io/why-containerization-is-a-key-enabling-technology-for-paas/) 的文章。一月的时候 [SaltStack](http://www.saltstack.com/) 宣布了 ```Salt 2014.1.0``` 版本[一些非常好的新特性](http://docs.saltstack.com/en/latest/topics/releases/2014.1.0.html)，包括支持 [Docker 容器生命周期的管理](http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.dockerio.html)。 SaltStack 早期就得到了 Docker 的支持，不过 Docker 认为自己还没有准备好用于生产环节（ Yelp 和 Spotify 均使用 Docker ），但是这些工具为固定不变的基础设施提供了一个开箱即用的解决方案。
 
-![enter image description here][9]
+在一年前，通过使用多个公共云横跨多个虚拟机来部署和管理一个应用，会被认为是非常难的使用案例。像 Google 、 FaceBook 和 Ning 这些公司为了解决扩展性难题，花费多年来开发内部使用的编配技术。今天，使用 Docker 容器结合 [Salt-Cloud](http://salt-cloud.readthedocs.org/en/latest/)，还有一些 Salt States ， 我们只需要花费几十分钟就能处理好。并且，因为我们使用了 SaltStack 的公开配置管理，我们能在实际生产环境中按照以下模式操作。
+
+![alt](http://resource.docker.cn/salt-docker-use-cases.png)
 
 这个案例的核心是在一个或多个公有云供应商上，把一个或多个应用部署在一个或者多个虚拟主机上。
 
@@ -25,7 +28,7 @@
 * 用一个虚拟的 apache 服务模仿真实世界的应用
 
 
-![enter image description here][10]
+![alt](http://resource.docker.cn/docker-salt-digitalocean.png)
 
 为了模仿一个真实的应用，需要创建一个 Apache 的 Docker 容器。从概念上讲，这个容器可能一个前端代理，一个 Web 中间件服务，一个数据库，或者是我们需要部署在生产上的其他类型的服务。为了这个，我们在一个目录下创建一个 DockerFile，构建这个容器，并且把这个容器 PUSH 到 Docker 仓库。
 
@@ -53,16 +56,16 @@ CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
 ```
 ##### Building the container
 root@salt:/some/dir/apache# docker build -t jthomason/apache .
-Uploading context  2.56 kB
+Uploading context  2.56 kB
 Uploading context
 Step 0 : FROM ubuntu:12.04
- ---> 1edb91fcb5b5
+ ---> 1edb91fcb5b5
 Step 1 : MAINTAINER Kimbro Staken version: 0.1
- ---> Using cache
- ---> 534b8974c22c
+ ---> Using cache
+ ---> 534b8974c22c
 Step 2 : RUN apt-get update && apt-get install -y apache2 && apt-get clean && rm -rf /var/lib/apt/lists/*
- ---> Using cache
- ---> 7d24f67a5573
+ ---> Using cache
+ ---> 7d24f67a5573
 ...
 <A WHOLE LOT OF STUFF HAPPENS>
 ...
@@ -81,7 +84,7 @@ The push refers to a repository [jthomason/apache] (len: 1)
 Pushing tag for rev [527ad6962e09] on {https://registry-1.docker.io/v1/repositories/jthomason/apache/tags/latest}
 ```
 
-当我们的应用 Demo 成功 PUSH 到了 Docker 的仓库后，我们准备开始协调它的部署。需要提前注意的是，我们假设你已经安装了一个 SaltStack ，如果没有，你可以根据这个[文档][11] 来获取 SaltStack Master 安装。下一步，就是在你选择的公有云供应商上配置 Salt-Cloud 。 配置 Salt-Cloud 是非常简单的，我们需要创建一个 SSH Key，Salt-Cloud 用它来在新创建的 VMs 上安装 Salt Minion，把这个 keypair 添加进公有云提供商，使用认证的 API 为我们的公有云创建一个 Salt-Cloud 配置文件。
+当我们的应用 Demo 成功 PUSH 到了 Docker 的仓库后，我们开始协调它的部署。需要提前注意的是，我们假设你已经安装了一个 SaltStack ，如果没有，你可以根据这个[文档](http://docs.saltstack.com/en/latest/topics/installation/index.html) 来获取 SaltStack Master 安装。下一步，就是在你选择的公有云供应商上配置 Salt-Cloud 。 配置 Salt-Cloud 是非常简单的，我们需要创建一个 SSH Key ， Salt-Cloud 用它来在新创建的 VMs 上安装 Salt Minion 。把这个 keypair 添加进公有云提供商，使用认证的 API 为我们的公有云创建一个 Salt-Cloud 配置文件。
 
 **Step 4: Create an SSH Key Pair**
 
@@ -113,9 +116,9 @@ root@salt:/etc/salt/keys#
 
 **Step 5: Upload SSH Key Pair**
 
-![enter image description here][12]
+{<4>}![alt](http://docker.u.qiniudn.com/digital-ocean-add-ssh-key.png)
 
-使用 Digital Ocean 让我们的 SSH Keys 生效，下一步的准备时间是使用 Digital Ocean’s API key 为我们的账号配置 Salt-Cloud，为 Digital Ocean 虚拟主机的大小，地理位置，镜像 定义配置文件，Salt-Cloud 的认证文件保存在 Salt-Master 的 ```/etc/salt/cloud.providers.d/``` 路径下，查看 Salt-Cloud 的[文档][13]了解更加多的配置文件细节
+使用 Digital Ocean 让我们的 SSH Keys 生效，下一步的准备时间是使用 Digital Ocean’s API key 为我们的账号配置 Salt-Cloud，为 Digital Ocean 虚拟主机的大小，地理位置，镜像 定义配置文件，Salt-Cloud 的认证文件保存在 Salt-Master 的 ```/etc/salt/cloud.providers.d/``` 路径下，查看 Salt-Cloud 的[文档](http://salt-cloud.readthedocs.org/en/latest/topics/config.html)了解更加多的配置文件细节
 
 **Step 6: Configure Salt-Cloud**
 
@@ -163,7 +166,7 @@ ubuntu_2GB_ny2:
   private_networking: True
 ```
 
-现在是时候为我们的应用容器配置 Salt。要做到这一点，我们需要创建两个 Salt [States][14] ,一个为在一个新创建的 VMs 上的 Docker 准备，另外一个为应用容器准备。Salt States 是 Salt 的声明式状态配置，它在目标主机上被 salt-minion 执行，States 有非常丰富的功能，几乎很少有像它这样在教程中覆盖了如此之多的各等级的细节，这个不是最聪明或是最优的 States 使用示例，但是它足够简单。你需要仔细研读 Salt States 来发展你自己的环境的最佳实践。
+现在要为我们的应用容器配置 Salt 。要做到这一点，我们需要创建两个 Salt [States](http://docs.saltstack.com/en/latest/topics/tutorials/starting_states.html) ，一个是为在新创建的 VMs 上的 Docker 做准备，另外一个为应用容器准备。Salt States 是 Salt 的公开状态配置，它在目标主机上被 salt-minion 执行，States 有非常丰富的功能，几乎很少有像它这样在教程中覆盖了如此之多的各等级的细节，这个不是最聪明或是最优的 States 使用示例，但是它足够简单。你需要仔细研读 Salt States 来找出最适应自己的环境的实战方法。
 
 **Step 7: Create a Salt state for Docker**
 
@@ -212,7 +215,7 @@ docker:
   service.running
 ```
 
-第一个 salt state 定义了依赖和安装 Docker 的配置
+第一个 salt state 定义了依赖和安装 Docker 的配置。
 
 **Step 8: Create Salt state for the application container**
 
@@ -239,7 +242,7 @@ apache:
                 HostPort: "80"
 ```
 
-现在终于配置完成，我们将准备 1-n 个虚拟机，每个运行一个应用容器实例。在我们做这个之前，让我们校验下 Salt Master 是否正常工作，这时候，我们知道至少有一个客户端应该与 Salt Master 通信，这个客户端与 Salt Master 运行在同一台服务器上。
+现在终于配置完成，我们将准备 1 到 n 个虚拟机，每个运行一个应用容器实例。在我们做这个之前，让我们校验下 Salt Master 是否正常工作，这时候，我们知道至少有一个客户端应该与 Salt Master 通信，这个客户端与 Salt Master 运行在同一台服务器上。
 
 **Step 9: Verify that Salt is working**
 
@@ -251,7 +254,7 @@ True
 root@salt:~#
 ```
 
-非常满意，随着 Salt 的安装，一切工作有序。现在我们可以用 Salt-Cloud 在我们的第一个虚拟机上准备我们的一个容器实例。
+结果非常满意，随着 Salt 的安装，一切工作有序。现在我们可以用 Salt-Cloud 在我们的第一个虚拟机上准备我们的一个容器实例。
 
 **Step 10: Provision a VM with an instance of the container**
 
@@ -302,33 +305,18 @@ one.garply.org:
         new
 ```
 
-当运行完成 Salt-Cloud，它发出一个包含新近创建的 VM 实例的信息的 YAML blob，让我们使用这个实例的 IP 来看下我们的应用是否在运行。
+当运行完成 Salt-Cloud，它发出一个包含新近创建的 VM 实例的信息的 YAML blob ，让我们使用这个实例的 IP 来看下我们的应用是否在运行。
 
 **Step 11: Verify application is running **
 
-![enter image description here][15] 
+![alt](http://resource.docker.cn/it-works.png) 
 
-我们已经为我们的基础设施建立了基本的设置和管理模式，增加额外的公有云是非常简单的，非常感谢 Salt-Cloud 为我们的应用基础设施提供了一个控制接口。在整个持续集成和部署过程，该何去何从？一个起始点是考虑 salt states 怎样被用来管理 VM 和 控制容器的生命周期。我计划在未来的文章中分享我的一些明确的想法。非常明显的，从你最后决定你的应用部署和操作的架构设计，这里会有非常多的想法适用于你的明确目标。不管怎样，Salt 是一个非常强大的工具，当与 Docker 组合的时候，在不可变的基础架构上，提供了一个声明式的框架来管理应用生命周期的开箱即用的范例。That versatility puts a whole lot of miles behind you，允许你专注于应用程序部署与操作的其他核心挑战。
+我们已经为我们的基础设施建立了基本的设置和管理模式。增加额外的公有云是非常简单的，非常感谢 Salt-Cloud 为我们的应用基础设施提供了一个控制接口。在整个持续集成和部署过程中，该何去何从？一个起始点是考虑 salt states 怎样被用来管理 VM 和 控制容器的生命周期。我计划在未来的文章中分享我的一些明确的想法。显而易见，要最终决定应用部署和操作的架构设计，会有非常多的想法适用于你的明确目标。不管怎样， Salt 是一个非常强大的工具，当与 Docker 组合的时候，在不可变的基础架构上，提供了一个使用公开的框架来管理应用生命周期的开箱即用的范例。这种灵活性让你占尽先机，使你专注于应用程序部署与操作的其他核心挑战。
+
+***
+
+#####这篇文章由 [James Thomason](https://twitter.com/fef1f0) 撰写， [叶可强](http://weibo.com/1224591704) 翻译。点击 [这里](http://thomason.io/automating-application-deployments-across-clouds-with-salt-and-docker/) 可阅读原文。
+#####The article was contributed by [JAMES THOMASON](https://twitter.com/fef1f0), click [here](http://thomason.io/automating-application-deployments-across-clouds-with-salt-and-docker/) to read the original publication.
 
 
-> 注： 该文章由 JAMES THOMASON 编写， 本文的[原文][16]请看这里，如需转载，请注明出处，谢谢！
-> 注： 该文由 [Docker 中文社区][17]收集，并且发布翻译任务，各位如果对 Docker 感兴趣，可以加入 Docker 中文社区。
 
-
-  [1]: http://thomason.io/wp-content/uploads/2014/04/saltstack-logo.png
-  [2]: https://github.com/saltstack/salt
-  [3]: http://www.saltstack.cn/
-  [4]: http://thomason.io/why-containerization-is-a-key-enabling-technology-for-paas/
-  [5]: http://www.saltstack.com/
-  [6]: http://docs.saltstack.com/en/latest/topics/releases/2014.1.0.html
-  [7]: http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.dockerio.html
-  [8]: http://salt-cloud.readthedocs.org/en/latest/
-  [9]: http://thomason.io/wp-content/uploads/2014/04/salt-docker-use-cases.png
-  [10]: http://thomason.io/wp-content/uploads/2014/04/docker-salt-digitalocean.png
-  [11]: http://docs.saltstack.com/en/latest/topics/installation/index.html
-  [12]: http://thomason.io/wp-content/uploads/2014/04/digital-ocean-add-ssh-key.png
-  [13]: http://salt-cloud.readthedocs.org/en/latest/topics/config.html
-  [14]: http://docs.saltstack.com/en/latest/topics/tutorials/starting_states.html
-  [15]: http://thomason.io/wp-content/uploads/2014/04/it-works.png
-  [16]: http://thomason.io/automating-application-deployments-across-clouds-with-salt-and-docker/
-  [17]: http://www.dockboard.org/
