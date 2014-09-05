@@ -19,7 +19,7 @@ POST /images/create
 ```
 
 下面的截图是一个示例。
-![create sample](http://cdn2.hubspot.net/hub/411552/file-1222274949-jpg/blog-files/create-an-image.jpg?t=1406803574300)
+![create sample](http://resource.docker.cn/create-an-image.jpg)
 
 ###从容器创建镜像
 
@@ -29,7 +29,7 @@ POST /images/create
 POST /commit
 ```
 下面的截图是一个示例。
-![commit sample](http://cdn2.hubspot.net/hub/411552/file-1222274964-png/blog-files/docker-create-image-from-container.png?t=1406803574300)
+![commit sample](http://resource.docker.cn/docker-create-image-from-container.png)
 
 ###镜像列表
 
@@ -38,7 +38,7 @@ POST /commit
 GET /images/json
 ```
 下面的截图是一个示例。
-![list sample](http://cdn2.hubspot.net/hub/411552/file-1222274979-png/blog-files/docker-list-images.png?t=1406803574300)
+![list sample](http://resource.docker.cn/docker-list-images.png)
 
 ###插入一个文件
 
@@ -48,7 +48,7 @@ GET /images/json
 POST /images/(name)/insert
 ```
 下面的截图是一个示例。
-![insert sample](http://cdn2.hubspot.net/hub/411552/file-1222274994-jpg/blog-files/docker-image-insert-file.jpg?t=1406803574300)
+![insert sample](http://resource.docker.cn/docker-image-insert-file.jpg)
 
 ###删除镜像
 
@@ -59,7 +59,7 @@ POST /images/(name)/insert
 DELETE /images/(name)
 ```
 下面的截图是一个示例。
-![delete sample](http://cdn2.hubspot.net/hub/411552/file-1222275009-jpg/blog-files/delete-an-image.jpg?t=1406803574300)
+![delete sample](http://resource.docker.cn/delete-an-image.jpg)
 
 ###提交到 Registry
 
@@ -69,7 +69,7 @@ DELETE /images/(name)
 POST /images/(name)/push
 ```
 下面的截图是一个执行的示例。
-![push sample](http://cdn2.hubspot.net/hub/411552/file-1222275024-png/blog-files/docker-push-image-to-remote-repo.png?t=1406803574300)
+![push sample](http://resource.docker.cn/docker-push-image-to-remote-repo.png)
 
 ###标注镜像
 
@@ -79,7 +79,7 @@ POST /images/(name)/push
 POST /images/(name)/tag
 ```
 下面的截图是一个执行的示例。
-![tag sample](http://cdn2.hubspot.net/hub/411552/file-1222275039-jpg/blog-files/tag-an-image.jpg?t=1406803574300)
+![tag sample](http://resource.docker.cn/tag-an-image.jpg)
 
 ###搜索镜像
 
@@ -89,7 +89,7 @@ POST /images/(name)/tag
 GET /images/search
 ```
 下面的截图是一个执行的示例。
-![search sample](http://cdn2.hubspot.net/hub/411552/file-1222275054-png/blog-files/docker-search-an-image.png?t=1406803574300)
+![search sample](http://resource.docker.cn/docker-search-an-image.png)
 
 ###历史
 
@@ -99,7 +99,7 @@ GET /images/search
 GET /images/(name)/history
 ```
 下面的截图是一个执行的示例。
-![history sample](http://cdn2.hubspot.net/hub/411552/file-1222275069-jpg/blog-files/docker-get-image-history.jpg?t=1406803574300)
+![history sample](http://resource.docker.cn/docker-get-image-history.jpg)
 
 ###构建镜像
 
@@ -110,7 +110,7 @@ POST /build
 ```
 下面的截图是一个执行的示例。
 
-![build sample](http://cdn2.hubspot.net/hub/411552/file-1222275084-png/blog-files/docker-build-image-from-dockerfile.png?t=1406803574300)
+![build sample](http://resource.docker.cn/docker-build-image-from-dockerfile.png)
 
 ***
 我们现在完成了 Docker API 所有内容。每个礼拜四，你都会在  [flux7](http://flux7.com)看到 Docker 教程系列的新文章。
