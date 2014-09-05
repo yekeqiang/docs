@@ -6,7 +6,7 @@
 #####译者：[叶可强](http://weibo.com/yeziyu)
 
 ***
-与 Docker 服务器最 “devOps” 的交互方式是通过 RESTfUL API 暴露接口，然后使用你选择的 HTTP 客户端给 Docker Server 发送命令。
+与 Docker 服务器最 “devOps” 的交互方式是通过 RESTful API 暴露接口，然后使用你选择的 HTTP 客户端给 Docker Server 发送命令。
 
 这里说明了为了能在 Ubuntu 14.04 上通过暴露 REST 来建立 Docker 服务器你需要做什么。
 
