@@ -43,7 +43,7 @@ Docker 是一个构建在 LXC 之上的开源平台，是 Linux 容器，可以�
 
 在 DockerClientDSC 文件夹里有个脚本 DockerClient.ps1 ，脚本里包含了一个叫做 DockerClient 的 DSC 配置。我将用它来确保我云端的目标虚拟机是按照 Docker 主机配置，并且包含了我将使用 dev/test 的 Docker 镜像。在继续之前，我还将 DockerClientDSC 文件夹设置为我的工作目录。
 
-###用DSC安装Docker
+###用 DSC 安装 Docker
 
 使用 DockerClient 之前，我会创建一个变量来存储 Linux 虚拟机的主机名：
 
