@@ -9,11 +9,11 @@
 
 ***
 
-![](http://thenewstack.io/wp-content/uploads/2014/04/homepage-docker-logo.png)
+![](http://resource.docker.cn/homepage-docker-logo.png)
 
 在今年6月份 Docker 1.0 版本被发布之前， CEO 及创始人 Solomon Hykes 就曾经对我说，
 在 Docker 1.1 版本中将增加 .dockerignore 功能。
-目前，[Docker 1.1 版本](http://blog.docker.com/2014/07/announcing-docker-1-1/)已经发布，
+目前，[Docker 1.1 版本](http://blog.docker.com/2014/07/announcing-docker-1-1/) 已经发布，
 Solomon Hykes 所说的话也被验证成真。
 现在，开发人员可以在 `Dockerfile` 旁边创建一个 `.dockerignore` 文件，
 当给 docker daemon 发送构建上下文的命令时，
@@ -34,7 +34,7 @@ Docker 就会忽略 `.dockerignore` 中列出的具体文件和路径。
 
 Randle 在五月份接受采访时说，当 `docker build` 命令被发出， docker client 会把  docker file 所在文件夹中的全部内容上传到 docker daemon。“当只有少量源码时，这个过程还是很快的。但是当应用依赖数以兆计的 node_modules 时，整个过程就需要花费大量时间。” 这个问题在 [GitHub](https://github.com/docker/docker/issues/2224)  上有一长串的讨论，最终导致了 `.dockerignore ` 的产生。讨论的导火索是这样的：
 
-![](http://thenewstack.io/wp-content/uploads/2014/06/dockerignore.png)
+![](http://resource.docker.cn/docker-ignore.png)
 
 Docker  has made improvements throughout the Docker ecosystem, including updates to Docker Engine, Docker Hub, and its documentation. Overall, not a major release, but more so a commentary on a still developing open source technology.
 
