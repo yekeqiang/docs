@@ -30,4 +30,4 @@ Jeff 联合 [Flynn](https://flynn.io/) 开发了一个类似 Heroku 的下一代
 
 
 ***
-#####这篇文章原载于 [InfoQ](http://www.infoq.com/cn/) ，[Docker中文社区](https://www.dockboard.org) 得到授权后将其转载。您可以查看位于 InfoQ 的 [中文译文](http://www.infoq.com/cn/news/2014/07/google-kubernetes) ，点击 [这里](http://www.infoq.com/news/2014/08/the-future-of-docker) 查看英文。
+#####这篇文章原载于 [InfoQ](http://www.infoq.com/cn/) ，[Docker中文社区](https://www.dockboard.org) 得到授权后将其转载。您可以查看位于 InfoQ 的 [中文译文](http://www.infoq.com/cn/news/2014/07/google-kubernetes) ，点击 [这里](http://www.infoq.com/news/2014/08/the-future-of-docker) 查看英文。 
