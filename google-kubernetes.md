@@ -1,4 +1,4 @@
-#谷歌的容器工具得到微软、IBM等公司的支持
+#谷歌的容器工具得到微软、IBM 等公司的支持
 
 #####作者：[Richard Seroter](http://www.infoq.com/cn/author/Richard-Seroter)
 
