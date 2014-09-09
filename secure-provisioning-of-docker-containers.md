@@ -13,13 +13,13 @@
 
 有很多方法可以给镜像和容器加入数据。很多 Docker 爱好者用的一个方法是，镜像本身是可以公共访问的，在容器启动的时候传递敏感信息，可以通过环境变量或者加载一个外部地址到容器中。尽管这是随 Docker 发展而形成的一种有用的方法，但用户和 CohesiveFT 都觉得这种方式削弱了 Docker 的沙箱功能。
 
-![](http://docker.u.qiniudn.com/lifehacker.jpg)
+![](http://resource.docker.cn/lifehacker.jpg)
 
 这种方法遇到 VNS3 就不好用了--用户不能直接访问 VNS3 文件系统，而且我们目前也不支持通过 API 或者界面的方式传递环境变量。（我们正在开发中，相信我，可能在3.7的版本就支持了。）
 
 现在，用户可以直接上传镜像到 VNS3 上，或者把镜像打包进网络平台的 VNS3 应用中。用户可以用 Dockerfile 和公共的仓库从头开始搞，也可以上传他们自己的镜像。
 
-![](http://docker.u.qiniudn.com/Docker_v35.jpg)
+![](http://resource.docker.cn/Docker_v35.jpg)
 
 我们和用户一起分析过几个场景。他们认为有两个直接的方法风险最小：
 
