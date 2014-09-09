@@ -1,22 +1,21 @@
-
-#我是怎样使用 Docker 来帮助 X 系统上的开发工作的
+#我是如何使用 Docker 来协助 X 系统上的开发工作的
 
 ***
 
 #####作者：[SEBASTIAN GĘBSKI](https://twitter.com/liveweird)
 
-#####译者：[brightzhou](http://www.brightconan.com)
+#####译者：[周亮](http://www.brightconan.com)
 
 ***
-对应用进行设置可能会相当复杂，尤其是在 Linux 系统上。不用的应用有不同的配置方法，它们会在不同的文件系统路径下（在不同的 Linux 发行版中，由于应用存在多种变种，这些路径也会有所不同）保存二进制文件和数据。一旦你把系统配置好了，就很难再恢复到之前的状态，尤其是你同时进行了一些其他修改的时候（比如，安装了一些其他应用程序）。这就是为什么最近一些部署工具，比如 **Puppet**、 **Chef**、 **Ansible** 和 **Salt**，这么流行的原因。但即使有了这些工具的帮助，创建 cookbook/recipe 也许也十分麻烦： Linux 系统并不是以傻瓜化著称的，系统本身并不会阻止你干任何事情。
+对应用进行设置可能会相当复杂，尤其是在 Linux 系统上。不同应用有不同的配置方法，它们会在不同的文件系统路径下（在不同的 Linux 发行版中，由于应用存在多种变种，这些路径也会有所不同）保存二进制文件和数据。一旦你把系统配置好了，就很难再恢复到之前的状态，尤其是你同时进行了一些其他修改的时候（比如，安装了一些其他应用程序）。这也是最近诸如 **Puppet**、 **Chef**、 **Ansible** 和 **Salt** 这样的部署工具流行的原因。但即使有了这些工具的帮助，创建 cookbook/recipe 也许也十分麻烦： Linux 系统并非以傻瓜化著称，系统本身也不能让你摆脱麻烦。
 
 ##业界出现了一个新的工具
 
-很幸运的是，对于 Linux 运维人员来说，一个新的工具产生了，而该工具很有可能改变游戏规则：[Docker](http://www.docker.com/)，一个开源的平台，该平台能够以一种轻量级的方式打包应用程序以及它们的依赖。
+很幸运的是，对于 Linux 运维人员来说，一个新的工具产生了，而该工具很有可能改变游戏规则：[Docker](http://www.docker.com/) ，一个开源的平台，能够以一种轻量级的方式打包应用程序以及它们的依赖。
 
 ###这到底意味着什么？
 
-Docker 使你能够在 Linux 系统上对不同的应用程序进行隔离，在不同的上下文环境中运行这些程序（这些程序可能执行在一台物理机器上，也可能运行在不同的物理机器上），请记住，这一点是非常重要的：
+Docker 使你能够在 Linux 系统上对不同的应用程序进行隔离，在不同的上下文环境中运行这些程序（这些程序可能执行在一台物理机器上，也可能运行在不同的物理机器上），请记住，这一点非常重要：
 
 - Docker 使用了底层的内核机制做到了资源隔离，而并不需要其他资源消耗型的虚拟化技术，[如果想了解更多细节，请点击这里。](http://www.infoq.com/news/2014/03/docker_0_9)
 
@@ -32,13 +31,13 @@ Docker 使你能够在 Linux 系统上对不同的应用程序进行隔离，在
 
 或者这么讲，至少对于我来说，它是这么工作的：
 
-1. 我已经在我的本地 [Vagrant](http://www.vagrantup.com/) 环境中指定了 Docker 作为部署工具，Vagrant 从 **1.6** 版本就引入了这一功能。我相信我不用过多地解释什么是 Vagrant，以及为什么它是 X 平台开发人员必备的工具。
+1. 我已经在我的本地 [Vagrant](http://www.vagrantup.com/) 环境中指定了 Docker 作为部署工具， Vagrant 从 **1.6** 版本就引入了这一功能。对于什么是 Vagrant ，以及它为什么是 X 平台开发人员必备的工具，我认为无需赘述。
 
 2. Docker 已经为我自动下载了一些 Linux 发行版的镜像（这些镜像会被 Vagrant 使用，在 hypervisor 上运行）。
 
 3. 现在我能够以至少两种方式创建我自己的容器（正在运行的，实现资源隔离的应用程序）：
 
- - 第一种方式是制作一个用命令配置好的 **Dockerfile** ，这个 Dockerfile 基于干净的 Linux 镜像来生成，同时这些命令也使用了非常简单的 DSL （领域特定语言）。这种方式是我比较喜欢的，而且比较有道理。
+ - 第一种方式是制作一个用命令配置好的 **Dockerfile** ，这个 Dockerfile 基于干净的 Linux 镜像来生成，同时这些命令也使用了非常简单的 DSL （领域特定语言）。这种方式是我比较喜欢的，而且确实实用。
 
  - 第二种方式是创建一个运行着终端的全新的容器，这样的话你就可以在终端上执行你自己的命令，来做到你自己想做的事情。
 
@@ -78,7 +77,7 @@ sudo commit <container name>
 
 - 非常方便地（回滚/前滚）创建出独立的，隔离的应用容器，同时又不像虚拟镜像那样会耗费许多时间，也没有不必要的操作系统开销。
 
-- 实验一系列很有意思的事情，却几乎不会冒重头来过的风险（*有鉴于此，Chef recipe已经过时了...*）。
+- 实验一系列很有意思的事情，却几乎不会冒重头来过的风险（*有鉴于此，Chef recipe 已经过时了...*）。
 
 ...在我做到以上所有事情的同时，我的操作系统却坚如磐石：我不会破坏任何事情，我可以很简单地回滚我做的任何操作。安装其他的容器也不会互相影响。
 
@@ -86,8 +85,8 @@ sudo commit <container name>
 
 ***
 
-#####这篇文章由 [SEBASTIAN GĘBSKI](https://twitter.com/liveweird) 撰写，[brightzhou](http://www.brightconan.com) 翻译。点击 [这里](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) 阅读原文。
+#####这篇文章由 [SEBASTIAN GĘBSKI](https://twitter.com/liveweird) 撰写，[周亮](http://www.brightconan.com) 翻译。点击 [这里](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) 阅读原文。
 
-#####The article was contributed by [SEBASTIAN GĘBSKI](https://twitter.com/liveweird), translated by [brightzhou](http://www.brightconan.com), click [here](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) to read the original publication.
+#####The article was contributed by [SEBASTIAN GĘBSKI](https://twitter.com/liveweird), translated by [周亮](http://www.brightconan.com), click [here](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) to read the original publication.
  
  
