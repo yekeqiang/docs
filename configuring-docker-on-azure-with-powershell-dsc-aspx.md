@@ -5,6 +5,7 @@
 #####译者：[Stone Feng](http://blog.csdn.net/stonefeng)
 ***
 > #####作者注：这篇博文的作者 Andrew Weiss ，是一位才华横溢的顾问，来自微软咨询服务部门。Andrew 一直致力于通过 PowerShell DSC 来提高管理 Docker 容器能力。感谢 Andrew 在 [Building Clouds](http://aka.ms/buildingclouds) 分享他的文章！
+
 ***
 [Windows PowerShell Desired State Configuration for Linux](https://github.com/MSFTOSSMgmt/WPSDSCLinux) 首个预览构建的发布，带来了丰富的、跨平台的配置管理可能性。
 
