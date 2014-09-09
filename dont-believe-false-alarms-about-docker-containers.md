@@ -39,6 +39,6 @@
 
 ***
 
-#####这篇文章由 [DavidLinthicum](https://twitter.com/DavidLinthicum) 撰写，[qwe12qwe19](http://blog.csdn.net/qwe12qwe19/article/details/38303665) 翻译。点击 [这里](http://www.infoworld.com/d/cloud-computing/dont-believe-false-alarms-about-docker-containers-246692) 阅读原文。
+#####这篇文章由 [David Linthicum](https://twitter.com/DavidLinthicum) 撰写，[qwe12qwe19](http://blog.csdn.net/qwe12qwe19/article/details/38303665) 翻译。点击 [这里](http://www.infoworld.com/d/cloud-computing/dont-believe-false-alarms-about-docker-containers-246692) 阅读原文。
 
 #####The article was contributed by [David Linthicum](https://twitter.com/DavidLinthicum) , click [here](http://www.infoworld.com/d/cloud-computing/dont-believe-false-alarms-about-docker-containers-246692) to read the original publication.
