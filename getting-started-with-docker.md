@@ -1,9 +1,9 @@
 #开始使用 Docker
 
 
-作者：[Arun Gupta](https://twitter.com/arungupta) 
+#####作者：[Arun Gupta](https://twitter.com/arungupta) 
 
-译者：[我不围观](http://weibo.com/ooutman)
+#####译者：[我不围观](http://weibo.com/ooutman)
 ***
 
 如果把来自不同会议和 meetup 上的演讲、 twitter 上的推文 、还有其它演讲稿累加，好像 Docker 有解决世界饥荒的节奏了。真是这样的话真真是极好的，不过显然还不行。但是 Docker 确实能很好的解决一些问题。
@@ -41,7 +41,7 @@ Docker **按启动顺序**包含两个组件：
 
 客户端可以和服务端运行在一台主机上，也可以在不同的主机上。服务端需要用 [pull](https://docs.docker.com/reference/commandline/cli/#pull) 命令从仓库中拉一个镜像下来。服务端可以从 Docker Hub 或者其他配置的仓库中下载镜像。服务端主机可以从仓库中下载和安装多个镜像。
 
-{<1>}![](http://img0.tuicool.com/MzQvqy.png)
+{<1>}![](http://resource.docker.cn/docker-architecture-techtip39.png)
 
 然后客户端就可以用 [run命令](https://docs.docker.com/reference/commandline/cli/#run) 来启动容器。完整的客户端命令列表可以看 [这里](https://docs.docker.com/reference/commandline/cli/) 。
 
@@ -54,7 +54,6 @@ Docker **按启动顺序**包含两个组件：
 对于非 Linux 的系统，需要安装一个轻量级的虚拟机，在虚拟机上安装 docker 服务程序。同时会安装一个原生的客户程序，可以和服务程序进行通信。下面是一个 Mac 上启动 docker 服务程序的日志：
 
 ```
-
 bash
 unset DYLD_LIBRARY_PATH ; unset LD_LIBRARY_PATH
 mkdir -p ~/.boot2docker
@@ -241,7 +240,7 @@ b2f8001164b0        jboss/wildfly:latest   /opt/wildfly/bin/sta   46 minutes ago
 
 现在可以在本地机器上通过 <http://192.168.59.103> 来访问 WildFly 服务器，结果就像这样：
 
-{<2>}![](http://img1.tuicool.com/iE7neu.png)
+{<2>}![](http://resource.docker.cn/wildfly-output-techtip39-942x1024.png)
 
 最后，容器可以通过 Ctrl+C 来停止，或者用如下命令：
 
@@ -264,7 +263,7 @@ b2f8001164b0
 * [LiveOak](http://liveoak.io/)
 * [AeroGear](http://aerogear.org/)
 
-![](http://img2.tuicool.com/zue6jq.png) ![](http://static.jboss.org/immutant/images/immutant_200x150.png) ![](http://static.jboss.org/torquebox/images/torquebox_200x150.png) ![](http://static.jboss.org/keycloak/images/keycloak_200x150.png)
+![](http://resource.docker.cn/keycloak-200x150.png) ![](http://resource.docker.cn/immutant-200x150.png) ![](http://resource.docker.cn/torquebox-200x150.png) ![](http://resource.docker.cn/keycloak-200x150.png)
 
 你知道 Red Hat 在 [Docker 贡献者中名列前茅](http://thenewstack.io/who-are-the-docker-developers/) 吗？有5名来自 [Project Atomic](http://www.projectatomic.io/) 的红帽子参与其中。
 
