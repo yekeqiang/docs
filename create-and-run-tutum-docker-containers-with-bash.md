@@ -53,5 +53,5 @@ https://app.tutum.co/api/v1/container/${uuid}/start/
 
 #####这篇文章由 [Dmitriy Akulov](https://twitter.com/jimaek/) 撰写，[HexTeto](http://weibo.com/hexteto) 翻译。点击 [这里](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/) 阅读原文。
 
-#####The article was contributed by [Dmitriy Akulov](https://twitter.com/jimaek/), click [here](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/) to read the original publication.
+#####The article was contributed by [Dmitriy Akulov](https://twitter.com/jimaek/), click [here](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/) to read the original publication. 
 
