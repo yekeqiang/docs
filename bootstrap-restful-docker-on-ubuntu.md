@@ -26,7 +26,7 @@ sudo sh -c 'echo "DOCKER_OPTS=\"-H unix:///var/run/docker.sock -H tcp://127.0.0.
 sudo service docker restart
 ```
 
-为了验证 Docker 已经正确的通过 HTTP 暴露接口，执行以下命令：
+为了验证 Docker 已经正确的通过 HTTP 暴露接口，执行以下命令： 
 
 ```
 curl http://127.0.0.1:2375/version
