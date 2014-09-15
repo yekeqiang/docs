@@ -93,7 +93,7 @@ $ sudo docker port fd461a1418c6 80
 
 #####The article was contributed by [James Turnbull](https://twitter.com/kartar), click [here](http://kartar.net/2013/12/building-puppet-apps-inside-docker/) to read the original publication.
 
-> 注：本文的原作者为 [JAMES TURNBULL](https://twitter.com/kartar)，本文的原文地址为 [Building Puppet-based applications inside Docker](http://kartar.net/2013/12/building-puppet-apps-inside-docker/)
+---
 
   [^1]:This is a somewhat short-term hacky implementation. When Docker is more pluggable this will be a lot easier. Expect to see that sort of plugin support in the 1.0 release
   
