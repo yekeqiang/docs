@@ -1,12 +1,14 @@
 # 在 Docker 中构建基于 Puppet 的应用
 
-标签（空格分隔）： Docker Puppet DevOps SysAdmin
+#####作者：[James Turnbull](https://twitter.com/kartar)
+
+#####译者：[叶可强](http://weibo.com/yeziyu)
 
 ---
 
-通过创建一个 [Docker][1] 的 ```Dockerfile``` 来构建一个应用程序是非常容易的。但是如果你已经有了大量的 Puppet 模块（或者是 Chef cookbooks），你想把这些模块用于构建你的应用程序，你应该怎么做？我们将看到利用 Dockerfile[^1] 构建是多么的容易。
+通过创建一个 [Docker](http://www.docker.io/) 的 ```Dockerfile``` 来构建一个应用程序是非常容易的。但是如果你已经有了大量的 Puppet 模块（或者是 Chef cookbooks），你想把这些模块用于构建你的应用程序，你应该怎么做？我们将看到利用 Dockerfile[^1] 构建是多么的容易。
 
-我们首先要构建一个 Docker 应用镜像来安装 Puppet。我们将把 Tim Sharpe 的一个非常酷的工具 [Librarian-Puppet][2] 添加到镜像中。Librarian-Puppet 是一个 Puppet 模块打包工具，你可以使用它从 GitHub 或者是 [Puppet Labs Forge][3] 选择和安装模块。
+我们首先要构建一个 Docker 应用镜像来安装 Puppet。我们将把 Tim Sharpe 的一个非常酷的工具 [Librarian-Puppet](http://librarian-puppet.com/) 添加到镜像中。Librarian-Puppet 是一个 Puppet 模块打包工具，你可以使用它从 GitHub 或者是 [Puppet Labs Forge](http://forge.puppetlabs.com/) 选择和安装模块。
 
 让我们创建一个 ```Dockerfile``` 来构建我们的 Puppet[^2] 镜像。
 
@@ -81,11 +83,17 @@ $ sudo docker port fd461a1418c6 80
 
 现在让我们访问端口 ```49158```，看 nginx 是否正在运行。
 
-![此处输入图片的描述][4]
+![此处输入图片的描述](http://kartar.net/images/posts/2013/12/nginx.png)
 
 欧耶！我们已经通过 Puppet 安装了 Nginx。你可以重复这个步骤安装任何基于 Puppet 的应用或者是基础设施[^3]。
 
-> 注：本文的原作者为 [JAMES TURNBULL][5]，本文的原文地址为 [Building Puppet-based applications inside Docker][6]
+***
+
+#####这篇文章由 [James Turnbull](https://twitter.com/kartar) 撰写，[叶可强](http://weibo.com/yeziyu) 翻译。点击 [这里](http://kartar.net/2013/12/building-puppet-apps-inside-docker/) 阅读原文。
+
+#####The article was contributed by [James Turnbull](https://twitter.com/kartar), click [here](http://kartar.net/2013/12/building-puppet-apps-inside-docker/) to read the original publication.
+
+> 注：本文的原作者为 [JAMES TURNBULL](https://twitter.com/kartar)，本文的原文地址为 [Building Puppet-based applications inside Docker](http://kartar.net/2013/12/building-puppet-apps-inside-docker/)
 
   [^1]:This is a somewhat short-term hacky implementation. When Docker is more pluggable this will be a lot easier. Expect to see that sort of plugin support in the 1.0 release
   
@@ -95,9 +103,4 @@ $ sudo docker port fd461a1418c6 80
   
 
 
-  [1]: http://www.docker.io/
-  [2]: http://librarian-puppet.com/
-  [3]: http://forge.puppetlabs.com/
-  [4]: http://kartar.net/images/posts/2013/12/nginx.png
-  [5]: http://kartar.net/about/
-  [6]: http://kartar.net/2013/12/building-puppet-apps-inside-docker/#fn:1
+ 
