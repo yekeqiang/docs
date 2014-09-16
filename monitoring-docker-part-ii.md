@@ -86,4 +86,4 @@ ps-wweouname,pid,cgroup
 
 #####这篇文章由 [Logscape](http://go.docker.com/e/44082/logscape/756b/21481063) 撰写，[陈菊英](http://weibo.com/u/1716255775) 翻译。点击 [这里](http://blog.logscape.com/2014/07/monitoring-docker-part-ii) 阅读原文。
 
-#####The article was contributed by [Logscape](http://go.docker.com/e/44082/logscape/756b/21481063), click [here](http://blog.logscape.com/2014/07/monitoring-docker-part-ii) to read the original publication.
+#####The article was contributed by [Logscape](http://go.docker.com/e/44082/logscape/756b/21481063), click [here](http://blog.logscape.com/2014/07/monitoring-docker-part-ii) to read the original publication. 
