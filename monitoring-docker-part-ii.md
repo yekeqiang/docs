@@ -57,8 +57,6 @@ ps-wweouname,pid,cgroup
 
 搜索结果还会展示内存是如何在不同 image 之间分布的。
 
-![alt](http://resource.docker.cn/selection-552-300x129.png)
-
 我们能看到 container：[e93abb421dda](https://bitbucket.org/logscape/blog-docker/commits/e93abb421dda) 和 [31dc0a17d71d](https://bitbucket.org/logscape/blog-docker/commits/31dc0a17d71d) 在 1345 附近开始，然后就迅速提升。这两个 container 属于 image：[logscape/fowarder](https://bitbucket.org/logscape/blog-docker/commits/e93abb421dda) ，都运行了相对比较大型的 Java 程序。下一个搜索语句会给出我们系统中运行的所有进程的 heatmap 表：
 ```
  | _type.equals(d_pids) comm.by(pid,command) rss.max(pid,rss)  cpuPct.max(pid,cpu)  memPct.max(pid,mem)  image.by(pid,)  CID.by(pid,) chart(table) buckets(1)
