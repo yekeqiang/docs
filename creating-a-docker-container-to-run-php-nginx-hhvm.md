@@ -6,7 +6,7 @@
 
 ---
 
-![alt](http://docker.u.qiniudn.com/PHP-NGINX-HHVM.png)
+![alt](http://resource.docker.cn/php-nginx-hhvm.png)
 
 对于 [Docker](http://docker.io/)，我感到非常的兴奋。作为一个很早就进行 .NET　开发的开发人员，我工作中不喜欢的事情之一就是在不同的环境中部署和测试。部署一个 web 应用程序的过程绝对是一个噩梦般的经历。即便之后我迁移到基于 UNIX 平台开发，并且使用开源的工具/语言，如 Node 、 Java 、  Scala 、 PHP 等等，我发现同样的部署问题一次又一次的发生。
 
@@ -112,7 +112,7 @@ docker run -d -p 80:80 centos-nginx-php5-hhvm
 ```
 如果你已经有本地的服务已经在运行并且占用了 80 端口，你能很容易的的改变容器的对外端口。
 
-{<2>}![alt](http://docker.u.qiniudn.com/localhost-hiphop.png)
+![alt](http://resource.docker.cn/localhost-hiphop.png)
 
 [docker registry](https://registry.hub.docker.com/u/mebinum/centos-nginx-php5-hhvm/) 提供这个 Docker 镜像的可用版本。
 
