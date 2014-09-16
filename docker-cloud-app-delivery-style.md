@@ -1,6 +1,6 @@
 #Docker，云时代的程序交付方式
 
-Posted on August 11, 2014 by [liubin](http://weibo.com/pmproad)
+**Posted on August 11, 2014 by [liubin](http://weibo.com/pmproad)**
 
 要说最近一年云计算业界有什么大事件？Google Compute Engine
 的正式发布？ Azure 入华？还是 AWS 落地中国？留在每个人大脑中的印象可能各不相同，但要是让笔者来排名的话那么 Docker 绝对应该算是第一位的。如果你之前听说过它的话，那么也许你会说“没错，就是它”，因为几乎世界各地的开发、运维都在谈论着 Docker ；如果你还没听说过 Docker ，那么我真的建议你花上10分钟来阅读本文。
