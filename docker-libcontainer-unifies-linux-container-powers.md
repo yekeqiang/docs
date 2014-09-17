@@ -18,7 +18,7 @@ Google、 [Red Hat](http://www.redhat.com/) 和 [Parallels](http://www.parallels
 
 Libcontainer 可以让容器通过一种一致可预测的方式使用 Linux 的 namespaces 、 cgroups 、 capabilities 、 AppAromor 安全配置、 网络接口以及防火墙规则。并且 libcontainer 并不依赖于 [LXC](https://linuxcontainers.org/) 、 [libvirt](http://libvirt.org/) 和 [systemd-nspawn](http://www.freedesktop.org/software/systemd/man/systemd-nspawn.html) 这些 Linux 用户空间组件。 Docker 声称 [这样可以减少不可控的部分](http://blog.docker.com/2014/03/docker-0-9-introducing-execution-drivers-and-libcontainer) ，将 Docker 从不同版本的 LXC 所带来的副作用中解放出来。
 
-在一次邮件采访中， Parallels CTO 、 服务器虚拟化专家兼 Linux 基金会技术咨询委员会主席  James Bottomley 说他们最终达成了一致，共同开发 libcontainer 。 Libcontainer 将会向应用提供他们所需要的更细粒度的容器特征（希望能够帮助诞生下一代类似 Docker 的应用），并且可以使我们的工具有更好的兼容性，在不同的产品间无缝的迁移。举例来说，我们可以让 Docker 和 LXC 在 [OpenVZ](http://openvz.org/Main_Page) 甚至在云服务器产品上进行部署。
+在一次邮件采访中， Parallels CTO 、 服务器虚拟化专家兼 Linux 基金会技术咨询委员会主席  James Bottomley 说他们最终达成了一致，共同开发 libcontainer 。 Libcontainer 将会向应用提供他们所需要的更细粒度的容器特征（希望能够帮助诞生下一代类似 Docker 的应用），并且可以使我们的工具有更好的兼容性，在不同的产品间无缝的迁移。举例来说，我们可以让 Docker 和 LXC 在 [OpenVZ](http://openvz.org/Main_Page) 甚至在云服务器产品上进行部署。 
 
 Libcontainer 使用 [Google Go](http://golang.org/) 语言编写，同时也有其他不同语言版本的实现。微软将可能会用 ASP.NET 进行实现。 Parallels 的 [libct](https://github.com/cyrillos/xemul-libct) 其中包含了 libcontainer 的功能，主要是由 C/C++ 以及 Python 实现。
 
