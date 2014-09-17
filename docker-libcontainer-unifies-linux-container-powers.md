@@ -9,7 +9,7 @@
 
 在旧金山举行的 [DockerCon](http://www.dockercon.com/) 中， [Docker](http://www.docker.com/) 的 CTO 及联合创始人 Solomon Hykes 宣布将会和其他之前在容器技术领域的竞争对手通力合作，共同开发 Docker 的关键开源组件 [libcontainer](https://github.com/docker/libcontainer) 。
 
-![alt](http://resource.docker.cn/libcontainer-Linux.png)
+![alt](http://resource.docker.cn/libcontainer-linux.png)
 >注：libcontainer 与 Linux 服务交互图
 
 Google、 [Red Hat](http://www.redhat.com/) 和 [Parallels](http://www.parallels.com/) 现在都成为了这个项目的参与者， 他们将会和 Docker 一起作为这个项目的核心维护者。这对系统管理员、数据中心管理者和云架构师来说是意义重大。 此外 Canonical Ubuntu 的容器工程师也将会加入这个项目中来。
