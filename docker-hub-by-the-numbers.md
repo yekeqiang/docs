@@ -8,10 +8,10 @@
 ***
 上个周六我参加了 [DockerCon Hackathon](http://www.meetup.com/Docker-meetups/events/170030222/) 活动。本人是一个 Docker 深度用户（主要是快速创建新容器，去验证或者重现 [Fluentd](http://www.fluentd.org/) 项目提交的问题）。
 
-毫无疑问，Docker 很棒，这个礼拜海量公告证明了它的受欢迎和关心的程度。但是 Docker （或者其他通常意义上的的开源软件）真正吸引我的地方是社区。
+毫无疑问，Docker 很棒，这个礼拜海量公告证明了它的受欢迎和关心的程度。不过 Docker （或者其他通常意义上的的开源软件）真正吸引我的地方还是社区。
 
 
-在编程马拉松活动中，我带上了自己“前数据科学家”（解读：定量金融中的最小量子）的帽子，收集了 [Docker Hub](http://hub.docker.io/) （ 一周前还叫 Docker Index-_-!) 的数据，在 Excel 上绘制了一些不那么"性感"的图表。
+在编程马拉松活动中，我借着自己“前数据科学家”（解读：定量金融中的最小量子）的头衔，收集了 [Docker Hub](http://hub.docker.io/) （ 一周前还叫 Docker Index-_-!) 的数据，在 Excel 上绘制了一些不那么"性感"的图表。
 
 >注: 数据收集于2014年6月9号，我尽力了。
 
@@ -32,6 +32,7 @@ Docker 刚刚 [宣布](https://www.dockboard.org/announcing-docker-hub-and-offic
 下面这幅图展示了每月创建的代码库的数量：
 
 ![alt](http://resource.docker.cn/repos-created-per-month.png)
+
 (六月份数据比较少，毕竟这个月才开始)
 
 ![alt](http://resource.docker.cn/m2m-growth.png)
