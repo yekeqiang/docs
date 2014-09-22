@@ -1,18 +1,15 @@
 #Docker and MongoDB Sharded Cluster
 
-[原文地址](http://sebastianvoss.com/docker-mongodb-sharded-cluster.html)
+#####作者：[Sebastian Voss](https://twitter.com/sebastian_voss)
 
-How Docker helps to create a complex MongoDB setup
+#####译者：[邵靖](http://www.weibo.com/dysj4099)
 
-This article describes how to create a Mongo DB Sharded Cluster using Docker. We will go through the creation of Dockerfiles and instanciation of the differnt moving parts of the cluster (replica sets, config servers and routers).
+***
 
-如何使用 docker 创建复杂的 mongodb 集群
+如何使用 docker 创建复杂的 mongodb 集群。
 
-本文描述了如何使用 docker 创建 mongodb shard 集群。我们将直接展示 mongodb 集群不同组件(副本集 replica sets 、配置服务器 config servers 以及资源路由 routes )所对应 dockerfile 文件以及容器的实例化过程。
+本文描述了如何使用 docker 创建 mongodb shard 集群。我们将直接展示 mongodb 集群不同组件（副本集 replica sets 、配置服务器 config servers 以及资源路由 routes ）所对应 dockerfile 文件以及容器的实例化过程。
 
-##Create the Dockerfiles
-
-First we need to create two Dockerfiles - one for mongod and another one for mongos. Let’s start with mongod.
 
 ##创建Dockerfile文件
 
@@ -36,9 +33,7 @@ EXPOSE 27017
 ENTRYPOINT ["usr/bin/mongod"]
 ```
 
-The Dockerfile for mongos is even simpler as it is based on the previous one.
-
-而为 mongos 准备的 dockerfile 就相当简单了，因为它基于前面做好的镜像。
+为 mongos 准备的 dockerfile 就相当简单了，因为它基于前面做好的镜像。
 
 
 ```
@@ -47,8 +42,6 @@ FROM dev24/mongodb:latest
 EXPOSE 27017
 ENTRYPOINT ["usr/bin/mongos"]
 ```
-
-Make sure you have stored each Dockerfile in its own directory.
 
 请确保你已经将 dockerfile 存储在对应的位置了，如下：
 
@@ -62,8 +55,6 @@ docker_mongodb_cluster
     |-- Dockerfile
 ```
 
-Switch to folder docker_mongodb_cluster and execute these commands to create our Docker images.
-
 切换到 docker_mongodb_cluster 路径下并执行以下这些命令创建 docker 镜像：
 
 ```
@@ -74,7 +65,7 @@ sudo docker build \
   -t dev24/mongodb mongos
 ```
 
-> 译注：此处作者的操作步骤有问题，上面的地一条语句使用 mongod/Dockerfile 建立了名为 dev24/mongodb 的镜像，当使用 docker run 运行该镜像时，根据 dockerfile 定义，会默认启动 /usr/bin/mongod 。而第二条语句在 dev24/mongodb 镜像的基础上将默认启动设置为 /usr/bin/mongos 并将新生成的镜像命名为 dev24/mongodb 从而覆盖了第一个镜像。本人亲测在启动副本集的时候会出错，因此本人在此将上述两句代码修改为以下的形式，生成 dev24/mongodb 以及 dev24/mongos 两个镜像，如果读者对此有不同意见，可以留言或与译者沟通，非常感谢。
+> #####译注：此处作者的操作步骤有问题，上面的一条语句使用 mongod/Dockerfile 建立了名为 dev24/mongodb 的镜像，当使用 docker run 运行该镜像时，根据 dockerfile 定义，会默认启动 /usr/bin/mongod 。而第二条语句在 dev24/mongodb 镜像的基础上将默认启动设置为 /usr/bin/mongos 并将新生成的镜像命名为 dev24/mongodb 从而覆盖了第一个镜像。本人亲测在启动副本集的时候会出错，因此本人在此将上述两句代码修改为以下的形式，生成 dev24/mongodb 以及 dev24/mongos 两个镜像，如果读者对此有不同意见，可以留言或与译者沟通，非常感谢。
 
 ```
 sudo docker build \
@@ -84,10 +75,6 @@ sudo docker build \
 sudo docker build \
   -t dev24/mongos mongos
 ```
-
-##Create the Replica Sets
-
-For our shard we need some replica sets. We will create two of them consisting of three nodes each. These commands will instantiate three mongod containers and assign them to replica set rs1. The parameters --noprealloc and --smallfiles are optional to avoid MongoDB is consuming lots of memory (useful while testing).
 
 ##创建副本集Replica Sets
 
@@ -113,8 +100,6 @@ sudo docker run \
   --noprealloc --smallfiles
 ```
 
-For the second replica set we issue the same commands just using a different replica set name rs2.
-
 将副本集的名称替换为 rs2 之后，我们就能够用同样的命令创建第二个副本集了。
 
 ```
@@ -137,10 +122,6 @@ sudo docker run \
   --noprealloc --smallfiles
 ```
 
-##Initialize the Replica Sets
-
-First take a note of the IP address and port bindings of all Docker containers.
-
 ##初始化副本集
 
 首先请记一下每个 docker 容器的 ip 地址以及绑定端口。
@@ -150,10 +131,6 @@ sudo docker inspect rs1_srv1
 sudo docker inspect rs1_srv2
 ...
 ```
-
-###Initialize Replica Set 1
-
-Connect to MongoDB running in container rs1_srv1 (you need the local port bound for 27017/tcp figured out in the previous step).
 
 ###初始化副本集1
 
@@ -170,10 +147,6 @@ rs.add("<IP_of_rs1_srv3>:27017")
 rs.status()
 ```
 
-Docker will assign an auto-generated hostname for containers and by default MongoDB will use this hostname while initializing the replica set. As we need to access the nodes of the replica set from outside the container we will use IP adresses instead.
-
-Use these MongoDB shell commands to change the hostname to the IP address.
-
 docker 将会自动为一个容器生成主机名，并且默认情况下 mongodb 将会在初始化副本集的时候使用这个主机名。所以我们需要使用 ip 地址来从容器外部登录到副本集的节点。
 
 用以下的 mongodb shell 命令修改对应的主机名。
@@ -186,10 +159,6 @@ cfg.members[0].host = "<IP_of_rs1_srv1>:27017"
 rs.reconfig(cfg)
 rs.status()
 ```
-
-###Initialize Replica Set 2
-
-The exact same procedure is required for the second replica set. Connect to MongoDB running in container rs2_srv1.
 
 ###初始化副本集2
 
@@ -206,8 +175,6 @@ rs.add("<IP_of_rs2_srv3>:27017")
 rs.status()
 ```
 
-Use these MongoDB shell commands to change the hostname to the IP address.
-
 使用 mongodb shell 命令修改对应的主机名。
 
 ```
@@ -218,10 +185,6 @@ cfg.members[0].host = "<IP_of_rs2_srv1>:27017"
 rs.reconfig(cfg)
 rs.status()
 ```
-
-##Create some Config Servers
-
-Now we create three MongoDB config servers to manage our shard. For development one config server would be sufficient but this shows how easy it is to start more.
 
 ##创建Config Server
 
@@ -253,17 +216,9 @@ sudo docker run \
   --port 27017
 ```
 
-Use docker inspect to figure out the IP adresses of each config server. We will need this to start the MongoDB router in the next step.
-
 使用 docker inspect 命令查看每个 config 服务器的 ip 地址。我们将在下一个配置 mongodb router 的步骤中使用到它们。
 
-##Create a Router
-
-A MongoDB router is the point of contact for all the clients of the shard. The --configdb parameter takes a comma separated list of IP addresses and ports of the config servers.
-
-Note that we are using the mongos image created in the first part.
-
-##创建Router
+##创建 Router
 
 mongodb router 是连接所有 shard 客户端的节点。--configdb 参数是一个用逗号分隔的 ip:port 列表，对应于 config 服务器。
 
@@ -281,13 +236,9 @@ sudo docker run \
     
 ```
 
-##Initialize the Shard
+##初始化 shard
 
-Finally we need to initialize the shard. Connect to the MongoDB router (you need the local port bound for 27017/tcp) and execute these shell commands:
-
-##初始化shard
-
-最后，我们需要初始化 shard 。连接到 mongodb router (需要绑定本地端口 27017/tcp )并执行 shell 命令：
+最后，我们需要初始化 shard 。连接到 mongodb router （需要绑定本地端口 27017/tcp ）并执行 shell 命令：
 
 ```
 mongo --port <port>
@@ -299,11 +250,11 @@ sh.addShard("rs2/<IP_of_rs2_srv1>:27017")
 sh.status()
 ```
 
-##Conclusion
-
-It is really impressive how easy it is to create a fairly complex MongoDB setup using Docker. Nevertheless there are a couple of manual steps involved which ideally should be automated. Additionally wiring of the different moving parts using IP adresses should be replaced with a DNS based approach.
-
 ##小结
 
 利用 docker 构建复杂 mongodb 的过程的确十分简单，让人印象深刻。虽然有很多需要设置的步骤，但是这很容易就能写自动化工具来完成。还有一点，就是对于不同部分使用 IP 地址的方式应该被使用 DNS 这样的方案来代替。
 
+***
+#####这篇文章由 [Sebastian Voss](https://twitter.com/sebastian_voss) 撰写， [邵靖](http://www.weibo.com/dysj4099) 翻译。点击 [这里](http://sebastianvoss.com/docker-mongodb-sharded-cluster.html) 可阅读原文。
+
+#####The article was contributed by [Sebastian Voss](https://twitter.com/sebastian_voss), click [here](http://sebastianvoss.com/docker-mongodb-sharded-cluster.html) to read the original publication.
