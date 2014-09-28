@@ -1,6 +1,12 @@
 # Docker 0.10：质量和运维工具
 
-今天，我们很高兴发布Docker 0.10。我们希望你也会喜欢。
+作者：[Solomon Hykes](https://twitter.com/solomonstre)
+
+译者：[李兆海](https://twitter.com/googellee)
+
+***
+
+今天，我们很高兴发布Docker 0.10 ，希望你也会喜欢。
 
 我们应当感谢社区里为这个版本作出贡献的伙计：Tianon Gravi，Alexander Larsson，Vincent Batts，Dan Walsh，Andy Kipp，Ken Ichikawa，Alexandr Morozov，Kato Kazuyoshi，Timothy Hobbs，Brian Goff，Daniel Norberg，Brandon Philips，Scott Collier，Fabio Falci Rodrigues，Liang-Chi Hsieh，Sridhar Ratnakumar，Johan Euphrosine，Paul Nasrat以及所有在Docker工作的那些出色的家伙。
 
@@ -59,3 +65,9 @@
 谢谢每个人的支持和帮助，玩得开心！
 
 Docker维护者
+
+---
+
+这篇文章由 [Solomon Hykes](https://twitter.com/solomonstre) 发表，[李兆海](https://twitter.com/googellee) 翻译。点击 [这里](http://blog.docker.io/2014/04/docker-0-10-quality-and-ops-tooling/) 可查阅原文。
+
+The article was contributed by [Solomon Hykes](https://twitter.com/solomonstre), click [here](http://blog.docker.io/2014/04/docker-0-10-quality-and-ops-tooling/) to read the original publication.
