@@ -1,31 +1,26 @@
-# Linking Docker Containers with a Serf Ambassador
-# 使用SERF AMBASSADOR来链接DOCKER CONTAINER
+#使用 SERF AMBASSADOR 来链接 DOCKER CONTAINER
 
-A few months ago, we wrote about using Serf with Docker to create a service registry so that your app could talk to your database indirectly. Then just a couple weeks ago, we wrote about using the Docker ambassadors model.
 
-几个月前，我们写了一片关于[使用Serf结合Docker](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)实现服务的注册，这样你的应用就可以自动地和你的数据库服务链接在一起了。接着在数周前，我们又写了一篇关于如何使用[Docker ambassadors](http://www.centurylinklabs.com/deploying-multi-server-docker-apps-with-ambassadors/)模型的文章。
+#####作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)
+#####译者：[Mark Shao](https://github.com/markshao)
 
-But in the Docker ambassadors post, we just setup a proxy ambassador, it didn’t do anything but forward TCP traffic.
+***
 
-但是在Docker ambassadors这片文章中，我们仅仅部署了一个代理ambassador,它除了转发TCP的请求啥都不做。
+几个月前，我们写了 [去中心化的 Docker](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/) 一文来说明如何配合 Docker 使用 Serf 实现服务注册，从而使应用与数据库服务间接链接在一起了。数周前，我们又写了一篇如何使用 [Docker ambassadors](http://www.centurylinklabs.com/deploying-multi-server-docker-apps-with-ambassadors/) 模型的文章。
 
-This week, we are going to use Docker ambassadors to do something more interesting: the ambassador will register the app container and the database container into the Serf network for us. This could just as easily be using ambassadors to register into etcd for us (in fact, I will show how at the end of this post). But for now, let’s start with Serf.
+但是在关于 Docker ambassadors 的 [这篇文章](http://www.centurylinklabs.com/deploying-multi-server-docker-apps-with-ambassadors/) 中，我们仅仅部署了一个代理 ambassador ，它除了转发 TCP 请求，别的啥都不做。
 
-这个兴起，我们将要使用Docker ambassadors来做一些有趣的东西。ambassador将会帮我们把APP Container和数据库Container的信息注册到Serf网络中。这个和使用ambassadors把服务注册到etcd一样简单。(事实上，我最后会展示怎么做)。但是现在，我们先从Serf开始。
+这周我们要使用 Docker ambassadors 来做一些有趣的东西： ambassador 会帮我们把应用容器和数据库容器的信息注册到 Serf 网络中。这和使用 ambassadors 把服务注册到 etcd 一样简单。（我最后会展示如何实现)。首先先从 Serf 开始。
 
-## Setup Serf With Docker
-## 用Docker来建立Serf
+## 使用 Docker 创建 Serf
 
-First, let’s setup a serf agent on a Docker container.
-首先，我们在一个Docker的容器上建立一个serf的代理。
+首先，在一个 Docker 容器上建立一个 serf 代理。
 
 ```
 $ SERF_ID=$(docker run -d --name serf_1 -p 7946 -p 7373 ctlc/serf /run.sh)
 ```
 
-Well that was easy! Now let’s connect to the Serf agent with a Serf client container that will print out any members added to the network automatically.
-
-那个太简单了！现在我们使用一个装有Serf客户端的container来链接到Serf代理服务，它会自动打印所有链接到网络上的成员。
+非常简单！现在我们使用一个装有 Serf 客户端的容器来链接到 Serf 代理服务，它会自动打印所有链接到网络上的成员。
 
 ```
 $ docker run -i -t --link serf_1:serf_1 ctlc/serf-members
@@ -33,15 +28,11 @@ $ docker run -i -t --link serf_1:serf_1 ctlc/serf-members
 f5af7d9dbc3c  172.17.0.2:7946  alive  role=serf-agent
 ```
 
-So now we can see our progress as we continue.
-所以现在我们可以看到我们的进度，我们继续下去。
+现在我们可以看到进度，继续下去。
 
-## Setup a Random MySQL Container
-## 建立一个随机的MySQL Container
+## 创建一个随机的 MySQL 容器
 
-Now we need to setup a MySQL database. I will pick a completely random MySQL database container from the Docker index:
-
-腺癌我们需要建立一个MySQL数据库，我会在Docker Index中找一个完全随机的MySQL数据库Container:
+现在我们要创建一个MySQL数据库，我在 Docker Index 中找出一个完全随机的 MySQL 数据库容器:
 
 ```
 $ docker run --name mysql -p 3306 -d brice/mysql
@@ -52,17 +43,13 @@ CONTAINER ID        IMAGE                      COMMAND             CREATED      
 f5af7d9dbc3c        ctlc/serf:latest           /run.sh             51 minutes ago      Up 51 minutes       0.0.0.0:49159->7373/tcp, 0.0.0.0:49160->7946/tcp   ...  
 ```
 
-This is not a trusted image, so we actually have no idea what code we are running. However, brice/mysql is probably pretty unlikely to be running Serf since I picked it randomly from the index. So how do we get this database registered into Serf? Using the ambassador model of course.
-
-这个不是一个受信任的镜像，所以我们也完全不知道到底在跑什么code。然而,brice/mysql也许不太可能来运行Serf，因为它是随机从index中找的一个镜像。那么我们怎么把它注册到Serf呢？当然就要使用ambassador模型。
+这个不是可信镜像，我们也完全不知道到底在跑什么代码。由于是从 index 中随机选出的镜像，因此 brice/mysql 有极大可能不能运行 Serf 。那我们如何把这个数据库注册到 Serf 呢？当然要用到 ambassador 模型。
 
 ```
 $ docker run -d --link mysql:mysql --link serf_1:serf_1 --name mysql_ambassador -p 3306:3306 ctlc/amb-serf
 ```
 
-Now look back at your other terminal window running the ctlc/serf-members container
-
-现在回过头来看一下另外一个运行着ctlc/serf-members容器的终端窗口。
+现在回过头来看一下另外一个运行着 ctlc/serf-members 容器的终端窗口。
 
 ```
 67ffbe3dba95  172.17.0.3:7946  alive   role=serf-members
@@ -70,31 +57,23 @@ f5af7d9dbc3c  172.17.0.2:7946  alive   role=serf-agent
 31aa2ce79322  172.17.0.5:7946  alive   role=3306
 ```
 
-Now you can see that Serf now knows the internal IP address of the host running MySQL. We are almost done
-现在你可以看到Serf已经知道了运行MySQL服务的内部IP地址。我们几乎快完成了。
+现在你可以看到 Serf 已经知道了运行 MySQL 服务的内部 IP 地址。我们几乎快完成了。
 
-## Setup a WordPress Container
-## 建立一个WordPress容器
+## 创建一个WordPress容器
 
-Now all we need is a WordPress container that can consume the information from Serf. We can do this two ways:
+我们现在需要一个 WordPress 容器来使用 Serf 中注册的服务。我们有两种方法来实现:
 
-我们现在需要一个WordPress容器来使用Serf中注册的服务。我们有两种方法来实现:
+1. 我们可以在容器中构建 Serf－logic 。
 
-1. We can build Serf-logic into the container
-1. 我们可以在容器中构件Serf－logic
-2. We can create another ambassador container to bridge to the MySQL ambassador and link to the WordPress container (which kinda defeats the purpose of using Serf in the first place, unless your new container uses Serf instead of environment variables to figure out where to bridge to)
+2.我们可以创建另外一个 ambassador 容器来桥接到 MySQL ambassador ，并且链接到 WordPress 容器（这个有点违背了我们一开始使用 Serf 的初衷。除非你的新容器使用Serf，而不是根据环境变量来决定要链接到哪里）。
 
-In this case, we will pick option 1 and leave option 2 as an exercise for the reader.
-2.我们可以创建另外一个ambassador容器来桥接到MySQL ambassador，并且链接到WordPress容器。(这个有点违背了我们一开始使用Serf的初衷，除非你新的container使用Serf而不是环境变量来决定需要链接到哪里)
-
-在这个情况下，我们会采用第一个方法，把第二个方法作为读者的练习。
+在这个情况下，我们会采用第一种方法，你们可以把方法二作为课外练习。
 
 ```
 $ docker run -d --link serf_1:serf_1 -p 80:80 -e "DB_USER=root" -e "DB_NAME=mysql" ctlc/wordpress-serf
 ```
-Now look back at your other terminal window running the ctlc/serf-members container
 
-现在回过头来看一下另外一个运行着ctlc/serf-members容器的终端窗口。
+现在回过头来看一下另外一个运行着 ctlc/serf-members 容器的终端窗口。
 
 ```
 67ffbe3dba95  172.17.0.3:7946  alive   role=serf-members
@@ -103,7 +82,6 @@ f5af7d9dbc3c  172.17.0.2:7946  alive   role=serf-agent
 ffa1b001a1b7  172.17.0.6:7946  alive   role=web
 ```
 
-Success.
 成功。
 
 ```
@@ -114,30 +92,28 @@ $ curl -s -L localhost | head
 	<link id="install-css" href="http://localhost/wp-admin/css/install.min.css?ver=3.9-beta3-27857" rel="stylesheet" media="all" type="text/css" />
 ```
 
-## Ambassadors for Etcd and CoreOS
-## 在Etcd和CoreOS中使用Ambassadors
+## 在 Etcd 和 CoreOS 中使用 Ambassador
 
-I promised I would show you how to register your database into Etcd instead of Serf at the beginning of this article. If you’ve made it this far, you deserve to see more. Ready for it? Instead of this:
-
-我在文章的一开始就保证会展示如何把你的数据库服务注册到Etcd而不是Serf中。如果你已经看到这里，那你就应该能够知道更多。准备好了么？
+我在文章的一开始就保证会展示如何把数据库服务注册到 Etcd 而不是 Serf 中。如果你已经看到这里，那你就应该能够知道更多。准备好了么？
 
 ```
 $ docker run -d --link mysql:mysql --link serf_1:serf_1 --name mysql_ambassador -p 3306:3306 ctlc/amb-serf
 ```
-Run this:
-运行这个:
+
+运行:
 
 ```
 $ docker run -d --link mysql:mysql --link serf_1:serf_1 --name mysql_ambassador -p 3306:3306 ctlc/amb-etcd
 ```
 
-The ctlc/amb-etcd container will register with etcd instead of serf automatically. Of course you will need to put this in systemd formatted file and deploy using fleetctl for this to actually work, but the idea is the same.
+ctlc/amb-etcd 容器会自动注册到 etcd 而不是 serf 。当然你需要把这个写入 systemd 标准的文件，使用 fleeetctl 来进行部署从而让它真正工作，不过概念是一样的。
 
-ctlc/amb-etcd容器会自动注册到etcd而不是serf. 当然你需要把这个写入systemd标准的文件，使用fleeetctl来进行部署从而让它真正工作,但是概念是一样的。
-
-## CONCLUSION
 ## 总结
 
-There is a lot you can do with the Docker ambassador model. This is just scratching the surface. In upcoming posts, we will show you how to do things like centralized transparent network logging and other fun stuff you can do with ambassadors. Make sure you subscribe to the mailing list (in the top bar above this blog post) to stay in touch.
+使用 Docker ambassador 模型你能做很多事情，这里仅仅提及了一些表面的东西。在后续的文章中，我们会向你展示如何通过 ambassador 实现中心化、透明化的网络日志，以及其他有趣的东西。欢迎订阅邮件列表进行学习。
 
-这里写了很多关于如何使用Docker ambassador模型。这个也仅仅提及了一些表面的东西。在未来的文章中，我们会向你展示通过ambassador实现的例如中心化，透明化的网络日志等其他有趣的东西。确保你订阅了邮件列表(在这片文章的顶部)来保持练习
+---
+
+#####这篇文章由 [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) 发表，点击 [这里](http://www.centurylinklabs.com/linking-docker-containers-with-a-serf-ambassador/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，您可以在 [GitHub](https://github.com/markshao) 上与他交流。
+
+#####The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) , click [here]((http://www.centurylinklabs.com/linking-docker-containers-with-a-serf-ambassador/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981)) to read the original publication.
