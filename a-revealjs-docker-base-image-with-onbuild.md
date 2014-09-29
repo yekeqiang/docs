@@ -89,4 +89,4 @@ $ docker build -t slideshow .
 ---
 #####这篇文章由 [Peter Parente](https://twitter.com/parente) 发表， [Mark Shao](https://github.com/markshao) 翻译。你可以点击 [这里](http://mindtrove.info/a-reveal.js-docker-base-image-with-onbuild/) 阅读原文。
 
-#####The article was contributed by [Peter Parente](https://twitter.com/parente), click [here](http://mindtrove.info/a-reveal.js-docker-base-image-with-onbuild/) to read the original publication.
+#####The article was contributed by [Peter Parente](https://twitter.com/parente), click [here](http://mindtrove.info/a-reveal.js-docker-base-image-with-onbuild/) to read the original publication. 
