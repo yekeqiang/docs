@@ -1,12 +1,12 @@
-#在Docker中使用Serf
+#在 Docker 中使用 Serf
 
 #####作者：[马金凯](http://weibo.com/u/2745455145)
 
 >作者注：本文编写思路来自 [Decentralizing Docker: How to Use Serf with Docker](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)
 
-在之前的 [Docker Link使用示例](http://my.oschina.net/marker/blog/200407) 中，我们对 [Docker](http://docker.io) 的link特性进行了简单的演示，这次的主题是使用 [Serf](http://www.serfdom.io/) 实现更加低耦合的容器关系结构，最终达到的效果是服务化各个服务。
+在之前的 [Docker Link 使用示例](http://my.oschina.net/marker/blog/200407) 中，我们对 [Docker](http://docker.io) 的 link 特性进行了简单的演示，这次的主题是使用 [Serf](http://www.serfdom.io/) 实现更加低耦合的容器关系结构，最终达到的效果是服务化各个服务。
 
-##构建Serf镜像
+##构建 Serf 镜像
 
 在这我并没有使用 [Supervisord](http://supervisord.org) 来启动Serf服务，大家可以参照后面的示例来启动Serf。
 
@@ -27,13 +27,13 @@ CMD ["-tag", "role=serf-agent"]
 ENTRYPOINT ["serf", "agent"]
 ```
 
-**构建Serf镜像**：
+**构建 Serf 镜像**：
 
 ```
 $ docker build -t serf - < Dockerfile_serf
 ```
 
-##构建mysql镜像
+##构建 mysql 镜像
 
 这一步比较复杂，我们将编写多个shell脚本，用于启动supervisor、启动mysql、创建数据库用户、创建数据库等，先让我们看一下目录结构
 
@@ -199,23 +199,23 @@ EXPOSE 3306 7946 7373
 CMD ["/run.sh"]
 ```
 
-大家可能看到了，这里使用了`ADD https://dl.bintray.com/mitchellh/serf/0.4.1_linux_amd64.zip serf.zip`来添加一个远程文件到镜像中，这跟Serf服务镜像构建时使用的方法不一样，但是达到了同样的效果。在此我需要解释一下，`RUN wget <url>`是可以被缓存的，而`ADD <url> <name>`是不能够被缓存的，也就是说每次构建都会再次下载这个文件，`RUN wget <url>`则会使用缓存，从而加快构建速度。大家可以试一下分别构建两次镜像，可以发现Serf镜像第二次全部使用了缓存，而mysql会在Step 6再次下载文件。
+大家可能看到了，这里使用了 `ADD https://dl.bintray.com/mitchellh/serf/0.4.1_linux_amd64.zip serf.zip` 来添加一个远程文件到镜像中，这跟 Serf 服务镜像构建时使用的方法不一样，但是达到了同样的效果。在此我需要解释一下， `RUN wget <url>` 是可以被缓存的，而 `ADD <url> <name>` 是不能够被缓存的，也就是说每次构建都会再次下载这个文件， `RUN wget <url>` 则会使用缓存，从而加快构建速度。大家可以试一下分别构建两次镜像，可以发现 Serf 镜像第二次全部使用了缓存，而 mysql 会在 Step 6 再次下载文件。
 
-进入mysql目录构建镜像：
+进入 mysql 目录构建镜像：
 
 ```
 $ docker build -t mysql .
 ```
 
-##测试Serf连接
-
-通过Serf镜像启动一个容器：
+##测试 Serf 连接
+ 
+通过 Serf 镜像启动一个容器：
 
 ```
 $ SERF_ID=$(docker run -d -p 7946 -p 7373 -name serf_agent serf)
 ```
 
-让我们测试一下Serf是否正常工作，在我们的宿主机上(安装docker的机器)也安装Serf，来连接容器的Serf：
+让我们测试一下 Serf 是否正常工作，在我们的宿主机上(安装 docker 的机器)也安装 Serf ，来连接容器的 Serf ：
 
 ```
 $ wget --no-check-certificate https://dl.bintray.com/mitchellh/serf/0.4.1_linux_amd64.zip
@@ -227,7 +227,7 @@ $ serf members
 packer-virtualbox    10.0.2.15:7946    alive
 ```
 
-现在，在我们的机器上就拥有了一个可用的Serf，你可以连接Docker的Serf代理容器来看看效果：
+现在，在我们的机器上就拥有了一个可用的 Serf ，你可以连接 Docker 的 Serf 代理容器来看看效果：
 
 ```
 $ serf join $(docker port $SERF_ID 7946)
@@ -237,15 +237,15 @@ precise64        10.0.2.15:7946      alive
 9be517551dda     172.17.0.2:7946     alive    role=serf-agent
 ```
 
-##测试Serf事件派发到mysql服务
+##测试 Serf 事件派发到 mysql 服务
 
-让我们启动一个mysql容器，并与serf_agent连接，使用-link参数，注意格式为name:alias，这里alias必须使用serf_agent，因为在join-cluster.sh中固定调用了`SERF_AGENT_PORT_7946_TCP_ADDR`和`SERF_AGENT_PORT_7946_TCP_PORT`两个环境变量，可以按照不同的名称要求做连接，命令如下：
+让我们启动一个 mysql 容器，并与 serf_agent 连接，使用 -link 参数，注意格式为 name:alias ，这里 alias 必须使用 serf_agent ，因为在 join-cluster.sh 中固定调用了 `SERF_AGENT_PORT_7946_TCP_ADDR` 和 `SERF_AGENT_PORT_7946_TCP_PORT` 两个环境变量，可以按照不同的名称要求做连接，命令如下：
 
 ```
 $ MYSQL_ID=$(docker run -d -p 3306 -p 7946 -p 7373 -link serf_agent:serf_agent mysql)
 ```
 
-在宿主机中查看Serf集群情况：
+在宿主机中查看 Serf 集群情况：
 
 ```
 $ serf members
@@ -254,9 +254,9 @@ precise64        10.0.2.15:7946     alive
 410d5a7f709a     172.17.0.3:7946    alive    role=db
 ```
 
-因为在mysql容器启动时，执行了join-cluster.sh脚本连接到了serf_agent，因此在宿主机中我们可以看到之后加入进来的mysql。
+因为在 mysql 容器启动时，执行了 join-cluster.sh 脚本连接到了 serf_agent ，因此在宿主机中我们可以看到之后加入进来的 mysql 。
 
-此时我们可以通过`docker logs $MYSQL_ID`查看mysql输出的用户名和密码信息(可以通过修改create_mysql_admin_user.sh来改变用户信息或输出格式等)。
+此时我们可以通过 `docker logs $MYSQL_ID` 查看 mysql 输出的用户名和密码信息(可以通过修改 create_mysql_admin_user.sh 来改变用户信息或输出格式等)。
 
 ```
 $ docker logs $MYSQL_ID
@@ -272,7 +272,7 @@ MySQL user 'root' has no password but only allows local connections
 ========================================================================
 ```
 
-执行自定义命令，通知mysql创建数据库：
+执行自定义命令，通知 mysql 创建数据库：
 
 ```
 $ serf event create_db wordpress
@@ -299,4 +299,4 @@ mysql> show databases;
 
 ##总结
 
-今天的示例就写到这里，大家可以继续发散思考，我的mysql容器已经具备了接受命令的功能，那么如果我再创建一个wordpress容器，当容器启动时会发送create_db命令给serf_agent，这样mysql就达到了服务化的目的。当然能够服务化的还很多，例如：负载均衡、memcached、redis等等。如果大家有什么更好的想法，可以共享出来，我的邮箱地址是：majk@vip.qq.com
+今天的示例就写到这里，大家可以继续发散思考，我的 mysql 容器已经具备了接受命令的功能，那么如果我再创建一个 wordpress 容器，当容器启动时会发 送create_db 命令给 serf_agent ，这样 mysql 就达到了服务化的目的。当然能够服务化的还很多，例如：负载均衡、 memcached 、 redis 等等。如果大家有什么更好的想法，欢迎发送 [邮件](mailto:majk@vip.qq.com) 给我。 
