@@ -1,26 +1,21 @@
-![enter image description here][1]
+#部署自己的私有 Docker Registry
 
-#How to Deploy your own Private Docker Registry
-#部署自己的私有Docker Registry
+![alt](http://resource.docker.cn/ship-with-containers.jpg)
+######图片来自：[Glyn Lowe Photoworks](http://www.flickr.com/photos/glynlowe/)
 
-Matthew Fisher, January 21, 2014
+#####作者：[Matthew Fisher](http://www.activestate.com/blog/authors/matthewf)
 
-Matthew Fisher, 2014年1月21日
+#####译者：[巨震](https://github.com/crystaldust)
 
-This blog post shows how you can deploy your own private Docker Registry behind your firewall with SSL encryption and HTTP authentication. A Docker Registry is a service which you can push Docker images to for storage and sharing. We will be installing the registry on Ubuntu, but it should work on any operating system that supports upstart. SSL encryption and HTTP basic authentication will be managed by Nginx, which will be a proxy server in front of the Docker Registry. Upstart will manage the gunicorn processes that will run the registry. We will also be using a LRU cache to reduce roundtrips to the storage backend. For this cache we will use Redis.
+---
 
 这篇博客讨论了如何部署一个带 SSL 加密、HTTP 验证并有防火墙防护的私有 [Docker Registry](https://github.com/dotcloud/docker-registry) 。[Docker Registry](https://github.com/dotcloud/docker-registry) 是一个存储和分享 [Docker](http://docker.io) 镜像的服务。本文中我们使用的操作系统是 [Ubuntu](http://www.ubuntu.com)，任何支持 [Upstart](http://upstart.ubuntu.com/) 的系统都可以。我们用 [Nginx](http://nginx.org) 作为 [Docker Registry](https://github.com/dotcloud/docker-registry) 的前端代理服务器，同时也用 [Nginx](http://nginx.org) 完成 SSL 加密和基本的 HTTP 验证。我们用 [Gunicorn](http://gunicorn.org) 运行 [Docker Registry](https://github.com/dotcloud/docker-registry) 并用 [Upstart](http://upstart.ubuntu.com/) 管理 [Gunicorn](http://gunicorn.org)。我们还用 [Redis](http://redis.io) 实现一个 LRU(Least Recently Used，近期最少使用算法) 缓存机制来减少 [Docker Registry](https://github.com/dotcloud/docker-registry) 和硬盘之间的数据存取。
 
 
-##Why do you need a Docker Registry?
 ##为什么需要Docker Registry?
-When you create new Docker images for use in your environment - whether that'd be a Redis server, a Hipache daemon, or an IRC logbot - you're going to want to store the images somewhere safe. Maybe you're working on a project where you also want to create a Docker image with Jenkins or Buildbot on each commit, bag and tag (read: docker commit && docker tag) the image, and then push that to the registry. But what if your code is proprietary, and you don't want to push that image to the public registry? Docker Inc. has already thought of that for you, and has created the docker-registry project. This project will allow you to push your own images to your own in-house registry. Woo!
 
 当在自己的环境中创建 [Docker](http://docker.io) 镜像的时候，无论是装 [Redis](http://redis.io/)，[Hipache](https://github.com/dotcloud/hipache)，还是 IRC 协议的 [logbot](https://github.com/dannvix/Logbot) ，你都希望可以把镜像存到一个安全的地方。也许你项目中的 [Docker](http://docker.io) 镜像需要安装 [Jenkins](http://buildbot.net/)，或者每次 commit 都跑一遍 [Buildbot](http://buildbot.net/)，又或者给镜像打上 bag 和 tag （相关阅读：[docker commit](http://docs.docker.io/en/latest/reference/commandline/cli/#commit)，[docker tag](http://docs.docker.io/en/latest/reference/commandline/cli/#tag)），再发送到 [Docker Registry](https://github.com/dotcloud/docker-registry)。可是如果镜像中的代码是私有的，你不想把镜像放到公共的 [Docker Registry](http://index.docker.io) 上呢？[Docker](http://docker.io) 公司已经想到了这一点，并因此建立了 [docker-registry](https://github.com/dotcloud/docker-registry) 项目。[docker-registry](https://github.com/dotcloud/docker-registry) 允许你把自己的镜像 [push](http://docs.docker.io/en/latest/reference/commandline/cli/#push) 到自己的 registry 中，酷！
 
-***还没看bag tag的内容***
-
-If you want to kick the proverbial tires, you can test the docker registry:
 
 如果你想感受一下[docker registry](https://github.com/dotcloud/docker-registry)，可以用公共的 [registry](http://index.docker.io) 来试试：
 
@@ -32,28 +27,15 @@ If you want to kick the proverbial tires, you can test the docker registry:
     $ docker push localhost:5000/busybox
 
 
-This is great to get started working with the registry for testing, but this will be using plain HTTP. Anyone can push to your server as long as they have endpoint access, which is not good. Let's get started with setting up our own private registry for internal use.
 
 对于 registry 入门，这个例子很有用，但是例子中仅用了一个简单的 HTTP 服务。任何知道服务器地址的人都可以随意 push 镜像，这不是个好方案。下面我们来建立自己的私有 registry 以供内部使用。
 
 
-##Planning our Deployment
 ##准备自己的部署方案
 
-Before we spawn an Ubuntu server to start deploying the registry, let's consider some things…
 我们要创建一个 Ubuntu 服务器来部署 registry，在此之前，我们先考虑几件事情...
 
-###What Storage Backend?
 ###用什么作为后台存储？
-
-What storage backend do we want to use? Here's a short list of the supported backends for the registry:
-local: use the local filesystem
-s3: store inside an Amazon S3 bucket
-swift: store inside a Openstack Swift container
-glance: use Openstack's Glance project
-elliptics: use the Elliptics key-value store
-
-Sidenote: I created the backend for Openstack Swift. If you find any bugs with it, please feel free to file a bug on the registry's github page.
 
 我们用什么来做后台存储呢？请看下面几种存储方案：
 
@@ -69,25 +51,13 @@ Sidenote: I created the backend for Openstack Swift. If you find any bugs with i
 
 译者注：国内的开发者 [桂阳](http://weibo.com/u/1656755095) 贡献了存储在阿里云的 [方案](https://github.com/guiyang/docker-registry/blob/aliyun-oss/lib/storage/aliyun_oss.py)。
 
-###Hosted or In-House Server?
 ###托管服务器还是用自己搭建服务器？
-
-Where do we want to host our docker registry? Do we want to use our own Openstack cluster, Amazon Web Services, Rackspace, or our own bare metal servers? Any option will work for us!
 
 我们要把 docker registry 服务部署到哪里呢？用自己的 OpenStack 集群？Amazon 的网络服务？还是 Rackspace？或者自己购买服务器？答案是：用什么都行！
 
-One thing to consider when using cloud-hosted infrastructure is the advantage of using an external volume for your data. This gives you control over managing your own backups, which is a huge win for us.
-
 使用云服务，我们可以使用可扩展的存储空间，便于我们管理自己的备份，非常方便。
 
-
-###What Operating System?
 ###用什么操作系统？
-
-Since the docker registry is a python project, it's ridiculously simple to port over to other operating systems. You can quite easily write up a systemd config file, or launch it as a Windows Service. Because we will be installing it on Ubuntu, we will be using upstart to manage our gunicorn processes.
-
-I will be demonstrating the deployment process using the local storage backend, where all of our assets will be held on our own hardware. We have an internal Openstack cluster over here in our Vancouver office (we love Openstack!), so we will use that for our hosting solution. docker-internal.example.com will be the fully qualified domain name, and we will be using Ubuntu's 12.04.3 cloud image as the server.
-All right. Let's get down to deploying!
 
 docker registry 是用 python 写的，所以把它导入到各种操作系统中真是太简单了。你可以轻轻松松的写一个 [systemd配置文件](https://wiki.archlinux.org/index.php/systemd#Writing_custom_.service_files) ，或者把它做成 [Widnows服务](http://en.wikipedia.org/wiki/Windows_service) 。本例中，我们在 Ubuntu 上安装 docker registry，因此，我们用 [upstart](http://upstart.ubuntu.com/)来管理 Gunicorn 进程。
 
@@ -95,10 +65,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 万事俱备，开工！
 
-###Boot the Server
 ###启动服务器
-
-First, let's boot up a server. Since I'll be using our internal Openstack cluster, I'll just use the nova client to boot up my server. If you're following this post line by line, here are the credentials you'll need to set up:
 
 首先，启动服务器。因为我是用的内部 Openstack，我用 [nova客户端](https://github.com/openstack/python-novaclient) 来启动就可以了。如果你按照本例来操作，请在 .bashrc 文件中设置下面列出的验证信息：
 
@@ -112,14 +79,12 @@ First, let's boot up a server. Since I'll be using our internal Openstack cluste
 	export OS_PASSWORD="******"
 	[...]
 
-Once you set that up, test by running:
 
 设置完成后，请用下面的命令测试一下：
 
 	$ sudo pip install python-novaclient
 	$ nova list
 
-Before we boot the server, let's upload the Ubuntu cloud image, as well as your own SSH key...
 
 启动服务器之前，我们先上传 Ubuntu cloud image 和自己的 SSH Key 文件：
 
@@ -127,7 +92,6 @@ Before we boot the server, let's upload the Ubuntu cloud image, as well as your 
 	$ sudo pip install python-glanceclient
 	$ glance image-create --name ubuntu-12.04.3-server-cloudimg-amd64 --disk-format qcow2 --container-format bare --location http://cloud-images.ubuntu.com/releases/12.04.3/release/ubuntu-12.04-server-cloudimg-amd64-disk1.img
 
-And create a security group that allows external access to port 80 and 443...
 
 再创建一个安全组，来允许外部对 80 和 443 端口的访问：
 
@@ -135,14 +99,11 @@ And create a security group that allows external access to port 80 and 443...
 	$ nova secgroup-add-rule web-server tcp 80 80 0.0.0.0/0
 	$ nova secgroup-add-rule web-server tcp 443 443 0.0.0.0/0
 
-now we will create the volume, which will be 512GB in size. We will be using this to store our docker images:
 
 现在，我们来创建一个 512G 的分区，用于存储我们的 docker 镜像：
 
 	$ nova volume-create 512 --display-name docker-internal
 
-***根据上下文，nova volume-create命令应该是分配了一个分区，因为后面用mount把这个512GB的分区挂在到了一个目录里***
-Finally, we can boot the server!
 
 最后，启动服务器吧！
 
@@ -167,21 +128,16 @@ Finally, we can boot the server!
 	+----------------+--------------------------------------+---------------+------+
 	$ nova add-floating-ip docker-internal 192.168.68.236
 
-Wait a couple seconds, and set up your domain registrar to map the subdomain docker-internal to this IP address. After that, run:
 
 等一小会儿，并把子域名 docker-internal 绑定到当前的 IP，然后用 SSH 登陆：
 
 	$ ssh ubuntu@docker-internal.example.com
 
 
-Hooray!
-
 哦耶！搞定！
 
-###Deploy and configure the registry
-###部署和配置 registry
+##部署和配置 registry
 
-Now that we have our server, let's install some packages to get started.
 
 我们已经有自己的服务器了，下面我们来装几个必要软件吧。
 
@@ -209,7 +165,6 @@ Now that we have our server, let's install some packages to get started.
     root@docker-internal:~# apt-get install redis-server
     root@docker-internal:~# apt-get clean
 
-Now that we have that out of the way, let's install the docker registry:
 
 必要的软件都装好了，下面我们就来安装 docker registry：
 
@@ -226,9 +181,6 @@ Now that we have that out of the way, let's install the docker registry:
     root@docker-internal:~# pip install -r requirements.txt
     root@docker-internal:~# cp config/config_sample.yml
 
-***这里作者没有指定要拷贝到哪里***
-
-If you've done this all correctly, we should now be able to test the registry will run with:
 
 如果一切顺利，我们现在应该可以用下面的命令来测试一下 docker registry 了：
 
@@ -236,7 +188,6 @@ If you've done this all correctly, we should now be able to test the registry wi
     2014-01-13 23:38:38,470 INFO:  * Running on http://0.0.0.0:5000/
     2014-01-13 23:38:38,470 INFO:  * Restarting with reloader
 
-If you see this, you're doing great! Now, we just need to set up a couple more things. Remember that volume we mapped to this server earlier? Let's set that up now:
 
 如果你看到的结果和上面一样，那么，恭喜你，成功了！接下来我们需要设置一些选项，记得我们之前分配给 docker registry 的分区吗？现在我们就来挂在这个分区：
 
@@ -244,7 +195,6 @@ If you see this, you're doing great! Now, we just need to set up a couple more t
     root@docker-internal:~# mkfs.ext4 /dev/vdb
     root@docker-internal:~# mount /dev/vdb /data/registry
 
-And now, let's edit our configuration file for the docker registry. You can use http://uuidgenerator.net/ to generate a secret key:
 
 现在，我们来编辑 docker registry 的配置文件，我们用 http://uuidgenerator.net 在线生成密钥：
 
@@ -276,7 +226,6 @@ And now, let's edit our configuration file for the docker registry. You can use 
             port: 6379
     EOF
 
-Once this is done, set up an upstart job for the registry:
 
 然后为 docker registry 设置一个 upstart 作业：
 
@@ -301,14 +250,12 @@ Once this is done, set up an upstart job for the registry:
     end script
     EOF
 
-And then start it with:
 
 用下面的命令启动 registry 的作业：
 
     root@docker-internal:~# start docker-registry
     docker-registry start/running, process 10872
 
-Verify that it's running by checking:
 
 用下面的命令检查 registry 的作业是否运行：
 
@@ -325,7 +272,6 @@ Verify that it's running by checking:
     2014-01-14 00:33:45 [15070] [INFO] Booting worker with pid: 15070
     2014-01-14 00:33:45 [15071] [INFO] Booting worker with pid: 15071
 
-Now for nginx:
 
 接下来，我们设置 nginx：
 
@@ -382,21 +328,17 @@ Now for nginx:
     
     root@docker-internal:~# service nginx restart
 
-And the associated htpasswd file (ensuring to replace USERNAME and PASSWORD):
 
 别忘了在 htpasswd 文件里设置账号密码：
 
     root@docker-internal:~# htpasswd -bc /etc/nginx/docker-registry.htpasswd USERNAME PASSWORD
 
 
-Let's install an SSL key onto the server. In this example, I am assuming that someone has handed you an SSL key that has been signed and verified by a certificate authority. This SSL key could be for either 'docker-internal.example.com' or '*.example.com':
-
 我们还要在服务器上安装一个 SSL 密钥。本例中，假设我们已经有认证机构颁发的 SSL证 书了，SSL 授权给'docker-internal.example.com'或者'*.example.com'，用下面的命令来安装 SSL 密钥：
 
     root@docker-internal:~# mv server.key /etc/ssl/private/docker-registry.key
     root@docker-internal:~# mv server.crt /etc/ssl/certs/docker-registry.crt
 
-If you don't have the cash to fork out for a new SSL key, or you are just testing out this process before deploying, you can install a self-signed SSL key by following the instructions from Akadia:
 
 如果你不打算花钱去搞一个认证机构授权的SSL密钥，或者你只是练习着部署 docker registry，那么你也可以按照 [Akadia的教程](http://www.akadia.com/services/ssh_test_certificate.html) 装一个自己授权的 SSL key，如下：
 
@@ -406,14 +348,11 @@ If you don't have the cash to fork out for a new SSL key, or you are just testin
     root@docker-internal:~# openssl rsa -in server.key.org -out server.key
     root@docker-internal:~# openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
 
-Please note that using self-signed certificates is currently waiting on pull request #2687. You will have to sit tight until it is merged into master, or you can try building Docker from source.
 
 请注意，现在官方的 docker 还不能用自授权的证书，要等到 [`#2687`](https://github.com/dotcloud/docker/pull/2687) 的 pull request 合并到官方 master 分支后才能使用。或者，你也可以试着修改 docker 的源代码来让它支持自授权证书。
 
-###Verification
-###测试
+##测试
 
-Finally, let's test this:
 
 最后，我们来测试一下自己的 docker registry：
 
@@ -436,38 +375,29 @@ Finally, let's test this:
     Pushing tags for rev [e9aa60c60128] on {https://docker-internal.example.com/v1/repositories/busybox/tags/latest}
     e9aa60c60128: Image already pushed, skipping
 
-And we're done! One docker registry, deployed on Openstack and ready to go.
 
 完成！现在我们在 Openstack 上部署了一个 docker registry，随时可用！
 
-###What's Next?
-###下一步
 
-So, after deploying the registry, what are some things that we can do to improve or enhance this project? I can think of a couple:
+##下一步
+
 
 部署好 docker registry 后，我们还可以进一步让它跑的更好，比如：
 
-- set up email notifications on registry exceptions
-- ship the logs off to logstash or some other log aggregation tool
-- deploy the registry on CentOS or RHEL
-- do some benchmarking to see how well the registry scales
-
 - 当docker registry崩溃的时候，发出邮件通知
-- 用[logstash](http://logstash.net/)或其他日志软件来管理日志
+- 用 [logstash](http://logstash.net/) 或其他日志软件来管理日志
 - 把docker registry部署到CentOS或者RHEL
 - 做一些测试，看看docker registry的性能如何
 
-What other suggestions can you think of? Leave a comment below!
-
 这只是我想到的一些，如果你有什么好点子，请在下面留言！
-
-Here at ActiveState, we're proud to say that we are actively using the Docker project in Stackato v3. If you missed Phil's amazing post on everything that's in Stackato v3, please take a look at his post, as well as the section about where Docker fits in with Stackato.
 
 在 ActiveState，我们在 [Stackato v3](http://www.activestate.com/stackato) 项目中大量的使用了 Docker。Phil 在博客中全面的介绍了 Stackat v3，如果你还没来得及看，一定要去拜读他的 [大作](http://www.activestate.com/blog/2013/11/technical-look-stackato-v30-beta) ，特别是其中 [Stackato在哪些地方适合用Docker](http://www.activestate.com/blog/2013/11/technical-look-stackato-v30-beta#docker) 这一节。
 
-图片来自：[Glyn Lowe Photoworks](http://www.flickr.com/photos/glynlowe/)
 
 
+---
+####这篇文章由 [Matthew Fisher](http://www.activestate.com/blog/authors/matthewf) 发表，点击[此处](http://www.activestate.com/blog/2014/01/deploying-your-own-private-docker-registry)可查阅原文。
+
+####The article was contributed by [Matthew Fisher](http://www.activestate.com/blog/authors/matthewf), click [here](http://www.activestate.com/blog/2014/01/deploying-your-own-private-docker-registry) to read the original publication.
 
 
-  [1]: http://www.activestate.com/sites/default/files/images/blog/ship-with-containers.jpg
