@@ -1,6 +1,5 @@
 #编译 CyanogenMod 的 Docker 模板
 
-***
 
 
 编译 [CyanogenMod](http://www.cyanogenmod.org) 需要很多的工作。你需要安装大量的依赖包，你还需要阅读很多文档。[Docker](http://docker.io) 是一个在容器自动内部署应用的软件。
@@ -36,7 +35,6 @@ cd docker-cyanogenmod
 
 ##为你的设备编译 CyanogenMode：
 
-***
 
 ```
 repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
