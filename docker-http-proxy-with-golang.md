@@ -1,5 +1,7 @@
 ##使用 Golang 编写一个简单的 HTTP 代理
 
+#####作者：[马全一](https://twiter.com/genedna)
+
 [goproxy](https://github.com/elazarl/goproxy) 是一个轻量级的 HTTP 代理库，可以很容易的编写一个仅供 [Docker](http://docker.io) 使用的代理 [程序](https://github.com/dockboard/docker-proxy) 。
 
 ```
