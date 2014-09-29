@@ -1,6 +1,8 @@
 #在Docker中使用Serf
 
-> 本文编写思路来自 [Decentralizing Docker: How to Use Serf with Docker](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)
+#####作者：[马金凯](http://weibo.com/u/2745455145)
+
+>作者注：本文编写思路来自 [Decentralizing Docker: How to Use Serf with Docker](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)
 
 在之前的 [Docker Link使用示例](http://my.oschina.net/marker/blog/200407) 中，我们对 [Docker](http://docker.io) 的link特性进行了简单的演示，这次的主题是使用 [Serf](http://www.serfdom.io/) 实现更加低耦合的容器关系结构，最终达到的效果是服务化各个服务。
 
@@ -295,6 +297,6 @@ mysql> show databases;
 
 成功了！我们看到了数据库已经被创建。
 
-#总结
+##总结
 
 今天的示例就写到这里，大家可以继续发散思考，我的mysql容器已经具备了接受命令的功能，那么如果我再创建一个wordpress容器，当容器启动时会发送create_db命令给serf_agent，这样mysql就达到了服务化的目的。当然能够服务化的还很多，例如：负载均衡、memcached、redis等等。如果大家有什么更好的想法，可以共享出来，我的邮箱地址是：majk@vip.qq.com
