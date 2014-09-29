@@ -1,4 +1,4 @@
-#A simple HTTP proxy using Golang
+#Docker HTTP proxy with Golang
 
 #####Author：[马全一](https://twitter.com/genedna)
 
