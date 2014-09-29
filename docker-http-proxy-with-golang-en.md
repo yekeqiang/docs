@@ -1,4 +1,8 @@
-##Writing a simple HTTP proxy using Golang
+#A simple HTTP proxy using Golang
+
+#####Author：[马全一](https://twitter.com/genedna)
+
+---
 
 The [goproxy](https://github.com/elazarl/goproxy) is a light weight http proxy library, which allows you to easily write a [proxy program](https://github.com/dockboard/docker-proxy) for [Docker](http://docker.io/), here is the code:
 
@@ -33,7 +37,7 @@ func main() {
 The program checks the target URL on each HTTP request, if the target is not docker.io or any of its sub sites, it will return an error. The purpose is to protect the server from abusing or misusing which possibly leads to being banned by Great Firewall because it's used to visit websites which are unaccessible in mainland China.
 
 
-##Writing the init.d script for Ubuntu
+###Writing the init.d script for Ubuntu
 
 
 We have to write the init.d script file to let the proxy service run as a daemon in Ubuntu:
@@ -119,7 +123,7 @@ exit 0
 ```
 
 
-##Modify docker’s configuration to use HTTP proxy in Ubuntu
+###Modify docker’s configuration to use HTTP proxy in Ubuntu
 
 
 Let’s add the http proxy environment variables to /etc/init /docker.conf:
@@ -166,4 +170,6 @@ http://192.241.209.203:8384
 The [dockerboard](http://www.dockboard.org/) is now providing a proxy service (deployed on DigitalOcean’s VPS) for the domestic Chinese users to use and study [Docker](http://docker.io/). The proxy is not guaranteed to be available 24/7. If you encounter any problem, please contact the dockboard's [official Weibo account](http://weibo.com/dockboard) for consultation.
 
 
-If you have any idle VPS and you would like to deploy a proxy to support Chinese docker lovers, we would be very grateful and happy to provide total technical support. To make the greatness, please contact: [meaglith.ma@aliyun.com](mailto:meaglith.ma@aliyun.com)
+If you have any idle VPS and you would like to deploy a proxy to support Chinese docker lovers, we would be very grateful and happy to provide total technical support. To make the greatness, please contact: [马全一](mailto:meaglith.ma@aliyun.com)
+
+
