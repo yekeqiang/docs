@@ -2,7 +2,7 @@
 
 #####作者：[Michael Friis](http://friism.com/michael-friis)
 
-#####译者：[Ley](http://my.oschina.net/Ley11) ， [petert](http://my.oschina.net/u/1422355)
+#####译者：[Ley](http://my.oschina.net/Ley11) & [petert](http://my.oschina.net/u/1422355)
 
 这篇博文涵盖了使用 [Mono](http://www.mono-project.com/Main_Page) 在 [Docker](https://www.docker.io/) 轻量容器中运行简单 .NET 应用的方法。我在 Windows 上的 Vagrant/VirtualBox VM上运行 Docker 。它运行的很好，也很快。在 Docker 网站有 [安装指导](http://docs.docker.io/en/latest/installation/windows/) 。
 
