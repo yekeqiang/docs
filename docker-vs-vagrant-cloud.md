@@ -1,5 +1,11 @@
 # Docker vs Vagrant Cloud
 
+#####作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)
+
+#####译者：[铁威](https://github.com/TieWei)
+
+
+
 什么是 vagrant ? Vagrant 是一个跨平台的虚拟机构造工具，能够通过 [vagrantfile](https://github.com/patrickdlee/vagrant-examples/blob/master/example2/Vagrantfile) 
 描述虚拟机并将其部署到 hypervisor 上。
 
@@ -68,6 +74,6 @@ $ vagrant up
 是以 linux container 为切入点的，但是从 dotcloud 的角度来讲，更希望其成为一个能够提供更多 PaaS 功能(更关注 runtime)的平台。
 
 ---
-这篇文章由[ Lucas Carlson ](http://www.centurylinklabs.com/author/cardmagic/)发表，点击[此处](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/)可查阅原文。
+#####这篇文章由[ Lucas Carlson ](http://www.centurylinklabs.com/author/cardmagic/)发表，[铁威](https://github.com/TieWei) 翻译，点击[此处](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/)可查阅原文。
 
-The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/), click [here](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/) to read the original publication.
+#####The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/), click [here](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/) to read the original publication.
