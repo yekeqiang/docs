@@ -154,4 +154,4 @@ http://192.241.209.203:8384
 
 目前 [dockboard](http://www.dockboard.org) 为了方便国内用户使用和学习 [docker](http://docker.io) 技术，使用 [DigitalOcean](http://www.digitalocean.com) 的 VPS 架设了一个代理。代理地址不保证 7x24 小时稳定，如果遇到网络问题，请咨询我们的微博账号：[Docker中文社区](http://weibo.com/dockboard)。
 
-如果开发者有闲置的 VPS 愿意架设 Docker 的代理为社区提供支持，我们非常愿意提供技术帮助，请联络：meaglith.ma@aliyun.com。
+如果开发者有闲置的 VPS 愿意架设 Docker 的代理为社区提供支持，我们非常愿意提供技术帮助，请通过 [邮件](mailto:meaglith.ma@aliyun.com) 与我们联络。
