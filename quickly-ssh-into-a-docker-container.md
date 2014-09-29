@@ -3,6 +3,12 @@
 
 ![alt](http://resource.docker.cn/ssh-docker.jpg)
 
+#####作者：[Gerald Kaszuba](https://github.com/gak)
+
+#####译者：[巨震](https://github.com/crystaldust)
+
+---
+
 玩了几个月的 [Docker](https://www.docker.io/) 发现这东西实在太棒了！
 
 但是每次使用 [Docker](https://www.docker.io/) 都必须通过 SSH 登陆到容器令人有点儿抓狂。一般来说如果有多个容器都在跑 SSHD 服务，就得让 SSH 随机生成端口以防止冲突。用 SSH 登陆需要多个步骤，在多个 SSHD 服务一起运行的时候就更加繁琐了。
