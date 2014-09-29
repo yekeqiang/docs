@@ -33,7 +33,7 @@ wget https://raw.github.com/barnybug/docker-fish-completion/master/docker.fish -
 
 输入 docker 命令后按 tab 键就可以看到命令补全的输出，输入命令的前几个字母的时候也可以按 tab 查看补全的信息。
 
-![Docker completion in fish shell](http://docker.u.qiniudn.com/docker-fish-shell-completion.png)
+![alt](http://resource.docker.cn/docker-fish-shell-completion.png)
 
 
 
