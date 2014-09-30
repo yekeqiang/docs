@@ -1,4 +1,4 @@
-![Why named docker?](http://docker.u.qiniudn.com/PPT_why_named_docker.jpg)
+![Why named docker?](http://resource.docker.cn/ppt-why-named-docker.jpg)
 
 嗨，Docker 0.7 终于和各位见面了！希望大家喜欢。自 0.6.0 发布以来，经过无数的 bug 修复和使用细节的改进，新版本增加了 7 个主要功能：
 
