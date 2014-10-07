@@ -27,7 +27,7 @@ GET /containers/(id)/json
 ```
 ![alt](http://resource.docker.cn/docker-inspect-a-container.png)
 
-- **Process List** - 获取一个容器中正在运行的所有进程：
+- **Process List** - 获取一个容器中正在运行的所有进程： 
 ```
 GET /containers/(id)/top
 ```
