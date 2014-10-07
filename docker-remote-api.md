@@ -33,7 +33,7 @@ GET /containers/(id)/top
 ```
 ![alt](http://resource.docker.cn/docker-container-top.png)
 
-- **Container Logs** - 从容器中收集 stdout 和 stderr 的日志：
+- **Container Logs** - 从容器中收集 stdout 和 stderr 的日志 ：
 ```
 GET /containers/(id)/logs
 ```
