@@ -1,29 +1,23 @@
-# Creating a Docker image from your code
-# 通过代码来创建一个Docker镜像
+#通过代码来创建一个 Docker 镜像
 
-One of the great developments that Heroku has open sourced are Buildpacks. Buildpacks are a collection of scripts that detect your application language/framework and install the required interpreters, libraries, etc. to run.
+#####作者：[Fernando Mayo](https://twitter.com/FernandoMayo) （ CTO & Co-founder of Tutum ）
 
-[Heroku](https://www.heroku.com/)最重要的开源项目之一是[Buildpacks](https://devcenter.heroku.com/articles/buildpacks).Buildpacks实际上是一系列脚本，它们可以自动侦测到应用的语言/框架,然后安装所运行所需要的解释器,库等等。
+#####译者：[Mark Shao](https://github.com/markshao)
 
-Buildstep is a great tool developed by progrium which uses these buildpacks to transform any application code (supported by any of the included buildpacks) into a self-sufficient Docker image. It is also used in the extremely popular Dokku project made by the same author.
+***
+[Heroku](https://www.heroku.com/) 最重要的开源项目之一是 [Buildpacks](https://devcenter.heroku.com/articles/buildpacks)  。 Buildpacks 实际上是一系列脚本，可以自动侦测到应用的语言/框架，然后安装所运行所需要的解释器、库等等。
 
-[Buildstep](https://github.com/progrium/buildstep)是[progrium](http://progrium.com/)开发的一个非常优秀的工具，它使用这些buildpacks把任意一些应用代码(被这些buildpacks所支持)转换成一个自给自足的Dokcer镜像.它也同样被用于这个作者开发的一个非常流行的项目[Dokku](https://github.com/progrium/dokku).
+[Buildstep](https://github.com/progrium/buildstep) 是 [progrium](http://progrium.com/) 开发的一个非常优秀的工具，通过使用 buildpacks 把任意一些应用代码（被这些 buildpacks 支持）转换成一个自实现的 Dokcer 镜像。它也同样被用于这个作者开发的一个非常流行的项目 [Dokku](https://github.com/progrium/dokku) 。
 
-In order to take full advantage of this amazing tool, we have created a base image called tutum/buildstep which can be used directly in a Dockerfile to produce application images with minimum effort.
+为了充分利用这个神奇的工具，我们创建了一个名为 [tutum/buildstep](https://index.docker.io/u/tutum/buildstep/) 的基础镜像，可以在 Dockerfile 中直接使用，毫不费力地生成一个应用程序的镜像。
 
-为了充分利用这个神奇的工具，我们创建了一个叫[tutum/buildstep](https://index.docker.io/u/tutum/buildstep/)的基础镜像，它可以直接使用在Dockerfile中，以最快的速度生成一个应用程序的镜像。
-
-Let’s see a simple example.
 
 让我们看一个简单的例子
 
-## Converting a Django app into a Docker image using buildstep
+##使用 buildstep 把 Django 应用转换成 Docker 的镜像
 
-使用buildstep把一个Django的应用转换成一个Docker的镜像
 
-Imagine we have a Django app and we want to convert it into a Docker image to be able to move it between hosts. In the application code folder, we’ll create the following Dockerfile:
-
-想象一下我们有一个Django的应用，我们希望把它转化成一个Docker的镜像可以方便我们在服务器间移动。在应用代码的目录中，我们要创建一个如下的Dockerfie:
+假设一下我们有一个 Django 应用，我们希望把它转化成一个  Docker 镜像，从而可以方便我们在服务器间移动。在应用代码的目录中，我们要创建一个如下的 Dockerfie :
 
 ```
 FROM tutum/buildstep
@@ -31,11 +25,8 @@ EXPOSE 80
 CMD ["python", "manage.py", "runserver", "80"]
 ```
 
-That’s it. The minimum required information for tutum/buildstep to work is the port to expose and the command used to launch your application. Adding the application code and setting the working directory is automatically done by tutum/buildstep using the ONBUILD directive.
+非常简单。运行 `tutum/buildstep` 仅需要“暴露的端口”以及“运行应用所需要的命令”这些信息。把应用代码添加进去，配置工作目录都是由 `tutum/buildstep` 使用 `ONBUILD` 指令自动完成的。
 
-就是那样. 运行`tutum/buildstep`所需要的最少信息是暴露的端口以及运行应用所需要的命令。把应用代码添加进去以及配置工作目录都是`tutum/buildstep`通过使用`ONBUILD`指令自动完成的.
-
-Let’s build it:
 我们来构建一下:
 
 ```
@@ -80,31 +71,22 @@ Removing intermediate container 3f10763973a8
 Removing intermediate container 7d122de7f8d3
 ```
 
-Our application is now Dockerized into an image called fermayo/myapp. Let’s try it out:
-
-现在我们的应用已经变成了一个叫`fermayo/myapp`的Docker镜像，我们来尝试运行一下:
+现在我们的应用已经变成了一个叫 `fermayo/myapp` 的 Docker 镜像。运行一下:
 
 ```
 $ docker run -d -p 80 fermayo/myapp
 ```
+Django 应用跑起来了!
 
-We have now our Django app up and running!
+## 使用 buildstep 把 Heroku 应用转化成 Docker 镜像
 
-我们已经把我们的Django应用运行起来了!
-
-## Converting a Heroku app into a Docker image using buildstep
-## 使用buildstep把一个Heroku应用转化成Docker镜像
-
-Buildstep also supports using a Procfile to define the application process types. The following would be a simple Procfile for our Django app we used earlier:
-
-Buildstep也支持使用[Procfile](https://devcenter.heroku.com/articles/procfile)来定义应用的处理类型。下面是一个我们为我们的Django应用最早准备的的一个简单的`Procfile`
+Buildstep 也支持使用 [Procfile](https://devcenter.heroku.com/articles/procfile) 来定义应用的处理类型。我们的 Django 应用以前用到了一个简单的 `Procfile` 。
 
 ```
 web: python manage.py runserver 80
 ```
-To use this instead of manually defining the command, we can create the following Dockerfile:
 
-使用这个而不是手工定义启动的命令，我们可以创建下面这个Dockerfile:
+通过使用这个命令而不是手动定义，我们可以创建下面这个 Dockerfile :
 
 ```
 FROM tutum/buildstep
@@ -112,17 +94,12 @@ EXPOSE 80
 CMD ["/start", "web"]
 ```
 
-By entering the desired process type name in the CMD directive we are defining which command should be used to start the application.
+通过在 CMD 指令中输入要处理的类型的名字，我们指定了用来启动应用的命令。
 
-通过在CMD指令中输入我们需要的处理类型的名字，我们定义了哪个命令我们会用来启动应用
 
-##Running your app without building an image using buildstep
+##运行应用，无需通过 buildstep 来构建镜像
 
-##运行你的应用而不需要通过buildstep来构建镜像
-
-If your application is stored in a git repository, you can also run tutum/buildstep passing in an environment variable GIT_REPO with its address and the container will clone the repo and install the dependencies, etc. on the fly:
-
-如果你的应用存储在一个git的代码库中，那么你可以在运行`tutum/buildstep`的时候传入一个指向项目地址的环境变量`GIT_REPO`,这样容器会在运行时克隆项目并且下载依赖:
+如果你的应用存储在一个 git 的代码库中，那么你可以在运行 `tutum/buildstep` 的时候传入一个指向项目地址的环境变量 `GIT_REPO` ，这样容器会在运行时克隆项目并且下载依赖:
 
 ```
 # Without a Procfile
@@ -134,20 +111,16 @@ $ docker run -d -p 80 -e GIT_REPO=https://github.com/fermayo/hello-world-django.
 $ docker run -d -p 80 -e GIT_REPO=https://github.com/fermayo/hello-world-php.git tutum/buildstep /start web
 ```
 
-So there is no need to build anything.
+所以无需构建任何东西。
 
-所以这个不需要构建任何东西.
+## 试试看!
 
-## Give it a try!
-## 试一下吧!
+这是一个非常好的使用 Docker 的入门级方法。请让我知道它是否适用于你的语言/框架，以及你计划如何优化它。
 
-This is a great way to getting started with Docker. Let us know if it works for your language/framework and how would you make it better.
-Thanks for reading!
+谢谢阅读！
 
-这是一个很好的入门使用Docker的方法。请让我们知道它是否适用于你们的语言/框架，以及你们如何准备把它变得更好。
+***
 
-谢谢阅读!
+#####这篇文章由 [Fernando Mayo](https://twitter.com/FernandoMayo) 发表，点击 [这里](http://blog.tutum.co/2014/04/10/creating-a-docker-image-from-your-code/) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，你可以在 [GitHub](https://github.com/markshao) 上与他交流。
 
-About [Fernando Mayo](http://blog.tutum.co/author/fermayotutum/)
-CTO & Co-founder of Tutum
-
+#####The article was contributed by [Fernando Mayo](https://twitter.com/FernandoMayo) , click [here](http://blog.tutum.co/2014/04/10/creating-a-docker-image-from-your-code/) to read the original publication.
