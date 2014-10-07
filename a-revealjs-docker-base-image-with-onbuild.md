@@ -1,4 +1,4 @@
-#A reveal.js Docker Base Image with ONBUILD
+#使用 ONBUILD 构建 reveal.js 的 Docker 镜像
 
 
 #####作者：[Peter Parente](https://twitter.com/parente)
