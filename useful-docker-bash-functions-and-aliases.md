@@ -1,4 +1,4 @@
-# 有用的 docker bash 函数 和 别名
+# 有用的 docker bash 函数和别名
 
 #####作者：[James Turnbull](https://twitter.com/kartar)
 #####译者：[叶可强](http://weibo.com/1224591704)
