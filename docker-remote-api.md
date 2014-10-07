@@ -25,7 +25,7 @@ Docker Remote API 是一个 REST 风格的 API，它用于代替远程的命令�
 ```
 GET /containers/(id)/json
 ```
-![alt](http://resource.docker.cn/docker-inspect-a-container.png)
+![alt](http://resource.docker.cn/docker-inspect-a-container.png) 
 
 - **Process List** - 获取一个容器中正在运行的所有进程： 
 ```
