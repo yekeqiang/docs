@@ -31,7 +31,7 @@ Greylock Ventures 是一家[顶级](http://www.forbes.com/sites/tomiogeron/2013/
 
 鉴于目前在我们的董事会里已经有了三位 “ Jerry ” ，加上我的名字，我们现在可是IT行业的 Ben & Jerry’s 了[2]。
 
-![Smaller icon](http://resource.docker.cn/ben-jerry.jpeg)
+![alt](http://resource.docker.cn/ben-jerry.jpeg)
 
 ##我们的生态系统
 
@@ -39,11 +39,11 @@ Docker 生态系统持续迅速发展。在我们成立后的最初九个月里�
 
 ####Docker 生态系统
 
-![Smaller icon](http://resource.docker.cn/docker-ecosystem.jpeg)
+![alt](http://resource.docker.cn/docker-ecosystem.jpeg)
 
 ####Docker 线下聚会小组
 
-![Smaller icon](http://resource.docker.cn/docker-meetup.png "Title here")
+![alt](http://resource.docker.cn/docker-meetup.png)
 
 ##我们将如何使用资金
 
