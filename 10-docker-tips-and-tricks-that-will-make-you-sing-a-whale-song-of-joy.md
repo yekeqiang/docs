@@ -6,7 +6,7 @@
 
 ***
 
-{<1>}![alt](http://resource.docker.cn/humpback.jpg)
+![alt](http://resource.docker.cn/humpback.jpg)
 
 作为 Docker 公司的一名解决方案工程师，我已经积累了很多使用 Docker 的建议和技巧。 Docker 社区每天都在产生着大量的内容，但是很多能让工作变得更容易更有乐趣的建议和技巧很容易就消失在这茫茫信息的洪流中，被人们忽视。
 
@@ -26,7 +26,8 @@
 10. #docker
 
 ## 在 VPS 上运行 Docker 来获得额外的速度 
-{<2>}![alt](http://resource.docker.cn/vps.jpeg)
+
+![alt](http://resource.docker.cn/vps.jpeg)
 
 这是一个直接了当的建议。如果你和我一样家里的带宽很小的话，你可以在 [Digital Ocean](http://digitalocean.com/) 或者 [Linode](http://linode.com/) 上来部署 Docker 以获得更好的 pull 和 push 带宽。在家里 Comcast 网络下，我的下载带宽大约有 50mbps，然而在我 Linode 主机上的速度要比这快一个数量级。
 
@@ -45,7 +46,7 @@
 
 ## 将容器作为可以高度任意使用的开发环境
 
-{<3>}![at](http://resource.docker.cn/devenv.gif)
+![alt](http://resource.docker.cn/devenv.gif)
 
 有多少次你需要快速隔离一个问题来观察它是否与特定事件相关？或者只是想切换到一个新分支，来对现在的环境进行些许细小的更改或实验，而不想导致大的意外发生？
 
@@ -146,7 +147,7 @@ Docker 提供了一种轻便的解决方法。
 
 ## Insta-nyan
 
-{<4>}![alt](http://resource.docker.cn/nyan.png)
+![alt](http://resource.docker.cn/nyan.png)
 
 十分简单，如果你想在终端显示一个 nyan 猫，并且你有 Docker 的话，你只需要执行下面的命令。
 
@@ -154,7 +155,7 @@ Docker 提供了一种轻便的解决方法。
 
 ## 在 OSX 上利用 boot2docker ip 地址修改 /etc/hosts/ 
 
-{<5>}![alt](http://resource.docker.cn/hacking.png)
+![alt](http://resource.docker.cn/hacking.png)
 
 最新版本的 [boot2docker](https://github.com/boot2docker/boot2docker) 包含了一个本地网络，通过它你可以通过 boot2docker 的虚拟机 ip 地址来访问容器的端口。 boot2doker ip 命令可以使你轻松地访问这些值。由于这个地址通常是 192.168.59.103 ，难记且不好拼，所以我在自己的 /etc/hosts 中加入了一个条目让我可以更容易的访问 boot2docker:port 。这个十分简单，试一下吧。 
 
@@ -213,7 +214,7 @@ Docker 提供了一种轻便的解决方法。
 
     docker run -p 3000:3000 -dt nathanleclaire/wetty
 
-{<6>}![alt](http://resource.docker.cn/wetty.png)
+![alt](http://resource.docker.cn/wetty.png)
 
 遗憾的是 wetty 只能在 Chrome 下工作。不过已经有其他的 JavaScript 终端模拟器将要 Docker 化。你可以通过控制浏览器来进行演示（想想一下你可以在你的 Reveal.js 幻灯片中展示一个可交互的 CLI 快照）。现在你可以在 web 应用中集成独立的终端应用并且你可以细粒度的控制你的环境的每个细节，无需担心主机和容器之间的任何污染。
 
