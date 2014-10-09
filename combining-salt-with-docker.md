@@ -32,8 +32,8 @@ ADD ./master.conf /etc/salt/minion.d/master.conf
 
 CMD /usr/bin/salt-minion
 #-------
-
 ```
+
 ###构建镜像
 
 这时通过 docker 运行 Dockerfile ，使用的命令是:
@@ -51,6 +51,7 @@ $ docker build --rm=true -t salt-minion .
 ```bash
 $ docker run -d salt-minion
 ```
+
 Docker 会返回:
 
 ```bash
