@@ -76,6 +76,7 @@ Removing intermediate container 7d122de7f8d3
 ```
 $ docker run -d -p 80 fermayo/myapp
 ```
+
 Django 应用跑起来了!
 
 ## 使用 buildstep 把 Heroku 应用转化成 Docker 镜像
