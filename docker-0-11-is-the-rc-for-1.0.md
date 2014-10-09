@@ -14,23 +14,23 @@
 
 	默认启动的容器，只会有一个环回接口`lo`和一个连接到docker桥接器的虚拟接口 `eth1` ：
 
-		$> docker run busybox ip a
+	```$> docker run busybox ip a```
 
-	You can now directly use the interfaces of you host (it’s much faster as it doesn’t go through the bridge) via --net=host:
     
 	你现在可以通过 `--net=host` 直接使用宿主系统的接口（这样会更快，因为不需要通过桥接）：
 
-		$> docker run --net=host busybox ip a
+	```$> docker run --net=host busybox ip a``
 
 
  - **链接主机名**。如果容器之间被关联在一起，现在可以通过主机名来互相发现。比如，你的应用程序前端可以通过打开主机名为 “db” 的链接，来访问数据库。这种发现方法是可选的，你可以继续使用环境变量这种发现方法。你可以启动一个 redis 服务器，并用下面的方法命名为 ‘redis’ ：
 
-		$> docker run -d --name redis crosbymichael/redis
-		a6011908ba
+
+		`$> docker run -d --name redis crosbymichael/redis`
+		`a6011908ba`
 
 	而现在如果想启动一个 redis-cli 容器，并关联到 `redis` 容器，可以这样做：
 
-		$> docker run -it --name redis-cli --link redis:redis crosbymichael/redis-cli -h redis
+		`$> docker run -it --name redis-cli --link redis:redis crosbymichael/redis-cli -h redis`
 
 	这样 `redis-cli` 容器的 /etc/hosts 会增加 `redis` 容器的 ip 。
 
