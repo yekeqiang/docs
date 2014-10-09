@@ -230,4 +230,4 @@ Wordpress 是一个很好的 Web 应用示例，它很难扩展，因为它依�
 
 #####这篇文章由 [serverascode](https://twitter.com/serverascode) 撰写， [邵靖](http://www.weibo.com/dysj4099) 翻译。点击 [这里](http://serverascode.com/2014/06/16/build-your-own-paas-docker.html) 可阅读原文。
 
-#####The article was contributed by [serverascode](https://twitter.com/serverascode), click [here](http://serverascode.com/2014/06/16/build-your-own-paas-docker.html) to read the original publication.
+#####The article was contributed by [serverascode](https://twitter.com/serverascode), click [here](http://serverascode.com/2014/06/16/build-your-own-paas-docker.html) to read the original publication. 
