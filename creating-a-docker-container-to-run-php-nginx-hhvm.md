@@ -79,6 +79,7 @@ RUN mkdir -p /var/www/html && chmod a+r /var/www/html && echo "<?php phpinfo(); 
 
   RUN chkconfig supervisord on && chkconfig nginx on
 ```
+
  - 添加一个 shell 脚本 ```/run.sh``` ，在 Docker 容器运行时启动。
 
 **run.sh**
@@ -101,6 +102,7 @@ supervisord -n
 ```
 
 构建容器，并且打 tag
+
 ```
 docker build -t centos-nginx-php5-hhvm .
 ```
@@ -110,6 +112,7 @@ docker build -t centos-nginx-php5-hhvm .
 ```
 docker run -d -p 80:80 centos-nginx-php5-hhvm
 ```
+
 如果你已经有本地的服务已经在运行并且占用了 80 端口，你能很容易的的改变容器的对外端口。
 
 ![alt](http://resource.docker.cn/localhost-hiphop.png)
@@ -164,7 +167,7 @@ EXPOSE 22 80
 ENTRYPOINT ["/run.sh"]
 ```
 
-在这篇文章中提到的其他的可用文件在 [Github](http://github.com/mebinum/dockerfiles) 上。
+这篇文章中提到的其他的可用文件在 [Github](http://github.com/mebinum/dockerfiles) 上。
 
 ## 下一步?
 
