@@ -156,4 +156,4 @@ Solomon、 Michael、 Victor、 Guillaume 以及所有的 Docker 维护者们，
 ----
 这篇文章由[ Solomon Hykes ](http://blog.docker.io/author/solomon/)发表，点击[此处](http://blog.docker.io/2013/11/docker-0-7-docker-now-runs-on-any-linux-distribution/)可查阅原文。
 
-The article was contributed by [Solomon Hykes](http://blog.docker.io/author/solomon/), click [here](http://blog.docker.io/2013/11/docker-0-7-docker-now-runs-on-any-linux-distribution/) to read the original publication.
+The article was contributed by [Solomon Hykes](http://blog.docker.io/author/solomon/), click [here](http://blog.docker.io/2013/11/docker-0-7-docker-now-runs-on-any-linux-distribution/) to read the original publication. 
