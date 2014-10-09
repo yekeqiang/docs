@@ -91,7 +91,6 @@ CoreOS 不是这个世界上最简单或者说最容易上手的系统。理解�
 
 
 ```
-
 $ sudo gem install fig2coreos
 $ fig2coreos wordpress-app fig.yml coreos-dir
 [SUCCESS] Try this: cd /Users/cardmagic/Sites/centurylinklabs.com/coreos-dir && vagrant up
@@ -126,7 +125,6 @@ Last login: Mon Feb 24 23:57:38 UTC 2014 from 10.0.2.2 on ssh
 / /___/ /_/ / /  /  __/ /_/ /___/ /
 \____/\____/_/   \___/\____//____/
 core@coreos-wordpress-app ~ $ 
-
 ```
 
 由于某些原因（我也不知道为什么），用 ```vagrant up``` 启动的 CoreOS 默认版本并不是最新版本，这意味着它没有安装 [Fleet](https://github.com/coreos/fleet) ，并且上面的 Docker (0.7.2) 也是旧的。一旦 vagrant coreos box 已经启动并且下载完了最新的 CoreOS 的版本，你就可以通过在 CoreOS 的虚拟机中运行 ```sudo reboot``` 或者在 vagrant 的当前工作目录下运行 ```vagrant reload --provision``` 来执行更新的操作。
@@ -134,10 +132,10 @@ core@coreos-wordpress-app ~ $
 ### fig2coreos 到底做了什么呢？
 
 
-`fig2coreos` 解析你的 `fig.yml` 并且生成一系列的 systemd 配置文件。你可以在它生成的目录中查看这些文件
+`fig2coreos` 解析你的 `fig.yml` 并且生成一系列的 systemd 配置文件。你可以在它生成的目录中查看这些文件：
+
 
 ```
-
 $ ls coreos-dir/media/state/units/
 db-discovery.1.service
 lb-discovery.1.service
@@ -165,7 +163,6 @@ ExecStopPost=/usr/bin/docker ps -a -q | xargs docker rm
 
 [Install]
 WantedBy=local.target
-
 ```
 
 看上去很复杂，其实是 ```fig.yml``` 中的 CoreOS 版本信息：
@@ -185,6 +182,7 @@ db:
 ```
 
 除了 MySQL 的启动脚本之外，也有一个通过 systemd 实现的 ```etcd``` 自动注册脚本，它在 ```db-discovery.1.service``` 文件中。
+
 
 ```
 $ cat coreos-dir/media/state/units/db-discovery.1.service
