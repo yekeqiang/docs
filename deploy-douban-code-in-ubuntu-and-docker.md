@@ -3,8 +3,8 @@
 ####作者：[巨震](http://weibo.com/1288360177)
 
 ***
-#在 Ubuntu 下部署豆瓣 CODE
-***
+##在 Ubuntu 下部署豆瓣 CODE
+
 
 ###豆瓣 CODE 需要的依赖
 
@@ -43,11 +43,7 @@ $ sudo ldconfig
 
 以上参考：http://douban-code.github.io/pages/python-libmemcached.html 。请注意，最后一步 load config 的操作是必须的。 make 的时候，可以指定调用 CPU 内核的个数，一般比 CPU 实际内核数多1，例如，你的CPU是4核的，就指定： `make -j5`
 
-
-
-
 ###下载执行豆瓣 CODE 的部署脚本
-
 
 豆瓣 CODE 的 git 主页上有相关的说明，但是提供的脚本在执行过程中还存在一些问题，下面以 Ubuntu 为例，把脚本的工作整理一下：
 
@@ -69,6 +65,7 @@ $ sudo apt-get install build-essential g++ git python-pip python-virtualenv pyth
 ```
 $ sudo apt-get install mysql-client mysql-server libmysqlclient-dev -yq
 ```
+
 设置 memcached 端口为 11311 并重启 memcached：
     
 ```
@@ -167,8 +164,7 @@ index-url = http://pypi.douban.com/simple/
 这样，就可以从豆瓣的镜像下载 python 的库了，速度杠杠滴啊，哈哈。
      
 *** 
-#在 Docker 中部署豆瓣 CODE
-***
+##在 Docker 中部署豆瓣 CODE
 
 有了在 Ubuntu 下部署 CODE 经验，在 Docker 中部署 CODE 就变得非常容易了。根据 Docker 的设计哲学，我们把数据和逻辑分开，为 MySQL 、 memcached 和 CODE 创建3个不同的镜像，然后彼此进行通信，就如同将三者部署到三台服务器上，而且部署速度更快、更容易。
 
@@ -336,6 +332,7 @@ docker build -t douban/code .
 ```
 docker images
 ```
+
 输出结果：
 
 ```
@@ -347,6 +344,7 @@ helloworld          latest              861397c62c8a        2 weeks ago         
 ubuntu              13.10               9f676bd305a4        7 weeks ago         178 MB
 ......
 ```
+
 好了，我们已经拥有这三个镜像了，下面我们就把 CODE 跑起来。首先，启动 MySQL 和 memcached ：
 
 ```
