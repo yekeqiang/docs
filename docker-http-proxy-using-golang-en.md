@@ -148,14 +148,12 @@ script
 end script
 ```
 
-
 Or we can remove the comment on http_proxy in etc/default/docker:
 
 ```
 # If you need Docker to use an HTTP proxy, it can also be specified here.
 export http_proxy=http://192.241.209.203:8384/
 ```
-
 
 Restart docker and it will download images through the proxy 192.241.209.203:8384
 
