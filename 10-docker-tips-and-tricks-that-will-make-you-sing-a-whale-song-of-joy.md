@@ -53,7 +53,8 @@
 Docker 提供了一种轻便的解决方法。
 
 你只需要简单的制作一个 Dockerfile 定义你理想的开发环境所需的 CLI（包括 ack 、 autojump 、 Go 等等任何你想要的东西），并且开启该 image 的新实例，你就可以获得一个全新的机器并试验你的想法。下面是 Docker 创始人 [Solomon Hykes](https://github.com/shykes) 的一个开发环境。
-    
+
+```
     FROM ubuntu:14.04
     
     RUN apt-get update -y
@@ -104,6 +105,7 @@ Docker 提供了一种轻便的解决方法。
     RUN ln -s /var/shared/.maintainercfg
     RUN chown -R dev:/home/dev
     USER dev
+```
 
 如果用 vim/emacs 来编辑这些东西的话会累死人的。你可以用 /bin/bash 作为你的 CMD 并且用 docker run -it my/devbox 。
 
@@ -119,8 +121,10 @@ Docker 提供了一种轻便的解决方法。
 
 下列是一些常用的快捷键:
 
+```
     alias drm="docker rm"
     alias dps="docker ps"
+```
 
 我会在每次发现重复使用相同命令的时候进行设置。自动化是我的一大乐趣。
 
@@ -130,20 +134,24 @@ Docker 提供了一种轻便的解决方法。
 
 来移除所有的容器（包括运行的容器）。或者你也可以使用
 
+```
     function da () {  
         docker start $1 && docker attach $1
     }
+```
 
 开启一个停止的容器并绑定它。
 
 我做了一个有趣的命令，可以让我开启 rapid-bash-container-prompt 来提醒我之前的技巧：
 
+```
     function newbox () {
         docker run -it --name $1 \
         --volumes-from=volume_container \
         -v /var/run/docker.sock:/var/run/docker.sock \
         -e BOX_NAME=$1 nathanleclaire/devbox
     }
+```
 
 ## Insta-nyan
 
@@ -151,7 +159,7 @@ Docker 提供了一种轻便的解决方法。
 
 十分简单，如果你想在终端显示一个 nyan 猫，并且你有 Docker 的话，你只需要执行下面的命令。
 
-    docker run -it supertest2014/nyan
+```docker run -it supertest2014/nyan```
 
 ## 在 OSX 上利用 boot2docker ip 地址修改 /etc/hosts/ 
 
@@ -169,20 +177,25 @@ Docker 提供了一种轻便的解决方法。
 
 通常 docker inspect $ID 会打印一个大的 JSON 串，你可以通过模板像下面这样访问每个值：
 
-    docker inspect -f '{{ .NetworkSettings.IPAddress }}' $ID
+```docker inspect -f '{{ .NetworkSettings.IPAddress }}' $ID```
 
 参数 -f 后面接的是一个 Go 模板。如果你做下面这些事情：
 
+```
     $ docker inspect -f '{{ .NetworkSettings }}' $ID
     map[Bridge:docker0 Gateway:172.17.42.1IPAddress:172.17.0.4IPPrefixLen:16PortMapping:<nil>Ports:map[5000/tcp:[map[HostIp:0.0.0.0HostPort:5000]]]]
+```
 
 你将不会得到一个 JSON 串。但是如果你像下面这样：
 
+```
     $ docker inspect -f '{{ json .NetworkSettings }}' $ID
     {"Bridge":"docker0","Gateway":"172.17.42.1","IPAddress":"172.17.0.4","IPPrefixLen":16,"PortMapping":null,"Ports":{"5000/tcp":[{"HostIp":"0.0.0.0","HostPort":"5000"}]}}
+```
 
 你将会得到一个 JSON 串，并且可以通过一个 Python 内置模块来美化它：
 
+```
     $ docker inspect -f '{{ json .NetworkSettings }}' $ID | python -mjson.tool
     {
     	"Bridge": "docker0",
@@ -199,10 +212,11 @@ Docker 提供了一种轻便的解决方法。
     		]
     	}
     }
+```
 
 你还可以做其他一些有趣的事情，比如访问那些非字母关键字的对象属性，这可以帮你更好的了解 Golang 。
 
-    docker inspect -f '{{ index .Volumes "/host/path" }}' $ID
+    ```docker inspect -f '{{ index .Volumes "/host/path" }}' $ID```
 
 这是一个帮助你提取容器运行信息的利器。由于他提供了大量的细节，他对调试十分有帮助。
 
@@ -212,7 +226,7 @@ Docker 提供了一种轻便的解决方法。
 
 你可以自己试一下：
 
-    docker run -p 3000:3000 -dt nathanleclaire/wetty
+    ```docker run -p 3000:3000 -dt nathanleclaire/wetty```
 
 ![alt](http://resource.docker.cn/wetty.png)
 
