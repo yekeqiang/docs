@@ -57,8 +57,10 @@
 
  - 发布哈希值：每个Docker的发布现在都会包含所有生成构建的SHA256和MD5的哈希值。这些哈希值将会发布到文档网站和下载页面，让大家可以确定安装文件没有被篡改。比如，你可以涌入下命令验证官方的Linux和Darwin二进制构建包的SHA256：
 
+```
         curl https://get.docker.io/builds/Linux/x86_64/docker-0.10.0.sha256
         curl https://get.docker.io/builds/Darwin/x86_64/docker-0.10.0.sha256
+```
 
 最后，为了将来能发布Docker 1.0，我们希望你们能积极测试Docker 0.10。请记录问题单，让我们知道你的反馈意见！
 
