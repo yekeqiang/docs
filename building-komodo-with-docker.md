@@ -1,6 +1,6 @@
 #使用 Docker 构建 Komodo
 
-![](http://resource.docker.cn/komodo-x11-ssh.png)
+![alt](http://resource.docker.cn/komodo-x11-ssh.png)
 
 
 #####作者：[Nathan Rijksen](https://twitter.com/NathanRijksen)
