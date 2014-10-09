@@ -47,5 +47,5 @@ $ ./trove.sh backup-create <backup-name> <cloud-db-uuid>
 
 #####这篇文章由 [Adam Alexander](https://twitter.com/adamalex) 撰写， [Peter Zhang](https://github.com/duobei)(https://github.com/iambowen) 翻译。点击 [这里](https://github.com/adamalex/docker-trove) 阅读原文。
 
-#####The article was contributed by [Adam Alexander](https://twitter.com/adamalex), click [here](https://github.com/adamalex/docker-trove) to read the original publication.
+#####The article was contributed by [Adam Alexander](https://twitter.com/adamalex), click [here](https://github.com/adamalex/docker-trove) to read the original publication. 
 
