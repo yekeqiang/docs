@@ -104,7 +104,6 @@ ONBUILD CMD rvm all do bundle exec rails server
 
 ```
 ONBUILD ADD . /opt/rails_demo
-
 ```
 
 
@@ -207,7 +206,6 @@ Successfully built 23c388fb84c1
 ```
 # Dockerfile
 FROM cpuguy83/onbuild_demo
-
 ```
 
 什么？ Dockerfile 总共只有那么牛叉闪闪的一行？确实如此，只有一行，因为我们把所有设置都放在父镜像中了。子镜像只需要保证 Dockerfile 是从 Rails 项目树中衍生出来的即可。当我们构建这个镜像时， cpuguy83/onbuild_demo 镜像中的 ONBUILD 命令就会插入到 FROM 指令后面。
