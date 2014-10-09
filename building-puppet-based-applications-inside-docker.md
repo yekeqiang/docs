@@ -83,7 +83,7 @@ $ sudo docker port fd461a1418c6 80
 
 现在让我们访问端口 ```49158```，看 nginx 是否正在运行。
 
-![此处输入图片的描述](http://kartar.net/images/posts/2013/12/nginx.png)
+![alt](http://resource.docker.cn/nginx.png)
 
 欧耶！我们已经通过 Puppet 安装了 Nginx。你可以重复这个步骤安装任何基于 Puppet 的应用或者是基础设施[^3]。
 
