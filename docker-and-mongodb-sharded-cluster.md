@@ -1,12 +1,10 @@
-#Docker and MongoDB Sharded Cluster
+#如何使用 docker 创建复杂的 mongodb 集群
 
 #####作者：[Sebastian Voss](https://twitter.com/sebastian_voss)
 
 #####译者：[邵靖](http://www.weibo.com/dysj4099)
 
 ***
-
-如何使用 docker 创建复杂的 mongodb 集群。
 
 本文描述了如何使用 docker 创建 mongodb shard 集群。我们将直接展示 mongodb 集群不同组件（副本集 replica sets 、配置服务器 config servers 以及资源路由 routes ）所对应 dockerfile 文件以及容器的实例化过程。
 
@@ -233,7 +231,6 @@ sudo docker run \
     <IP_of_container_cfg1>:27017, \
     <IP_of_container_cfg2>:27017, \
     <IP_of_container_cfg3>:27017
-    
 ```
 
 ##初始化 shard
