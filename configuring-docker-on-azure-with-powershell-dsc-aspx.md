@@ -132,7 +132,6 @@ $mongoIP = "172.17.0.28"
 $envVars = @("MONGOHQ_URL=mongodb://$mongoIP/platynem-dev","PORT=80")
 
 $webContainer = @{Name="web";Image="anweiss/docker-platynem:latest";Port="80:80";Env=$envVars;Link="db"}
-
 ``` 
 
 再一次，我们用这个散列表创建一个新的配置。
