@@ -36,8 +36,6 @@ Randle 在五月份接受采访时说，当 `docker build` 命令被发出， do
 
 ![](http://resource.docker.cn/docker-ignore.png)
 
-Docker  has made improvements throughout the Docker ecosystem, including updates to Docker Engine, Docker Hub, and its documentation. Overall, not a major release, but more so a commentary on a still developing open source technology.
-
 Docker 已经对整个 Docker 生态系统中做了改进，包括更新了 Docker Engine 、 Docker Hub 以及文档。总体来说，这并非主要版本更新，更多的是对这个仍处于发展阶段的开源技术的评述。
 
 ***
