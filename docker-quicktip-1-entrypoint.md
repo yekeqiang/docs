@@ -27,12 +27,13 @@ Entrypoint 非常好用。它非常像 CMD ，不同的是它是在容器开始�
 
 你也可以在 Dockerfile 中指定 Entrypoint：
 
+```
     FROM busybox
     ENTRYPOINT ["/bin/echo", "foo"]
 
     docker build -rm -t me/echo .
     docker run -i -t -rm me/echo bar
-
+```
 
 这样，就把 " bar " 作为额外的参数传递给了 `/bin/echo foo` ，最终相当于执行 `/bin/echo foo bar` 。
 
