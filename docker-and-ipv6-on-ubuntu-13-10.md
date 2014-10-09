@@ -11,7 +11,7 @@
 
 卸载 IPv6 后一些人发现能使其工作的内在组件。 Andreas Neuhaus 告诉我们一些能使容器支持 Ipv6 的原始 LXC 命令。 Marek Goldmann 也告诉我们另外一些在多个主机上使容器相连的 LXC 命令。希望我的 pullrequest  能够让 Docker 尽快支持 Ipv6 ，尽管我的问题看起来并不像是丢失了支持 Ipv6 的内部组件。
 
-程序调试，桥式接线，ip信息包过滤系统以及接口安装，然后再回头查看系统配置条目。你或许会惊讶每一个非法进入，甚至看起来合法的进入都会被记录：我允许 Ipv6 使用所有接口用 net.ipv6.conf.all.forwarding=1 在 /etc/sysctl.conf 。快速启动很快完成，并通 过dockerized CouchDB 反馈回来。终于轻松了！有时事情还是很简单的。
+程序调试，桥式接线，ip信息包过滤系统以及接口安装，然后再回头查看系统配置条目。你或许会惊讶每一个非法进入，甚至看起来合法的进入都会被记录：我允许 Ipv6 使用所有接口用 `net.ipv6.conf.all.forwarding=1` 在 `/etc/sysctl.conf` 。快速启动很快完成，并通 过dockerized CouchDB 反馈回来。终于轻松了！有时事情还是很简单的。
 
 最有趣的部分到了，通过容器再次连接 CouchDB River Plugin 和 ElasticSearch 。
 
