@@ -14,6 +14,7 @@
 
 **Dockerfile**
 
+```
     FROM cpuguy83/ubuntu
      
     RUN apt-get update && apt-get install -y postgresql postgresql-contrib libpq-dev
@@ -42,7 +43,7 @@
     fi
     sysctl -w kernel.shmmax=4418740224
     su postgres -c "/usr/lib/postgresql/9.1/bin/postgres -D /var/lib/postgresql/9.1/main -c config_file=/etc/postgresql/9.1/main/postgresql.conf $PG_CONFIG"
-
+```
 
 上面的文件还存在一些问题，我们后面再说。这里我们先看 Dockerfile 的 CMD 这一行和 pg_start.sh 的最后一行。
 
@@ -55,9 +56,9 @@
 
 这种调用方法可以让整个 Docker 容器崩溃。调用 postgres 还好，要是直接调用其他的程序，就有可能引起大灾难了。
 
-假设就这样直接调用了，如果我们尝试停止容器，Docker会卡住几秒钟，然后直接杀掉容器。试试吧，很刺激哦。在Docker中还有一个选项可以设置卡住多久就调用SIGKILL关闭容器（docker stop -t N，N是秒数，默认是10）。
+假设就这样直接调用了，如果我们尝试停止容器， Docker 会卡住几秒钟，然后直接杀掉容器。试试吧，很刺激哦。在 Docker 中还有一个选项可以设置卡住多久就调用 SIGKILL 关闭容器（ `docker stop -t N` ，N是秒数，默认是10）。
 
-执行`docker logs $container_id`可以证明上面所述。
+执行 `docker logs $container_id` 可以证明上面所述。
 
 为什么会这样呢？因为关闭进程的信号是发送到启动脚本的，而不是postgres。在我的启动脚本中并没有监听这个信号，当然我也不可能在启动脚本中去监听信号。
 
@@ -67,8 +68,9 @@
 
 我们修改一下 pg_start.sh 的最后一行，用 exec 来执行命令：
 
-
+```
     exec su postgres -c "/usr/lib/postgresql/9.1/bin/postgres -D /var/lib/postgresql/9.1/main -c config_file=/etc/postgresql/9.1/main/postgresql.conf $PG_CONFIG"
+```
 
 好了，现在 Docker 会先彻底关掉 postgres 的进程，而不是用 SIGKILL 来关闭了。
 
