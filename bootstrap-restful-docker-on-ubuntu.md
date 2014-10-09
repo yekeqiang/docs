@@ -21,6 +21,7 @@ curl -s https://get.docker.io/ubuntu/ | sudo sh
 ## 通过 HTTP 暴露 Docker 接口
 
 Docker 默认是通过 Unix sockets 暴露的，你可以通过额外的选项 ```-H``` 来改变它：
+
 ```
 sudo sh -c 'echo "DOCKER_OPTS=\"-H unix:///var/run/docker.sock -H tcp://127.0.0.1:2375\"" > /etc/default/docker'
 sudo service docker restart
@@ -31,11 +32,11 @@ sudo service docker restart
 ```
 curl http://127.0.0.1:2375/version
 {"ApiVersion":"1.12","Arch":"amd64","GitCommit":"990021a","GoVersion":"go1.2.1","KernelVersion":"3.13.0-29-generic","Os":"linux","Version":"1.0.1"}
-
 ```
 
 ## 非 ROOT 权限运行 Docker
 如果你想不通过 sudo 执行 Docker 命令，把当前用户添加进 Docker 系统账户组：
+
 ```
 sudo vim /etc/group
 ...
