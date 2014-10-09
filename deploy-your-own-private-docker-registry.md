@@ -19,14 +19,14 @@
 
 如果你想感受一下[docker registry](https://github.com/dotcloud/docker-registry)，可以用公共的 [registry](http://index.docker.io) 来试试：
 
+```
     $ docker pull samalba/docker-registry
     $ docker run -d -p 5000:5000 samalba/docker-registry
     # 我们先pull下来一个简单的镜像（或者自己做一个也可以）
     $ docker pull busybox
     $ docker tag busybox localhost:5000/busybox
     $ docker push localhost:5000/busybox
-
-
+```
 
 对于 registry 入门，这个例子很有用，但是例子中仅用了一个简单的 HTTP 服务。任何知道服务器地址的人都可以随意 push 镜像，这不是个好方案。下面我们来建立自己的私有 registry 以供内部使用。
 
@@ -69,7 +69,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 首先，启动服务器。因为我是用的内部 Openstack，我用 [nova客户端](https://github.com/openstack/python-novaclient) 来启动就可以了。如果你按照本例来操作，请在 .bashrc 文件中设置下面列出的验证信息：
 
-
+```
 	$ cat ~/.bashrc
 	[...]
 	export OS_AUTH_URL=http://******/v2.0
@@ -78,35 +78,40 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 	export OS_USERNAME=******
 	export OS_PASSWORD="******"
 	[...]
-
+```
 
 设置完成后，请用下面的命令测试一下：
 
+```
 	$ sudo pip install python-novaclient
 	$ nova list
-
+```
 
 启动服务器之前，我们先上传 Ubuntu cloud image 和自己的 SSH Key 文件：
 
+```
 	$ nova keypair-add --pub-key ~/.ssh/id_rsa.pub bacongobbler
 	$ sudo pip install python-glanceclient
 	$ glance image-create --name ubuntu-12.04.3-server-cloudimg-amd64 --disk-format qcow2 --container-format bare --location http://cloud-images.ubuntu.com/releases/12.04.3/release/ubuntu-12.04-server-cloudimg-amd64-disk1.img
-
+```
 
 再创建一个安全组，来允许外部对 80 和 443 端口的访问：
 
+```
 	$ nova secgroup-create web-server "security group for standard web servers"
 	$ nova secgroup-add-rule web-server tcp 80 80 0.0.0.0/0
 	$ nova secgroup-add-rule web-server tcp 443 443 0.0.0.0/0
+```
 
 
 现在，我们来创建一个 512G 的分区，用于存储我们的 docker 镜像：
 
-	$ nova volume-create 512 --display-name docker-internal
+	```$ nova volume-create 512 --display-name docker-internal```
 
 
 最后，启动服务器吧！
 
+```
 	$ nova boot docker-internal --image ubuntu-12.04.3-server-cloudimg-amd64 --flavor m1.medium --security-groups web-server --key-name bacongobbler
 	$ # do some grepping for the volume ID
 	$ VOLUME_ID=$(nova volume-list | grep docker-internal | awk '{print $2}')
@@ -127,11 +132,12 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 	| 10.3.4.1       | 192dadcc-e786-4366-8091-2e9a364a65cf | 192.168.32.17 | nova |
 	+----------------+--------------------------------------+---------------+------+
 	$ nova add-floating-ip docker-internal 192.168.68.236
+```
 
 
 等一小会儿，并把子域名 docker-internal 绑定到当前的 IP，然后用 SSH 登陆：
 
-	$ ssh ubuntu@docker-internal.example.com
+	```$ ssh ubuntu@docker-internal.example.com```
 
 
 哦耶！搞定！
@@ -141,6 +147,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 我们已经有自己的服务器了，下面我们来装几个必要软件吧。
 
+```
     # 安装软件之前，我们先更新一下软件源列表，然后重启
     ubuntu@docker-internal:~$ sudo apt-get update
     ubuntu@docker-internal:~$ sudo apt-get upgrade
@@ -164,10 +171,11 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
     # 安装redis来实现我们的LRU缓存策略
     root@docker-internal:~# apt-get install redis-server
     root@docker-internal:~# apt-get clean
-
+```
 
 必要的软件都装好了，下面我们就来安装 docker registry：
 
+```
     root@docker-internal:~# git clone https://github.com/dotcloud/docker-registry.git /opt/docker-registry
     root@docker-internal:~# cd /opt/docker-registry
     
@@ -180,24 +188,27 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
     # 安装 pip 包
     root@docker-internal:~# pip install -r requirements.txt
     root@docker-internal:~# cp config/config_sample.yml
-
+```
 
 如果一切顺利，我们现在应该可以用下面的命令来测试一下 docker registry 了：
 
+```
     root@docker-internal:~# ./wsgi.py
     2014-01-13 23:38:38,470 INFO:  * Running on http://0.0.0.0:5000/
     2014-01-13 23:38:38,470 INFO:  * Restarting with reloader
-
+```
 
 如果你看到的结果和上面一样，那么，恭喜你，成功了！接下来我们需要设置一些选项，记得我们之前分配给 docker registry 的分区吗？现在我们就来挂在这个分区：
 
+```
     root@docker-internal:~# mkdir -p /data/registry
     root@docker-internal:~# mkfs.ext4 /dev/vdb
     root@docker-internal:~# mount /dev/vdb /data/registry
-
+```
 
 现在，我们来编辑 docker registry 的配置文件，我们用 http://uuidgenerator.net 在线生成密钥：
 
+```
     root@docker-internal:~# cat << EOF > /opt/docker-registry/config/config.yml
     # The 'common' part is automatically included (and possibly overriden by
     # all other flavors)
@@ -225,10 +236,11 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
             host: localhost
             port: 6379
     EOF
-
+```
 
 然后为 docker registry 设置一个 upstart 作业：
 
+```
     root@docker-internal:~# cat << EOF > /etc/init/docker-registry.conf
     description "Docker Registry"
     version "0.6.3"
@@ -249,16 +261,18 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
     exec gunicorn -k gevent --max-requests 100 --graceful-timeout 3600 -t 3600 -b 0.0.0.0:5000 -w 8 --access-logfile /var/log/docker-registry/access.log --error-logfile /var/log/docker-registry/server.log wsgi:application
     end script
     EOF
-
+```
 
 用下面的命令启动 registry 的作业：
 
+```
     root@docker-internal:~# start docker-registry
     docker-registry start/running, process 10872
-
+```
 
 用下面的命令检查 registry 的作业是否运行：
 
+```
     root@docker-internal:~# cat /var/log/docker-registry/server.log
     2014-01-14 00:33:44 [15051] [INFO] Starting gunicorn 18.0
     2014-01-14 00:33:44 [15051] [INFO] Listening at: http://0.0.0.0:5000 (15051)
@@ -271,10 +285,11 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
     2014-01-14 00:33:45 [15069] [INFO] Booting worker with pid: 15069
     2014-01-14 00:33:45 [15070] [INFO] Booting worker with pid: 15070
     2014-01-14 00:33:45 [15071] [INFO] Booting worker with pid: 15071
-
+```
 
 接下来，我们设置 nginx：
 
+```
     root@docker-internal:~# rm /etc/nginx/sites-enabled/default
     root@docker-internal:~# cat << EOF > /etc/nginx/sites-enabled/docker-registry
 ` nginx的配置：`
@@ -327,27 +342,29 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 ` `    
     
     root@docker-internal:~# service nginx restart
-
+```
 
 别忘了在 htpasswd 文件里设置账号密码：
 
-    root@docker-internal:~# htpasswd -bc /etc/nginx/docker-registry.htpasswd USERNAME PASSWORD
+    ```root@docker-internal:~# htpasswd -bc /etc/nginx/docker-registry.htpasswd USERNAME PASSWORD```
 
 
 我们还要在服务器上安装一个 SSL 密钥。本例中，假设我们已经有认证机构颁发的 SSL证 书了，SSL 授权给'docker-internal.example.com'或者'*.example.com'，用下面的命令来安装 SSL 密钥：
 
+```
     root@docker-internal:~# mv server.key /etc/ssl/private/docker-registry.key
     root@docker-internal:~# mv server.crt /etc/ssl/certs/docker-registry.crt
-
+```
 
 如果你不打算花钱去搞一个认证机构授权的SSL密钥，或者你只是练习着部署 docker registry，那么你也可以按照 [Akadia的教程](http://www.akadia.com/services/ssh_test_certificate.html) 装一个自己授权的 SSL key，如下：
 
+```
     root@docker-internal:~# openssl genrsa -des3 -out server.key 1024
     root@docker-internal:~# openssl req -new -key server.key -out server.csr
     root@docker-internal:~# cp server.key server.key.org
     root@docker-internal:~# openssl rsa -in server.key.org -out server.key
     root@docker-internal:~# openssl x509 -req -days 3650 -in server.csr -signkey server.key -out server.crt
-
+```
 
 请注意，现在官方的 docker 还不能用自授权的证书，要等到 [`#2687`](https://github.com/dotcloud/docker/pull/2687) 的 pull request 合并到官方 master 分支后才能使用。或者，你也可以试着修改 docker 的源代码来让它支持自授权证书。
 
@@ -356,6 +373,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 最后，我们来测试一下自己的 docker registry：
 
+```
     root@docker-internal:~# exit
     ubuntu@docker-internal:~$ exit
     $ curl -u bacongobbler:******* https://docker-internal.example.com
@@ -374,7 +392,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
     Pushing repository docker-internal.example.com/busybox (1 tags)
     Pushing tags for rev [e9aa60c60128] on {https://docker-internal.example.com/v1/repositories/busybox/tags/latest}
     e9aa60c60128: Image already pushed, skipping
-
+```
 
 完成！现在我们在 Openstack 上部署了一个 docker registry，随时可用！
 
