@@ -6,7 +6,7 @@
 #####译者：[BOWEN](https://github.com/iambowen)
 
 ***
-上个周六我参加了 [DockerCon Hackathon](http://www.meetup.com/Docker-meetups/events/170030222/) 活动。本人是一个 Docker 深度用户（主要是快速创建新容器，去验证或者重现 [Fluentd](http://www.fluentd.org/) 项目提交的问题）。
+上个周六我参加了 [DockerCon Hackathon](http://www.meetup.com/Docker-meetups/events/170030222/) 活动。本人是一名 Docker 深度用户（主要是快速创建新容器，去验证或者重现 [Fluentd](http://www.fluentd.org/) 项目提交的问题）。
 
 毫无疑问，Docker 很棒，这个礼拜海量公告证明了它的受欢迎和关心的程度。不过 Docker （或者其他通常意义上的的开源软件）真正吸引我的地方还是社区。
 
