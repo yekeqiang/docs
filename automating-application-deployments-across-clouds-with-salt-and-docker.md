@@ -33,6 +33,7 @@
 为了模仿一个真实的应用，需要创建一个 Apache 的 Docker 容器。从概念上讲，这个容器可能一个前端代理，一个 Web 中间件服务，一个数据库，或者是我们需要部署在生产上的其他类型的服务。为了这个，我们在一个目录下创建一个 DockerFile，构建这个容器，并且把这个容器 PUSH 到 Docker 仓库。
 
 **Step 1: Create a Dockerfile**
+
 ```
 ##### An apache Dockerfile
 root@salt:/some/dir/apache# cat Dockerfile
@@ -51,6 +52,7 @@ EXPOSE 80
  
 CMD ["/usr/sbin/apache2", "-D", "FOREGROUND"]
 ```
+
 **Step 2: Build the container**
 
 ```
@@ -116,7 +118,7 @@ root@salt:/etc/salt/keys#
 
 **Step 5: Upload SSH Key Pair**
 
-{<4>}![alt](http://docker.u.qiniudn.com/digital-ocean-add-ssh-key.png)
+![alt](http://resource.docker.cn/digital-ocean-add-ssh-key.png)
 
 使用 Digital Ocean 让我们的 SSH Keys 生效，下一步的准备时间是使用 Digital Ocean’s API key 为我们的账号配置 Salt-Cloud，为 Digital Ocean 虚拟主机的大小，地理位置，镜像 定义配置文件，Salt-Cloud 的认证文件保存在 Salt-Master 的 ```/etc/salt/cloud.providers.d/``` 路径下，查看 Salt-Cloud 的[文档](http://salt-cloud.readthedocs.org/en/latest/topics/config.html)了解更加多的配置文件细节
 
