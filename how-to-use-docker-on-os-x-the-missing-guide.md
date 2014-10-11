@@ -29,8 +29,8 @@ Docker **client** 是一个命令行程序，通过 REST API 与 Docker server �
 
 如果我们要在 Linux 笔记本电脑上直接运行 containers：
 
-![](http://f.cl.ly/items/242F0M1e2B0B0J0L3S0n/Screen%20Shot%202014-08-20%20at%2012.14.11%20PM.png)  
-DOCKING ON LINUX
+![alt](http://resource.docker.cn/docker-on-linux.png)  
+
 
 不难发现，笔记本运行 client 的同时，也作为 Docker 的主机运行着 server 。
 
@@ -42,8 +42,8 @@ DOCKING ON LINUX
 
 这张图说明了我们是怎样使用 boot2docker ：
 
-![](http://cl.ly/image/351d3i291t0O/Screen%20Shot%202014-08-20%20at%2012.14.47%20PM.png)   
-DOCKING ON OS X
+![alt](http://resource.docker.cn/docker-on-osx.png)   
+
 
 我们在 OS X 本地上运行 Docker client ， 而 Docker server 是在 boot2docker VM 里面运行。 也就是说， boot2docker 才是 Docker host 而不是 OS X。
 
@@ -180,32 +180,37 @@ Docker 将 80 端口与 Docker host 上的 49153 进行了绑定。如果是在 
 
 这很招人厌，下面的 bash 函数可以解决它：
 
+```
     docker-ip() {
       boot2docker ip 2> /dev/null
     }
-
+```
 
 把上面的代码拷贝到 shell 配置文件中，然后运行一下：
 
+```
     > curl $(docker-ip):49153
     <!DOCTYPE html>
     <html>
     <head>
     <title>Welcome to nginx!</title>
         [ ... ]
+```
 
 这样，在终端里面就有了这个 IP 地址的引用，当然，也可以为其他应用程序（例如，浏览器）做一个类似的 IP 地址引用。在 `/etc/hosts` 增加 `dockerhost` :
 
-	> echo $(docker-ip) dockerhost | sudo tee -a /etc/hosts
+	```> echo $(docker-ip) dockerhost | sudo tee -a /etc/hosts```
 
 于是就可以在任何地方使用它了：
 
-![](http://f.cl.ly/items/2O1p1Q0A0B0P0U0x2M0H/Screen%20Shot%202014-08-20%20at%2011.30.34%20AM.png)
+![alt](http://f.cl.ly/welcome-to-nginx.png)
 
 到这里，这个问题已经被很好的解决了。在继续之前，我们先停止并且移除这个 container 。
 
+```
     > docker stop web
     > docker rm web
+```
 
 *VirtualBox assigns IP addresses using DHCP, meaning the IP address could change. If you’re only using one VM, it should always get the same IP, but if you’re VMing on the reg, it could change. Fair warning.*
 
@@ -214,12 +219,14 @@ Docker 将 80 端口与 Docker host 上的 49153 进行了绑定。如果是在 
 
 如果你想使用 localhost 来访问 Docker container ，可以把 Docker 整个范围内的端口从 VM 映射到 localhost 。 bash 代码如下，出自[这里](https://github.com/boot2docker/boot2docker/blob/master/doc/WORKAROUNDS.md#port-forwarding-on-steroids):
 
+```
     #!/bin/bash
 
     for i in {49000..49900}; do
       VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port$i,tcp,,$i,,$i";
       VBoxManage modifyvm "boot2docker-vm" --natpf1 "udp-port$i,udp,,$i,,$i";
     done
+```
 
 这样，Docker 就会将 80 端口 映射到 VM 上的 49153 端口（假如是这个端口），而 VirtualBox 会将 49153 端口从 VM 映射到 localhost 。
 
@@ -231,25 +238,32 @@ Docker 支持 volumes：可以将 host 上的一个目录挂载到你的 contain
 
 首先，创建一个目录，并且添加一个 `index.html`
 
+```
     > cd /Users/Chris
     > mkdir web
     > cd web
     > echo 'yay!' > index.html
+```
 
 （别忘了，用你自己的路径替换`/Users/Chris`）
 
 然后，启动一个 nginx container ，这次将刚才建立的目录挂载在 container 里面 nginx 的 web 根目录上：
 
+```
     > docker run -d -P -v /Users/Chris/web:/usr/local/nginx/html --name web nginx
     485386b95ee49556b2cf669ea785dffff2ef3eb7f94d93982926579414eec278
+```
 
 查看一下 container 中 80 端口所对应的端口：
 
+```
     > docker port web 80
     0.0.0.0:49154
+```
 
 curl 一下新的 index.html 页面：
 
+```
     > curl dockerhost:49154
     <html>
     <head><title>403 Forbidden</title></head>
@@ -258,6 +272,7 @@ curl 一下新的 index.html 页面：
     <hr><center>nginx/1.7.1</center>
     </body>
     </html>
+```
 
 不难发现，它并没有正常工作。这个问题出现的原因也与 VM 相关。 Docker 试图将 host 上的 `/Users/Chris/web`  挂载到 container 里面，但是 boot2docker 是 host 而不是 OS  X 。但是 boot2docker 对 OS X 上的文件可是一无所知。
 
@@ -269,44 +284,53 @@ boot2docker 并不支持 VirtualBox Guest Additions , 不允许我们那样做�
 
 首先，移出 web container ，关闭 VM ：
 
+```
     > docker stop web
     > docker rm web
     > boot2docker down
-
+```
 
 然后，下载上述自定义生成的 boot2docker ：
 
+```
     > curl http://static.dockerfiles.io/boot2docker-v1.2.0-virtualbox-guest-additions-v4.3.14.iso > ~/.boot2docker/boot2docker.iso
+```
 
 最后，将 /Users 目录在 VM 上共享，并且启动 VM ：
 
+```
     > VBoxManage sharedfolder add boot2docker-vm -name home -hostpath /Users
     > boot2docker up
+```
 
-*Replacing the boot2docker image won’t erase any of the data in your VM, so don’t worry about losing any of your containers. Good guy boot2docker.*
 
 
 让我们再次试一下 能否访问 web：
 
+```
     > docker run -d -P -v /Users/Chris/web:/usr/local/nginx/html --name web nginx
     0d208064a1ac3c475415c247ea90772d5c60985841e809ec372eba14a4beea3a
     > docker port web 80
     0.0.0.0:49153
     > curl dockerhost:49153
     yay!
+```
 
 再验证一下所使用的 volume ，在 OS X 上新建一个文件，看看 nginx 是否能对它启动服务：
 
+```
     > echo 'hooray!' > hooray.html
     > curl dockerhost:49153/hooray.html
     hooray!
+```
 
 最后别忘了停止并移出 container：
 
+```
     > docker stop web
     > docker rm web
+```
 
-*If you update `index.html` and curl it, you won’t see your changes. This is because nginx ships with `sendfile` turned on, which doesn’t play well with VirtualBox. The solution is simple—turn off `sendfile` in the nginx config file—but outside the scope of this post.*
 
 
 ### PROBLEM #3: 进入容器的内部
@@ -319,7 +343,7 @@ boot2docker 并不支持 VirtualBox Guest Additions , 不允许我们那样做�
 
 请看 [nsenter](https://github.com/jpetazzo/nsenter)。nsenter 允许你在 内核命名空间中运行命令行。 因为 每个 container 都是一个运行在它自己的内核命名空间中的进程，而我们也正需要在容器的内部启动一个 shell 。
 
-*This part deals with shells running in three different places. Trés confusing. I’ll use a different prompt to distinguish each*
+
 
 * `>` *for OS X*
 * `$` *for the boot2docker VM*
@@ -327,44 +351,50 @@ boot2docker 并不支持 VirtualBox Guest Additions , 不允许我们那样做�
 
 首先，建立一个ssh连接，来访问 boot2docker VM ：
 
-	boot2docker ssh> boot2docker ssh
+	```boot2docker ssh> boot2docker ssh```
 
 然后，安装 `nsenter`:
 
-	$ docker run --rm -v /var/lib/boot2docker:/target jpetazzo/nsenter
+	```$ docker run --rm -v /var/lib/boot2docker:/target jpetazzo/nsenter```
 
-*(How does that install it? `jpetazzo/nsenter` is [a Docker image configured to build nsenter from source](https://github.com/jpetazzo/nsenter/blob/master/Dockerfile). When we start a container from this image, it builds nsenter and installs it to `/target`, which we’ve set to be a volume pointing to `/var/lib/boot2docker` in our VM.*
-
-*In other words, we start a prepackaged build environment for nsenter, which compiles and installs it to our VM using a volume. How awesome is that? Seriously, how awesome? Answer me!)*
 
 最后，我们需要在 VM 中 把 `/var/lib/boot2docker`添加 到 `docker` 用户的`PATH` ：
 
+```
     $ echo 'export PATH=/var/lib/boot2docker:$PATH' >> ~/.profile
     $ source ~/.profile
+```
 
 现在，我们能使用 nsenter了 ：
 
+```
     $ which nsenter
     /var/lib/boot2docker/nsenter
+```
 
 再次启动 nginx container ，看看它的运行状况（这时我们一直用 SSH 访问 VM）：
 
+```
     $ docker run -d -P --name web nginx
     f4c1b9530fefaf2ac4fedac15fd56aa4e26a1a01fe418bbf25b2a4509a32957f
+```
 
 该访问容器的内部了。nsenter 需要这个正运行的 container 的 pid。 获取 pid：
 
-	$ PID=$(docker inspect --format '{{ .State.Pid }}' web)
+	```$ PID=$(docker inspect --format '{{ .State.Pid }}' web)```
 
 
 这一刻终于到来了：
 
+```
     $ sudo nsenter -m -u -n -i -p -t $PID
     % hostname
     f4c1b9530fef
+```
 
 成功了，有木有！那么接下来，确认一下是否真的在容器里面了，查看一下正在运行的进程（必须要安装 `ps`）：
 
+```
     % apt-get update
     % apt-get install -y procps
     % ps -A
@@ -374,30 +404,35 @@ boot2docker 并不支持 VirtualBox Guest Additions , 不允许我们那样做�
        29 ?        00:00:00 bash
       237 ?        00:00:00 ps
     % exit
-
+```
 
 我们可以看到两个 nginx 进程，一个是 shell 另一个是 ps，表明确实进入了容器内部。
 
 获得 pid 并将它传给 `nsenter` 有点麻烦，jpetazzo/nsenter 中包含了 [docker-enter](https://github.com/jpetazzo/nsenter/blob/master/docker-enter) 这个 shell 脚本, 它能解决这个问题：
 
+```
     $ sudo docker-enter web
     % hostname
     f4c1b9530fef
     % exit
+```
 
 它的默认命令行是 `sh`，我们可以运行任何命令行：
 
+```
  	sudo docker-enter web ps -A
       PID TTY          TIME CMD
         1 ?        00:00:00 nginx
         8 ?        00:00:00 nginx
       245 ?        00:00:00 ps
+```
 
 这样做已经很棒了，如果能够直接在 OS X 做这些，那就更好了。  [jpetazzo](https://github.com/jpetazzo) 仍然能够可以帮助我们完成这件事( 这家伙考虑得十分周到)，只需要在 OS X 上安装一个  [bash 脚本](https://github.com/jpetazzo/nsenter#docker-enter-with-boot2docker) 。下面的脚本与之类似，只做了微小的改变。
 
 
 只需要将以下的代码复制粘贴到 OS X PATH 上（并且 `chom +x ` 它），所有就到设置好了：
 
+```
 	#!/bin/bash
 	set -e
  
@@ -411,26 +446,31 @@ boot2docker 并不支持 VirtualBox Guest Additions , 不允许我们那样做�
     fi
 
     boot2docker ssh -t sudo /var/lib/boot2docker/docker-enter "${args[@]}"
+```
 
 测试一下：
 
+```
     > docker-enter web
     % hostname
     f4c1b9530fef
+```
 
 最后不要忘了，停止并移除 container
 
+```
     > docker stop web
     > docker rm web
+```
 
-##结束语
+## 结束语
 
 你现在已经有一个运行在 OS X 上的 Docker 环境了，做你想做的事情吧。 也许你急切的想知道 Docker 是如何工作的以及如何去使用它。
 
 
 如果你打算深入学习 Docker，读一读 [The Docker Book](http://dockerbook.com/)，我力荐这本书，花点钱去[这里](http://dockerbook.com/)买一本还是值得的。
 
-##展望未来
+## 展望未来
 
 
 Docker 可能会成为一颗冉冉升起的新星，但是我们已经考虑将它加入到工作流中了。敬请期待它的时代吧。
@@ -440,7 +480,7 @@ Docker 可能会成为一颗冉冉升起的新星，但是我们已经考虑将�
 
 ***
 
-#####这篇文章由 [CHRIS JONES](http://viget.com/about/team/cjones) 撰写，[moonatcs](http://blog.yege.me) 翻译。点击 [这里](http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide) 阅读原文。
+##### 这篇文章由 [CHRIS JONES](http://viget.com/about/team/cjones) 撰写，[moonatcs](http://blog.yege.me) 翻译。点击 [这里](http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide) 阅读原文。
 
-#####The article was contributed by [CHRIS JONES](http://viget.com/about/team/cjones) , click [here](http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide) to read the original publication.
+##### The article was contributed by [CHRIS JONES](http://viget.com/about/team/cjones) , click [here](http://viget.com/extend/how-to-use-docker-on-os-x-the-missing-guide) to read the original publication.
  
