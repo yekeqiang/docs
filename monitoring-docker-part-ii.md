@@ -1,7 +1,7 @@
-#监控 Docker -- 第二部分
+# 监控 Docker -- 第二部分
 
-#####作者：[Logscape](http://go.docker.com/e/44082/logscape/756b/21481063)
-#####译者：[陈菊英](http://weibo.com/u/1716255775)
+##### 作者：[Logscape](http://go.docker.com/e/44082/logscape/756b/21481063)
+##### 译者：[陈菊英](http://weibo.com/u/1716255775)
 
 ***
 
@@ -25,7 +25,7 @@ pid | command |  containerID |  image |
 1332 |java   | 21123abc23 | risk/appserver:1.2
 
 
-##获取 container 的 PID
+## 获取 container 的 PID
 
 Docker 采用 cgroups 来隔离资源。要想知道一个进程是否采用了 Docker控制组 ，在 proc 文件系统中打开下面的文件：
 
@@ -49,7 +49,7 @@ ps-wweouname,pid,cgroup
 
 该脚本输出 pid 、资源利用率和 Docker 相关的元信息。
 
-##搜索
+## 搜索
 
 下面这个部分和这个系列的最后一个部分都会详细的研究 DockerApp-1.0 。它提供的服务是基于 [第一部分](http://blog.logscape.com/2014/06/monitoring-docker-mongo-cluster-part-1/) 使用的命令，还有从 cgroups 和 proc 文件系统收集信息的脚本。采用上面展示过的示例信息，我们来看看几个搜索的结果。
 
@@ -79,7 +79,7 @@ ps-wweouname,pid,cgroup
 
 看一看输出结果，我们就能发现系统中占用 CPU 最多的进程，以及它们所属的 image 和 container 。
 
-##结论
+## 结论
 
 下一篇博客会关注比较大型的系统，这些系统比较强大，运行了不同的服务器和数据库系统。我们会看到不同的团队和部门是如何管理这些系统的，能够监控到的系统健康程度，还有不依赖docker事件的告警。
 
@@ -90,6 +90,6 @@ ps-wweouname,pid,cgroup
 
 ***
 
-#####这篇文章由 [Logscape](http://go.docker.com/e/44082/logscape/756b/21481063) 撰写，[陈菊英](http://weibo.com/u/1716255775) 翻译。点击 [这里](http://blog.logscape.com/2014/07/monitoring-docker-part-ii) 阅读原文。
+##### 这篇文章由 [Logscape](http://go.docker.com/e/44082/logscape/756b/21481063) 撰写，[陈菊英](http://weibo.com/u/1716255775) 翻译。点击 [这里](http://blog.logscape.com/2014/07/monitoring-docker-part-ii) 阅读原文。
 
-#####The article was contributed by [Logscape](http://go.docker.com/e/44082/logscape/756b/21481063), click [here](http://blog.logscape.com/2014/07/monitoring-docker-part-ii) to read the original publication. 
+##### The article was contributed by [Logscape](http://go.docker.com/e/44082/logscape/756b/21481063), click [here](http://blog.logscape.com/2014/07/monitoring-docker-part-ii) to read the original publication. 
