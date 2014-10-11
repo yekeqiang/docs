@@ -1,12 +1,12 @@
-#How to Deploy Douban CODE in Ubuntu and Docker
+# How to Deploy Douban CODE in Ubuntu and Docker
 
-#####Author：[Zhen JU](http://weibo.com/1288360177)
+##### Author：[Zhen JU](http://weibo.com/1288360177)
 
 
 [CODE](http://douban-code.github.io/) , standing for <b>C</b>ommunity <b>O</b>riginal <b>D</b>eveloper <b>E</b>ldamaris, initially was an internal project to build a cooperation platform based on Git version control system in [Douban](http://douban.com). Up to now, CODE has hosted almost all internal code in Douban. Feb 14, 2014 Douban Inc. offically announced to open-source the project. You can visit [Github](http://douban-code.github.io/) to get more information.
 
 
-##Deploy CODE in Ubuntu
+## Deploy CODE in Ubuntu
 
 ### Dependancies CODE requires
 
@@ -51,7 +51,7 @@ $ sudo ldconfig
 
 
 
-###Download CODE deployment scripts
+### Download CODE deployment scripts
 
 
 
@@ -222,7 +222,7 @@ Well now, download python library from douban mirror. Speedy!
      
 
 
-##Deploy CODE in Docker
+## Deploy CODE in Docker
 
 
 
