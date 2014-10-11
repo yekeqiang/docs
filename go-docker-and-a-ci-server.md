@@ -22,6 +22,7 @@
 
 [mina](http://nadarei.co/mina/)类似capistrano，是个快速的发布工具。我对这个项目感兴趣，是因为它把速度作为设计目标。所以回答“如何发布项目”这个问题就变得很简单，而且我认为是mina让这个回答变得简单。只有一个地方需要些技巧，就是找到生成可执行文件并将其发送到生产机上去。我看到一些人使用类似s3的云存储，但是我并不喜欢这些方案，这些方案花费不少，但是没有新增任何价值。而且，我也没法控制我的发布流程的所有步骤。所以，我使用了简单粗暴的方法：rsync。假设我的项目叫做awesome-go-project，这是我现在的发布脚本：
 
+```
 	set :deploy_binary, lambda { "awesome-go-project-#{`git --no-pager log --format="%h" -1`.strip}" }
 
 	task setup: :environment do
@@ -34,11 +35,13 @@
 	  sh 'make build-release'
 	  sh "rsync --progress -avzp -e 'ssh -p #{port}' release/awesome-go-project #{user}@#{domain}:/tmp/#{deploy_binary}"
 	end
+```
 
 我忽略了大部分无聊的配置设置和实际的发布任务，因为这个任务只是把要发布的可执行文件`deploy\_binary`链接到合适的文件名，然后执行`sudo service awesome-go-project restart`。只有一件事情需要多写几笔，就是我管理可执行文件的方法。因为只有执行文件，我在服务器上不需要源码管理软件，这样就无法立刻知道我在生产环境里执行的是哪个版本的程序，所以所有我对deploy\_binary做的就是使用一个包含提交的SHA1值的文件名。另外一个值得注意的细节是，因为我自己使用mac系统，而生产环境使用的ubuntu，所以我需要学习如何交叉编译go代码，当然这个利用[golang-crosscompile](https://github.com/davecheney/golang-crosscompile)工具可以轻易完成。
 
 从docker开始，才是真正有意思的部分。当思考如何避免在持续集成服务器上安装项目依赖时，我意识到这是我第一次可以用docker做一些“Hello World”容器之外的事情。我的业余项目有一些依赖（比如强大的influxdb和mysql），但是为了不陷入争论，让我们把项目限制在早期状态，就是只依赖`go test -v`命令来执行测试的状态。首先，我创建了两个docker仓库，[go-lang](https://index.docker.io/u/lucapette/go-lang/)和[go-command](https://index.docker.io/u/lucapette/go-command/)。这有些感觉是在重复造轮子，因为已经有很多仓库这么做过了，不过他们都和我想要的不太一样。因为我是完全以学习的态度在进行这个业余项目，我不是*“接受现有的解决方案以便快速解决问题”*，而是*“我完全按自己的想法制造东西虽然会慢一些”*。这个体验很棒。开发Dockerfile是个有趣的过程，因为docker自己有很好的界面和很棒的文档，所以很容易学习。最后，`lucapette/go-lang`看上去是这样：
 
+```
 	FROM debian:jessie
 
 	MAINTAINER lucapette <lucapette@gmail.com>
@@ -54,24 +57,29 @@
 	RUN cd /usr/local/go/src && ./make.bash --no-clean 2>&1
 	ENV PATH /usr/local/go/bin:/go/bin:$PATH
 	ENV GOPATH /go
+```
 
 需要注意的是我要使用的镜像。我遵从了[Docker最佳实践——第二部分](http://crosbymichael.com/dockerfile-best-practices-take-2.html)的建议，你也应该通读一遍（而且也遵守）。这个容器_只_提供给我们安装好的go。我下一步做的是使用`lucapette/go-lang`创建的镜像来创建`lucapette/go-command`：
 
+```
 	FROM lucapette/go-lang
 
 	RUN mkdir -p /go/src
 
 	ENTRYPOINT ["go"]
+```
 
 这个很简短，因为所有的魔法都包含在[ENTRYPOINT](http://docs.docker.io/en/latest/reference/builder/#entrypoint)命令里。简单来说，这个命令让容器执行一个命令，这里是`go`命令。现在，让我们继续假设我的项目叫做`awesome-go-project`，我的持续集成脚本看上去像这样：
 
+```
 	#!/bin/bash
 
 	set -e
 
 	docker run --rm=true -v `pwd`:/go/src/github.com/lucapette/awesome-go-project -w /go/src/github.com/lucapette/awesome-go-project  lucapette/go-command test -v
+```
 
-The script makes the assumption it will run from the root directory of the awesome-go-project. There are a few things happening, let’s dissect the docker command I’m running:
+
 脚本假设从awesome-go-project的根目录执行。发生了一些事情，让我们解析一下我执行的docker命令：
 
  - `--rm=true`
