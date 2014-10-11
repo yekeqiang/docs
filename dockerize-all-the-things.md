@@ -1,7 +1,7 @@
-#让 Docker 无处不在
+# 让 Docker 无处不在
 
-#####作者：[Timo Derstappen](https://twitter.com/teemow)
-#####译者：[Mark Shao](http://weibo.com/1889619455)
+##### 作者：[Timo Derstappen](https://twitter.com/teemow)
+##### 译者：[Mark Shao](http://weibo.com/1889619455)
 
 ***
 
@@ -58,7 +58,7 @@ Docker 的 [links](http://docs.docker.io/en/latest/use/working_with_links_names/
 
 ***
 
-#####这篇文章由 [Timo Derstappen](https://twitter.com/teemow) 发表，[Mark Shao](http://weibo.com/1889619455) 翻译。点击 [这里](http://catalyst-zero.com/dockerize-all-the-things/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981) 可查阅原文。
+##### 这篇文章由 [Timo Derstappen](https://twitter.com/teemow) 发表，[Mark Shao](http://weibo.com/1889619455) 翻译。点击 [这里](http://catalyst-zero.com/dockerize-all-the-things/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981) 可查阅原文。
 
-#####The article was contributed by [Timo Derstappen](https://twitter.com/teemow), click [here](http://catalyst-zero.com/dockerize-all-the-things/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981) to read the original publication. 
+##### The article was contributed by [Timo Derstappen](https://twitter.com/teemow), click [here](http://catalyst-zero.com/dockerize-all-the-things/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981) to read the original publication. 
 
