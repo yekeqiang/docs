@@ -1,4 +1,4 @@
-#Mac OS X 下 Docker 安装教程
+# Mac OS X 下 Docker 安装教程
 
 ---
 
@@ -12,15 +12,15 @@
 
 ---
 
-##如何在 Mac OS X 上安装Docker
+## 如何在 Mac OS X 上安装Docker
 
-###VirtualBox
+### VirtualBox
 
 在 OS X 运行 docker 需要安装 virtualbox ，首先，先从 Virtualbox 页面获取安装包（ OS X 主机版本 x86/amd64 ）。
 
 下载完成后，打开磁盘镜像，设置和运行文件（ VirtualBox.pkg ）来安装 virtualbox ，不要简单的复制没有运行的安装包。
 
-###boot2docker
+### boot2docker
 
 [boot2docker](https://github.com/boot2docker/boot2docker) 提供了一个简单的脚本来管理正在运行 docker 进程的虚拟主机。它还负责为操作系统镜像的安装工作。
 
@@ -39,7 +39,7 @@ curl https://raw.github.com/steeve/boot2docker/master/boot2docker > boot2docker
 chmod +x boot2docker
 ```
 
-###Docker OS X Client
+### Docker OS X Client
 
 docker 进程使用 docker 客户端访问。
 
@@ -61,9 +61,9 @@ sudo cp docker /usr/local/bin/
 
 然后让我们看看如何使用它。
 
-##如何在 Mac OS X 上使用 Docker
+## 如何在 Mac OS X 上使用 Docker
 
-###docker 进程（通过 boot2docker ）
+### docker 进程（通过 boot2docker ）
 
 进行~/bin目录，运行下边的命令：
 
@@ -80,7 +80,7 @@ sudo cp docker /usr/local/bin/
 # Usage ./boot2docker {init|start|up|pause|stop|restart|status|info|delete|ssh|download}
 ```
 
-###docker 客户端
+### docker 客户端
 
 一旦虚拟主机运行 docker 进程，你可以像使用其它的一些应用一样来使用 docker 客户端。
 
@@ -94,7 +94,7 @@ docker version
 # Go version (server): go1.2
 ```
 
-###用 SSH 来连接虚拟主机
+### 用 SSH 来连接虚拟主机
 如果你感觉需要连接虚拟主机，你可以简单的运行下边的命令：
 
 ```
@@ -106,7 +106,7 @@ docker version
 
 现在你可以使用 hello World 的例子了~
 
-###学习更多
+### 学习更多
 
 **boot2docker**
 
@@ -117,4 +117,4 @@ docker version
 `ssh-keygen -R '[localhost]:2022'`
 
 ---
-#####这篇文章由 [widuu](http://weibo.com/widuu) 翻译并发表于 [微度网络](http://www.widuu.com/)，Docker 中文社区获得作者许可转载。您也可以点击 [这里](http://docs.docker.io/en/latest/installation/mac/) 阅读英文原版教程。
+##### 这篇文章由 [widuu](http://weibo.com/widuu) 翻译并发表于 [微度网络](http://www.widuu.com/)，Docker 中文社区获得作者许可转载。您也可以点击 [这里](http://docs.docker.io/en/latest/installation/mac/) 阅读英文原版教程。
