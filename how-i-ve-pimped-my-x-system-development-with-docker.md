@@ -49,7 +49,7 @@ or
 sudo docker run -i -t <image_name> /bin/bash    
 ```
 
-##有些重要的事情需要记住
+##值得铭记的重要事项
 
 
 
