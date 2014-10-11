@@ -1,8 +1,8 @@
-#在 Docker 里使用（支持镜像继承的）supervisor 管理
+# 在 Docker 里使用（支持镜像继承的）supervisor 管理
 
 ![alt](http://resource.docker.cn/homepage-docker-logo.png)
-#####作者：[Quinten Krijger](https://twitter.com/qkrijger)
-#####译者：[李兆海](https://twitter.com/googollee)
+##### 作者：[Quinten Krijger](https://twitter.com/qkrijger)
+##### 译者：[李兆海](https://twitter.com/googollee)
 
 ---
 
@@ -15,10 +15,12 @@
 `docker run ubuntu echo "hello world"`
 
 另外一种方法，你可以利用 [CMD](http://docs.docker.io/en/latest/reference/builder/#cmd) 指令，在 Dockerfile 里指定 docker run 命令的默认参数。比如，如果你目录下的Dockerfile包含以下内容：
+
 ```
 FROM ubuntu
 CMD echo "hello world"
 ```
+
 再使用下面的指令构造 `hello_world_printer` 镜像：
 
 `docker build -t "hello_world_printer" `
@@ -42,7 +44,7 @@ docker run ... /usr/sbin/sshd && run_your_app_in_foreground
 
 所以，在运行更复杂的 container 的时候，很多人使用复杂的 bash 脚本。典型的 bash 脚本会执行一个前台进程，并开启一个或者多个（ renegade ）守护进程。与只用 Docker 命令行的方式相比，这种方法最重要的改进在于，bash 脚本是可以做版本控制的：启动脚本在你的 Docker 镜像里，新的改动可以和软件项目一起分发。不过，使用 bash 脚本管理进程依旧简陋枯燥，而且容易出错。
 
-##使用 supervisor
+## 使用 supervisor
 
 更好的方法是使用 [supervisor](http://supervisord.org/) 。 supervisor 可以更好的管理进程：使用更加简洁的代码管理进程；在崩溃时可以重启进程；允许重启一组进程并且有命令行工具和网页界面来管理进程。当然，能力越大，责任越大：大量使用 supervisor 特性的代码，预示着你应该将整个服务更好的拆分成多个小的 supervisor 来管理。
 
@@ -52,11 +54,13 @@ docker run ... /usr/sbin/sshd && run_your_app_in_foreground
 
 首先，因为我默认使用 supervisor ，所以我所有的镜像都扩展自一个只包含 supervisor 和最新版本 ubuntu 的基础镜像。你可以在 [这里](https://github.com/Krijger/docker-cookbooks/blob/master/supervisor/Dockerfile) 找到这个 Dockerfile 。这个基础镜像包括一个配置文件 `/etc/supervisor.conf` ：
 
+```
 	[supervisord]
 	nodaemon=true
 
 	[include]
 	files = /etc/supervisor/conf.d/*.conf
+```
 
 这个配置让 supervisor 本身以前台进程运行，这样可以让我们的 container 启动后持续运行。第二，这个配置将包含所有在 `/etc/supervisor/conf.d/` 目录下的配置文件，启动任何在这里定义的程序。
 
@@ -80,9 +84,11 @@ docker run child_image_name "supervisor -c /etc/supervisor.conf"
 
  - Tomcat 镜像在工作栈上安装 Tomcat 并暴露 8080 端口。这层包括一个名字是 Tomcat 的服务，定义在 [tomcat.sv.conf](https://github.com/Krijger/docker-cookbooks/blob/master/tomcat7/tomcat.sv.conf) ：
 
+```
 		[program:webapp]
 		command=/bin/bash -c "env > /tmp/tomcat.env && cat /etc/default/tomcat7 >> /tmp/tomcat.env && mv /tmp/tomcat.env /etc/default/tomcat7 && service tomcat7 start"
 		redirect_stderr=true
+```
 
 执行 Tomcat 服务的命令并不像我喜欢的那样简洁，将其放到一个专门的脚本里会更好。命令先添加了一些环境变量，比如 [container的关联参数](http://docs.docker.io/en/latest/use/working_with_links_names/) 到 `/etc/default/tomcat7` ，这样我们可以在之后的配置中使用这些参数，后面的例子会展示这种用法。也许使用类似 etcd 的键值存储会更好，不过这超出了本文的范畴。
 
@@ -96,6 +102,7 @@ docker run child_image_name "supervisor -c /etc/supervisor.conf"
 
 假设，我们有一个使用 Elasticsearch 的网络应用：
 
+```
 	FROM quintenk/tomcat:7
 
 	# 安装一些项目的依赖，这些依赖在每次更新时不会改变
@@ -115,6 +122,7 @@ docker run child_image_name "supervisor -c /etc/supervisor.conf"
 	RUN chown root:tomcat7 /var/lib/tomcat7/webapps/ROOT.war
 
 	CMD supervisord -c /etc/supervisor.conf
+```
 
 这段代码里， elasticsearch 的相关环境变量（搜索索引）已经被设置了，因为 supervisor 关于 Tomcat 的配置，会在启动时将所有环境变量添加到 /etc/default/tomcat7 。当然，我们在启动网络应用镜像时需要关联到 elasticsearch containter ，比如：
 
@@ -122,12 +130,13 @@ docker run child_image_name "supervisor -c /etc/supervisor.conf"
 docker run -link name_of_elasticsearch_instance:elasticsearch -d name_of_webapp_image "supervisor -c /etc/supervisor.conf"
 ```
 你现在的网络应用可以去访问 `ELASTICSEARCH_SERVER_URL` 路径了。你可以在配置文件里使用这个变量，像这样：
+	
 	elastic.unicast.hosts=${ELASTICSEARCH_SERVER_URL}
 
 这样就可以将配置暴露给你的应用程序。如果你是个 Java 开发者，并且也阅读了前一篇文章，希望本文的技术能让你开始一段愉快的代码之旅。
 
 ***
 
-#####这篇文章由 [Quinten Krijger](https://twitter.com/qkrijger) 发表，[李兆海](https://twitter.com/googollee) 翻译。点击 [这里](http://blog.trifork.com/2014/03/11/using-supervisor-with-docker-to-manage-processes-supporting-image-inheritance) 可查阅原文。
+##### 这篇文章由 [Quinten Krijger](https://twitter.com/qkrijger) 发表，[李兆海](https://twitter.com/googollee) 翻译。点击 [这里](http://blog.trifork.com/2014/03/11/using-supervisor-with-docker-to-manage-processes-supporting-image-inheritance) 可查阅原文。
 
-#####The article was contributed by [Quinten Krijger](https://twitter.com/qkrijger), translated by [@googollee](https://twitter.com/googollee). Please click [here](http://blog.trifork.com/2014/03/11/using-supervisor-with-docker-to-manage-processes-supporting-image-inheritance) to read the original publication.
+##### The article was contributed by [Quinten Krijger](https://twitter.com/qkrijger), translated by [@googollee](https://twitter.com/googollee). Please click [here](http://blog.trifork.com/2014/03/11/using-supervisor-with-docker-to-manage-processes-supporting-image-inheritance) to read the original publication.
