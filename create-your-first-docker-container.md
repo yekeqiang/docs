@@ -1,8 +1,8 @@
-#创建你的首个 Docker 容器
+# 创建你的首个 Docker 容器
 
-#####作者：[James Coyle](https://twitter.com/Jamescoyle_uk)
+##### 作者：[James Coyle](https://twitter.com/Jamescoyle_uk)
 
-#####译者：[xanpeng](https://github.com/xanpeng)
+##### 译者：[xanpeng](https://github.com/xanpeng)
 
 ***
 
@@ -12,7 +12,8 @@
 
 有一系列命令可用来管理 Docker 容器和镜像。我们首先来看本地 Docker 库中是否已有一些镜像。
 
-```text
+```
+text
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 ```
@@ -21,7 +22,8 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 
 当然我们必须指定待下载镜像的名称。目前官方 Docker 镜像库中有数以千计的可用镜像，可以通过相应的 `docker` 命令下载。我们先用搜索命令找一个镜像。
 
-```text
+```
+text
 $ docker search ubuntu
 ```
 
@@ -29,7 +31,8 @@ $ docker search ubuntu
 
 我们来下载标准的 ubuntu 14.04 镜像：
 
-```text
+```
+text
 $ docker pull ubuntu:14.04
 Pulling repository ubuntu
 ad892dd21d60: Download complete
@@ -41,7 +44,8 @@ e465fff03bce: Download complete
 
 你可以验证这条命令是否下载了 ubuntu 14.04 的镜像文件，验证方法是使用前面提及的 `docker images` 命令。请注意下面验证结果中的镜像 ID ，我们后面可以通过这个 ID 创建容器。
 
-```text
+```
+text
 $ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 ubuntu              14.04               ad892dd21d60        11 days ago         275.5 MB
@@ -51,7 +55,8 @@ ubuntu              14.04               ad892dd21d60        11 days ago         
 
 通过 `docker run` 创建容器并指定运行 bash 后， Docker 呈现给我们一个 bash 会话，我们据此修改 Docker 容器。在下面的命令中使用你环境中实际的镜像 ID 替换我这里的 ad892dd21d60。
 
-```text
+```
+text
 $ docker run -i -t ad892dd21d60  /bin/bash
 root@3a09b2588478:/#
 ```
@@ -60,7 +65,8 @@ root@3a09b2588478:/#
 
 通过 `docker ps` 命令查看本地 Docker 环境中存在多少容器。
 
-```text
+```
+text
 $ docker ps -a
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 f4b0d7285fec        ubuntu:14.04        /bin/bash           8 minutes ago       Exit 0                                  hungry_thompson
@@ -70,19 +76,22 @@ f4b0d7285fec        ubuntu:14.04        /bin/bash           8 minutes ago       
 
 上面的输出显示有 3 个容器正在运行，容器 ID 显示在列表左侧。我们可以重新进入容器，不过需要先启动容器。这里使用容器 3a09b2588478 作为示例，你操作时需要使用自己的容器 ID 。
 
-```text
+```
+text
 $ docker start 3a09b2588478
 ```
 
 现在可以通过 `docker attach` 关联容器，并启动一个终端以支持登入操作。
 
-```text
+```
+text
 $ docker attach 3a09b2588478
 ```
 
 现在你已重新进入容器。这里我们只演示一些简单的修改，比如只通过 `apt-get` 升级容器中的 ubuntu 14.04 系统安装的软件，然后退出容器。在实际环境中，你可能会安装一个应用程序，或者修改一些服务设定（比如 LDAP SSH 登录配置等）。
 
-```text
+```
+text
 $ apt-get update
 $ apt-get upgrade
 $ exit
@@ -90,7 +99,8 @@ $ exit
 
 我们示例的最后一步是将容器保存为一个新的镜像，从而后续可被用于创建新的容器。你需要指定容器 ID 以及待创建镜像的名称。如果使用已有的镜像名称表示将覆盖已有的镜像。
 
-```text
+```
+text
 $ docker commit 3a09b2588478 ubuntu:14.04
 b2391f1efa6db419fad0271efc591be11d0a6d7f645c17487ef3d06ec54c6489
 ```
@@ -99,6 +109,6 @@ b2391f1efa6db419fad0271efc591be11d0a6d7f645c17487ef3d06ec54c6489
 
 ***
 
-这篇文章由 [James Coyle](https://twitter.com/Jamescoyle_uk) 撰写，点击 [这里]((http://www.jamescoyle.net/how-to/1503-create-your-first-docker-container)) 阅读原文。 [xanpeng](https://github.com/xanpeng) 翻译了本文，你可以通过 [撰写邮件](mailto:xanpeng@gmail.com) 与他联系。
+##### 这篇文章由 [James Coyle](https://twitter.com/Jamescoyle_uk) 撰写，点击 [这里]((http://www.jamescoyle.net/how-to/1503-create-your-first-docker-container)) 阅读原文。 [xanpeng](https://github.com/xanpeng) 翻译了本文，你可以通过 [撰写邮件](mailto:xanpeng@gmail.com) 与他联系。
 
-The article was contributed by [James Coyle](https://twitter.com/Jamescoyle_uk) , click [here]((http://www.jamescoyle.net/how-to/1503-create-your-first-docker-container)) to read the original publication. 
+##### The article was contributed by [James Coyle](https://twitter.com/Jamescoyle_uk) , click [here]((http://www.jamescoyle.net/how-to/1503-create-your-first-docker-container)) to read the original publication. 
