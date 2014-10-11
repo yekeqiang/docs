@@ -1,8 +1,8 @@
-#使用 Device Mapper 插件来改变 Docker 容器的大小
+# 使用 Device Mapper 插件来改变 Docker 容器的大小
 
-#####作者：[Jérôme Petazzoni](https://twitter.com/jpetazzo) （ Docker 布道师）
+##### 作者：[Jérôme Petazzoni](https://twitter.com/jpetazzo) （ Docker 布道师）
 
-#####译者：[Mark Shao](https://github.com/markshao) （ EMC 中国高级工程师）
+##### 译者：[Mark Shao](https://github.com/markshao) （ EMC 中国高级工程师）
 
 ***
 
@@ -190,6 +190,6 @@ Docker 将来肯定会提供一些更好的方法来扩容容器，所需的代�
 
 ***
 
-#####这篇文章由 [Jérôme Petazzoni](https://twitter.com/jpetazzo) 发表，点击 [这里](http://jpetazzo.github.io/2014/01/29/docker-device-mapper-resize/) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，你可以在 [GitHub](https://github.com/markshao) 上与他交流。
+##### 这篇文章由 [Jérôme Petazzoni](https://twitter.com/jpetazzo) 发表，点击 [这里](http://jpetazzo.github.io/2014/01/29/docker-device-mapper-resize/) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，你可以在 [GitHub](https://github.com/markshao) 上与他交流。
 
-#####The article was contributed by [Jérôme Petazzoni](https://twitter.com/jpetazzo) , click [here](http://jpetazzo.github.io/2014/01/29/docker-device-mapper-resize/) to read the original publication.
+##### The article was contributed by [Jérôme Petazzoni](https://twitter.com/jpetazzo) , click [here](http://jpetazzo.github.io/2014/01/29/docker-device-mapper-resize/) to read the original publication.
