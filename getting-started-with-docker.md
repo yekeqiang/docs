@@ -1,9 +1,9 @@
-#开始使用 Docker
+# 开始使用 Docker
 
 
-#####作者：[Arun Gupta](https://twitter.com/arungupta) 
+##### 作者：[Arun Gupta](https://twitter.com/arungupta) 
 
-#####译者：[我不围观](http://weibo.com/ooutman)
+##### 译者：[我不围观](http://weibo.com/ooutman)
 ***
 
 如果把来自不同会议和 meetup 上的演讲、 twitter 上的推文 、还有其它演讲稿累加，好像 Docker 有解决世界饥荒的节奏了。真是这样的话真真是极好的，不过显然还不行。但是 Docker 确实能很好的解决一些问题。
@@ -14,13 +14,13 @@
 
 简单来说， Docker 简化了软件的分发过程，它使制作和共享包含软件环境的镜像文件变得简单了。这些镜像文件也叫**应用程序操作系统** 
 
-##什么是应用操作系统？
+## 什么是应用操作系统？
 
 你的应用程序一般都需要特定版本的操作系统、应用服务器、 JDK 、数据库服务器，还可能需要调整配置文件和其他一些依赖关系。应用程序可能需要绑定到指定的端口和一定量的内存。这些运行应用程序所需要的组件和配置就是所说的应用程序操作系统。
 
 你当然可以写一个包含下载和安装这些组件的安装脚本。 Docker 简化了这个流程，通过创建一个包含应用程序和基础设施的镜像(image)，当作一个组件进行管理。这些镜像可以创建 Docker *容器(container)*，容器运行在 Docker 提供的*容器虚拟化平台*上。
 
-##Docker的主要组件有哪些？
+## Docker的主要组件有哪些？
 
 Docker 有两个主要组件：
 
@@ -37,17 +37,17 @@ Docker **按启动顺序**包含两个组件：
 * 服务端：运行在宿主机上，负责构建、运行和分发 Docker 容器等重要工作
 * 客户端：Docker 二进制程序，接收用户的命令和服务程序进行通信
 
-##这些组件怎么一起工作？
+## 这些组件怎么一起工作？
 
 客户端可以和服务端运行在一台主机上，也可以在不同的主机上。服务端需要用 [pull](https://docs.docker.com/reference/commandline/cli/#pull) 命令从仓库中拉一个镜像下来。服务端可以从 Docker Hub 或者其他配置的仓库中下载镜像。服务端主机可以从仓库中下载和安装多个镜像。
 
-{<1>}![](http://resource.docker.cn/docker-architecture-techtip39.png)
+![](http://resource.docker.cn/docker-architecture-techtip39.png)
 
 然后客户端就可以用 [run命令](https://docs.docker.com/reference/commandline/cli/#run) 来启动容器。完整的客户端命令列表可以看 [这里](https://docs.docker.com/reference/commandline/cli/) 。
 
 客户端和服务端通过 socket 或者 REST API 进行通信。
 
-##因为 Docker 使用了 Linux 内核特性，是不是说只能在基于 Linux 的系统上使用？
+## 因为 Docker 使用了 Linux 内核特性，是不是说只能在基于 Linux 的系统上使用？
 
 不同操作系统的 Docker 服务端和客户端都可以从 <https://docs.docker.com/installation> 安装。你也看到了，其实 Docker 是可以在很多平台上安装的，包括 Mac 和 Windows 上。
 
@@ -131,7 +131,7 @@ Commands:
     version                 Display version information.
 ```
 
-##光说不练，举个栗子呗？
+## 光说不练，举个栗子呗？
 
 一些 JBoss 项目可以在 [这里](www.jboss.org/docker) 找到 Docker 镜像，在页面上还可以看到安装的详细命令。比如， WildFly 的 Docker 镜像就可以这么安装：
 
@@ -240,7 +240,7 @@ b2f8001164b0        jboss/wildfly:latest   /opt/wildfly/bin/sta   46 minutes ago
 
 现在可以在本地机器上通过 <http://192.168.59.103> 来访问 WildFly 服务器，结果就像这样：
 
-{<2>}![](http://resource.docker.cn/wildfly-output-techtip39-942x1024.png)
+![](http://resource.docker.cn/wildfly-output-techtip39-942x1024.png)
 
 最后，容器可以通过 Ctrl+C 来停止，或者用如下命令：
 
@@ -268,8 +268,8 @@ b2f8001164b0
 你知道 Red Hat 在 [Docker 贡献者中名列前茅](http://thenewstack.io/who-are-the-docker-developers/) 吗？有5名来自 [Project Atomic](http://www.projectatomic.io/) 的红帽子参与其中。
 
 ***
-#####这篇文章由 [Arun Gupta](https://twitter.com/arungupta)   撰写，[我不围观](http://weibo.com/ooutman) 翻译。点击 [这里](http://blog.arungupta.me/2014/07/getting-started-with-docker/) 阅读原文。
+##### 这篇文章由 [Arun Gupta](https://twitter.com/arungupta)   撰写，[我不围观](http://weibo.com/ooutman) 翻译。点击 [这里](http://blog.arungupta.me/2014/07/getting-started-with-docker/) 阅读原文。
 
-#####The article was contributed by [Arun Gupta](https://twitter.com/arungupta) , click [here](http://blog.arungupta.me/2014/07/getting-started-with-docker/) to read the original publication. 
+##### The article was contributed by [Arun Gupta](https://twitter.com/arungupta) , click [here](http://blog.arungupta.me/2014/07/getting-started-with-docker/) to read the original publication. 
 ***
 
