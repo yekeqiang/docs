@@ -96,11 +96,13 @@ IP          CONTAINERS                         TAGS
 ```
 $ airdock deploy --scale web
 ```
+
 你可以指定希望部署到有 “web” 标签的主机数量。在这个例子里，它被部署到一台主机上。
 
 ```
 $ airdock deploy --scale web:1
 ```
+
 或者按照多个标签进行部署。
 
 ```
