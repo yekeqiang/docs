@@ -1,9 +1,9 @@
-#Bootstrap RESTful Docker on Ubuntu
+# Bootstrap RESTful Docker on Ubuntu
 
 
-#####作者： [Henryk Konsek](https://twitter.com/hekonsek)
+##### 作者：[Henryk Konsek](https://twitter.com/hekonsek)
 
-#####译者：[叶可强](http://weibo.com/yeziyu)
+##### 译者：[叶可强](http://weibo.com/yeziyu)
 
 ***
 与 Docker 服务器最 “devOps” 的交互方式是通过 RESTful API 暴露接口，然后使用你选择的 HTTP 客户端给 Docker Server 发送命令。
@@ -35,6 +35,7 @@ curl http://127.0.0.1:2375/version
 ```
 
 ## 非 ROOT 权限运行 Docker
+
 如果你想不通过 sudo 执行 Docker 命令，把当前用户添加进 Docker 系统账户组：
 
 ```
@@ -51,6 +52,6 @@ sudo vim /etc/group
 
 ***
 
-#####这篇文章由 [Henryk Konsek](https://twitter.com/hekonsek) 撰写，[叶可强](http://weibo.com/yeziyu) 翻译。点击 [这里](http://henryk-konsek.blogspot.tw/2014/06/bootstrap-restful-docker-on-ubuntu.html) 阅读原文。
+##### 这篇文章由 [Henryk Konsek](https://twitter.com/hekonsek) 撰写，[叶可强](http://weibo.com/yeziyu) 翻译。点击 [这里](http://henryk-konsek.blogspot.tw/2014/06/bootstrap-restful-docker-on-ubuntu.html) 阅读原文。
 
-#####The article was contributed by [Henryk Konsek](https://twitter.com/hekonsek), click [here](http://henryk-konsek.blogspot.tw/2014/06/bootstrap-restful-docker-on-ubuntu.html) to read the original publication.
+##### The article was contributed by [Henryk Konsek](https://twitter.com/hekonsek), click [here](http://henryk-konsek.blogspot.tw/2014/06/bootstrap-restful-docker-on-ubuntu.html) to read the original publication.
