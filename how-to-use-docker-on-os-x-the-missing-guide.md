@@ -203,7 +203,7 @@ Docker 将 80 端口与 Docker host 上的 49153 进行了绑定。如果是在 
 
 于是就可以在任何地方使用它了：
 
-![alt](http://f.cl.ly/welcome-to-nginx.png)
+![alt](http://resource.docker.cn/welcome-to-nginx.png)
 
 到这里，这个问题已经被很好的解决了。在继续之前，我们先停止并且移除这个 container 。
 
