@@ -1,8 +1,8 @@
-#使用 Bash 在 Tutum 上创建并运行 Docker 容器
+# 使用 Bash 在 Tutum 上创建并运行 Docker 容器
 
-#####作者：[Dmitriy Akulov](https://twitter.com/jimaek/)
+##### 作者：[Dmitriy Akulov](https://twitter.com/jimaek/)
 
-#####译者：[HexTeto](http://weibo.com/hexteto)
+##### 译者：[HexTeto](http://weibo.com/hexteto)
 ***
 
 [Tutum](https://www.tutum.co/) 提供非常棒的 Docker 容器托管服务。
@@ -38,7 +38,8 @@ libgrabber 每次会工作 3 ~ 5 分钟，之后这个容器就会被销毁.
 最简单的方法是使用
 [jsawk](https://github.com/micha/jsawk) ，但是我懒得鼓捣它。我的解决方法是:
 
-```bash
+```
+bash
 uuid=$(curl -s -H "Authorization: ApiKey username: YOURKEY" -H "Content-Type: application/json" -d
 '{"image":"r.tutum.co/user/image", "name":"libgrabber", "autodestroy":"ALWAYS", "container_size":"S"}'
 https://app.tutum.co/api/v1/container/ | grep -Po '"'"uuid"'"\s*:\s*"\K([^"]*)' $1)
@@ -51,7 +52,7 @@ https://app.tutum.co/api/v1/container/${uuid}/start/
 
 ***
 
-#####这篇文章由 [Dmitriy Akulov](https://twitter.com/jimaek/) 撰写，[HexTeto](http://weibo.com/hexteto) 翻译。点击 [这里](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/) 阅读原文。
+##### 这篇文章由 [Dmitriy Akulov](https://twitter.com/jimaek/) 撰写，[HexTeto](http://weibo.com/hexteto) 翻译。点击 [这里](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/) 阅读原文。
 
-#####The article was contributed by [Dmitriy Akulov](https://twitter.com/jimaek/), click [here](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/) to read the original publication.  
+##### The article was contributed by [Dmitriy Akulov](https://twitter.com/jimaek/), click [here](http://dakulov.com/create-and-run-tutum-docker-containers-with-bash-and-cron/) to read the original publication.  
 
