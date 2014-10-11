@@ -1,15 +1,15 @@
-#15 分钟掌握 15 个 Docker 小窍门
+# 15 分钟掌握 15 个 Docker 小窍门
 
 ![Docker 15 个要点](http://resource.docker.cn/docker-15-tips.jpg)
 
-#####作者：[Brian Morearty](https://twitter.com/BMorearty)
+##### 作者：[Brian Morearty](https://twitter.com/BMorearty)
 
-#####译者：[巨震](https://github.com/crystaldust)
+##### 译者：[巨震](https://github.com/crystaldust)
 
 ---
 
 
-##1. 获取最近运行容器的id
+## 1. 获取最近运行容器的id
 
 这是我们经常会用到的一个操作，按照官方示例，你可以这样做：
 
@@ -36,7 +36,7 @@
 `docker ps -l -q`命令将返回最近运行的容器的id，通过设置别名（alias），dl命令就是获取最近容器的id。这样，就无需再输入冗长的docker ps -l -q命令了。通过两个斜引号``，可以获取dl命令的值，也就是最近运行的容器的id。
 
 
-##2.尽量在Dockerfile中指定要安装的软件，而不用Docker容器的shell直接安装软件
+## 2.尽量在Dockerfile中指定要安装的软件，而不用Docker容器的shell直接安装软件
 
 说实话，我有时候也喜欢在shell中安装软件，也许你也一样，喜欢在shell中把所有软件安装都搞定。但是，搞来搞去，最后还是发现，你还是需要在Doockerfile中指定安装文件。在shell中安装软件，你要这样做：
 
@@ -63,7 +63,7 @@
 	2.然后在Dockerfile中指定一些docker的命令，如CMD, ENTERPOINT, VOLUME等等来指定安装的软件
 
 
-##3.超-超-超级用户
+## 3.超-超-超级用户
 
 你可能需要一直用超级用户来操作docker，就像早期示例里一直提示的：
 
@@ -81,18 +81,18 @@
 Wow！连续三个sudo！三次化身“超级用户”，真可谓是“超-超-超级用户”啊！别担心，设置完毕，以后你就再也不用打那么多sudo了！
 
 
-##4. 清理垃圾
+## 4. 清理垃圾
 
 如果你想删除所有停止运行的容器，用这个命令：
 
 	```$ docker rm $(docker ps -a -q)```
 
 顺便说一句，docker ps命令很慢，不知道为啥这么慢，按理说Go语言是很快的啊。
-`docker ps -a -q`命令列出所有容器的id，然后根据id删除容器。docker rm命令遇到正在运行的容器就会失效，所以这个命令完美的删除了所有没在运行的容器。
+ `docker ps -a -q` 命令列出所有容器的id，然后根据id删除容器。docker rm命令遇到正在运行的容器就会失效，所以这个命令完美的删除了所有没在运行的容器。
 
 
 
-##5. docker inspect输出结果的解析利器：jq
+## 5. docker inspect输出结果的解析利器：jq
 
 要对docker inspect的输出结果进行过滤，一般情况下，用grep命令，你需要这样操作：
 
@@ -105,7 +105,7 @@ Wow！连续三个sudo！三次化身“超级用户”，真可谓是“超-超
 其中第一个’.’代表所有的结果。’[0]’代表数组的第一个元素。就像JavaScript访问一个JSON对象一样，简单方便。
 
 
-##6.镜像有哪些环境变量？
+## 6.镜像有哪些环境变量？
 
 有时候，你需要知道自己创建的镜像有哪些环境变量。简单！只要这样：
 
@@ -122,7 +122,7 @@ Wow！连续三个sudo！三次化身“超级用户”，真可谓是“超-超
 
 调用env查看环境变量，对于后面要讲到的“链接”(-link)很有用，在连接两个容器时候需要用到这些环境变量，具体请看最后一个要点“链接”。
 
-##7.RUN命令 vs CMD命令
+## 7.RUN命令 vs CMD命令
 
 Docker的新手用户比较容易混淆RUN和CMD这两个命令。
 RUN命令在构建（Build）Docker时执行，这时CMD命令不执行。CMD命令在RUN命令执行时才执行。我们来理清关系，假设Dockerfile内容如下：
@@ -145,7 +145,7 @@ RUN命令在构建（Build）Docker时执行，这时CMD命令不执行。CMD命
 Build时执行RUN，RUN时执行CMD，也就是说，CMD才是镜像最终执行的命令。
 
 
-##8.CMD命令 vs ENTRYPOINT命令
+## 8.CMD命令 vs ENTRYPOINT命令
 
 又是两条容易混淆的命令！具体细节我们就不说了，举个例子，假设一个容器的Dockerfile指定CMD命令，如下：
 
@@ -180,7 +180,7 @@ Build时执行RUN，RUN时执行CMD，也就是说，CMD才是镜像最终执行
 看到不同了吧？实际上， CMD 命令是可覆盖的，docker run 后面输入的命令与 CMD 指定的命令匹配时，会把 CMD 指定的命令替换成 docker run 中带的命令。而 ENTRYPOINT 指定的命令只是一个“入口”，docker run 后面的内容会全部传给这个“入口”，而不是进行命令的替换，所以得到的结果就是 “echo hello” 。
 
 
-##9.Docker 容器有自己的IP地址吗？
+## 9.Docker 容器有自己的IP地址吗？
 
 刚接触Docker的人或许会有这样的疑问：Docker容器有自己的IP地址吗？Docker容器是一个进程？还是一个虚拟机？嗯...也许两者兼具？哈哈，其实，Docker容器确实有自己的IP，就像一个具有IP的进程。只要分别在主机和Docker容器中执行查看ip的命令就知道了。
 
@@ -203,7 +203,7 @@ Build时执行RUN，RUN时执行CMD，也就是说，CMD才是镜像最终执行
 两者并不相同，说明 Docker 容器有自己的ip。
 
 
-##10.基于命令行的瘦客户端，使用 UNIX Socket 和 Docker 后台服务的 REST 接口进行通信
+## 10.基于命令行的瘦客户端，使用 UNIX Socket 和 Docker 后台服务的 REST 接口进行通信
 
 Docker默认是用 UNIX socket 通信的，一直到大概0.5、0.6的版本还是用端口来通信，但现在则改成 UNIX socket ，所以从外部无法控制Docker容器的内部细节。下面我们来搞点有趣的事情，从主机链接到docker的UNIX socket：
 
@@ -229,7 +229,7 @@ Docker默认是用 UNIX socket 通信的，一直到大概0.5、0.6的版本还�
 
 有一天，我不小心把提交的名称打错了，名字开头打成”-xxx”（我把命令和选项的顺序搞混了），所以当我删除的时候出了问题，docker rm -xxx，会把-xxx当成参数而不是镜像的名称。所以我只得通过 socket 直接连到容器来调用 REST Server 把错误的东西删掉。
 
-##11.把镜像的依赖关系绘制成图
+## 11.把镜像的依赖关系绘制成图
 
 docker images命令有一个很拉风的选项：-viz，可以把镜像的依赖关系绘制成图并通过管道符号保存到图片文件：
 
@@ -251,7 +251,7 @@ OK，依赖关系一目了然！
 （译者注：要使用dot命令，主机要安装graphviz包。另外，如果主机ip没有绑定域名，machinename换成主机的ip即可。）
 
 
-##12.Docker把东西都存到哪里去了？
+## 12.Docker把东西都存到哪里去了？
 
 Docker实际上把所有东西都放到/var/lib/docker路径下了。切换成super用户，到/var/lib/docker下看看，你能学到很多有趣的东西。执行下面的命令：
 
@@ -264,26 +264,26 @@ Docker实际上把所有东西都放到/var/lib/docker路径下了。切换成su
 
 可以看到不少目录，containers目录当然就是存放容器（container）了，graph目录存放镜像，文件层（file system layer）存放在graph/imageid/layer路径下，这样你就可以看看文件层里到底有哪些东西，利用这种层级结构可以清楚的看到文件层是如何一层一层叠加起来的。
 
-##13.Docker源代码：Go, Go, Go, Golang!
+## 13.Docker源代码：Go, Go, Go, Golang!
 
 Docker的源代码全部是用Go语言写的。Go是一门非常酷的语言。其实，不只是Docker，很多优秀的软件都是用 Go 写的。对我来说，Docker源文件中，有4个是我非常喜欢阅读的：
 
-#####commands.go
+##### commands.go
 docker的命令行接口，是对REST API的一个轻量级封装。Docker团队不希望在命令中出现逻辑，因此commands.go只是向REST API发送指令，确保其较小的颗粒性。
 
-#####api.go
+##### api.go
 REST API的路由（接受commands.go中的请求，转发到server.go）
 
-#####server.go 
+##### server.go 
 大部分REST API的实现
 	
-#####buildfile.go
+##### buildfile.go
 Dockerfile的解析器
 
 有的伙计惊叹”Wow!Docker是怎么实现的？！我无法理解！”没关系，Docker是开源软件，去看它的源代码就可以了。如果你不太清楚Dockerfile中的命令是怎么回事，直接去看buildfile.go就明白了。
 
 
-##14.运行几个Docker后台程序，再退出容器，会发生什么？
+## 14.运行几个Docker后台程序，再退出容器，会发生什么？
 
 OK，倒数第二个要点。如果在Docker中运行几个后台程序，再退出Docker容器，会发生什么？答案是：不要这么做！因为这样做后台程序就全丢了。
 
@@ -298,7 +298,7 @@ Dockerfile中用RUN命令去开启一个后台程序，如：
 然后调用 ps aux查看进程，你会发现postgres的进程并没有跑起来。
 RUN命令会影响文件系统。因此，不要再Dockerfile中用启动后台程序，要把后台程序启动成前台进程。或者，像一些高手提议的那样，写一个启动脚本，在脚本中启动这些后台程序或进程。
 
-##15.容器之间进行友好沟通：链接
+## 15.容器之间进行友好沟通：链接
 
 这是最拉风的功能！我把它留到最后压轴！这是0.6.5中最重要的新功能，我们前面已经提过两次了。运行一个容器，给它一个名称，在下面的例子中，我们通过-name参数给容器指定名称”loldb”:
 
@@ -321,4 +321,4 @@ RUN命令会影响文件系统。因此，不要再Dockerfile中用启动后台�
 这样，我们就在两个容器间建立起一个网络通道（bridge），基于此，我们可以建立一个类似rails的程序：一个容器可以访问数据库容器而不对外暴露其他接口。非常酷！数据库容器只需要知道第一个容器的别名（在本例中为cheez）和要打开的端口号。所以数据库容器也可以env命令来查看这个端口是否打开。
 
 ----
-这篇文章由 [Brian Morearty](https://twitter.com/BMorearty) 发表，点击 [此处](http://www.youtube.com/watch?v=BJT9bA64Hcc) 观看讲座视频，或下载 [PPT](http://resource.docker.cn/15-docker-tips-in-15-minutes.pdf)。
+##### 这篇文章由 [Brian Morearty](https://twitter.com/BMorearty) 发表，点击 [此处](http://www.youtube.com/watch?v=BJT9bA64Hcc) 观看讲座视频，或下载 [PPT](http://resource.docker.cn/15-docker-tips-in-15-minutes.pdf)。
