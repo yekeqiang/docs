@@ -1,4 +1,4 @@
-##在 Mac OS 10.9 上安装 Fish Shell
+# 在 Mac OS 10.9 上安装 Fish Shell
 
 ---
 
@@ -26,7 +26,7 @@ brew install fish
 
 修改 终端工具 的 偏好配置，在 Shell 的打开方式中选择命令，输入框中写入 /usr/local/bin/fish 。重启 终端工具后 fish 就替代了默认的 bash 。
 
-##安装 Docker 的命令补全
+## 安装 Docker 的命令补全
 
 ```
 mkdir ~/.config/fish/completions
