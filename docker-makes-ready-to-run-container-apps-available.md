@@ -31,7 +31,7 @@
 大部分的公司和企业最感兴趣的地方是 Docker 的官方仓库。这里包括了最优化的、被维护的、官方支持的 Docker 化应用，并且提供给所有 Docker Hub 用户使用。现在，仓库里包括 Docker Hub Registry 中搜索次数前13名的应用程序，包括 CentOS 、  MongoDB 、 MySQL 、 Nginx 、 Redis 、 Ubuntu 和 WordPress 。这些程序向所有的组织开放，也包括一些愿意根据程序的指导手册提供持续维护的独立软件开发商。
 
 
-想把你的程序或者操作系统 “Docker 化” 吗？给 [Docker]( mailto:partners@docker.com) 发送邮件。从现在起用户可以注册 [免费 Docker Hub 帐号](http://hub.docker.com/) 。
+想把你的程序或者操作系统 “Docker 化” 吗？给 [Docker]( mailto:partners@docker.com) 发送邮件。从现在起用户可以免费注册 [ Docker Hub 帐号](http://hub.docker.com/) 。
 
 ***
 
