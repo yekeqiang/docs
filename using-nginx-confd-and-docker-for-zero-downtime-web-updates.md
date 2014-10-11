@@ -1,7 +1,7 @@
-#使用 nginx 、 Confd 以及 Docker 实现零停机 Web 更新
+# 使用 nginx 、 Confd 以及 Docker 实现零停机 Web 更新
 
-#####作者：[Brian Ketelsen](https://twitter.com/bketelsen)
-#####译者：[Xiaobo He](https://github.com/xiaobohe)
+##### 作者：[Brian Ketelsen](https://twitter.com/bketelsen)
+##### 译者：[Xiaobo He](https://github.com/xiaobohe)
 
 ***
 最近我很享受使用 Docker ，但是让我痛苦的是如何在不停机的情况下更新运行在 Docker 容器中的 web 应用。像这个 [应用](https://github.com/dotcloud/hipache) 使用了一个从 Redis 实例中获取配置的自定义的 Node.js 代理，但我真的不想为一个小小的网站维护如此“重量级”的东西，所以花了一段时间去查找更好的方案。我甚至考虑自己实现一个类似的东西，在开始了一段时间后，意识到没必要重写，所以就停止了。
@@ -32,7 +32,6 @@ sudo mkdir -p /etc/confd/templates
 然后，我为 nginx 制作了一个用来反向代理配置的模版。如下所示：
 
 ```
-
 upstream myapp {
 {{range $server := .gophercon_upstream}}
 server {{$server.Value}};
@@ -129,6 +128,6 @@ docker build -t gophercon .
 现在，所有提交到 master 分支的代码都会触发一个 drone.io 的构建。当没有错误发生，它将通过 ssh/rsync 被拷贝到 Gophercon 服务器的一个临时文件夹，然后 Docker 镜像将被构建。最后一步将触发我前面创建的部署脚本，持续发布，自动化 Dockek 部署及 nginx 反向代理。
 
 ***
-#####这篇文章由 [Brian Ketelsen](https://twitter.com/bketelsen) 发布，点击 [这里](http://brianketelsen.com/2014/02/25/using-nginx-confd-and-docker-for-zero-downtime-web-updates/) 可查阅原文。 [Xiaobo He](https://github.com/xiaobohe) 翻译了本文。
+##### 这篇文章由 [Brian Ketelsen](https://twitter.com/bketelsen) 发布，点击 [这里](http://brianketelsen.com/2014/02/25/using-nginx-confd-and-docker-for-zero-downtime-web-updates/) 可查阅原文。 [Xiaobo He](https://github.com/xiaobohe) 翻译了本文。
 
-#####The article was contributed by [Brian Ketelsen](https://twitter.com/bketelsen), click [here](http://brianketelsen.com/2014/02/25/using-nginx-confd-and-docker-for-zero-downtime-web-updates/) to read the original publication.
+##### The article was contributed by [Brian Ketelsen](https://twitter.com/bketelsen), click [here](http://brianketelsen.com/2014/02/25/using-nginx-confd-and-docker-for-zero-downtime-web-updates/) to read the original publication.
