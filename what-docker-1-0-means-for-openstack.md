@@ -1,10 +1,10 @@
-#对于 OpenStack ，Docker 1.0 意味着什么
+# 对于 OpenStack ，Docker 1.0 意味着什么
 
 ![alt](http://resource.docker.cn/business-org-chart-1.png)
 
-#####作者：[Jason Baker](https://twitter.com/jehb)
+##### 作者：[Jason Baker](https://twitter.com/jehb)
 
-#####译者：[Peter Zhang](https://github.com/duobei)
+##### 译者：[Peter Zhang](https://github.com/duobei)
 
 ***
 门票售罄的 [Docker大会](http://www.dockercon.com/) 发布了许多重大公告，其中最引人注目的是发布 Docker 1.0 。
@@ -28,6 +28,6 @@ Docker 即将成为 OpenStack 管理员的重要工具，与传统的虚拟机�
 
 ***
 
-#####这篇文章由 [Jason Baker](https://twitter.com/jehb) 撰写， [Peter Zhang](https://github.com/duobei) 翻译。点击 [这里](http://opensource.com/business/14/6/docker-and-openstack) 阅读原文。
+##### 这篇文章由 [Jason Baker](https://twitter.com/jehb) 撰写， [Peter Zhang](https://github.com/duobei) 翻译。点击 [这里](http://opensource.com/business/14/6/docker-and-openstack) 阅读原文。
 
-#####The article was contributed by [Jason Baker](https://twitter.com/jehb) , click [here](http://opensource.com/business/14/6/docker-and-openstack) to read the original publication.
+##### The article was contributed by [Jason Baker](https://twitter.com/jehb) , click [here](http://opensource.com/business/14/6/docker-and-openstack) to read the original publication.
