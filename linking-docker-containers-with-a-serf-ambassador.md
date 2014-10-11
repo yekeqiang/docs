@@ -1,8 +1,8 @@
-#使用 SERF AMBASSADOR 来链接 DOCKER 容器
+# 使用 SERF AMBASSADOR 来链接 DOCKER 容器
 
 
-#####作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)
-#####译者：[Mark Shao](https://github.com/markshao)
+##### 作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)
+##### 译者：[Mark Shao](https://github.com/markshao)
 
 ***
 
@@ -114,6 +114,6 @@ ctlc/amb-etcd 容器会自动注册到 etcd 而不是 serf 。当然你需要把
 
 ---
 
-#####这篇文章由 [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) 发表，点击 [这里](http://www.centurylinklabs.com/linking-docker-containers-with-a-serf-ambassador/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，您可以在 [GitHub](https://github.com/markshao) 上与他交流。
+##### 这篇文章由 [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) 发表，点击 [这里](http://www.centurylinklabs.com/linking-docker-containers-with-a-serf-ambassador/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，您可以在 [GitHub](https://github.com/markshao) 上与他交流。
 
-#####The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) , click [here]((http://www.centurylinklabs.com/linking-docker-containers-with-a-serf-ambassador/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981)) to read the original publication.
+##### The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) , click [here]((http://www.centurylinklabs.com/linking-docker-containers-with-a-serf-ambassador/?utm_source=Docker+News&utm_campaign=c3d355131c-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-c3d355131c-235722981)) to read the original publication.
