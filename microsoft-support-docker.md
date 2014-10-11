@@ -1,8 +1,8 @@
-#微软如何支持开源的 Docker 容器模型
+# 微软如何支持开源的 Docker 容器模型
 
-#####作者：[Mary Jo Foley](http://www.zdnet.com/meet-the-team/us/mary-jo-foley/)
+##### 作者：[Mary Jo Foley](http://www.zdnet.com/meet-the-team/us/mary-jo-foley/)
 
-#####译者：[Bo Wen](https://github.com/iambowen)
+##### 译者：[Bo Wen](https://github.com/iambowen)
 
 ***
 Docker，这个自动化应用部署的开源引擎，在本周发布了 1.0 的里程碑版本。
@@ -28,6 +28,6 @@ Docker 的测试者已经可以 [在 Azure 的 Linux 虚拟机上尝试预览版
 
 ***
 
-#####这篇文章由 [Mary Jo Foley](http://www.zdnet.com/meet-the-team/us/mary-jo-foley/) 撰写， [BOWEN](https://github.com/iambowen) 翻译。点击 [这里](http://www.zdnet.com/heres-how-microsoft-is-supporting-the-open-source-docker-container-model-7000030393/) 阅读原文。
+##### 这篇文章由 [Mary Jo Foley](http://www.zdnet.com/meet-the-team/us/mary-jo-foley/) 撰写， [BOWEN](https://github.com/iambowen) 翻译。点击 [这里](http://www.zdnet.com/heres-how-microsoft-is-supporting-the-open-source-docker-container-model-7000030393/) 阅读原文。
 
-#####The article was contributed by [Mary Jo Foley](http://www.zdnet.com/meet-the-team/us/mary-jo-foley/), click [here](http://www.zdnet.com/heres-how-microsoft-is-supporting-the-open-source-docker-container-model-7000030393/) to read the original publication.
+##### The article was contributed by [Mary Jo Foley](http://www.zdnet.com/meet-the-team/us/mary-jo-foley/), click [here](http://www.zdnet.com/heres-how-microsoft-is-supporting-the-open-source-docker-container-model-7000030393/) to read the original publication.
