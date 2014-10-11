@@ -1,12 +1,12 @@
-#在 Docker 中运行 .NET 应用
+# 在 Docker 中运行 .NET 应用
 
-#####作者：[Michael Friis](http://friism.com/michael-friis)
+##### 作者：[Michael Friis](http://friism.com/michael-friis)
 
-#####译者：[Ley](http://my.oschina.net/Ley11) & [petert](http://my.oschina.net/u/1422355)
+##### 译者：[Ley](http://my.oschina.net/Ley11) & [petert](http://my.oschina.net/u/1422355)
 
 这篇博文涵盖了使用 [Mono](http://www.mono-project.com/Main_Page) 在 [Docker](https://www.docker.io/) 轻量容器中运行简单 .NET 应用的方法。我在 Windows 上的 Vagrant/VirtualBox VM上运行 Docker 。它运行的很好，也很快。在 Docker 网站有 [安装指导](http://docs.docker.io/en/latest/installation/windows/) 。
 
-##构建基础镜像
+## 构建基础镜像
 
 首先是要创建安装有 Mono 的 Docker 镜像。我们将使用它作为基础镜像，以使容器可以真正运行应用。为了得到最新的 Mono 版本（写本文时是3.2.6），我使用 [由 Timotheus Pokorra 创建](http://software.opensuse.org/download/package?project=home:tpokorra:mono&package=mono-opt) 的、安装在 Ubuntu 12.04 LTS 上的 Docker 镜像。下面是它的 [Dockerfile](http://docs.docker.io/en/latest/use/builder/) ：
 
@@ -46,7 +46,7 @@ Mono JIT compiler version 3.2.6 (tarball Sat Jan 18 16:48:05 UTC 2014)
 
 出现 `installed/opt` 说明安装成功了!
 
-##运行控制台应用
+## 运行控制台应用
 
 首先，部署一款简单的控制台应用:
 
@@ -96,7 +96,7 @@ $ docker build -t friism/helloworld-container ....$ docker run friism/helloworld
 
 **成功！**
 
-##Web应用
+## Web应用
 
 运行 self-hosting 的 [OWIN](http://www.asp.net/vnext/overview/owin-and-katana) web 应用也很简单. 我这里使用 [OWIN/Katana-on-Heroku post](http://friism.com/running-owin-katana-apps-on-heroku) 上的代码
 
@@ -127,6 +127,6 @@ $ docker run -p 80:5000 -t friism/mono-hello-world-web
 如果你是一名 DotNET 开发人员，希望这篇文章能将 Docker 带入你的视野。如果想了解更多关于如何使用 Docker 来部署应用的方法，可以看看 [Automated deployment with Docker – lessons learnt](https://www.hiddentao.com/archives/2013/12/26/automated-deployment-with-docker-lessons-learnt/) 这篇文章。
 
 ---
-#####这篇文章由 [Michael Friis](http://friism.com/michael-friis) 发表，点击 [此处](http://friism.com/running-net-apps-on-docker) 可查阅原文。 [开源中国社区](http://www.oschina.net/) 的 [Ley](http://my.oschina.net/Ley11) 和 [petert](http://my.oschina.net/u/1422355) 贡献对本文的翻译。
+##### 这篇文章由 [Michael Friis](http://friism.com/michael-friis) 发表，点击 [此处](http://friism.com/running-net-apps-on-docker) 可查阅原文。 [开源中国社区](http://www.oschina.net/) 的 [Ley](http://my.oschina.net/Ley11) 和 [petert](http://my.oschina.net/u/1422355) 贡献对本文的翻译。
 
-#####The article was contributed by [Michael Friis](http://friism.com/michael-friis) , click [here](http://friism.com/running-net-apps-on-docker) to read the original publication.
+##### The article was contributed by [Michael Friis](http://friism.com/michael-friis) , click [here](http://friism.com/running-net-apps-on-docker) to read the original publication.
