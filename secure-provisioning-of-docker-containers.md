@@ -1,8 +1,8 @@
-#Docker 容器的安全配置
+# Docker 容器的安全配置
 
-#####作者：[Nicholas Clements](http://www.linkedin.com/pub/nicholas-clements/13/544/478) 
+##### 作者：[Nicholas Clements](http://www.linkedin.com/pub/nicholas-clements/13/544/478) 
 
-#####译者：[我不围观](http://weibo.com/ooutman)
+##### 译者：[我不围观](http://weibo.com/ooutman)
 ***
 
 [技术支持](http://www.cohesiveft.com/support/support-contacts/) 是 CohesiveFT 的一个重要内容，投入了较大的力量。用户经常会有一些关于我们产品的问题需要咨询，我们提供高质量的支持，也提供其他产品和服务的支持和最佳实践。最近就有一个用户询问 Docker 镜像和容器安全配置的最佳实践。鉴于我们支持在 [VNS3 Manager 的 3.5版本](http://www.cohesiveft.com/support/vns3-release-notes/) 上使用容器，我们还是比较乐于聊聊这个的。
@@ -57,6 +57,6 @@ RUN chmod 400 /root/.ssh/authorized_keys
 
 
 ***
-#####这篇文章由 [Nicholas Clements](http://www.linkedin.com/pub/nicholas-clements/13/544/478)  撰写，[我不围观](http://weibo.com/ooutman) 翻译。点击 [这里](http://blog.cohesiveft.com/2014/07/secure-provisioning-of-docker-containers.html) 阅读原文。
+##### 这篇文章由 [Nicholas Clements](http://www.linkedin.com/pub/nicholas-clements/13/544/478)  撰写，[我不围观](http://weibo.com/ooutman) 翻译。点击 [这里](http://blog.cohesiveft.com/2014/07/secure-provisioning-of-docker-containers.html) 阅读原文。
 
-#####The article was contributed by [Nicholas Clements](http://www.linkedin.com/pub/nicholas-clements/13/544/478)  , click [here](http://blog.cohesiveft.com/2014/07/secure-provisioning-of-docker-containers.html) to read the original publication.
+##### The article was contributed by [Nicholas Clements](http://www.linkedin.com/pub/nicholas-clements/13/544/478)  , click [here](http://blog.cohesiveft.com/2014/07/secure-provisioning-of-docker-containers.html) to read the original publication.
