@@ -1,8 +1,8 @@
-#创建一个运行 PHP 、NGINX 和 Hip Hop VM(HHVM) 的 Docker 容器
+# 创建一个运行 PHP 、NGINX 和 Hip Hop VM(HHVM) 的 Docker 容器
 
-#####作者：[Mike Ebinum](https://twitter.com/mikeebinum)
+##### 作者：[Mike Ebinum](https://twitter.com/mikeebinum)
 
-#####译者：[叶可强](http://weibo.com/yeziyu)
+##### 译者：[叶可强](http://weibo.com/yeziyu)
 
 ---
 
@@ -175,7 +175,7 @@ ENTRYPOINT ["/run.sh"]
 
 ***
 
-#####这篇文章由 [Mike Ebinum](https://twitter.com/mikeebinum) 撰写，[叶可强](http://weibo.com/yeziyu) 翻译。点击 [这里](http://blog.seedtech.io/post/91801062414/creating-a-docker-container-to-run-php-nginx-and-hip) 阅读原文。
+##### 这篇文章由 [Mike Ebinum](https://twitter.com/mikeebinum) 撰写，[叶可强](http://weibo.com/yeziyu) 翻译。点击 [这里](http://blog.seedtech.io/post/91801062414/creating-a-docker-container-to-run-php-nginx-and-hip) 阅读原文。
 
-#####The article was contributed by [Mike Ebinum](https://twitter.com/mikeebinum), click [here](http://blog.seedtech.io/post/91801062414/creating-a-docker-container-to-run-php-nginx-and-hip) to read the original publication.
+##### The article was contributed by [Mike Ebinum](https://twitter.com/mikeebinum), click [here](http://blog.seedtech.io/post/91801062414/creating-a-docker-container-to-run-php-nginx-and-hip) to read the original publication.
 
