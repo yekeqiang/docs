@@ -1,6 +1,6 @@
-#创建自己的 Docker Repository
+# 创建自己的 Docker Repository
 
-#####作者：[Tyr Chen](http://www.weibo.com/tchen82)
+##### 作者：[Tyr Chen](http://www.weibo.com/tchen82)
 
 ---
 
@@ -8,7 +8,7 @@
 
 在 ubuntu 下安装 docker 请参考 [官方教程](http://docs.docker.io/en/latest/installation/ubuntulinux/) 。注意，由于 docker 的核心技术是 [Linux container](http://en.wikipedia.org/wiki/LXC)，所以如果想在 osx 下安装 docker 请使用 vagrant。
 
-##安装docker-registry
+## 安装docker-registry
 
 首先 clone docker-registry：
 
@@ -49,7 +49,7 @@ $ . venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-##配置supervisor
+## 配置supervisor
 
 如果系统没有安装supervisor，请先安装:
 
@@ -91,7 +91,7 @@ docker-registry         RUNNING    pid 4371, uptime 0:00:01
 
 这样，`docker-registry` 服务就正常运行了。
 
-##配置nginx
+## 配置nginx
 
 接下来把 `nginx` request proxy 到 `docker-registry app` 就大功告成了。
 
@@ -210,4 +210,4 @@ $ sudo docker pull docker.your-domain.com/tchen/base
 ```
 
 ---
-#####这篇文章由 [Tyr Chen](http://www.weibo.com/tchen82) 发表于他的 [个人博客](http://tchen.me/)，Docker中文社区已获得作者许可转载此文章。您也可以点击 [这里](http://tchen.me/posts/2013-11-13-local-docker-repo.html) 阅读原文。
+##### 这篇文章由 [Tyr Chen](http://www.weibo.com/tchen82) 发表于他的 [个人博客](http://tchen.me/)，Docker中文社区已获得作者许可转载此文章。您也可以点击 [这里](http://tchen.me/posts/2013-11-13-local-docker-repo.html) 阅读原文。
