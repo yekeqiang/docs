@@ -30,7 +30,9 @@ Swarmd 是一个概念验证的二进制文件，通过运行它，你可以像 
 
 最基础的 swarmd 设置是这样的：
 
- ` ./swarmd 'dockerserver unix:///var/run/docker.sock' 'dockerclient tcp://1.2.3.4:2375'`
+```
+./swarmd 'dockerserver unix:///var/run/docker.sock' 'dockerclient tcp://1.2.3.4:2375'
+```
 
 这将会开启一个 Docker REST API ，实现 “dockerserver” 服务。 dockerserver 接受 HTTP 请求并且从中生成 libswarm 消息。 “dockerclient” 接受 libswarm 消息并且将他们传送给 docker 的守护进程（目前用的是 REST API ）。这个操作不多，但能让你在本地运行一个 docker 客户端并与 /var/run/docker.sock 进行通信，并将这些请求发送到 1.2.3.4:2357 的 docker 守护进程。
 
