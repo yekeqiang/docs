@@ -1,8 +1,8 @@
-#Docker 让即开即用的容器应用成为可能
+# Docker 让即开即用的容器应用成为可能
 
-#####作者：[Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/)
+##### 作者：[Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/)
 
-#####译者：[汪海洋](https://github.com/callmewhy)
+##### 译者：[汪海洋](https://github.com/callmewhy)
 
 ***
 
@@ -35,6 +35,6 @@
 
 ***
 
-#####这篇文章由 [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/) 撰写， [汪海洋](https://github.com/callmewhy) 翻译。点击 [这里](http://www.zdnet.com/docker-makes-ready-to-run-container-apps-available-7000030343/) 可阅读原文。
+##### 这篇文章由 [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/) 撰写， [汪海洋](https://github.com/callmewhy) 翻译。点击 [这里](http://www.zdnet.com/docker-makes-ready-to-run-container-apps-available-7000030343/) 可阅读原文。
 
-#####The article was contributed by [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/), click [here](http://www.zdnet.com/docker-makes-ready-to-run-container-apps-available-7000030343/) to read the original publication.
+##### The article was contributed by [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/), click [here](http://www.zdnet.com/docker-makes-ready-to-run-container-apps-available-7000030343/) to read the original publication.
