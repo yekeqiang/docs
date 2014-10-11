@@ -1,15 +1,15 @@
-#如何使用 docker 创建复杂的 mongodb 集群
+# 如何使用 docker 创建复杂的 mongodb 集群
 
-#####作者：[Sebastian Voss](https://twitter.com/sebastian_voss)
+##### 作者：[Sebastian Voss](https://twitter.com/sebastian_voss)
 
-#####译者：[邵靖](http://www.weibo.com/dysj4099)
+##### 译者：[邵靖](http://www.weibo.com/dysj4099)
 
 ***
 
 本文描述了如何使用 docker 创建 mongodb shard 集群。我们将直接展示 mongodb 集群不同组件（副本集 replica sets 、配置服务器 config servers 以及资源路由 routes ）所对应 dockerfile 文件以及容器的实例化过程。
 
 
-##创建Dockerfile文件
+## 创建Dockerfile文件
 
 首先我们需要创建两个 dockerfile ，一个是 mongod 而另一个是 mongos 。先来看 mongod ：
 
@@ -63,7 +63,7 @@ sudo docker build \
   -t dev24/mongodb mongos
 ```
 
-> #####译注：此处作者的操作步骤有问题，上面的一条语句使用 mongod/Dockerfile 建立了名为 dev24/mongodb 的镜像，当使用 docker run 运行该镜像时，根据 dockerfile 定义，会默认启动 /usr/bin/mongod 。而第二条语句在 dev24/mongodb 镜像的基础上将默认启动设置为 /usr/bin/mongos 并将新生成的镜像命名为 dev24/mongodb 从而覆盖了第一个镜像。本人亲测在启动副本集的时候会出错，因此本人在此将上述两句代码修改为以下的形式，生成 dev24/mongodb 以及 dev24/mongos 两个镜像，如果读者对此有不同意见，可以留言或与译者沟通，非常感谢。
+> ##### 译注：此处作者的操作步骤有问题，上面的一条语句使用 mongod/Dockerfile 建立了名为 dev24/mongodb 的镜像，当使用 docker run 运行该镜像时，根据 dockerfile 定义，会默认启动 /usr/bin/mongod 。而第二条语句在 dev24/mongodb 镜像的基础上将默认启动设置为 /usr/bin/mongos 并将新生成的镜像命名为 dev24/mongodb 从而覆盖了第一个镜像。本人亲测在启动副本集的时候会出错，因此本人在此将上述两句代码修改为以下的形式，生成 dev24/mongodb 以及 dev24/mongos 两个镜像，如果读者对此有不同意见，可以留言或与译者沟通，非常感谢。
 
 ```
 sudo docker build \
@@ -74,7 +74,7 @@ sudo docker build \
   -t dev24/mongos mongos
 ```
 
-##创建副本集Replica Sets
+## 创建副本集Replica Sets
 
 集群中，每个分片都需要副本集以保证数据可靠性。在这里我们需要为每个分片创建两个副本以构成三个节点的副本集。以下这些命令将会实例化三个 mongod 容器并且将他们组成副本集 rs1 。参数 --noprealloc 和 --smallfiles 是可选项，用来避免 mongodb 消耗掉过多内存(在测试时十分有效)。
 
@@ -120,7 +120,7 @@ sudo docker run \
   --noprealloc --smallfiles
 ```
 
-##初始化副本集
+## 初始化副本集
 
 首先请记一下每个 docker 容器的 ip 地址以及绑定端口。
 
@@ -130,7 +130,7 @@ sudo docker inspect rs1_srv2
 ...
 ```
 
-###初始化副本集1
+### 初始化副本集1
 
 连接到运行于容器 rs1_srv1 的 mongodb (你需要将本地端口绑定到 27017/tcp ，如有疑问请查看前述步骤)。
 
@@ -158,7 +158,7 @@ rs.reconfig(cfg)
 rs.status()
 ```
 
-###初始化副本集2
+### 初始化副本集2
 
 初始化副本集2也需要相同的步骤。请连上运行于 rs2_srv1 容器的 mongodb 。
 
@@ -184,7 +184,7 @@ rs.reconfig(cfg)
 rs.status()
 ```
 
-##创建Config Server
+## 创建Config Server
 
 当副本集配置好之后，我们将创建三个 mongodb config 服务来管理我们的分片。对于开发来说，一个 config 服务已经足够了，不过这里我们将演示如何创建更多。
 
@@ -216,7 +216,7 @@ sudo docker run \
 
 使用 docker inspect 命令查看每个 config 服务器的 ip 地址。我们将在下一个配置 mongodb router 的步骤中使用到它们。
 
-##创建 Router
+## 创建 Router
 
 mongodb router 是连接所有 shard 客户端的节点。--configdb 参数是一个用逗号分隔的 ip:port 列表，对应于 config 服务器。
 
@@ -233,7 +233,7 @@ sudo docker run \
     <IP_of_container_cfg3>:27017
 ```
 
-##初始化 shard
+## 初始化 shard
 
 最后，我们需要初始化 shard 。连接到 mongodb router （需要绑定本地端口 27017/tcp ）并执行 shell 命令：
 
@@ -247,11 +247,11 @@ sh.addShard("rs2/<IP_of_rs2_srv1>:27017")
 sh.status()
 ```
 
-##小结
+## 小结
 
 利用 docker 构建复杂 mongodb 的过程的确十分简单，让人印象深刻。虽然有很多需要设置的步骤，但是这很容易就能写自动化工具来完成。还有一点，就是对于不同部分使用 IP 地址的方式应该被使用 DNS 这样的方案来代替。
 
 ***
-#####这篇文章由 [Sebastian Voss](https://twitter.com/sebastian_voss) 撰写， [邵靖](http://www.weibo.com/dysj4099) 翻译。点击 [这里](http://sebastianvoss.com/docker-mongodb-sharded-cluster.html) 可阅读原文。
+##### 这篇文章由 [Sebastian Voss](https://twitter.com/sebastian_voss) 撰写， [邵靖](http://www.weibo.com/dysj4099) 翻译。点击 [这里](http://sebastianvoss.com/docker-mongodb-sharded-cluster.html) 可阅读原文。
 
-#####The article was contributed by [Sebastian Voss](https://twitter.com/sebastian_voss), click [here](http://sebastianvoss.com/docker-mongodb-sharded-cluster.html) to read the original publication.
+##### The article was contributed by [Sebastian Voss](https://twitter.com/sebastian_voss), click [here](http://sebastianvoss.com/docker-mongodb-sharded-cluster.html) to read the original publication.
