@@ -55,7 +55,7 @@ cgroups 是一个 Google 贡献的项目，它主要用来对共享资源的分�
 
 容器技术实现方案可以用下面的图进行简单说明。
 
-![Docker如何和Linux内核打交道](http://liubin-org.u.qiniudn.com/2014/docker01/docker-execdriver-diagram.png/zoom1)
+![Docker如何和Linux内核打交道](http://resource.docker.cn/docker-execdriver-diagram.png)
 
 上图中的 cgroups 、 namespaces 和 apparmor 等都是 Linux 内核提供的功能。不管是传统的 LXC 还是 Docker 的 libcontainer ，都使用了 Kernel 的这些功能来实现容器功能。
 
@@ -78,7 +78,7 @@ AUFS（ AnotherUnionFS ）是一个分层的基于 Copy On Write 技术的文件
 性能 | 接近宿主机本地进程 | 逊于宿主机
 资源利用率 |高 | 低
 
-比如开源 PaaS 实现软件 tsuru 最初使用的是基于虚拟机的技术，创建一个应用程序需要5分钟左右的时间，而在采用 Docker 之后，已经将这个时间缩短到了10秒钟了（详见 Andrews Medina 的分享 [tsuru and docker by ](https://speakerdeck.com/andrewsmedina/tsuru-and-docker) ）。
+比如开源 PaaS 实现软件 tsuru 最初使用的是基于虚拟机的技术，创建一个应用程序需要5分钟左右的时间，而在采用 Docker 之后，已经将这个时间缩短到了10秒钟了（详见 Andrews Medina 的分享 [tsuru and docker](https://speakerdeck.com/andrewsmedina/tsuru-and-docker) ）。
   
 
 ### 1.5. 我们能用 Docker 做什么？
@@ -143,7 +143,7 @@ Docker 容器是可移植，或者说跨平台。将来的应用部署可能是�
 
 「Blue-green deployment」这个词最初出现在 *Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation*一书，后经 ThoughtWorks 的 [Martin Fowler](http://martinfowler.com/bliki/BlueGreenDeployment.html) 发扬光大。
 
-![blue_green_deployment](http://liubin-org.u.qiniudn.com/2014/docker01/blue_green_deployment.png/zoom1)
+![blue_green_deployment](http://resource.docker.cn/blue-green-deployment.png)
 
 Blue-green deployment 方法其实很简单，就是保持两套一样的生产环境，而实际上只有一套环境真正的对外提供服务（图中绿色环境），而另一套环境则处于待机状态（图中蓝色）。部署的时候，我们会先上线到蓝色环境中，如果测试没有问题了，再将路由切换到新的服务上。
 
@@ -175,7 +175,7 @@ Blue-green 部署能带来如下好处：
 
 Docker 是一个构建、发布、运行分布式应用的平台（见下图）， Docker 平台由Docker Engine（运行环境 + 打包工具）、Docker Hub（ API + 生态系统）两部分组成。
 
-![](http://liubin-org.u.qiniudn.com/2014/docker01/docker_platform.png/zoom1)
+![](http://resource.docker.cn/docker-platform.png/)
 
 从图中我们可以看到， Docker 的底层是各种 Linux OS 以及云计算基础设施，而上层则是各种应用程序和管理工具，每层之间都是通过 API 来通信的。
 
@@ -197,7 +197,7 @@ Docker 镜像是 Docker 系统中的构建模块（ Build Component ），是启
 
 我们可以通过一个官方提供的示意图来帮助我们来理解一下镜像的概念。
 
-![docker image](http://liubin-org.u.qiniudn.com/2014/docker01/image_container.png/zoom1)
+![docker image](http://resource.docker.cn/image-container.png)
 
 Docker 镜像位于 bootfs 之上，实际上 bootfs 在系统启动后会被卸载的。 Docker镜像（ Images ）是分层的，这得益于其采用的联合文件系统，前面我们已经介绍过了。镜像是有继承（父子）关系的，每一层镜像的下面一层称为父镜像，没有父镜像的称为基础镜像（ Base Iamge ，其实叫做 Root Image 可能更确切，不过这可能容易和 rootfs 混淆）。
 
@@ -682,6 +682,6 @@ Docker 虽然入门和使用起来非常简单，但整个生态系统还是挺�
 
 ***
 
-这篇文章最初由 [刘斌](http://weibo.com/pmproad) 发表于 [个人网站](http://liubin.org/) ，我们得到其授权后将其转载，并对错别字进行了修改。为了阅读方便，也对格式进行了调整。你可以点击 [这里](http://liubin.org/2014/08/11/docker-cloud-app-delivery-style/) 来阅读 [原始版本](http://liubin.org/2014/08/11/docker-cloud-app-delivery-style/)。 
+##### 这篇文章最初由 [刘斌](http://weibo.com/pmproad) 发表于 [个人网站](http://liubin.org/) ，我们得到其授权后将其转载，并对错别字进行了修改。为了阅读方便，也对格式进行了调整。您可以点击 [这里](http://liubin.org/2014/08/11/docker-cloud-app-delivery-style/) 来阅读 [原始版本](http://liubin.org/2014/08/11/docker-cloud-app-delivery-style/)。 
 
-如果你有任何疑问，欢迎通过 [微博](http://weibo.com/pmproad) 、[GitHub](http://weibo.com/pmproad) 向作者提问；也欢迎你在 [Twitter](https://twitter.com/OurColorfulDays) 上 follow [@OurColorfulDays](https://twitter.com/OurColorfulDays) 。
+##### 如果您有任何疑问，欢迎通过 [微博](http://weibo.com/pmproad) 、[GitHub](http://weibo.com/pmproad) 向作者提问；也欢迎您在 [Twitter](https://twitter.com/OurColorfulDays) 上 follow [@OurColorfulDays](https://twitter.com/OurColorfulDays) 。
