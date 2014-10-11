@@ -1,9 +1,9 @@
-#Docker vs LXC/Ansible
+# Docker vs LXC/Ansible
 
 ![alt](http://resource.docker.cn/linux-containers-300x248.png)
 
-#####作者：[Maciej Lasyk](https://twitter.com/docent_net)
-#####译者：[@regrecall](http://weibo.com/u/2279238670)
+##### 作者：[Maciej Lasyk](https://twitter.com/docent_net)
+##### 译者：[@regrecall](http://weibo.com/u/2279238670)
 
 
 
@@ -36,6 +36,6 @@
 借助这种开发方式，我想自己可能会在后面几周里找到这个问题的最佳答案，这也将会是非常棒的演讲话题。
 
 ---
-#####这篇文章由 [Maciej Lasyk](https://twitter.com/docent_net) 发表，点击 [此处](http://maciek.lasyk.info/sysop/2014/03/16/docker-vs-lxcansible/?utm_source=Docker+News&utm_campaign=778f653f1b-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-778f653f1b-235722981) 可查阅原文。
+##### 这篇文章由 [Maciej Lasyk](https://twitter.com/docent_net) 发表，点击 [此处](http://maciek.lasyk.info/sysop/2014/03/16/docker-vs-lxcansible/?utm_source=Docker+News&utm_campaign=778f653f1b-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-778f653f1b-235722981) 可查阅原文。
 
-#####The article was contributed by [Maciej Lasyk](https://twitter.com/docent_net) , click [here](http://maciek.lasyk.info/sysop/2014/03/16/docker-vs-lxcansible/?utm_source=Docker+News&utm_campaign=778f653f1b-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-778f653f1b-235722981) to read the original publication.
+##### The article was contributed by [Maciej Lasyk](https://twitter.com/docent_net) , click [here](http://maciek.lasyk.info/sysop/2014/03/16/docker-vs-lxcansible/?utm_source=Docker+News&utm_campaign=778f653f1b-Docker_0_5_0_7_18_2013&utm_medium=email&utm_term=0_c0995b6e8f-778f653f1b-235722981) to read the original publication.
