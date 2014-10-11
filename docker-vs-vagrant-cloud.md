@@ -4,7 +4,7 @@
 
 #####译者：[铁威](https://github.com/TieWei)
 
-
+---
 
 什么是 vagrant ? Vagrant 是一个跨平台的虚拟机构造工具，能够通过 [vagrantfile](https://github.com/patrickdlee/vagrant-examples/blob/master/example2/Vagrantfile) 
 描述虚拟机并将其部署到 hypervisor 上。
@@ -53,9 +53,9 @@ $ vagrant up
 * 可以在一个虚拟机中运行多个 container，从而节省开销
 * Docker 的 container 机制更适合一些[持续集成/持续发布和微型 PaaS 场景](http://www.centurylinklabs.com/top-10-open-source-docker-projects/)
 
-然而有明显的迹象表明虚拟机将会在这些方面有所改善。
+然而有明显迹象表明虚拟机将会在这些方面有所改善。
 
-结语
+###结语
 
 虚拟机和 linux container 的竞争十分激烈，二者在竞争中相互启发并走向技术的进步。比如 vagrant 作者的 [serf](http://serfdom.io/) 
 项目可以[很方便地在 linux container 环境中使用](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)。
