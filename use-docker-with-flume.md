@@ -1,8 +1,8 @@
-#基于 Docker 构建 Flume   --   Part 1
+# 基于 Docker 构建 Flume   --   Part 1
 
-#####作者：[Alex Wilson](https://twitter.com/pr0bablyfine)
+##### 作者：[Alex Wilson](https://twitter.com/pr0bablyfine)
 
-#####译者：[叶可强](http://weibo.com/1224591704)
+##### 译者：[叶可强](http://weibo.com/1224591704)
 
 ***
 
@@ -37,6 +37,7 @@ RUN wget -qO- \
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV PATH /opt/flume/bin:$PATH
 ```
+
 通过这个 Dockerfile 构建一个镜像（使用 ```docker build -t flume .``` ），将给我们一个基础镜像，以使 Flume 容器可用。你可以在 [Docker index](https://index.docker.io/u/probablyfine/flume/) 找到它。
 
 ## 一个基础的 Flume  拓扑
@@ -50,6 +51,7 @@ ENV PATH /opt/flume/bin:$PATH
  - 一个 LoggerSink ，记录它接收到的事件
  
 这个拓扑的配置文件，我们称之为 flume-example.conf 。配置文件如下：
+
 ```
 docker.sinks = logSink
 docker.sources = netcatSource
@@ -69,6 +71,7 @@ docker.sinks.logSink.channel = inMemoryChannel
 ```
 
 我们使用这个配置文件创建一个新容器，并且启动 docker agent 。
+
 ```
 FROM probablyfine/flume
 
@@ -84,6 +87,7 @@ ENTRYPOINT [ "flume-ng", "agent",
 将 ```ENTRYPOINT``` 块中的 ```flume-ng``` 的命令在一个启动的容器中运行（需要配置文件的目录、配置文件、 以及 agent 名称），并且 ```EXPOSE``` 指令使得端口在运行期是可用的。 NetcatSource 在监听这个端口。
 
 一旦我们创建了这个新镜像（我们叫做 flume-example），我们就可以通过使用命令 ```docker run -p 444:44444 -t flume-example``` 启动该容器。 ```p 444:44444``` 指令将让容器中的 ```4444``` 端口和本机的 ```444``` 端口做映射。现在我们可以通过 ```echo foo bar baz | nc localhost 444``` 给它发送消息了，然后查看被记录的事件。
+
 ```
 ...
 2014-05-05 19:26:13,218 (SinkRunner-PollingRunner-DefaultSinkProcessor)
@@ -98,6 +102,6 @@ ENTRYPOINT [ "flume-ng", "agent",
 
 ***
 
-#####这篇文章由 [Alex Wilson](https://twitter.com/pr0bablyfine) 撰写， [叶可强](http://weibo.com/1224591704) 翻译。点击 [这里](http://probablyfine.co.uk/2014/05/05/using-docker-with-apache-flume-1/) 可阅读原文。
+##### 这篇文章由 [Alex Wilson](https://twitter.com/pr0bablyfine) 撰写， [叶可强](http://weibo.com/1224591704) 翻译。点击 [这里](http://probablyfine.co.uk/2014/05/05/using-docker-with-apache-flume-1/) 可阅读原文。
 
-#####The article was contributed by [Alex Wilson](https://twitter.com/pr0bablyfine), click [here](http://probablyfine.co.uk/2014/05/05/using-docker-with-apache-flume-1/) to read the original publication.
+##### The article was contributed by [Alex Wilson](https://twitter.com/pr0bablyfine), click [here](http://probablyfine.co.uk/2014/05/05/using-docker-with-apache-flume-1/) to read the original publication.
