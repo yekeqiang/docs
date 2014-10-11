@@ -1,5 +1,7 @@
 #用 Drone 和 Docker 10 分钟搭建全功能的 CI 服务器
 
+---
+
 什么是 [Drone](https://github.com/drone/drone) ？ 官方的解释：“ Drone 是基于 Docker 构建的持续集成平台”。
 
 什么是 [Docker](http://docker.io) ？官方的解释：“ Docker 是一个开源项目，它是一个容易创建的轻量级、易移植和对任何程序都是全功能的容器。”
@@ -90,7 +92,7 @@ notify:
 
 你一定很疑惑 database.drone.yml 是什么，[请看这个gist](https://gist.github.com/jipiboily/0cad2550be91f5c9b5d)
 
-这里有很多 Go、Python、Haskell、PHP、Scala、Node 的镜像。Drone 为我们提供了这些[官方镜像](https://github.com/drone/drone#images)，但是你可以使用其它的镜像。
+这里有很多 Go、Python、Haskell、PHP、Scala、Node 的镜像。Drone 为我们提供了这些[官方镜像](https://github.com/drone/drone#images)，不过你也可以使用其它的镜像。
 
 [这里还有很多服务的镜像](https://github.com/drone/drone#databases)
 
@@ -102,7 +104,7 @@ notify:
 
 ##特别提示！
 
-下面是一些 Drone 提供给的，你可能需要的功能：
+下面是一些由 Drone 提供的、你可能需要的功能：
 
 * 邮件通知( SMTP 设置在  http://my-server-ip-or-addr/account/admin/settings 底部 )
 * SSL 设置( SSL 设置在 http://my-server-ip-or-addr/account/admin/settings 顶部 )
