@@ -1,10 +1,10 @@
-#Docker Quicktip #1: Entrypoint
+# Docker Quicktip #1: Entrypoint
 
 ![alt](http://resource.docker.cn/quick-tip.jpg)
 
-#####作者：[Brian Goff](https://github.com/cpuguy83) 
+##### 作者：[Brian Goff](https://github.com/cpuguy83) 
 
-#####译者：[巨震](https://github.com/crystaldust)
+##### 译者：[巨震](https://github.com/crystaldust)
 
 ---
 
@@ -42,8 +42,8 @@ Entrypoint 非常好用。它非常像 CMD ，不同的是它是在容器开始�
 
 
 ---
-#####这篇文章由 [Brian Goff](https://github.com/cpuguy83) 发表，点击 [此处](http://www.tech-d.net/2014/01/27/docker-quicktip-1-entrypoint/)可查阅原文。
+##### 这篇文章由 [Brian Goff](https://github.com/cpuguy83) 发表，点击 [此处](http://www.tech-d.net/2014/01/27/docker-quicktip-1-entrypoint/)可查阅原文。
 
-#####The article was contributed by [Brian Goff](https://github.com/cpuguy83) , click [here](http://www.tech-d.net/2014/01/27/docker-quicktip-1-entrypoint/) to read the original publication.
+##### The article was contributed by [Brian Goff](https://github.com/cpuguy83) , click [here](http://www.tech-d.net/2014/01/27/docker-quicktip-1-entrypoint/) to read the original publication.
 
 
