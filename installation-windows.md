@@ -1,24 +1,24 @@
-#Windows 下 Docker 安装教程
+# Windows 下 Docker 安装教程
 
 
->作者注：你的CPU一定要支持VT才可以，笔者的笔记本T6400不支持VT是装不上的，所以一定要支持VT，好在笔者的MAC很OK，公司电脑也给力。
+> 作者注：你的CPU一定要支持VT才可以，笔者的笔记本T6400不支持VT是装不上的，所以一定要支持VT，好在笔者的MAC很OK，公司电脑也给力。
 
 
 上一节我们介绍了在 ubuntu 和 centos 下的安装，当然都是基于64位系统的，在学习过程中，你可能没有这些东西，当然你可以用 virtualbox 或者 Vmware 虚拟化出来，今天我们介绍的是官网给我们提供的 using vagrant 方案
 
 通过使用 virtualbox 这样的 VM ，Docker 可以在 Windows 上运行，然后你也可以在 VM 里运行 Linux 。
 
-##安装警告
+## 安装警告
 
 1. 官方申明 docker 还是在开发完善中，不建议在运营的产品中使用。请关注 [官方博客](http://blog.docker.io/2013/08/getting-to-docker-1-0/) 。
 
 2. windows 的安装是社区贡献出来的，唯一的官方认可的的安装方法使用是 [ubuntu](http://docs.docker.io/en/latest/installation/ubuntulinux/#ubuntu-linux) 。不过鉴于版本更新速度，本文提及的版本可能过期。
 
-##安装前准备
+## 安装前准备
 
 步骤1. 安装 virtualbox ，下载地址：https://www.virtualbox.org
 
-*译者注：如果你不会安装或者感觉下载速度慢，可以用360或者QQ软件管家下载自动安装*
+> 作者注：如果你不会安装或者感觉下载速度慢，可以用360或者QQ软件管家下载自动安装
 
 步骤2. 安装 vagrant ，下载地址：http://www.vagrantup.com
 
@@ -30,15 +30,15 @@
 
 **官方推荐至少有2GB的磁盘空间和2GB的内存！**
 
-###运行命令提示符
+### 运行命令提示符
 
 首先要打开 cmd 命令提示符，你可以同时按住 windows 键(非官方备注：ctrl键旁边那个微软图标)+R，然后输入 cmd ,按回车（Enter）就可以了，当然你也可以在你的计算机中搜索cmd.exe
 
-*译者注：如果你跟我一样用 win8 ，可以 "windows键 + x" 选择命令提示符管理员那个*
+> 作者注：如果你跟我一样用 win8 ，可以 "windows键 + x" 选择命令提示符管理员
 
 当然你可以用Cygwin终端或者git bash这些命令行都可以，操作都是一样的
 
-###安装 Ubuntu virtual server
+### 安装 Ubuntu virtual server
 
 让我们下载和运行一个安装好 docker 文件的 ubuntu 镜像
 
@@ -54,7 +54,7 @@ vagrant up
 
 ![alt](http://resource.docker.cn/installation-windows-3.png)
 
-###官方文档没有提到但是你会遇到的情况
+### 官方文档没有提到但是你会遇到的情况
 
 更新内核完成后，就出现一些字段，譬如升级完内核可能出现  vagrant halt 的字样，这个时候你就要输入 vagrant halt ，然后再输入 vagrant up ，可能会出现如下结果：
 
@@ -77,14 +77,14 @@ vagrant up
 ![alt](http://resource.docker.cn/installation-windows-7.png)
 
 
-##登录 unbuntu 服务器
+## 登录 unbuntu 服务器
 
 现在登录你的ubuntu服务器，你现在有两个选择
 
 - 运用vagrant的命令行来操作
 - 运用ssh（我用的putty）
 
-###运用windows命令行来操作
+### 运用windows命令行来操作
 
 `vagrant ssh`
 
@@ -100,7 +100,7 @@ vagrant up
 
 如果这个时候你出现错误 “ *The program ‘docker’ is currently not installed* ”，那就很遗憾你只能从头开始重新安装了。
 
-###运用 ssh 客户端登录
+### 运用 ssh 客户端登录
 
 首先，你要拿到你登录的IP和端口，输入
 
@@ -117,7 +117,7 @@ vagrant up
 `ssh vagrant@127.0.0.1 –p 2222`
 
 
-##运行docker
+## 运行docker
 
 首先获得 root
 
@@ -132,4 +132,4 @@ vagrant up
 ![alt](http://resource.docker.cn/installation-windows-12.png)
 
 ---
-#####这篇文章由 [widuu](www.weibo.com/widuu) 结合 Docker 官方 [教程](http://docs.docker.io/en/latest/installation/windows/) 撰写而成，最早发表于 [微度网络](http://www.widuu.com/docker/docker-windows.html) 。Docker 中文社区获得作者许可转载。您也可以点击 [这里](http://docs.docker.io/en/latest/installation/windows/) 阅读英文原版教程。
+##### 这篇文章由 [widuu](www.weibo.com/widuu) 结合 Docker 官方 [教程](http://docs.docker.io/en/latest/installation/windows/) 撰写而成，最早发表于 [微度网络](http://www.widuu.com/docker/docker-windows.html) 。Docker 中文社区获得作者许可转载。您也可以点击 [这里](http://docs.docker.io/en/latest/installation/windows/) 阅读英文原版教程。
