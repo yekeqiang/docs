@@ -1,8 +1,8 @@
-#十个让你乐开怀的 Docker 技巧
+# 十个让你乐开怀的 Docker 技巧
 
-#####作者：[Nathan LeClaire](https://twitter.com/upthecyberpunks)
+##### 作者：[Nathan LeClaire](https://twitter.com/upthecyberpunks)
 
-#####译者：[刘梦馨](http://weibo.com/oilbeater)
+##### 译者：[刘梦馨](http://weibo.com/oilbeater)
 
 ***
 
@@ -37,8 +37,9 @@
 
 在 privileged 模式下，想在容器里做一些 Docker 相关的事情，可是又不想运行一个完整的 Docker in Docker (dind) ，该怎么办？你可以使用一个装有 Docker 客户端的 image 并且使用 -v 参数 bind-mount 自己的 Docker socket 。
 
-
+```
     docker run -it -v /var/run/docker.sock:/var/run/docker.sock nathanleclaire/devbox
+```
 
 现在你可以利用同一个 docker daemon 向你容器内的 Docker 发送 docker 命令了。
 
@@ -130,7 +131,7 @@ Docker 提供了一种轻便的解决方法。
 
 你也可以将这些快捷键以一种有趣的方式组合，例如你可以这样
 
-    $ drm -f $(dps -aq)
+    ```$ drm -f $(dps -aq)```
 
 来移除所有的容器（包括运行的容器）。或者你也可以使用
 
@@ -257,6 +258,6 @@ Docker 的工程师 [Jérôme Petazzoni](http://twitter.com/jpetazzo) 在几周�
 
 ***
 
-#####这篇文章由 [Nathan LeClaire](https://twitter.com/upthecyberpunks) 撰写，[刘梦馨](http://weibo.com/oilbeater) 翻译。点击 [这里](http://blog.docker.com/2014/07/10-docker-tips-and-tricks-that-will-make-you-sing-a-whale-song-of-joy/) 阅读原文。
+##### 这篇文章由 [Nathan LeClaire](https://twitter.com/upthecyberpunks) 撰写，[刘梦馨](http://weibo.com/oilbeater) 翻译。点击 [这里](http://blog.docker.com/2014/07/10-docker-tips-and-tricks-that-will-make-you-sing-a-whale-song-of-joy/) 阅读原文。
 
-#####The article was contributed by [Nathan LeClaire](https://twitter.com/upthecyberpunks), click [here](http://blog.docker.com/2014/07/10-docker-tips-and-tricks-that-will-make-you-sing-a-whale-song-of-joy/) to read the original publication.
+##### The article was contributed by [Nathan LeClaire](https://twitter.com/upthecyberpunks), click [here](http://blog.docker.com/2014/07/10-docker-tips-and-tricks-that-will-make-you-sing-a-whale-song-of-joy/) to read the original publication.
