@@ -1,14 +1,14 @@
-#使用 CoreOS 和 Fig 构建基于 Docker 的复杂应用
+# 使用 CoreOS 和 Fig 构建基于 Docker 的复杂应用
 
-#####作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)#####
+##### 作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)#####
 
-#####译者：[Mark Shao](https://github.com/markshao)#####
+##### 译者：[Mark Shao](https://github.com/markshao)#####
 
 ---
 
 要使用 Docker 来部署系统， [CoreOS](https://coreos.com) 的功能比较强大但是配置比较复杂； [Fig](http://orchardup.github.io/fig/) 相对而言比较简单，但是很难在多台服务器上做扩展。这篇博客将向您展示如何 [使用 Fig 构建多个容器的复杂应用](http://www.centurylinklabs.com/auto-loadbalancing-with-fig-haproxy-and-serf/) 并且把这些应用部署到基于 CoreOS 的生产环境。
 
-###完整构建一个基于 Fig 的多容器应用
+## 完整构建一个基于 Fig 的多容器应用
 
 在上个星期的博文中，我们谈到了在 Fig 中构建有 4 个容器的应用。开门见山，下面这个 ```fig.yml``` 就是用来构建 4 个容器的应用的。
 
@@ -50,7 +50,7 @@ db:
     
 ```
 
-如果要在你的环境中部署这个具有4个容器的系统，只需要简单运行 ```fig up -d``` （和重启系统的命令一样）。
+如果要在环境中部署这个具有4个容器的系统，只需要简单运行 ```fig up -d``` （和重启系统的命令一样）。
 
 
 ```
@@ -83,7 +83,7 @@ ctlcblog_lb_1     /run.sh              Up      80->80/tcp
 
 你可以看到，Fig 的使用是非常简单和方便的，但第一个问题就是我们如何把它扩展到多个服务器上?
 
-###你如何在 CoreOS 中基于 Fig 的配置来创建容器？
+## 如何在 CoreOS 中基于 Fig 的配置来创建容器？
 
 CoreOS 不是这个世界上最简单或者说最容易上手的系统。理解并正确编写一个 systemd 配置文件是非常耗时而且让人困扰的。
 
@@ -129,7 +129,7 @@ core@coreos-wordpress-app ~ $
 
 由于某些原因（我也不知道为什么），用 ```vagrant up``` 启动的 CoreOS 默认版本并不是最新版本，这意味着它没有安装 [Fleet](https://github.com/coreos/fleet) ，并且上面的 Docker (0.7.2) 也是旧的。一旦 vagrant coreos box 已经启动并且下载完了最新的 CoreOS 的版本，你就可以通过在 CoreOS 的虚拟机中运行 ```sudo reboot``` 或者在 vagrant 的当前工作目录下运行 ```vagrant reload --provision``` 来执行更新的操作。
 
-### fig2coreos 到底做了什么呢？
+## fig2coreos 到底做了什么呢？
 
 
 `fig2coreos` 解析你的 `fig.yml` 并且生成一系列的 systemd 配置文件。你可以在它生成的目录中查看这些文件：
@@ -206,7 +206,7 @@ This registers the service into the ```etcd``` key/value store. In this example 
 
 系统管理和配置管理不尽相同，但最终殊途同归。 Serf 和 etcd 都可以让 Docker 的应用察觉到它们所对应的容器、容器的功能以及它们之间的连结。
 
-###如何把 Docker 扩展到不同的主机上？
+## 如何把 Docker 扩展到不同的主机上？
 
 
 理论上讲，你可以在每一台服务器上使用 Fig ，让每一台机器运行一个独立的 Docker 守护进程。但是这会导致链接容器变得复杂，而且网络问题也变得很严重，即使是使用 Serf 也会如此。
@@ -215,12 +215,12 @@ This registers the service into the ```etcd``` key/value store. In this example 
 
 通过观看这条 [介绍 CoreOS Fleet 的 2 分钟 YouTube 视频](http://www.youtube.com/watch?v=u91DnN-yaJ8)， 你能了解一个关于部署多主机 CoreOS 服务的案例，并从中发现 CoreOS 和 Fleet 的强大。但目前还不能把所有的组件组合在一起来重现视频中的例子。
 
-###结语
+## 结语
 
 我们已经非常接近向您展示如何部署一个多主机的 Docker 应用到一个云生产环境中。每周我都会通过展示一些复杂的例子来带领你达成这个目标。 CoreOS 和 Fig 只是两个基于 Docker 技术开发的、用来部署复杂应用的工具。未来我们将向您展示另外的工具比如 [Flynn](https://flynn.io/) 和 [Deis](http://deis.io/) ，它们也可以用来实现相同的目的。
 
 ***
 
-#####这篇文章由 [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) 发表，点击 [这里](http://www.centurylinklabs.com/building-complex-apps-for-docker-on-coreos-and-fig/) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，您可以在 [GitHub](https://github.com/markshao) 上与他交流。#####
+##### 这篇文章由 [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) 发表，点击 [这里](http://www.centurylinklabs.com/building-complex-apps-for-docker-on-coreos-and-fig/) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，您可以在 [GitHub](https://github.com/markshao) 上与他交流。#####
 
-#####The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) , click [here](http://www.centurylinklabs.com/building-complex-apps-for-docker-on-coreos-and-fig/) to read the original publication.
+##### The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/) , click [here](http://www.centurylinklabs.com/building-complex-apps-for-docker-on-coreos-and-fig/) to read the original publication.
