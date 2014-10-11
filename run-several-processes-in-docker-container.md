@@ -1,18 +1,18 @@
-#在 Docker 容器中运行多个进程
+# 在 Docker 容器中运行多个进程
 
-#####作者：[Alexander Beletsky](https://github.com/alexanderbeletsky)
+##### 作者：[Alexander Beletsky](https://github.com/alexanderbeletsky)
 
-#####译者：[巨震](https://github.com/crystaldust)
+##### 译者：[巨震](https://github.com/crystaldust)
 
 我最喜欢 Docker 的地方就是它那全新的软件部署和发布方式。我经常会看到令人兴奋的软件，兴冲冲的准备研究一下，然后被其安装说明在第一时间扼杀掉我的兴趣。稍微大一点的软件需要很多附属条件：运行时间、库、数据库。
 
 
 在Docker中，这些安装步骤被精简成这样子：
 
-
+```
     $ docker pull vendor/package
     $ docker run vendor/package
-
+```
 
 基本上就是这么几行命令了，不需要你在服务器上装什么 Java 运行时环境，非常适合 TCP/HTTP 的程序。
 
@@ -21,6 +21,7 @@
 
 我创建了一个 `Dockerfile`，可以构建一个运行着Seismo的镜像。
 
+```
     FROM    ubuntu:latest
     
     # Git
@@ -49,7 +50,8 @@
     
     WORKDIR /seismo
     ENTRYPOINT ["./bin/run.sh"]
- 
+```
+
 这个镜像基于最新的服务器版 Ubuntu，安装了 Git，MongoDB 和 NodeJS 的运行环境，并且把 Seismo 的库克隆到镜像内部。
 
 但是，在容器内部启动多个进程的时候，我遇到了一些问题。因为我需要 MongoDB 作为存储，还需要 NodeJS 做 API 服务器，需要在容器中同时运行这两个程序。如果shell脚本只启动了一个，比如，只启动了 `mongod`，那么`node app.js`就不会执行。
@@ -58,13 +60,14 @@
 
 但我还是找到了解决方案。我重新写了脚本，把 mongod 作为后台进程开起来，然后再启动 nodejs 。
 
-
+```
     #!/bin/bash
     mongod & node ./source/server.js
+```
 
 问题完美解决！
 
 ---
-#####这篇文章由 [Alexander Beletsky](https://github.com/alexanderbeletsky) 发表，点击 [此处](http://beletsky.net/2013/12/run-several-processes-in-docker-container.html) 可查阅原文。
+##### 这篇文章由 [Alexander Beletsky](https://github.com/alexanderbeletsky) 发表，点击 [此处](http://beletsky.net/2013/12/run-several-processes-in-docker-container.html) 可查阅原文。
 
-#####The article was contributed by [Alexander Beletsky](https://github.com/alexanderbeletsky) , click [here](http://beletsky.net/2013/12/run-several-processes-in-docker-container.html) to read the original publication.
+##### The article was contributed by [Alexander Beletsky](https://github.com/alexanderbeletsky) , click [here](http://beletsky.net/2013/12/run-several-processes-in-docker-container.html) to read the original publication.
