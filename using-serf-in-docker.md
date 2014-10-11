@@ -1,12 +1,12 @@
-#在 Docker 中使用 Serf
+# 在 Docker 中使用 Serf
 
-#####作者：[马金凯](http://weibo.com/u/2745455145)
+##### 作者：[马金凯](http://weibo.com/u/2745455145)
 
->作者注：本文编写思路来自 [Decentralizing Docker: How to Use Serf with Docker](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)
+> 作者注：本文编写思路来自 [Decentralizing Docker: How to Use Serf with Docker](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)
 
 在之前的 [Docker Link 使用示例](http://my.oschina.net/marker/blog/200407) 中，我们对 [Docker](http://docker.io) 的 link 特性进行了简单的演示，这次的主题是使用 [Serf](http://www.serfdom.io/) 实现更加低耦合的容器关系结构，最终达到的效果是服务化各个服务。
 
-##构建 Serf 镜像
+## 构建 Serf 镜像
 
 在这我并没有使用 [Supervisord](http://supervisord.org) 来启动Serf服务，大家可以参照后面的示例来启动Serf。
 
@@ -33,7 +33,7 @@ ENTRYPOINT ["serf", "agent"]
 $ docker build -t serf - < Dockerfile_serf
 ```
 
-##构建 mysql 镜像
+## 构建 mysql 镜像
 
 这一步比较复杂，我们将编写多个shell脚本，用于启动supervisor、启动mysql、创建数据库用户、创建数据库等，先让我们看一下目录结构
 
@@ -207,7 +207,7 @@ CMD ["/run.sh"]
 $ docker build -t mysql .
 ```
 
-##测试 Serf 连接
+## 测试 Serf 连接
  
 通过 Serf 镜像启动一个容器：
 
@@ -237,7 +237,7 @@ precise64        10.0.2.15:7946      alive
 9be517551dda     172.17.0.2:7946     alive    role=serf-agent
 ```
 
-##测试 Serf 事件派发到 mysql 服务
+## 测试 Serf 事件派发到 mysql 服务
 
 让我们启动一个 mysql 容器，并与 serf_agent 连接，使用 -link 参数，注意格式为 name:alias ，这里 alias 必须使用 serf_agent ，因为在 join-cluster.sh 中固定调用了 `SERF_AGENT_PORT_7946_TCP_ADDR` 和 `SERF_AGENT_PORT_7946_TCP_PORT` 两个环境变量，可以按照不同的名称要求做连接，命令如下：
 
@@ -297,6 +297,6 @@ mysql> show databases;
 
 成功了！我们看到了数据库已经被创建。
 
-##总结
+## 总结
 
 今天的示例就写到这里，大家可以继续发散思考，我的 mysql 容器已经具备了接受命令的功能，那么如果我再创建一个 wordpress 容器，当容器启动时会发 送create_db 命令给 serf_agent ，这样 mysql 就达到了服务化的目的。当然能够服务化的还很多，例如：负载均衡、 memcached 、 redis 等等。如果大家有什么更好的想法，欢迎发送 [邮件](mailto:majk@vip.qq.com) 给我。 
