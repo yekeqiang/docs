@@ -1,15 +1,15 @@
-#结合 Salt 使用 Docker
+# 结合 Salt 使用 Docker
 
 
-#####作者：[Xebia](https://twitter.com/Xebia)
+##### 作者：[Xebia](https://twitter.com/Xebia)
 
-#####译者：[Bo Wen](https://github.com/iambowen)
+##### 译者：[Bo Wen](https://github.com/iambowen)
 
 ***
 
 你可以用 Salt 去构建和运行 Docker 容器，但是我不是这么用的。这篇博客介绍一个实验，该实验在 Docker 容器中运行 Salt minions 。使用场景？假设你有运行特定中间件的若干容器，并且这些中间件都需要一个安全升级，比如，一个 OpenSSL 的补丁，这个时候就需要很快的执行更新。
 
-###Dockerfile
+## Dockerfile
 
 ```bash
 #-------
@@ -34,7 +34,7 @@ CMD /usr/bin/salt-minion
 #-------
 ```
 
-###构建镜像
+## 构建镜像
 
 这时通过 docker 运行 Dockerfile ，使用的命令是:
 
@@ -44,7 +44,7 @@ $ docker build --rm=true -t salt-minion .
 
 假设你运行这条命令时和 Dockerfile 以及 master.confg 在同一目录。 Docker 会创建一个镜像，其标签为 'salt-minion' ，同时，在构建成功后，会删除所有的中间镜像。
 
-###运行一个容器
+## 运行一个容器
 
 使用的命令是:
 
@@ -68,7 +68,7 @@ CONTAINER ID        IMAGE                COMMAND                CREATED         
 273a6b77a8fa        salt-minion:latest   /bin/sh -c /etc/rc.l   3 seconds ago       Up 3 seconds        distracted_lumiere
 ```
 
-###应用补丁
+## 应用补丁
 
 提示: 你的 Salt master 控制着 Salt minion 。假设你有一个状态模块包含了 OpenSSL 的补丁，你可以很轻易的更新所有的 docker 节点，包括补丁:
 
@@ -80,6 +80,6 @@ salt \* state.sls openssl-hotfix
 
 ***
 
-#####这篇文章由 [Xebia](https://twitter.com/Xebia) 撰写，[Bo Wen](https://github.com/iambowen) 翻译。点击 [这里](http://blog.xebia.com/2014/06/14/combining-salt-with-docker/) 阅读原文。
+##### 这篇文章由 [Xebia](https://twitter.com/Xebia) 撰写，[Bo Wen](https://github.com/iambowen) 翻译。点击 [这里](http://blog.xebia.com/2014/06/14/combining-salt-with-docker/) 阅读原文。
 
-#####The article was contributed by [Xebia](https://twitter.com/Xebia), click [here](http://blog.xebia.com/2014/06/14/combining-salt-with-docker/) to read the original publication.
+##### The article was contributed by [Xebia](https://twitter.com/Xebia), click [here](http://blog.xebia.com/2014/06/14/combining-salt-with-docker/) to read the original publication.
