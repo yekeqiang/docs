@@ -1,11 +1,11 @@
 
-#Docker 1.1 新增 "ignore" 功能
+# Docker 1.1 新增 "ignore" 功能
 
 ***
 
-#####作者：[Alex Williams](https://twitter.com/alexwilliams)
+##### 作者：[Alex Williams](https://twitter.com/alexwilliams)
 
-#####译者：[moonatcs](https://code.csdn.net/moonatcs)
+##### 译者：[moonatcs](https://code.csdn.net/moonatcs)
 
 ***
 
@@ -40,9 +40,9 @@ Docker 已经对整个 Docker 生态系统中做了改进，包括更新了 Dock
 
 ***
 
-#####这篇文章由 [Alex Williams](https://twitter.com/alexwilliams) 撰写，[moonatcs](https://code.csdn.net/moonatcs) 翻译。点击 [这里](http://thenewstack.io/docker-1-1-released-and-with-it-a-new-ignore-functionality/) 阅读原文。
+##### 这篇文章由 [Alex Williams](https://twitter.com/alexwilliams) 撰写，[moonatcs](https://code.csdn.net/moonatcs) 翻译。点击 [这里](http://thenewstack.io/docker-1-1-released-and-with-it-a-new-ignore-functionality/) 阅读原文。
 
-#####The article was contributed by [Alex Williams](https://twitter.com/alexwilliams) , click [here](http://thenewstack.io/docker-1-1-released-and-with-it-a-new-ignore-functionality/) to read the original publication.
+##### The article was contributed by [Alex Williams](https://twitter.com/alexwilliams) , click [here](http://thenewstack.io/docker-1-1-released-and-with-it-a-new-ignore-functionality/) to read the original publication.
 
  
  
