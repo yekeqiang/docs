@@ -1,8 +1,8 @@
 # Docker 0.10：质量和运维工具
 
-作者：[Solomon Hykes](https://twitter.com/solomonstre)
+##### 作者：[Solomon Hykes](https://twitter.com/solomonstre)
 
-译者：[李兆海](https://twitter.com/googellee)
+##### 译者：[李兆海](https://twitter.com/googellee)
 
 ***
 
@@ -70,6 +70,6 @@ Docker维护者
 
 ---
 
-这篇文章由 [Solomon Hykes](https://twitter.com/solomonstre) 发表，[李兆海](https://twitter.com/googellee) 翻译。点击 [这里](http://blog.docker.io/2014/04/docker-0-10-quality-and-ops-tooling/) 可查阅原文。
+##### 这篇文章由 [Solomon Hykes](https://twitter.com/solomonstre) 发表，[李兆海](https://twitter.com/googellee) 翻译。点击 [这里](http://blog.docker.io/2014/04/docker-0-10-quality-and-ops-tooling/) 可查阅原文。
 
-The article was contributed by [Solomon Hykes](https://twitter.com/solomonstre), click [here](http://blog.docker.io/2014/04/docker-0-10-quality-and-ops-tooling/) to read the original publication.
+##### The article was contributed by [Solomon Hykes](https://twitter.com/solomonstre), click [here](http://blog.docker.io/2014/04/docker-0-10-quality-and-ops-tooling/) to read the original publication.
