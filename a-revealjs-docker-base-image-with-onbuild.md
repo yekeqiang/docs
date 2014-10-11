@@ -1,8 +1,8 @@
-#使用 ONBUILD 构建 reveal.js 的 Docker 镜像
+# 使用 ONBUILD 构建 reveal.js 的 Docker 镜像
 
 
-#####作者：[Peter Parente](https://twitter.com/parente)
-#####译者：[Mark Shao](https://github.com/markshao)
+##### 作者：[Peter Parente](https://twitter.com/parente)
+##### 译者：[Mark Shao](https://github.com/markshao)
 
 ***
 
