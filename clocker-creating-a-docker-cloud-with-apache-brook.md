@@ -1,8 +1,8 @@
-#Clocker : 用 Apache Brokklyn 搭建的 Docker Cloud
+# Clocker : 用 Apache Brokklyn 搭建的 Docker Cloud
 
-#####作者：[Andrew Kennedy](https://twitter.com/cloudsoft)
+##### 作者：[Andrew Kennedy](https://twitter.com/cloudsoft)
 
-#####译者：[刘梦馨](http://weibo.com/oilbeater)
+##### 译者：[刘梦馨](http://weibo.com/oilbeater)
 
 ***
 
@@ -75,7 +75,7 @@ Clocker 利用 Brooklyn 进行云上的部署和管理，需要一个配置文�
 
 "docker.machine.* sensor" 数据展示了 Docker 主机的使用情况，包括 CPU 和内存的使用率。
 
-## 部署一个简单应用 ##
+## 部署一个简单应用 
 
 下面是一个 Tomcat 服务的部署 YAML 文件，通过一个 War 文件来进行配置。这个文件可以复制到 Brooklyn 的 ‘Add Application’ 对话框中。
 
@@ -127,7 +127,7 @@ Docker 主机部署每一个容器，并且把每一个实例展示在管理树�
 
 ![alt](http://resource.docker.cn/softlayer-tomcat-cluster-nginx.png)
 
-## 工作原理 ##
+## 工作原理 
 
 Brooklyn 利用一个云 API 库 [Apache jclouds](http://jclouds.apache.org/) 来提供云虚拟主机之间的安全传输（SSH）。
 
@@ -146,11 +146,11 @@ Brooklyn 可以从下述层面获取数据并进行管理和配置：
 
 这些都使得自动在 Docker Cloud 中分发应用变得可能。
 
-## 阅读更多 ##
+## 阅读更多 
 
 [AMP for Docker](http://www.cloudsoftcorp.com/blog/2014/03/amp-for-docker/) 讲述了 jclouds 驱动， [Implementing a Docker Cloud with Apache Brooklyn](http://abstractvisitorpattern.blogspot.com/2014/06/clocker-implementing-docker-cloud-with.html)  对 Brooklyn 的整体架构做了更进一步的探索。
 
-## 路线图 ##
+## 路线图 
 
 这只是 Clocker 的第一个发行版，开发还在进行中。我们欢迎您的各种想法和贡献（[GitHub](https://github.com/brooklyncentral/clocker)）。
 
@@ -163,7 +163,7 @@ Brooklyn 可以从下述层面获取数据并进行管理和配置：
 - 增加对诸如 [Open vSwitch](http://openvswitch.org/) 和  [OpenContrail](http://opencontrail.org/about/) 这类 SDN 的支持，可以隔离和控制容器的网络流量。并且可以通过引入一个共享的 Docker Vlan 来进行容器间的通信。
 - 将现有的 Brooklyn 蓝图和 Docker 进行融合。
 
-## 总结 ##
+## 总结 
 
 Clocker 可以容应用蓝图部署在云上的 Docker 容器中，在云虚拟机上建立 Docker 主机来传播智慧。
 
@@ -178,9 +178,9 @@ Clocker 可以容应用蓝图部署在云上的 Docker 容器中，在云虚拟�
 感谢 Andrew Kennedy（ [@grkvlt](https://github.com/grkvlt/) ）以及 Andrea Turli （ [@andreaturli](https://github.com/andreaturli/) ）的帮助。
 
 ***
-#####这篇文章由 [Andrew Kennedy](https://twitter.com/cloudsoft) 撰写， [刘梦馨](http://weibo.com/oilbeater) 翻译。点击 [这里](http://www.cloudsoftcorp.com/blog/2014/06/clocker-creating-a-docker-cloud-with-apache-brooklyn/) 阅读原文。
+##### 这篇文章由 [Andrew Kennedy](https://twitter.com/cloudsoft) 撰写， [刘梦馨](http://weibo.com/oilbeater) 翻译。点击 [这里](http://www.cloudsoftcorp.com/blog/2014/06/clocker-creating-a-docker-cloud-with-apache-brooklyn/) 阅读原文。
 
-#####The article was contributed by [Andrew Kennedy](https://twitter.com/cloudsoft), click [here](http://www.cloudsoftcorp.com/blog/2014/06/clocker-creating-a-docker-cloud-with-apache-brooklyn/) to read the original publication.
+##### The article was contributed by [Andrew Kennedy](https://twitter.com/cloudsoft), click [here](http://www.cloudsoftcorp.com/blog/2014/06/clocker-creating-a-docker-cloud-with-apache-brooklyn/) to read the original publication.
 
 
 
