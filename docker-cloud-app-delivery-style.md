@@ -1,4 +1,4 @@
-# Docker，云时代的程序交付方式
+# Docker，云时代的程序交付方式 
 
 **Posted on August 11, 2014 by [liubin](http://weibo.com/pmproad)**
 
