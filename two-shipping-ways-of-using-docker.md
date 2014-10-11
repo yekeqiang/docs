@@ -2,7 +2,7 @@
 
 ##### 作者：[Perficient](https://twitter.com/Perficient) 
 
-##### 译者：[Chenia](http://weibo.com/u/1716255775)
+##### 译者：[陈菊英](http://weibo.com/u/1716255775)
 ***
 
 [docker](http://www.docker.com) 为开发人员和系统管理员提供了一个可供开发，分发( ship )和运行应用的平台。**将 Docker 化 的应用及其依赖环境不需要经过任何修改就可以分发到任何地方--提供给 QA 、团队成员或者分发到云平台中**。这是使用 Docker 的一个很重要的目的。
@@ -51,9 +51,7 @@ $ docker build -t library/app .
 但是到目前，我们也没有一个结论说哪种方式更好。从一个程序员的角度来讲，我更愿意开发和维护 Dockerfile ，因为当我们在 container 中用交互的方式去下载、安装、配置软件包时，或多或少我们都会遗留一些无用的东西在里面。
 
 ***
-##### 这篇文章由 [Perficient](https://twitter.com/Perficient)  撰写，[Chenia](http://weibo.com/u/1716255775) 翻译。点击 [这里](http://blogs.perficient.com/multi-shoring/blog/2014/07/22/two-shipping-ways-of-using-docker/) 阅读原文。
+##### 这篇文章由 [Perficient](https://twitter.com/Perficient)  撰写，[陈菊英](http://weibo.com/u/1716255775) 翻译。点击 [这里](http://blogs.perficient.com/multi-shoring/blog/2014/07/22/two-shipping-ways-of-using-docker/) 阅读原文。
 
 ##### The article was contributed by [Perficient](https://twitter.com/Perficient), click [here](http://blogs.perficient.com/multi-shoring/blog/2014/07/22/two-shipping-ways-of-using-docker/) to read the original publication.
 
-
-***
