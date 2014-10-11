@@ -1,6 +1,6 @@
-#Docker HTTP proxy with Golang
+# Docker HTTP proxy with Golang
 
-#####Author：[马全一](https://twitter.com/genedna)
+##### Author：[马全一](https://twitter.com/genedna)
 
 ---
 
@@ -37,7 +37,7 @@ func main() {
 The program checks the target URL on each HTTP request, if the target is not docker.io or any of its sub sites, it will return an error. The purpose is to protect the server from abusing or misusing which possibly leads to being banned by Great Firewall because it's used to visit websites which are unaccessible in mainland China.
 
 
-###Writing the init.d script for Ubuntu
+## init.d script for Ubuntu
 
 
 We have to write the init.d script file to let the proxy service run as a daemon in Ubuntu:
@@ -123,7 +123,7 @@ exit 0
 ```
 
 
-###Modify docker’s configuration to use HTTP proxy in Ubuntu
+## Modify docker’s configuration to use HTTP proxy in Ubuntu
 
 
 Let’s add the http proxy environment variables to /etc/init /docker.conf:
@@ -158,7 +158,7 @@ export http_proxy=http://192.241.209.203:8384/
 Restart docker and it will download images through the proxy 192.241.209.203:8384
 
 
-###Available proxies
+## Available proxies
 
 ```
 http://192.241.209.203:8384
