@@ -1,8 +1,8 @@
-#使用 Datadog 监控 Docker
+# 使用 Datadog 监控 Docker
 
-#####作者：[Alexis Lê-Quôc](https://twitter.com/alq) 
+##### 作者：[Alexis Lê-Quôc](https://twitter.com/alq) 
 
-#####译者：[sealday](https://github.com/sealday)
+##### 译者：[sealday](https://github.com/sealday)
 
 ***
 
@@ -12,7 +12,7 @@
 
 使用我们对 Docker 的监控集成，你可以运行 4.3.1 版本的 [Datadog 代理](http://docs.datadoghq.com/guides/basic_agent_usage/) 来监控容器。而这个监控配置，就如同其他基于代理的集成一样，是一个简单的 [YAML 文件](https://github.com/DataDog/dd-agent/blob/master/conf.d/docker.yaml.example) 。
 
-##Docker 监控是怎么工作的
+## Docker 监控是怎么工作的
 
 通过在主机上运行 Datadog 代理是监控 Docker 容器最简单的方式，在这种情况下它可以直接获取容器的数据。当你将 Docker 部署到延用已经存在应用（例如数据库）的主机上时，情况更是如此。
 
@@ -23,13 +23,13 @@
 
 ![two](http://resource.docker.cn/docker-image-2-screenboard.png)
 
-##使用标签有效监控多个容器
+## 使用标签有效监控多个容器
 
 凭借易于使用的轻量级容器，你可以连接数倍于底层物理机或虚拟机的容器。那如何无需为每一个容器单独花费时间就能够追踪和监控它们呢？答案就是使用标签。 [标签](http://docs.datadoghq.com/guides/metrics/#tags) 是不花费额外努力来监控大量容器的关键。默认情况下，代理会监控你的容器，并且将 Docker 的名字、镜像以及命令属性转换成标签。
 
 ![three](http://resource.docker.cn/docker-image-3-tags.png)
 
-##带标签的图像化指标
+## 带标签的图像化指标
 
 在 Datadog 中，你可以基于一个或多个标签来定义显示在仪表盘和图上的指标。这允许你可以全局上追踪众多容器的特定指标。使用标签，可以很轻松地创建一个运行着指定镜像的所有容器的指标图。
 
@@ -37,7 +37,7 @@
 
 ![four](http://resource.docker.cn/docker-image-4-graph-by-image.png)
 
-##警报
+## 警报
 
 标签在定义跨容器集群的警报时非常有用。例如，你在运行着 Redis 的容器集群，而你想要当其中有一个容器发生内存溢出时接收到警报。
 
@@ -47,7 +47,7 @@
 
 ![five](http://resource.docker.cn/docker-image-5-multi-alert.png)
 
-##监控你的容器生命周期
+## 监控你的容器生命周期
 
 由于容器时被设计成与传统 OS 进程一般短期存活（或长期存活），那么代理可以用在整个生命周期中追踪特定的容器。
 
@@ -59,7 +59,7 @@
 
 ![seven](http://resource.docker.cn/docker-image-7-correlations.png)
 
-##浏览 Docker 指标
+## 浏览 Docker 指标
 
 想浏览可用的 Docker 指标，你可以使用 Datadog 中的 Metrics Explorer（指标浏览器），在第一个下拉框中输入“ docker ” 。
 
@@ -71,6 +71,6 @@
 
 ***
 
-#####这篇文章由 [Alexis Lê-Quôc](https://twitter.com/alq)  撰写， [sealday](https://github.com/sealday) 翻译。点击 [这里](https://www.datadoghq.com/2014/06/monitor-docker-datadog/) 阅读原文。
+##### 这篇文章由 [Alexis Lê-Quôc](https://twitter.com/alq)  撰写， [sealday](https://github.com/sealday) 翻译。点击 [这里](https://www.datadoghq.com/2014/06/monitor-docker-datadog/) 阅读原文。
 
-#####The article was contributed by [Alexis Lê-Quôc](https://twitter.com/alq) , click [here](https://www.datadoghq.com/2014/06/monitor-docker-datadog/) to read the original publication
+##### The article was contributed by [Alexis Lê-Quôc](https://twitter.com/alq) , click [here](https://www.datadoghq.com/2014/06/monitor-docker-datadog/) to read the original publication
