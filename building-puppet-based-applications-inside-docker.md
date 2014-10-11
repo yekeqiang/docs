@@ -1,8 +1,8 @@
 # 在 Docker 中构建基于 Puppet 的应用
 
-#####作者：[James Turnbull](https://twitter.com/kartar)
+##### 作者：[James Turnbull](https://twitter.com/kartar)
 
-#####译者：[叶可强](http://weibo.com/yeziyu)
+##### 译者：[叶可强](http://weibo.com/yeziyu)
 
 ---
 
@@ -89,18 +89,7 @@ $ sudo docker port fd461a1418c6 80
 
 ***
 
-#####这篇文章由 [James Turnbull](https://twitter.com/kartar) 撰写，[叶可强](http://weibo.com/yeziyu) 翻译。点击 [这里](http://kartar.net/2013/12/building-puppet-apps-inside-docker/) 阅读原文。
+##### 这篇文章由 [James Turnbull](https://twitter.com/kartar) 撰写，[叶可强](http://weibo.com/yeziyu) 翻译。点击 [这里](http://kartar.net/2013/12/building-puppet-apps-inside-docker/) 阅读原文。
 
-#####The article was contributed by [James Turnbull](https://twitter.com/kartar), click [here](http://kartar.net/2013/12/building-puppet-apps-inside-docker/) to read the original publication.
+##### The article was contributed by [James Turnbull](https://twitter.com/kartar), click [here](http://kartar.net/2013/12/building-puppet-apps-inside-docker/) to read the original publication.
 
----
-
-  [^1]:This is a somewhat short-term hacky implementation. When Docker is more pluggable this will be a lot easier. Expect to see that sort of plugin support in the 1.0 release
-  
-  [^2]:We could easy do the same thing with Chef too
-  
-  [^3]:For other thoughts on Docker and CM see this
-  
-
-
- 
