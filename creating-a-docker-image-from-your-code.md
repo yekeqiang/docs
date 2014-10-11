@@ -1,8 +1,8 @@
-#通过代码来创建一个 Docker 镜像
+# 通过代码来创建一个 Docker 镜像
 
-#####作者：[Fernando Mayo](https://twitter.com/FernandoMayo) （ CTO & Co-founder of Tutum ）
+##### 作者：[Fernando Mayo](https://twitter.com/FernandoMayo) （ CTO & Co-founder of Tutum ）
 
-#####译者：[Mark Shao](https://github.com/markshao)
+##### 译者：[Mark Shao](https://github.com/markshao)
 
 ***
 [Heroku](https://www.heroku.com/) 最重要的开源项目之一是 [Buildpacks](https://devcenter.heroku.com/articles/buildpacks)  。 Buildpacks 实际上是一系列脚本，可以自动侦测到应用的语言/框架，然后安装所运行所需要的解释器、库等等。
@@ -14,7 +14,7 @@
 
 让我们看一个简单的例子
 
-##使用 buildstep 把 Django 应用转换成 Docker 的镜像
+## 使用 buildstep 把 Django 应用转换成 Docker 的镜像
 
 
 假设一下我们有一个 Django 应用，我们希望把它转化成一个  Docker 镜像，从而可以方便我们在服务器间移动。在应用代码的目录中，我们要创建一个如下的 Dockerfie :
@@ -98,7 +98,7 @@ CMD ["/start", "web"]
 通过在 CMD 指令中输入要处理的类型的名字，我们指定了用来启动应用的命令。
 
 
-##运行应用，无需通过 buildstep 来构建镜像
+## 运行应用，无需通过 buildstep 来构建镜像
 
 如果你的应用存储在一个 git 的代码库中，那么你可以在运行 `tutum/buildstep` 的时候传入一个指向项目地址的环境变量 `GIT_REPO` ，这样容器会在运行时克隆项目并且下载依赖:
 
@@ -122,6 +122,6 @@ $ docker run -d -p 80 -e GIT_REPO=https://github.com/fermayo/hello-world-php.git
 
 ***
 
-#####这篇文章由 [Fernando Mayo](https://twitter.com/FernandoMayo) 发表，点击 [这里](http://blog.tutum.co/2014/04/10/creating-a-docker-image-from-your-code/) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，你可以在 [GitHub](https://github.com/markshao) 上与他交流。
+##### 这篇文章由 [Fernando Mayo](https://twitter.com/FernandoMayo) 发表，点击 [这里](http://blog.tutum.co/2014/04/10/creating-a-docker-image-from-your-code/) 可阅读原文。 [Mark Shao](https://github.com/markshao) 翻译了本文，你可以在 [GitHub](https://github.com/markshao) 上与他交流。
 
-#####The article was contributed by [Fernando Mayo](https://twitter.com/FernandoMayo) , click [here](http://blog.tutum.co/2014/04/10/creating-a-docker-image-from-your-code/) to read the original publication.
+##### The article was contributed by [Fernando Mayo](https://twitter.com/FernandoMayo) , click [here](http://blog.tutum.co/2014/04/10/creating-a-docker-image-from-your-code/) to read the original publication.
