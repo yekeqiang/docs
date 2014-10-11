@@ -1,4 +1,4 @@
-#用 Drone 和 Docker 10 分钟搭建全功能的 CI 服务器
+# 用 Drone 和 Docker 10 分钟搭建全功能的 CI 服务器
 
 ---
 
@@ -10,7 +10,7 @@
 
 10 分钟和让一台 [Jenkins](http://jenkins-ci.org) 服务器启动和运行所需的时间差了个数量级。我从来都不是 [Jenkins](http://jenkins-ci.org) 的粉丝，或许永远都不会是。还是让我们在其它文章中讨论这个问题吧。
 
-##需要的条件
+## 需要的条件
 
 我们假设你有一台可以访问的 64 位 Ubuntu 13.04 版本服务器。在 Digital Ocean (我非常喜欢 Digital Ocean，请使用我的[推荐链接](https://www.digitalocean.com/?refcode=9b3537dd733f)，谢谢～) 你可以使用预先安装好 Docker 版本的 VPS ，在写这篇文章的时候 Docker 的版本是 0.8 。
 
@@ -18,7 +18,7 @@
 
 你的应用需要托管在 [Github](http://github.com) ，貌似 [Bitbucket](http://bitbucket.org) 很快就会支持。目前只支持 [Github](http://github.com) 对我来说没什么问题，我喜欢 [Github](http://github.com) 。
 
-###第 0 步：安装 Docker (可选，如果你已经安装了 Docker 可以跳过此步)
+### 第 0 步：安装 Docker (可选，如果你已经安装了 Docker 可以跳过此步)
 
 在你的 Ubuntu 机器上执行：
 
@@ -34,7 +34,7 @@ sudo docker run -i -t ubuntu /bin/bash
 ```
 
 
-###第 1 步：安装 Drone
+### 第 1 步：安装 Drone
 
 Drone 安装非常简单！
 
@@ -49,7 +49,7 @@ sudo dpkg -i drone.deb
 
 安装完成后，用浏览器打开 http://my-server-ip-or-addr:80/install ，根据向导创建账号。一旦登陆，请保持浏览器一直打开。
 
-###第 2 步：在 Github 注册一个新的应用
+### 第 2 步：在 Github 注册一个新的应用
 
 现在你已经有一个 Drone 的服务在运行了，但是我们必须配置一个 Github 的应用使得 Drone 在 Github 的 Pull 或 Push 后能够 Build 你的代码。[在这里注册一个新的程序](https://github.com/settings/applications/new)。
 
@@ -58,17 +58,17 @@ sudo dpkg -i drone.deb
 * 描述就像名字一样，对你有意义就可以
 * Github OAuth 认证的回调地址是 http://my-server-ip-or-addr/auth/login/github
 
-###第 3 步：在 Drone 中设置 Github 的 Client ID 和 Client Secret 
+### 第 3 步：在 Drone 中设置 Github 的 Client ID 和 Client Secret 
 
 在 Github 注册完成新应用后，你会得到 Client ID 和 Client Secret，把它们拷贝到 http://my-server-ip-or-addr/account/admin/settings 页面的 "GitHub OAuth Consumer Key and Secret" 部分。
 
-###第 4 步：链接你的项目
+### 第 4 步：链接你的项目
 
 点击  “New Repository”  按钮页面会转跳到 http://my-server-ip-or-addr/new/github.com 这里，点击 “Link Now” 按钮，一旦接受了 Drone 的 Repository Setup 页的，你会得到 Github 账户内所有代码仓库的信息(账户名+仓库名)。
 
 Boom！你的项目几乎已经可以进行集成测试了，你现在只需要完成最后一步...
 
-###第 5 步：配置你的 .drone.yml 文件
+### 第 5 步：配置你的 .drone.yml 文件
 
 .drone.yml 文件是 Drone 用来配置编译步骤、各种服务和通知等的配置文件。
 
@@ -102,7 +102,7 @@ notify:
 
 当第一次 Build 代码的时候会花上一些时间。
 
-##特别提示！
+## 特别提示！
 
 下面是一些由 Drone 提供的、你可能需要的功能：
 
@@ -111,7 +111,7 @@ notify:
 * HipChat 通知
 * 可持续部署
 
-##结论
+## 结论
 
 
 就是这些，让你可以部署一个全功能的 CI 服务器。是不是应该使用它替代 Jenkins、Codeship 或者其它的 CI 服务么？这完全取决于你。这个项目是一周前发布的，我还不能确定是否把它用在我工作的项目中，但是我会保持关注。
@@ -121,6 +121,6 @@ notify:
 另外：如果你喜欢 Docker 和 类似 Heroku 的 PaaS 服务，你可能会感兴趣我的另一篇关于 [Dokku 安装](http://jipiboily.com/2013/install-dokku-postgresql-with-docker-for-your-rails-app-or-whatever-else-almost) 的文章。
 
 ---
-#####这篇文章由 [Jean Philippe](https://github.com/jipiboily) 在2014年2月13日发布，点击 [这里](http://jipiboily.com/2014/from-zero-to-fully-working-ci-server-in-less-than-10-minutes-with-drone-docker) 可以阅读原文。
+##### 这篇文章由 [Jean Philippe](https://github.com/jipiboily) 在2014年2月13日发布，点击 [这里](http://jipiboily.com/2014/from-zero-to-fully-working-ci-server-in-less-than-10-minutes-with-drone-docker) 可以阅读原文。
 
-#####These article was contributed by [Jean Philippe](https://github.com/jipiboily), click [here](http://jipiboily.com/2014/from-zero-to-fully-working-ci-server-in-less-than-10-minutes-with-drone-docker) to read the original publication.
+##### These article was contributed by [Jean Philippe](https://github.com/jipiboily), click [here](http://jipiboily.com/2014/from-zero-to-fully-working-ci-server-in-less-than-10-minutes-with-drone-docker) to read the original publication.
