@@ -1,10 +1,10 @@
-#Docker vs Vagrant? 为何这两种技术不存在竞争
+# Docker vs Vagrant? 为何这两种技术不存在竞争
 
 ![alt](http://resource.docker.cn/vagrant-vs-docker.png)
 
 
-#####作者：[Marcos Otero](https://medium.com/@_marcos_otero)
-#####译者：[Mike Ling](https://twitter.com/tiramisu1993)
+##### 作者：[Marcos Otero](https://medium.com/@_marcos_otero)
+##### 译者：[Mike Ling](https://twitter.com/tiramisu1993)
 ***
 
 在阅读过现有的一些关于“Docker vs Vagrant”的博客（比如 [这篇](http://www.dockboard.org/docker-vs-vagrant-cloud/) 和 [这篇](https://phunehehe.net/docker-vs-chef-vagrant/) ）后，我决定写一篇文章来阐明这两种技术并非彼此竞争而是相互补充。
@@ -13,7 +13,7 @@
 
 ***
 
-###Vagrant
+## Vagrant
 
 >Vagrant 基于行业技术标准提供了易于配置、可量产、并且可移植的工作环境，并且由一个统一的工作流程进行控制，从而使你和团队的工作效率和灵活性得以最大化。
 
@@ -27,8 +27,8 @@
 
 ***Vagrant 技术能够让你以一种方便简单的方式安装开发应用所需的一切。***
 
-***
-###Docker
+
+## Docker
 
 >Docker 是一个能让你在任何应用中都能轻松创建轻量级、可移植、自足容器的开源项目。一个在笔记本上编译和调试的容易能够大规模应用在虚拟机、 bare metal 、 OpenStack 集群、公有云等不同的生产环境中。
 
@@ -45,9 +45,8 @@
 
 ***
 
-##如何将这两种技术同时应用到你的生产环境中
+## 如何将这两种技术同时应用到你的生产环境中
 
-***
 
 如果此刻你还不能相信可以同时将两种技术整合到一起，那么让我给你举个例子：
 
@@ -65,7 +64,7 @@
 
 7. 测试你在 AWS 中的容器并且观察他们是否得到你预想的运行效果。
 
->#####译者注：上面提到的 AWS 是指 Amazon Web Services ，是一个 Amazon 提供的云主机服务
+> ##### 译者注：上面提到的 AWS 是指 Amazon Web Services ，是一个 Amazon 提供的云主机服务。
 
 
 ***
@@ -75,6 +74,6 @@
 P.S 如果你发现任何语法错误的话请让我知道并且修复它。谢谢！
 
 ---
-#####这篇文章由 [Marcos Otero](https://medium.com/@_marcos_otero) 发表，[Mike Ling](https://twitter.com/tiramisu1993) 翻译。点击 [这里](https://medium.com/devops-programming/582135beb623) 可查阅原文。
+##### 这篇文章由 [Marcos Otero](https://medium.com/@_marcos_otero) 发表，[Mike Ling](https://twitter.com/tiramisu1993) 翻译。点击 [这里](https://medium.com/devops-programming/582135beb623) 可查阅原文。
 
-#####The article was contributed by [Marcos Otero](https://medium.com/@_marcos_otero), translated by [Mike Ling](https://twitter.com/tiramisu1993). Please click [here](https://medium.com/devops-programming/582135beb623) to read the original publication.
+##### The article was contributed by [Marcos Otero](https://medium.com/@_marcos_otero), translated by [Mike Ling](https://twitter.com/tiramisu1993). Please click [here](https://medium.com/devops-programming/582135beb623) to read the original publication.
