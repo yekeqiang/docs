@@ -1,15 +1,15 @@
-#基于云使用 salt 和 docker 自动化部署应用
+# 基于云使用 salt 和 docker 自动化部署应用
 
 ![alt](http://resource.docker.cn/saltstack-logo.png)
 
 ***
 
-#####作者：[James Thomason](https://twitter.com/fef1f0)  
-#####译者：[叶可强](http://weibo.com/1224591704)
+##### 作者：[James Thomason](https://twitter.com/fef1f0)  
+##### 译者：[叶可强](http://weibo.com/1224591704)
 
 如果你还没有机会使用 [Salt](https://github.com/saltstack/salt) 的话，那我简单介绍下。 Salt 是一个非常强大的配置管理系统，它容易运行，并且能支持分布式命令执行和复杂的配置文件管理，具有高可扩展性，能同时支持上千台服务器运行。
 
-> #####译者注： 希望进一步学习和了解 SaltStack 的同学可以加入 [SaltStack 中国用户组](http://www.saltstack.cn/)。SaltStack 确实是一个非常强大的工具，用 Python 编写的，可以通过 API 进行二次开发。
+> ##### 译者注： 希望进一步学习和了解 SaltStack 的同学可以加入 [SaltStack 中国用户组](http://www.saltstack.cn/)。SaltStack 确实是一个非常强大的工具，用 Python 编写的，可以通过 API 进行二次开发。
 
 最近，我撰写了一篇如何将实际存在的集装箱化标准转化为 [新一代的管理工具](http://thomason.io/why-containerization-is-a-key-enabling-technology-for-paas/) 的文章。一月的时候 [SaltStack](http://www.saltstack.com/) 宣布了 ```Salt 2014.1.0``` 版本[一些非常好的新特性](http://docs.saltstack.com/en/latest/topics/releases/2014.1.0.html)，包括支持 [Docker 容器生命周期的管理](http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.dockerio.html)。 SaltStack 早期就得到了 Docker 的支持，不过 Docker 认为自己还没有准备好用于生产环节（ Yelp 和 Spotify 均使用 Docker ），但是这些工具为固定不变的基础设施提供了一个开箱即用的解决方案。
 
@@ -317,8 +317,9 @@ one.garply.org:
 
 ***
 
-#####这篇文章由 [James Thomason](https://twitter.com/fef1f0) 撰写， [叶可强](http://weibo.com/1224591704) 翻译。点击 [这里](http://thomason.io/automating-application-deployments-across-clouds-with-salt-and-docker/) 可阅读原文。
-#####The article was contributed by [JAMES THOMASON](https://twitter.com/fef1f0), click [here](http://thomason.io/automating-application-deployments-across-clouds-with-salt-and-docker/) to read the original publication.
+##### 这篇文章由 [James Thomason](https://twitter.com/fef1f0) 撰写， [叶可强](http://weibo.com/1224591704) 翻译。点击 [这里](http://thomason.io/automating-application-deployments-across-clouds-with-salt-and-docker/) 可阅读原文。
+
+##### The article was contributed by [JAMES THOMASON](https://twitter.com/fef1f0), click [here](http://thomason.io/automating-application-deployments-across-clouds-with-salt-and-docker/) to read the original publication.
 
 
 
