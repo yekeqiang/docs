@@ -1,6 +1,6 @@
-##使用 Golang 编写一个简单的 HTTP 代理
+# 使用 Golang 编写一个简单的 HTTP 代理
 
-#####作者：[马全一](https://twiter.com/genedna)
+##### 作者：[马全一](https://twiter.com/genedna)
 
 [goproxy](https://github.com/elazarl/goproxy) 是一个轻量级的 HTTP 代理库，可以很容易的编写一个仅供 [Docker](http://docker.io) 使用的代理 [程序](https://github.com/dockboard/docker-proxy) 。
 
@@ -32,7 +32,7 @@ func main() {
 
 程序在每次 HTTP 的请求过程中都检测目标地址的 URL，如果不是 docker.io 或子站会返回一个错误信息。这为了避免使用代理访问其它的网站，致使服务器被墙。
 
-##编写 Ubuntu init.d 的启动脚本
+## 编写 Ubuntu init.d 的启动脚本
 
 为了保证服务在后台运行，编写 Ubuntu init.d 的启动脚本管理 Proxy 服务。
 
@@ -115,7 +115,7 @@ esac
 exit 0
 ```
 
-##Ubuntu 中修改 Docker 的配置文件使用 HTTP Proxy
+## Ubuntu 中修改 Docker 的配置文件使用 HTTP Proxy
 
 修改 /etc/init/docker.conf 加入 http proxy 的环境变量。
 
