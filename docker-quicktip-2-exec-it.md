@@ -1,10 +1,10 @@
-#Docker Quicktip #2: 用 exec 执行命令！
+# Docker Quicktip #2: 用 exec 执行命令！
 
 ![alt](http://resource.docker.cn/quick-tip.jpg)
 
-#####作者：[Brian Goff](https://github.com/cpuguy83)
+##### 作者：[Brian Goff](https://github.com/cpuguy83)
 
-#####译者：[巨震](https://github.com/crystaldust)
+##### 译者：[巨震](https://github.com/crystaldust)
 
 通常在创建一个 Docker 容器，需要在容器启动主要程序之前要进行一系列的设置。有时候这些设置只是在容器首次启动时做一次设置（比如设置数据库用户，导入数据等等），有时还需要设置让容器里的程序跑起来的环境（和那些 init.d 启动脚本做的事情是一样的）。不管如何，都需要为 Docker 容器中运行的主要程序写一些脚本。
 
@@ -77,6 +77,6 @@
 Docker 默认允许你把所有的信号代理给容器中正在运行的进程。如果需要发送 HUP 信号给容器中运行的进程，只需发送给 Docker 容器的进程就可以了。你还可以用这个特性，启动一个进程来监听你的 Host 文件中的代理关系，通过这样监听在 Docker 容器中运行的进程。具体请参考 [Docker host integration](http://docs.docker.io/en/latest/use/host_integration/) 这篇文章。
 
 ---
-#####这篇文章由 [Brian Goff](https://github.com/cpuguy83) 发表，点击 [此处](http://www.tech-d.net/2014/01/27/docker-quicktip-2-exec-it/)可查阅原文。
+##### 这篇文章由 [Brian Goff](https://github.com/cpuguy83) 发表，点击 [此处](http://www.tech-d.net/2014/01/27/docker-quicktip-2-exec-it/)可查阅原文。
 
-#####The article was contributed by [Brian Goff](https://github.com/cpuguy83), click [here](http://www.tech-d.net/2014/01/27/docker-quicktip-2-exec-it/) to read the original publication.
+##### The article was contributed by [Brian Goff](https://github.com/cpuguy83), click [here](http://www.tech-d.net/2014/01/27/docker-quicktip-2-exec-it/) to read the original publication.
