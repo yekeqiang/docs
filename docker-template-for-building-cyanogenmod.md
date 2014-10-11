@@ -77,4 +77,4 @@ Github 库地址：[https://github.com/stucki/docker-cyanogenmod](https://github
 
 #####这篇文章由 [michael_ch](http://forum.xda-developers.com/member.php?u=2113874) 发表，点击 [此处](http://forum.xda-developers.com/showthread.php?t=2650345) 可查阅原文。
 
-#####The article was contributed by [michael_ch](http://forum.xda-developers.com/member.php?u=2113874), click [here](http://forum.xda-developers.com/showthread.php?t=2650345) to read the original publication.
+#####The article was contributed by [michael_ch](http://forum.xda-developers.com/member.php?u=2113874), click [here](http://forum.xda-developers.com/showthread.php?t=2650345) to read the original publication. 
