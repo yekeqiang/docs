@@ -28,69 +28,81 @@
 
 运行下边的命令来获得 boot2docker 。
 
-`# 进去安装目录
-cd ~/bin`
+```
+# 进去安装目录
+cd ~/bin
 
-`# 获取安装文件
-curl https://raw.github.com/steeve/boot2docker/master/boot2docker > boot2docker`
+# 获取安装文件
+curl https://raw.github.com/steeve/boot2docker/master/boot2docker > boot2docker
 
-`# 设置可执行
-chmod +x boot2docker`
+# 设置可执行
+chmod +x boot2docker
+```
 
 ###Docker OS X Client
+
 docker 进程使用 docker 客户端访问。
 
 运行下边的命令，来获取docker并且设置它。
 
-`# 获取文件
-curl -o docker http://get.docker.io/builds/Darwin/x86_64/docker-latest`
+```
+# 获取文件
+curl -o docker http://get.docker.io/builds/Darwin/x86_64/docker-latest
 
-`# 设置可执行
-chmod +x docker`
+# 设置可执行
+chmod +x docker
 
-`# 设置docker进程的环境变量
-export DOCKER_HOST=tcp://`
+# 设置docker进程的环境变量
+export DOCKER_HOST=tcp://
 
-`# 复制可执行文件
-sudo cp docker /usr/local/bin/`
+# 复制可执行文件
+sudo cp docker /usr/local/bin/
+```
 
 然后让我们看看如何使用它。
 
 ##如何在 Mac OS X 上使用 Docker
+
 ###docker 进程（通过 boot2docker ）
 
 进行~/bin目录，运行下边的命令：
 
-`# 初始化虚拟主机
-./boot2docker init`
+```
+# 初始化虚拟主机
+./boot2docker init
 
-`# 运行虚拟主机 (the docker daemon)
-./boot2docker up`
+# 运行虚拟主机 (the docker daemon)
+./boot2docker up
 
-`# 看所有可用的命令:
-./boot2docker`
+# 看所有可用的命令:
+./boot2docker
 
-`# Usage ./boot2docker {init|start|up|pause|stop|restart|status|info|delete|ssh|download}`
+# Usage ./boot2docker {init|start|up|pause|stop|restart|status|info|delete|ssh|download}
+```
 
 ###docker 客户端
 
 一旦虚拟主机运行 docker 进程，你可以像使用其它的一些应用一样来使用 docker 客户端。
 
-`docker version`	
-`# Client version: 0.7.6`	
-`# Go version (client): go1.2`	
-`# Git commit (client): bc3b2ec`	
-`# Server version: 0.7.5`	
-`# Git commit (server): c348c04`	
-`# Go version (server): go1.2`
+```
+docker version
+# Client version: 0.7.6
+# Go version (client): go1.2	
+# Git commit (client): bc3b2ec
+# Server version: 0.7.5	
+# Git commit (server): c348c04
+# Go version (server): go1.2
+```
 
 ###用 SSH 来连接虚拟主机
 如果你感觉需要连接虚拟主机，你可以简单的运行下边的命令：
 
-`./boot2docker ssh`
+```
+./boot2docker ssh
 
-`# User: docker`	
-`# Pwd:  tcuser`
+# User: docker
+# Pwd:  tcuser
+```
 
 现在你可以使用 hello World 的例子了~
 
