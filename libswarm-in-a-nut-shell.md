@@ -30,8 +30,7 @@ Swarmd 是一个概念验证的二进制文件，通过运行它，你可以像 
 
 最基础的 swarmd 设置是这样的：
 
-
-    ./swarmd 'dockerserver unix:///var/run/docker.sock' 'dockerclient tcp://1.2.3.4:2375'
+    ``` ./swarmd 'dockerserver unix:///var/run/docker.sock' 'dockerclient tcp://1.2.3.4:2375'```
 
 这将会开启一个 Docker REST API ，实现 “dockerserver” 服务。 dockerserver 接受 HTTP 请求并且从中生成 libswarm 消息。 “dockerclient” 接受 libswarm 消息并且将他们传送给 docker 的守护进程（目前用的是 REST API ）。这个操作不多，但能让你在本地运行一个 docker 客户端并与 /var/run/docker.sock 进行通信，并将这些请求发送到 1.2.3.4:2357 的 docker 守护进程。
 
@@ -39,7 +38,9 @@ Swarmd 是一个概念验证的二进制文件，通过运行它，你可以像 
 
 你也可以进行下面的操作：
 
+```
     ./swarmd 'dockerserver unix:///var/run/docker.sock' 'aggregate "dockerclient tcp://1.2.3.4:2375" "dockerclient tcp://1.2.3.5:2375" "dockerclient tcp://1.2.3.6:2376"'
+```
 
 这和第一个例子很像，但是他利用了 “aggregate” 服务来和各个 “dockerclient” 服务通信，并将结果聚集起来。你可以在这里使用 “docker run” ， “aggregate” 将会选择一个 “dockerclient” 来生成一个新的容器。
 
@@ -47,7 +48,9 @@ Swarmd 是一个概念验证的二进制文件，通过运行它，你可以像 
 
 但是想象一下这个：
 
+```
     ./swarmd 'dockerserver unix:///var/run/docker.sock' 'mesos "dockerclient tcp://1.2.3.4:2375" "dockerclient tcp://1.2.3.5:2375" "dockerclient tcp://1.2.3.6:2376"'
+```
 
 目前没有 mesos 的后端（请帮助我们）。如果有的话，我们就可以把 “docker run” 和 Mesos 连接起来，这样就可以让 “dockerclient” 遵循 Mesos 的标准来获得可用性。
 
@@ -55,7 +58,7 @@ Swarmd 是一个概念验证的二进制文件，通过运行它，你可以像 
 
 你可以连接任何你想要的服务：
 
-    ./swarmd 'dockerserver unix://var/run/docker.sock' 'serviceA' 'serviceB' 'serviceC' 'dockerclient tcp://1.2.3.5:2375'
+    ```./swarmd 'dockerserver unix://var/run/docker.sock' 'serviceA' 'serviceB' 'serviceC' 'dockerclient tcp://1.2.3.5:2375'```
 
 这之中的任何一个服务都可以截获请求，按一定规则完成操作并沿着链条将请求传送，或者调用外部服务进行操作再在沿着链条传递。
 
