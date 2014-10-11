@@ -1,8 +1,8 @@
-#New Relic 开源 Docker 部署工具 Centurion
+# New Relic 开源 Docker 部署工具 Centurion
 
-#####作者：[Carlos Sanchez](https://twitter.com/csanchez)
+##### 作者：[Carlos Sanchez](https://twitter.com/csanchez)
 
-#####译者：[Bo Wen](http://weibo.com/u/2537862844)
+##### 译者：[Bo Wen](http://weibo.com/u/2537862844)
 
 ***
 [New Relic](http://newrelic.com/) 开源了 Centurion，一个在内部产品环境中运行的部署工具。 [Centurion](http://github.com/newrelic/centurion) 从 Docker registry 拿到容器，用正确的环境变量、主机容量映射，端口映射将它们运行在一队主机上，支持容器外的滚动部署。
@@ -18,7 +18,7 @@ Centurion 包括多个命令，用于分布式容器环境:
 
 - 在主机上部署一个 bash 命令行 ```deploy_console``` ：在容器中已存在的环境中启动一个命令行 shell 。 Dockerfile 中的 ```CMD``` 指令被替换为 ```/bin/bash``` ，使用主机列表中第一个主机。
 
-- 列出为特定项目运行的服务器的所有标签```list:running_container_tags```: 返回服务运行机器的所有当前标签列表。给出所有主机的唯一标签列表，对于验证部署的状态很有用，以防在部署过程中出问题。
+- 列出为特定项目运行的服务器的所有标签 ```list:running_container_tags```: 返回服务运行机器的所有当前标签列表。给出所有主机的唯一标签列表，对于验证部署的状态很有用，以防在部署过程中出问题。
 
 - 列出当前项目所有运行的容器 ```list:running_containers``` ：返回配置中每个 Docker 服务器上运行项目的所有容器的列表。
 
@@ -28,6 +28,6 @@ Centurion 包括多个命令，用于分布式容器环境:
 
 ***
 
-#####这篇文章由 [Carlos Sanchez](https://twitter.com/csanchez) 撰写，[Bo Wen](http://weibo.com/u/2537862844) 翻译。点击 [这里](http://www.infoq.com/news/2014/06/docker-deployment-tool-centurion) 阅读原文。
+##### 这篇文章由 [Carlos Sanchez](https://twitter.com/csanchez) 撰写，[Bo Wen](http://weibo.com/u/2537862844) 翻译。点击 [这里](http://www.infoq.com/news/2014/06/docker-deployment-tool-centurion) 阅读原文。
 
-#####The article was contributed by [Carlos Sanchez](https://twitter.com/csanchez), click [here](http://www.infoq.com/news/2014/06/docker-deployment-tool-centurion) to read the original publication.
+##### The article was contributed by [Carlos Sanchez](https://twitter.com/csanchez), click [here](http://www.infoq.com/news/2014/06/docker-deployment-tool-centurion) to read the original publication.
