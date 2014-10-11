@@ -270,6 +270,6 @@ b2f8001164b0
 ***
 #####这篇文章由 [Arun Gupta](https://twitter.com/arungupta)   撰写，[我不围观](http://weibo.com/ooutman) 翻译。点击 [这里](http://blog.arungupta.me/2014/07/getting-started-with-docker/) 阅读原文。
 
-#####The article was contributed by [Arun Gupta](https://twitter.com/arungupta) , click [here](http://blog.arungupta.me/2014/07/getting-started-with-docker/) to read the original publication.
+#####The article was contributed by [Arun Gupta](https://twitter.com/arungupta) , click [here](http://blog.arungupta.me/2014/07/getting-started-with-docker/) to read the original publication. 
 ***
 
