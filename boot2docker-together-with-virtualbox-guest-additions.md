@@ -1,13 +1,13 @@
-#boot2docker 和 VirtualBox Guest Additions -- 如何把 /Users 挂载到 boot2docker
+# boot2docker 和 VirtualBox Guest Additions -- 如何把 /Users 挂载到 boot2docker
 
 
-#####作者：[Matthias Kadenbach](https://twitter.com/mkadenbach)
+##### 作者：[Matthias Kadenbach](https://twitter.com/mkadenbach)
 
-#####译者：[Peter Zhang](https://github.com/duobei)
+##### 译者：[Peter Zhang](https://github.com/duobei)
 
 ***
 
-在 Mac 上使用 boot2docker，我想无缝地运行如下的命令：
+在 Mac 上使用 boot2docker，我想无缝地运行如下命令：
 
 ```
 docker run -i -t -v /Users/mattes/project1:/data/project1 ubuntu /bin/bash
@@ -103,6 +103,6 @@ docker run -i -t -v /Users/mattes/project1:/data/project1 ubuntu /bin/bash
 
 ***
 
-#####这篇文章由 [Matthias Kadenbach](https://twitter.com/mkadenbach) 撰写，[Peter Zhang](https://github.com/duobei) 翻译。点击 [这里](https://medium.com/boot2docker-lightweight-linux-for-docker/boot2docker-together-with-virtualbox-guest-additions-da1e3ab2465c) 阅读原文。
+##### 这篇文章由 [Matthias Kadenbach](https://twitter.com/mkadenbach) 撰写，[Peter Zhang](https://github.com/duobei) 翻译。点击 [这里](https://medium.com/boot2docker-lightweight-linux-for-docker/boot2docker-together-with-virtualbox-guest-additions-da1e3ab2465c) 阅读原文。
 
-#####The article was contributed by [Matthias Kadenbach](https://twitter.com/mkadenbach) , click [here](https://medium.com/boot2docker-lightweight-linux-for-docker/boot2docker-together-with-virtualbox-guest-additions-da1e3ab2465c) to read the original publication.
+##### The article was contributed by [Matthias Kadenbach](https://twitter.com/mkadenbach) , click [here](https://medium.com/boot2docker-lightweight-linux-for-docker/boot2docker-together-with-virtualbox-guest-additions-da1e3ab2465c) to read the original publication.
