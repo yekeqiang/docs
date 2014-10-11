@@ -1,18 +1,18 @@
-#部署自己的私有 Docker Registry
+# 部署自己的私有 Docker Registry
 
 ![alt](http://resource.docker.cn/ship-with-containers.jpg)
-######图片来自：[Glyn Lowe Photoworks](http://www.flickr.com/photos/glynlowe/)
+###### 图片来自：[Glyn Lowe Photoworks](http://www.flickr.com/photos/glynlowe/)
 
-#####作者：[Matthew Fisher](http://www.activestate.com/blog/authors/matthewf)
+##### 作者：[Matthew Fisher](http://www.activestate.com/blog/authors/matthewf)
 
-#####译者：[巨震](https://github.com/crystaldust)
+##### 译者：[巨震](https://github.com/crystaldust)
 
 ---
 
 这篇博客讨论了如何部署一个带 SSL 加密、HTTP 验证并有防火墙防护的私有 [Docker Registry](https://github.com/dotcloud/docker-registry) 。[Docker Registry](https://github.com/dotcloud/docker-registry) 是一个存储和分享 [Docker](http://docker.io) 镜像的服务。本文中我们使用的操作系统是 [Ubuntu](http://www.ubuntu.com)，任何支持 [Upstart](http://upstart.ubuntu.com/) 的系统都可以。我们用 [Nginx](http://nginx.org) 作为 [Docker Registry](https://github.com/dotcloud/docker-registry) 的前端代理服务器，同时也用 [Nginx](http://nginx.org) 完成 SSL 加密和基本的 HTTP 验证。我们用 [Gunicorn](http://gunicorn.org) 运行 [Docker Registry](https://github.com/dotcloud/docker-registry) 并用 [Upstart](http://upstart.ubuntu.com/) 管理 [Gunicorn](http://gunicorn.org)。我们还用 [Redis](http://redis.io) 实现一个 LRU(Least Recently Used，近期最少使用算法) 缓存机制来减少 [Docker Registry](https://github.com/dotcloud/docker-registry) 和硬盘之间的数据存取。
 
 
-##为什么需要Docker Registry?
+## 为什么需要Docker Registry?
 
 当在自己的环境中创建 [Docker](http://docker.io) 镜像的时候，无论是装 [Redis](http://redis.io/)，[Hipache](https://github.com/dotcloud/hipache)，还是 IRC 协议的 [logbot](https://github.com/dannvix/Logbot) ，你都希望可以把镜像存到一个安全的地方。也许你项目中的 [Docker](http://docker.io) 镜像需要安装 [Jenkins](http://buildbot.net/)，或者每次 commit 都跑一遍 [Buildbot](http://buildbot.net/)，又或者给镜像打上 bag 和 tag （相关阅读：[docker commit](http://docs.docker.io/en/latest/reference/commandline/cli/#commit)，[docker tag](http://docs.docker.io/en/latest/reference/commandline/cli/#tag)），再发送到 [Docker Registry](https://github.com/dotcloud/docker-registry)。可是如果镜像中的代码是私有的，你不想把镜像放到公共的 [Docker Registry](http://index.docker.io) 上呢？[Docker](http://docker.io) 公司已经想到了这一点，并因此建立了 [docker-registry](https://github.com/dotcloud/docker-registry) 项目。[docker-registry](https://github.com/dotcloud/docker-registry) 允许你把自己的镜像 [push](http://docs.docker.io/en/latest/reference/commandline/cli/#push) 到自己的 registry 中，酷！
 
@@ -31,7 +31,7 @@
 对于 registry 入门，这个例子很有用，但是例子中仅用了一个简单的 HTTP 服务。任何知道服务器地址的人都可以随意 push 镜像，这不是个好方案。下面我们来建立自己的私有 registry 以供内部使用。
 
 
-##准备自己的部署方案
+## 准备自己的部署方案
 
 我们要创建一个 Ubuntu 服务器来部署 registry，在此之前，我们先考虑几件事情...
 
@@ -51,13 +51,13 @@
 
 译者注：国内的开发者 [桂阳](http://weibo.com/u/1656755095) 贡献了存储在阿里云的 [方案](https://github.com/guiyang/docker-registry/blob/aliyun-oss/lib/storage/aliyun_oss.py)。
 
-###托管服务器还是用自己搭建服务器？
+### 托管服务器还是用自己搭建服务器？
 
 我们要把 docker registry 服务部署到哪里呢？用自己的 OpenStack 集群？Amazon 的网络服务？还是 Rackspace？或者自己购买服务器？答案是：用什么都行！
 
 使用云服务，我们可以使用可扩展的存储空间，便于我们管理自己的备份，非常方便。
 
-###用什么操作系统？
+### 用什么操作系统？
 
 docker registry 是用 python 写的，所以把它导入到各种操作系统中真是太简单了。你可以轻轻松松的写一个 [systemd配置文件](https://wiki.archlinux.org/index.php/systemd#Writing_custom_.service_files) ，或者把它做成 [Widnows服务](http://en.wikipedia.org/wiki/Windows_service) 。本例中，我们在 Ubuntu 上安装 docker registry，因此，我们用 [upstart](http://upstart.ubuntu.com/)来管理 Gunicorn 进程。
 
@@ -65,7 +65,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 万事俱备，开工！
 
-###启动服务器
+### 启动服务器
 
 首先，启动服务器。因为我是用的内部 Openstack，我用 [nova客户端](https://github.com/openstack/python-novaclient) 来启动就可以了。如果你按照本例来操作，请在 .bashrc 文件中设置下面列出的验证信息：
 
@@ -142,7 +142,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 哦耶！搞定！
 
-##部署和配置 registry
+## 部署和配置 registry
 
 
 我们已经有自己的服务器了，下面我们来装几个必要软件吧。
@@ -368,7 +368,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 请注意，现在官方的 docker 还不能用自授权的证书，要等到 [`#2687`](https://github.com/dotcloud/docker/pull/2687) 的 pull request 合并到官方 master 分支后才能使用。或者，你也可以试着修改 docker 的源代码来让它支持自授权证书。
 
-##测试
+## 测试
 
 
 最后，我们来测试一下自己的 docker registry：
@@ -397,7 +397,7 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 完成！现在我们在 Openstack 上部署了一个 docker registry，随时可用！
 
 
-##下一步
+## 下一步
 
 
 部署好 docker registry 后，我们还可以进一步让它跑的更好，比如：
@@ -414,8 +414,8 @@ docker registry 是用 python 写的，所以把它导入到各种操作系统�
 
 
 ---
-####这篇文章由 [Matthew Fisher](http://www.activestate.com/blog/authors/matthewf) 发表，点击[此处](http://www.activestate.com/blog/2014/01/deploying-your-own-private-docker-registry)可查阅原文。
+##### 这篇文章由 [Matthew Fisher](http://www.activestate.com/blog/authors/matthewf) 发表，点击[此处](http://www.activestate.com/blog/2014/01/deploying-your-own-private-docker-registry)可查阅原文。
 
-####The article was contributed by [Matthew Fisher](http://www.activestate.com/blog/authors/matthewf), click [here](http://www.activestate.com/blog/2014/01/deploying-your-own-private-docker-registry) to read the original publication.
+##### The article was contributed by [Matthew Fisher](http://www.activestate.com/blog/authors/matthewf), click [here](http://www.activestate.com/blog/2014/01/deploying-your-own-private-docker-registry) to read the original publication.
 
 
