@@ -1,4 +1,4 @@
-#编译 CyanogenMod 的 Docker 模板
+# 编译 CyanogenMod 的 Docker 模板
 
 
 
@@ -12,7 +12,7 @@
 
 注意：你需要根据 Docker 的文档先安装 Docker ：[https://www.docker.io/gettingstarted/](https://www.docker.io/gettingstarted/)
 
-##编译：
+## 编译：
 
 
 ```
@@ -22,7 +22,7 @@ cd docker-cyanogenmod
 ```
 
 
-##运行：
+## 运行：
 
 
 
@@ -33,7 +33,7 @@ cd docker-cyanogenmod
 
 
 
-##为你的设备编译 CyanogenMode：
+## 为你的设备编译 CyanogenMode：
 
 
 ```
@@ -46,7 +46,7 @@ brunch <device codename>      # example: brunch grouper
 ```
 
 
-##下载：
+## 下载：
 
 Github URL: https://github.com/stucki/docker-cyanogenmod
 
@@ -54,7 +54,7 @@ Github 库地址：[https://github.com/stucki/docker-cyanogenmod](https://github
 
 
 
-##ChangeLog:
+## ChangeLog:
 
 
 
@@ -75,6 +75,6 @@ Github 库地址：[https://github.com/stucki/docker-cyanogenmod](https://github
 
 ---
 
-#####这篇文章由 [michael_ch](http://forum.xda-developers.com/member.php?u=2113874) 发表，点击 [此处](http://forum.xda-developers.com/showthread.php?t=2650345) 可查阅原文。
+##### 这篇文章由 [michael_ch](http://forum.xda-developers.com/member.php?u=2113874) 发表，点击 [此处](http://forum.xda-developers.com/showthread.php?t=2650345) 可查阅原文。
 
-#####The article was contributed by [michael_ch](http://forum.xda-developers.com/member.php?u=2113874), click [here](http://forum.xda-developers.com/showthread.php?t=2650345) to read the original publication. 
+##### The article was contributed by [michael_ch](http://forum.xda-developers.com/member.php?u=2113874), click [here](http://forum.xda-developers.com/showthread.php?t=2650345) to read the original publication. 
