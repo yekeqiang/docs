@@ -1,11 +1,11 @@
-#Docker quicktip #3 - ONBUILD
+# Docker quicktip #3 - ONBUILD
 
 ![alt](http://resource.docker.cn/quick-tip.jpg)
 
 ---
-作者：[Brian Goff](https://github.com/cpuguy83)
+##### 作者：[Brian Goff](https://github.com/cpuguy83)
 
-译者：[巨震](https://github.com/crystaldust)
+##### 译者：[巨震](https://github.com/crystaldust)
 
 ---
 **ONBUILD** 是 **Dockerfile** 中新增的一个命令，**ONBUILD** 指定的命令在构建镜像时并不执行，而是在它的子镜像中执行。例如：
@@ -261,7 +261,7 @@ docker run -i -t cpuguy83/rails_demo
 
 ---
 
-#####这篇文章由 [Brian Goff](https://github.com/cpuguy83) 发表， [巨震](https://github.com/crystaldust) 翻译。你可以点击 [这里](http://www.tech-d.net/2014/02/06/docker-quicktip-3-onbuild/) 阅读原文。
+##### 这篇文章由 [Brian Goff](https://github.com/cpuguy83) 发表， [巨震](https://github.com/crystaldust) 翻译。你可以点击 [这里](http://www.tech-d.net/2014/02/06/docker-quicktip-3-onbuild/) 阅读原文。
 
-#####The article was contributed by [Brian Goff](https://github.com/cpuguy83) , click [here](http://www.tech-d.net/2014/02/06/docker-quicktip-3-onbuild/) to read the original publication.
+##### The article was contributed by [Brian Goff](https://github.com/cpuguy83) , click [here](http://www.tech-d.net/2014/02/06/docker-quicktip-3-onbuild/) to read the original publication.
 
