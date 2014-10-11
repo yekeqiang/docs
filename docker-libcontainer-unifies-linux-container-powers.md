@@ -1,9 +1,9 @@
-#Docker 的 libcontainer 正在联合各种 Linux 容器的力量
+# Docker 的 libcontainer 正在联合各种 Linux 容器的力量
 
 
-#####作者：[Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/) 
+##### 作者：[Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/) 
 
-#####译者：[Liu Mengxin](http://weibo.com/oilbeater)
+##### 译者：[Liu Mengxin](http://weibo.com/oilbeater)
 
 ***
 
@@ -30,6 +30,6 @@ Google 基础架构部副总裁 [Eric Brewer](https://twitter.com/eric_brewer) �
 
 ***
 
-#####这篇文章由 [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/) 撰写，[Liu Mengxin]( http://weibo.com/oilbeater) 翻译。点击 [这里](http://www.zdnet.com/docker-libcontainer-unifies-linux-container-powers-7000030397/) 可阅读原文。
+##### 这篇文章由 [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/) 撰写，[Liu Mengxin]( http://weibo.com/oilbeater) 翻译。点击 [这里](http://www.zdnet.com/docker-libcontainer-unifies-linux-container-powers-7000030397/) 可阅读原文。
 
-#####The article was contributed by [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/), click [here](http://www.zdnet.com/docker-libcontainer-unifies-linux-container-powers-7000030397/) to read the original publication.
+##### The article was contributed by [Steven J. Vaughan-Nichols](http://www.zdnet.com/meet-the-team/us/steven-j-vaughan-nichols/), click [here](http://www.zdnet.com/docker-libcontainer-unifies-linux-container-powers-7000030397/) to read the original publication.
