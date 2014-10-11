@@ -1,19 +1,19 @@
-#我是如何使用 Docker 来协助 X 系统上的开发工作的
+# 我是如何使用 Docker 来协助 X 系统上的开发工作的
 
 ***
 
-#####作者：[SEBASTIAN GĘBSKI](https://twitter.com/liveweird)
+##### 作者：[SEBASTIAN GĘBSKI](https://twitter.com/liveweird)
 
-#####译者：[周亮](http://www.brightconan.com)
+##### 译者：[周亮](http://www.brightconan.com)
 
 ***
 对应用进行设置可能会相当复杂，尤其是在 Linux 系统上。不同应用有不同的配置方法，它们会在不同的文件系统路径下（在不同的 Linux 发行版中，由于应用存在多种变种，这些路径也会有所不同）保存二进制文件和数据。一旦你把系统配置好了，就很难再恢复到之前的状态，尤其是你同时进行了一些其他修改的时候（比如，安装了一些其他应用程序）。这也是最近诸如 **Puppet**、 **Chef**、 **Ansible** 和 **Salt** 这样的部署工具流行的原因。但即使有了这些工具的帮助，创建 cookbook/recipe 也许也十分麻烦： Linux 系统并非以傻瓜化著称，系统本身也不能让你摆脱麻烦。
 
-##业界出现了一个新的工具
+## 业界出现了一个新的工具
 
 很幸运的是，对于 Linux 运维人员来说，一个新的工具产生了，而该工具很有可能改变游戏规则：[Docker](http://www.docker.com/) ，一个开源的平台，能够以一种轻量级的方式打包应用程序以及它们的依赖。
 
-###这到底意味着什么？
+## 这到底意味着什么？
 
 Docker 使你能够在 Linux 系统上对不同的应用程序进行隔离，在不同的上下文环境中运行这些程序（这些程序可能执行在一台物理机器上，也可能运行在不同的物理机器上），请记住，这一点非常重要：
 
@@ -27,7 +27,7 @@ Docker 使你能够在 Linux 系统上对不同的应用程序进行隔离，在
 
 - Docker 完美地支持了“**一次配置，到处运行**”的范式。
 
-##在实践中 Docker 是如何工作的？
+## 在实践中 Docker 是如何工作的？
 
 或者这么讲，至少对于我来说，它是这么工作的：
 
@@ -49,7 +49,7 @@ or
 sudo docker run -i -t <image_name> /bin/bash    
 ```
 
-##值得铭记的重要事项
+## 值得铭记的重要事项
 
 
 
@@ -69,7 +69,7 @@ sudo docker ps
 sudo commit <container name>
 ```
 
-##通过使用以上所有的选项...
+## 通过使用以上所有的选项...
 
 ...我能够：
 
@@ -85,8 +85,8 @@ sudo commit <container name>
 
 ***
 
-#####这篇文章由 [SEBASTIAN GĘBSKI](https://twitter.com/liveweird) 撰写，[周亮](http://www.brightconan.com) 翻译。点击 [这里](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) 阅读原文。
+##### 这篇文章由 [SEBASTIAN GĘBSKI](https://twitter.com/liveweird) 撰写，[周亮](http://www.brightconan.com) 翻译。点击 [这里](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) 阅读原文。
 
-#####The article was contributed by [SEBASTIAN GĘBSKI](https://twitter.com/liveweird), translated by [周亮](http://www.brightconan.com), click [here](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) to read the original publication.
+##### The article was contributed by [SEBASTIAN GĘBSKI](https://twitter.com/liveweird), translated by [周亮](http://www.brightconan.com), click [here](http://no-kill-switch.ghost.io/how-i-ve-pimped-my-x-system-development-with-docker/) to read the original publication.
  
  
