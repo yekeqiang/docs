@@ -6,11 +6,11 @@
 
 ---
 
-通过创建一个 [Docker](http://www.docker.io/) 的 ```Dockerfile``` 来构建一个应用程序是非常容易的。但是如果你已经有了大量的 Puppet 模块（或者是 Chef cookbooks），你想把这些模块用于构建你的应用程序，你应该怎么做？我们将看到利用 Dockerfile[^1] 构建是多么的容易。
+通过创建一个 [Docker](http://www.docker.io/) 的 ```Dockerfile``` 来构建一个应用程序是非常容易的。但是如果你已经有了大量的 Puppet 模块（或者是 Chef cookbooks），你想把这些模块用于构建你的应用程序，你应该怎么做？我们将看到利用 Dockerfile 构建是多么的容易。
 
 我们首先要构建一个 Docker 应用镜像来安装 Puppet。我们将把 Tim Sharpe 的一个非常酷的工具 [Librarian-Puppet](http://librarian-puppet.com/) 添加到镜像中。Librarian-Puppet 是一个 Puppet 模块打包工具，你可以使用它从 GitHub 或者是 [Puppet Labs Forge](http://forge.puppetlabs.com/) 选择和安装模块。
 
-让我们创建一个 ```Dockerfile``` 来构建我们的 Puppet[^2] 镜像。
+让我们创建一个 ```Dockerfile``` 来构建我们的 Puppet 镜像。
 
 ```
 FROM ubuntu:12.10
@@ -85,7 +85,7 @@ $ sudo docker port fd461a1418c6 80
 
 ![alt](http://resource.docker.cn/nginx.png)
 
-欧耶！我们已经通过 Puppet 安装了 Nginx。你可以重复这个步骤安装任何基于 Puppet 的应用或者是基础设施[^3]。
+欧耶！我们已经通过 Puppet 安装了 Nginx。你可以重复这个步骤安装任何基于 Puppet 的应用或者是基础设施。
 
 ***
 
