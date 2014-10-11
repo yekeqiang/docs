@@ -1,7 +1,7 @@
-#Docker 0.11作为1.0 预览版发布
+# Docker 0.11作为1.0 预览版发布
 
-#####作者：[Scott Johnston](https://twitter.com/scottcjohnston) ( SVP, Product of Docker, Inc )
-#####译者：[李兆海](https://twitter.com/googollee)
+##### 作者：[Scott Johnston](https://twitter.com/scottcjohnston) ( SVP, Product of Docker, Inc )
+##### 译者：[李兆海](https://twitter.com/googollee)
 
 ***
 最近几个月，我们被问的最多的一个问题就是“什么时候发布1.0？” 今天我们宣布，立刻可用 的Docker 0.11 会是 1.0 的第一个预览版。从现在起，我们希望得到你们持续的反馈，尤其是质量问题的反馈。
@@ -52,6 +52,6 @@ Docker 团队
 
 ***
 
-这篇文章由 [Scott Johnston](https://twitter.com/scottcjohnston) 发表，[李兆海](https://twitter.com/googollee)，点击 [这里](http://blog.docker.io/2014/05/docker-0-11-release-candidate-for-1-0/) 可阅读原文。
+##### 这篇文章由 [Scott Johnston](https://twitter.com/scottcjohnston) 发表，[李兆海](https://twitter.com/googollee)，点击 [这里](http://blog.docker.io/2014/05/docker-0-11-release-candidate-for-1-0/) 可阅读原文。
 
-#####The article was contributed by [Scott Johnston](https://twitter.com/scottcjohnston) , click [here](http://blog.docker.io/2014/05/docker-0-11-release-candidate-for-1-0/) to read the original publication.
+##### The article was contributed by [Scott Johnston](https://twitter.com/scottcjohnston) , click [here](http://blog.docker.io/2014/05/docker-0-11-release-candidate-for-1-0/) to read the original publication.
