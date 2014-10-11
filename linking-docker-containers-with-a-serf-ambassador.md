@@ -1,4 +1,4 @@
-#使用 SERF AMBASSADOR 来链接 DOCKER CONTAINER
+#使用 SERF AMBASSADOR 来链接 DOCKER 容器
 
 
 #####作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)
