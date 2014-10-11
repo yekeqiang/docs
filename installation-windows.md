@@ -18,7 +18,7 @@
 
 1. 安装 virtualbox ，下载地址：https://www.virtualbox.org
 
-*非官方备注：如果你不会安装或者感觉下载速度慢，可以用360或者QQ软件管家下载自动安装*
+*译者注：如果你不会安装或者感觉下载速度慢，可以用360或者QQ软件管家下载自动安装*
 
 2. 安装 vagrant ，下载地址：http://www.vagrantup.com
 
@@ -34,7 +34,7 @@
 
 首先要打开 cmd 命令提示符，你可以同时按住 windows 键(非官方备注：ctrl键旁边那个微软图标)+R，然后输入 cmd ,按回车（Enter）就可以了，当然你也可以在你的计算机中搜索cmd.exe
 
-*非官方备注：如果你跟我一样用 win8 ，可以 "windows键 + x" 选择命令提示符管理员那个*
+*译者注：如果你跟我一样用 win8 ，可以 "windows键 + x" 选择命令提示符管理员那个*
 
 当然你可以用Cygwin终端或者git bash这些命令行都可以，操作都是一样的
 
@@ -42,9 +42,11 @@
 
 让我们下载和运行一个安装好 docker 文件的 ubuntu 镜像
 
-`git clone https://github.com/dotcloud/docker.git
-cd docker`
-`vagrant up`
+```
+git clone https://github.com/dotcloud/docker.git
+cd docker
+vagrant up
+```
 
 ![alt](http://resource.docker.cn/installation-windows-1.png)
 
