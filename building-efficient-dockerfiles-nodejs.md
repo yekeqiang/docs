@@ -1,8 +1,8 @@
-#构造有效的 Dockerfile —— Node.js
+# 构造有效的 Dockerfile —— Node.js
 
 
-#####作者：[David Weisnstein](https://twitter.com/insitusec)
-#####译者：[李兆海](https://twitter.com/googollee)
+##### 作者：[David Weisnstein](https://twitter.com/insitusec)
+##### 译者：[李兆海](https://twitter.com/googollee)
 
 ***
 
@@ -17,7 +17,7 @@
 	RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 ```
 
-# 为了模块使用缓存层
+## 为了模块使用缓存层
 
 这篇文章是关于如何高效使用docker的中间层的；同时我们会看到如何降低 docker 容器里 node.js 应用的开发和调试时间。随着把开发环境下所有事情迁移到 docker ，总有些别扭产生，主要还是“边修改边测试”的交互式工作方式。
 
@@ -166,12 +166,12 @@ Docker 作为一个新技术，如何写出高效的 `dockerfile` 是使用这�
 
 假设你之前构建过容器（比如 `docker build -t testProject .` ），然后去掉例子的 server.js 里第七行的注释（模拟修改了应用程序的逻辑），再看看重新构建容器，日志会提示发生了什么。看看日志，在[第32行](https://gist.github.com/dweinstein/9550105#file-gistfile1-txt-L32)使用了缓存，而[第38行](https://gist.github.com/dweinstein/9550105#file-gistfile1-txt-L38)则没有使用缓存。
 
-# 结论
+## 结论
 
 由于现在缓存了模块，所以每次修改应用程序代码时，不会再重新构建这些模块。这会大大提高测试和调试 nodejs 应用程序的速度。而且，这种缓存技巧也可以用于 ruby gems ，就像我们在另一篇文章里讨论的那样。
 
 ***
 
-#####这篇文章由 [David Weisnstein](https://twitter.com/insitusec) 发表，[李兆海](https://twitter.com/googollee)，点击 [这里](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js) 可阅读原文。
+##### 这篇文章由 [David Weisnstein](https://twitter.com/insitusec) 发表，[李兆海](https://twitter.com/googollee)，点击 [这里](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js) 可阅读原文。
 
-#####The article was contributed by [David Weisnstein](https://twitter.com/insitusec) , click [here](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js) to read the original publication.
+##### The article was contributed by [David Weisnstein](https://twitter.com/insitusec) , click [here](http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js) to read the original publication.
