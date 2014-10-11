@@ -1,9 +1,9 @@
-#透过数字看 Docker Hub
+# 透过数字看 Docker Hub
 
 
-#####作者：[Kiyoto Tamura](https://twitter.com/kiyototamura)
+##### 作者：[Kiyoto Tamura](https://twitter.com/kiyototamura)
 
-#####译者：[BOWEN](https://github.com/iambowen)
+##### 译者：[BOWEN](https://github.com/iambowen)
 
 ***
 上个周六我参加了 [DockerCon Hackathon](http://www.meetup.com/Docker-meetups/events/170030222/) 活动。本人是一名 Docker 深度用户（主要是快速创建新容器，去验证或者重现 [Fluentd](http://www.fluentd.org/) 项目提交的问题）。
@@ -22,10 +22,10 @@
 
 对，这就是让人觉得搞笑的地方。这是 Docker 编程马拉松，而我却在用 EC2 节点。
 
-##数据
+## 数据
 
 
-## 13,475 ：Docker Hub 上（我能找到的）代码库的数量
+### 13,475 ：Docker Hub 上（我能找到的）代码库的数量
 
 Docker 刚刚 [宣布](https://www.dockboard.org/announcing-docker-hub-and-official-repositories/) 它们已经拥有超过14,000个代码库，因此我的数据已经很接近了……或者是他们把数据取整了^_^ 。
 
@@ -39,7 +39,7 @@ Docker 刚刚 [宣布](https://www.dockboard.org/announcing-docker-hub-and-offic
 
 代码库数量每月的中位数增长率为 43.99% 。变化很大，因此我们也无法估量未来的走势。但是如果它能保持每月 40% 的净增长率，到2015年9月份，代码库总量会达到 100 万。（参考 Github ，在运营3年后，他们 [在2011年拥有了200万个代码库](https://github.com/blog/841-those-are-some-big-numbers) ）
 
-##5,091: Docker Hub 的用户数量
+### 5,091: Docker Hub 的用户数量
 
 这是我估测的代码库拥有者的数量。这意味着每个用户有13,475/5091 = 2.64 个代码库。中位数是1，人数的标准差是3.96 。
 
@@ -48,7 +48,7 @@ Docker 刚刚 [宣布](https://www.dockboard.org/announcing-docker-hub-and-offic
 ![alt](http://resource.docker.cn/top-20-repo-owners.png)
 
 
-##101,477: Docker Hub 上镜像总数
+### 101,477: Docker Hub 上镜像总数
 
 诚然，很多的这些镜像并不是代码库的“顶端”。我通过它们优秀的 Ancestry API 去重新构建了大部分的层次树。
 
@@ -67,12 +67,12 @@ Docker 刚刚 [宣布](https://www.dockboard.org/announcing-docker-hub-and-offic
 2. 基于 From 继承创建一个 Dockerfile 树：这个点子来 自[@ewindisch](http://github.com/ewindisch) 。目前，可信的版本（托管在 Github 上的 Dockerfile ）可以从一个不可信的版本继承，因为不要求可信版本必须从一个可信的版本构建。看到有多少可信的版本有正真可信的血统是一件很有趣的事情。
 
 
-##感谢 Docker 公司
+## 感谢 Docker 公司
 
 最后，但也是最重要的， Docker 带给了我很多的乐趣。作为一名开发人员营销人员，编码没有以前多了，而且明显的感觉越来越生疏了。但是能够再次挽起袖子，和全球各地的开发人员一起探索发现新事物（我实现了自己第一份 Go 代码，学习了很多关于 Docker 的 API 的知识）的感觉很棒。因此，感谢每一个参与到 Docker 编程马拉松活动的每个人 :) 。
 
 ***
 
-#####这篇文章由 [Kiyoto Tamura](https://twitter.com/kiyototamura) 撰写， [BOWEN](https://github.com/iambowen) 翻译。点击 [这里](http://kiyototamura.tumblr.com/post/88454980152/docker-hub-by-the-numbers-my-docker-hackathon) 阅读原文。
+##### 这篇文章由 [Kiyoto Tamura](https://twitter.com/kiyototamura) 撰写， [BOWEN](https://github.com/iambowen) 翻译。点击 [这里](http://kiyototamura.tumblr.com/post/88454980152/docker-hub-by-the-numbers-my-docker-hackathon) 阅读原文。
 
-#####The article was contributed by [Kiyoto Tamura](https://twitter.com/kiyototamura), click [here](http://kiyototamura.tumblr.com/post/88454980152/docker-hub-by-the-numbers-my-docker-hackathon) to read the original publication.
+##### The article was contributed by [Kiyoto Tamura](https://twitter.com/kiyototamura), click [here](http://kiyototamura.tumblr.com/post/88454980152/docker-hub-by-the-numbers-my-docker-hackathon) to read the original publication.
