@@ -1,8 +1,8 @@
-#Libswarm 简明介绍
+# Libswarm 简明介绍
 
-#####作者：[Brian Goff](https://twitter.com/cpuguy83)
+##### 作者：[Brian Goff](https://twitter.com/cpuguy83)
 
-#####译者：[刘梦馨](http://weibo.com/oilbeater)
+##### 译者：[刘梦馨](http://weibo.com/oilbeater)
 
 ***
 
@@ -10,7 +10,7 @@ Libswarm 提供了一组通用的 API 可以将原先相互分离的各种工具
 
 如果你想更多了解 libswarm，可以查看 [github](https://github.com/docker/libswarm)，并且加入我们的 freenode 频道 #libswarm。感谢 @markwrenn 的图示。
 
-----------
+---
 
 在 Dockercon 上，Docker 宣布了一项正在进行中的新项目 libswarm 。我想澄清一下 libswarm 是什么，它能做什么，又不能做什么。
 
@@ -78,6 +78,6 @@ Libswarm 目前还在初步的开发中，很多 API 都还没有固定下来。
 
 ***
 
-#####这篇文章由 [Brian Goff](https://twitter.com/cpuguy83) 撰写，[刘梦馨](http://weibo.com/oilbeater) 翻译。点击 [这里](http://www.tech-d.net/2014/07/03/libswarm/) 阅读原文。
+##### 这篇文章由 [Brian Goff](https://twitter.com/cpuguy83) 撰写，[刘梦馨](http://weibo.com/oilbeater) 翻译。点击 [这里](http://www.tech-d.net/2014/07/03/libswarm/) 阅读原文。
 
-#####The article was contributed by [Brian Goff](https://twitter.com/cpuguy83), click [here](http://www.tech-d.net/2014/07/03/libswarm/) to read the original publication.
+##### The article was contributed by [Brian Goff](https://twitter.com/cpuguy83), click [here](http://www.tech-d.net/2014/07/03/libswarm/) to read the original publication.
