@@ -1,8 +1,8 @@
 # Docker vs Vagrant Cloud
 
-#####作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)
+##### 作者：[Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/)
 
-#####译者：[铁威](https://github.com/TieWei)
+##### 译者：[铁威](https://github.com/TieWei)
 
 ---
 
@@ -55,7 +55,7 @@ $ vagrant up
 
 然而有明显迹象表明虚拟机将会在这些方面有所改善。
 
-###结语
+## 结语
 
 虚拟机和 linux container 的竞争十分激烈，二者在竞争中相互启发并走向技术的进步。比如 vagrant 作者的 [serf](http://serfdom.io/) 
 项目可以[很方便地在 linux container 环境中使用](http://www.centurylinklabs.com/decentralizing-docker-how-to-use-serf-with-docker/)。
@@ -74,6 +74,6 @@ $ vagrant up
 是以 linux container 为切入点的，但是从 dotcloud 的角度来讲，更希望其成为一个能够提供更多 PaaS 功能(更关注 runtime)的平台。
 
 ---
-#####这篇文章由[ Lucas Carlson ](http://www.centurylinklabs.com/author/cardmagic/)发表，[铁威](https://github.com/TieWei) 翻译，点击[此处](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/)可查阅原文。
+##### 这篇文章由[ Lucas Carlson ](http://www.centurylinklabs.com/author/cardmagic/)发表，[铁威](https://github.com/TieWei) 翻译，点击[此处](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/)可查阅原文。
 
-#####The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/), click [here](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/) to read the original publication.
+##### The article was contributed by [Lucas Carlson](http://www.centurylinklabs.com/author/cardmagic/), click [here](http://www.centurylinklabs.com/docker-vs-vagrant-cloud/) to read the original publication.
