@@ -1,9 +1,9 @@
-#Docker 容器的服务发现
+# Docker 容器的服务发现
 
 
-#####作者：[Des Drury](https://twitter.com/DesDrury)
+##### 作者：[Des Drury](https://twitter.com/DesDrury)
 
-#####译者：[Bo Wen](http://weibo.com/u/2537862844)
+##### 译者：[Bo Wen](http://weibo.com/u/2537862844)
 
 ***
 Docker 是一个封装运行时环境和可部署代码的应用程序的奇妙工具，但是它没有提供在分布式架构下容器间交流的功能。 Docker 的 links 功能只能帮助托管在单个节点的容器。一些模式和实现的如雨后春笋般出现弥补这个差距。我将在这篇博客中指出我自己的分布式 Docker 容器解决方案。
@@ -24,7 +24,7 @@ Docker 是一个封装运行时环境和可部署代码的应用程序的奇妙�
 
 ![diagram](http://resource.docker.cn/stack-1.png)
 
-###Docker容器
+## Docker容器
 
 每个 Docker 容器中都有一些额外的进程。我使用了 Supervisord 作为进程管理工具。下面图表展示了容器的结构。
 
@@ -42,7 +42,7 @@ announce-service 和 listen-path 的后台进程描述如下：
 `listen-service` ：每个容器都要运行的脚本。
 
 
-###发布一个服务
+## 发布一个服务
 
 announce-service 能发现一系列的环境变量。如下面这些变量:
 
@@ -66,7 +66,8 @@ docker run -d -t -P -e ANNOUNCE_PATH=/internal/app1/dev/db/ghost.example -e PORT
 
 下面是写入到路径的 JSON 字符串示例。
 
-```javascript
+```
+javascript
 {"ID":"444a99dbf0c6",
 "APP":"app1",
 "ENV":"dev",
@@ -94,7 +95,7 @@ docker run -d -t -P -e ANNOUNCE_PATH=/internal/app1/dev/db/ghost.example -e PORT
 
 ![diagram](http://resource.docker.cn/announce-service-2.png)
 
-###注册一个服务
+## 注册一个服务
 
 一旦一个服务被发布，它需要立即注册。这个额外的步骤的原因在于容器不知道 Docker 指派给自己的外部 IP 地址或者端口。
 
@@ -111,7 +112,8 @@ docker run -d -t -P -e ANNOUNCE_PATH=/internal/app1/dev/db/ghost.example -e PORT
 
 下面是写入到该路径中的一个 JSON 字符串示例。
 
-```javascript
+```
+javascript
 {"ID":"0ce60d000eac",
 "APP":"app1",
 "ENV":"dev",
@@ -135,7 +137,8 @@ docker run -d -t -P -e ANNOUNCE_PATH=/internal/app1/dev/db/ghost.example -e PORT
 
 如下是一个写到路径的实例JSON字符串。
 
-```javascript
+```
+javascript
 {"host":"x.x.x.x"}
 ```
 
@@ -147,7 +150,7 @@ ghost.example.web.dev.app1.internal
 
 注意：在我当前版本的脚本中， DNS 入口的 IP 地址被硬编码为包含 web 前端 HA proxy 容器的 AWS 服务器的动态 IP 地址。在将来的版本中这部分会被修改的更加动态。
 
-###监听一个服务
+## 监听一个服务
 
 如果容器运行了 ```listen-path``` 脚本，之后它将会监听一个或者更多的 Etcd 路径更改。路径用如下的环境变量定义。
 
@@ -155,7 +158,8 @@ ghost.example.web.dev.app1.internal
 
 下面是一个启动 web 前端 HA Proxy 容器请求 DEV 和 SIT 命名环境中的服务的例子。
 
-```bash
+```
+bash
 docker run -d -t -p 80:80 -p 2200:22 -e LISTEN_PATH=/services/internal/app1/dev,/services/internal/app1/sit --name web_frontend registry/haproxy
 ```
 
@@ -166,7 +170,8 @@ docker run -d -t -p 80:80 -p 2200:22 -e LISTEN_PATH=/services/internal/app1/dev,
 
 下面是启动自我发布和监听 PostgreSQL 容器的 Django 容器示例。
 
-```bash
+```
+bash
 docker run -d -t -P -e ANNOUNCE_PATH=/internal/app1/dev/web/ghost.example -e PORT=80 -e TYPE=HTTP -e  LISTEN_PATH=/services/internal/app1/dev/db/ghost.example --name django registry/django
 ```
 
@@ -174,7 +179,8 @@ docker run -d -t -P -e ANNOUNCE_PATH=/internal/app1/dev/web/ghost.example -e POR
 
 之后， ```launch-service``` 将修改 ```haproxy.cfg``` 文件中的 ```http-in``` 前端代码块，于是 Django 容器发布的内容就被知道了，如下。
 
-```bash
+```
+bash
 acl ghost.example.web.dev.app1.internal hdr_dom(host) -i ghost.example.web.dev.app1.internal
 
 use_backend ghost.example.web.dev.app1.internal if ghost.example.web.dev.app1.internal
@@ -182,7 +188,8 @@ use_backend ghost.example.web.dev.app1.internal if ghost.example.web.dev.app1.in
 
 `launch-service` 脚本还会创建一个针对具体环境的配置的包含 `backend` 的代码块，如下。
 
-```bash
+```
+bash
 backend ghost.example.web.dev.app1.internal
   log global
   server 0ce60d000eac 10.250.136.243:49176
@@ -190,7 +197,8 @@ backend ghost.example.web.dev.app1.internal
 
 如果多余的 Django 容器启动发布给相同的路径，那么它们也会被添加到 ```backend``` 代码块，如下。
 
-```bash
+```
+bash
 backend ghost.example.web.dev.app1.internal
   log global
   server 0ce60d000eac 10.250.136.243:49176
@@ -199,7 +207,7 @@ backend ghost.example.web.dev.app1.internal
 
 前面的例子描述了配置 HTTP 服务，这对 TCP 也同样适用。一个例子是 Django 容器在监听它的 PostgreSQL 容器。一旦 PostgreSQL 容器被检测到，它会在 Django 容器的 ```127.0.0.1:5432``` 上变得可用。这意味着 Django 容器不用修改在任何环境中移动。唯一需要修改的是环境变量的值。
 
-###优点
+## 优点
 
 一旦 Docker 容器能够使用服务发现交流，会带来很多优点。
 
@@ -215,6 +223,6 @@ Docker 容器的服务发现的问题解决后，下一个需求就是在多个�
 
 ***
 
-#####这篇文章由 [Des Drury](https://twitter.com/DesDrury) 撰写，[Bo Wen](http://weibo.com/u/2537862844) 翻译。点击 [这里](http://desdrury.com/service-discovery-for-docker-containers/) 阅读原文。
+##### 这篇文章由 [Des Drury](https://twitter.com/DesDrury) 撰写，[Bo Wen](http://weibo.com/u/2537862844) 翻译。点击 [这里](http://desdrury.com/service-discovery-for-docker-containers/) 阅读原文。
 
-#####The article was contributed by [Des Drury](https://twitter.com/DesDrury), click [here](http://desdrury.com/service-discovery-for-docker-containers/) to read the original publication.
+##### The article was contributed by [Des Drury](https://twitter.com/DesDrury), click [here](http://desdrury.com/service-discovery-for-docker-containers/) to read the original publication.
