@@ -16,15 +16,15 @@
 
 ##安装前准备
 
-1. 安装 virtualbox ，下载地址：https://www.virtualbox.org
+步骤1. 安装 virtualbox ，下载地址：https://www.virtualbox.org
 
 *译者注：如果你不会安装或者感觉下载速度慢，可以用360或者QQ软件管家下载自动安装*
 
-2. 安装 vagrant ，下载地址：http://www.vagrantup.com
+步骤2. 安装 vagrant ，下载地址：http://www.vagrantup.com
 
 选择安装路径一路next就可以了
 
-3. 下载安装带有 ssh 的 git ，下载地址：http://git-scm.com/downloads
+步骤3. 下载安装带有 ssh 的 git ，下载地址：http://git-scm.com/downloads
 
 这个其实也是一路 next（向 github 提交过代码的应该最清楚）
 
@@ -54,7 +54,7 @@ vagrant up
 
 ![alt](http://resource.docker.cn/installation-windows-3.png)
 
-**官方文档没有的但是你会遇到的**
+###官方文档没有提到但是你会遇到的情况
 
 更新内核完成后，就出现一些字段，譬如升级完内核可能出现  vagrant halt 的字样，这个时候你就要输入 vagrant halt ，然后再输入 vagrant up ，可能会出现如下结果：
 
