@@ -1,21 +1,22 @@
-#一些使用 Docker 的技巧与秘诀
+# 一些使用 Docker 的技巧与秘诀
 
-#####作者：[Wouter Danes](https://twitter.com/wouterdanes)
+##### 作者：[Wouter Danes](https://twitter.com/wouterdanes)
 
-#####译者：[叶可强](http://weibo.com/1224591704)
+##### 译者：[叶可强](http://weibo.com/1224591704)
 
 ***
 
 Docker 可能一开始让你望而生畏，但确实是一个非常伟大的工具。用 Shells 工作令人烦扰，并且有陷阱。鉴于我花了很多时间才弄明白它，所以我想写这篇文章来避免你们做无用功。这篇文章列举了一些快速技巧、秘诀和单行脚本，帮助你更有效地使用 Docker 。
 
-##移除所有的容器和镜像（大扫除）
+## 移除所有的容器和镜像（大扫除）
 
 用一行命令大扫除：
 
 ```
   docker kill $(docker ps -q) ; docker rm $(docker ps -a -q) ; docker rmi $(docker images -q -a) 
 ```
-> #####译者注：shell 中的 $() 和 `` 类似，会先执行这里面的内容，上面的脚本会出现如下 docker kill "pids" ; docker kill 在 docker 中用于停止容器，docker rm 用户删除容器， docker rmi 删除镜像
+
+> ##### 译者注：shell 中的 $() 和 `` 类似，会先执行这里面的内容，上面的脚本会出现如下 docker kill "pids" ; docker kill 在 docker 中用于停止容器，docker rm 用户删除容器， docker rmi 删除镜像
 
 当没有运行的容器或者是根本没有容器的时候，这只是个警告。不过当你想尝试运行的时候，这就是个非常好的单行命令。如果你想删除所有容器，可以运行如下命令：
 
@@ -87,7 +88,7 @@ for line in ${tomcat_host_port} ; do
 done
 ```
 
-> ######译者注：如需转载，请注明出处。由于个人的翻译水平问题，同时欢迎各位读者修正翻译的错误，并且就 Docker 问题进行讨论。
+> ###### 译者注：如需转载，请注明出处。由于个人的翻译水平问题，同时欢迎各位读者修正翻译的错误，并且就 Docker 问题进行讨论。
 
 ***
 
