@@ -12,6 +12,7 @@
 ```bash
 sudo cp /etc/fstab /etc/fstab.$(date +%Y-%m-%d)
 ```
+
 **然后停止 docker ，通过 ```rsync``` 拷贝所有文件，保留所有属性。**
 
 ```bash
@@ -27,6 +28,7 @@ sudo rsync -aXS /var/lib/docker/. /usr/local/docker/ [/bash]
 # ...
 /usr/local/docker /var/lib/docker none bind 0 0
 ```
+
 ;file system> <mount point> <type> <options> <dump> <pass>
 不用重新启动，加载新的配置。
 
