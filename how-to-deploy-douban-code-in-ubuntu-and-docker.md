@@ -67,10 +67,7 @@ common.sh script provides some general fuctions such as installing mysql and lib
 
 
 
-
 OS_NAME.sh call the package installation command(such as 'apt-get' in Ubuntu) to:
-
-    
 
 
 Install basic develop environment:
@@ -94,12 +91,8 @@ $ sudo sed -i "s/11211/11311/g" /etc/memcached.conf
 $ sudo /etc/init.d/memcached restart
 ```
     
-
-
 Install libememcached(just as described above).
     
-
-
 Install douban/CODE:
     
 ```
@@ -118,53 +111,39 @@ $ mysql -uroot -e 'create database valentine;'
 $ mysql -uroot -D valentine < vilya/databases/schema.sql  
 ```	
     
-
-
 Install virtualenv with pip:
     
 ```
 $ sudo pip install virtualenv
 ```
 
-
-
 Create and activate Python virtual environment:
 
 ```
-# 激活后，命令行的前面会加上（venv）
+# 激活后，命令行的前面会加上(venv)
 # After activation, (venv) will be added to $PS1
 $ virtualenv venv
 $ . venv/bin/activate
 ```
-    
-
 
 Install cython and setuptools with pip:
     
+
 ```
 (venv)$ pip install cython
 (venv)$ pip install -U setuptools
 ```
 
-
-
 If you are using archlinx, install MySQL-python patch:
     
-```
-（venv)$ pip install "distribute==0.6.29" 
-```
+```(venv)$ pip install "distribute==0.6.29" ```
     
-
-
 Install the packages specified in requirements.txt in CODE:
     
-```
-（venv)$ pip install -r requirements.txt
-```
+```(venv)$ pip install -r requirements.txt```
     
-
-
 Config the IP and port
+
     
 ```    
 #把模板复制到vilya/local_config.py，CODE将从vilya/local_config.py文件中读取配置:
