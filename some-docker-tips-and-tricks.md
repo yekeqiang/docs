@@ -92,9 +92,9 @@ done
 
 ***
 
-#####这篇文章由 [Wouter Danes](https://twitter.com/wouterdanes) 发表，[叶可强](http://weibo.com/1224591704) 翻译。点击 [这里](http://www.wouterdanes.net/2014/04/16/some-docker-tips-and-tricks.html) 可查阅原文。
+##### 这篇文章由 [Wouter Danes](https://twitter.com/wouterdanes) 发表，[叶可强](http://weibo.com/1224591704) 翻译。点击 [这里](http://www.wouterdanes.net/2014/04/16/some-docker-tips-and-tricks.html) 可查阅原文。
 
-#####The article was contributed by [Wouter Danes](https://twitter.com/wouterdanes) , click [here](http://www.wouterdanes.net/2014/04/16/some-docker-tips-and-tricks.html) to read the original publication.
+##### The article was contributed by [Wouter Danes](https://twitter.com/wouterdanes) , click [here](http://www.wouterdanes.net/2014/04/16/some-docker-tips-and-tricks.html) to read the original publication.
 
 
   
