@@ -1,4 +1,4 @@
-# Docker 中文社区
+# 欢迎加入Docker 中文社区
 
 [Docker 中文社区](http://www.dockboard.org) 是一个开放的开源社区，一方面在 [网站](http://www.dockboard.org) 组织 **Docker** 技术文章的翻译和原创，另一方面在各地组织 Meetup 活动及其它社区的技术宣讲。关于 **Docker** 技术的问答请访问 [Docker 中文技术社区](http://www.dockboard.org) 和 [SegmentFault](http://segmentfault.com) 合作的 [问答子站](http://segmentfault.com/docker) 。
 
