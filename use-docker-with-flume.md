@@ -6,7 +6,7 @@
 
 ***
 
-在 Unruly ，我们使用 [Apache Flume](https://flume.apache.org/) 作为事件流架构的一部分。在源断和 sinks 端，它使非常容易建立以及丢弃的。在我的创新时间，我尝试创立一些 Flume 技术来获得 Docker 和集装箱运输的知识。
+在 Unruly ，我们使用 [Apache Flume](https://flume.apache.org/) 作为事件流架构的一部分。在源端和 sinks 端，它使非常容易建立以及丢弃的。在我的创新时间，我尝试创立一些 Flume 技术来获得 Docker 和集装箱运输的知识。
 
 ## 建立一个基础镜像
 
