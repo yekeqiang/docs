@@ -2,7 +2,7 @@
 
 ##### 作者：[Richard Seroter](http://www.infoq.com/cn/author/Richard-Seroter)
 
-#####译者：[郭蕾](http://www.infoq.com/cn/author/%E9%83%AD%E8%95%BE)
+##### 译者：[郭蕾](http://www.infoq.com/cn/author/%E9%83%AD%E8%95%BE)
 
 ***
 近日，谷歌开源了其管理 Docker 容器的编配工具 Kubernetes 。上周，微软、IBM、红帽、 Docker 、 Mesosphere 、 CoreOS 和 SaltStack 纷纷加入并表示将积极支持该项目。虽然各个厂商都有他们支持 Kubernetes 的理由，但是这一快速的合作也证明了 Linux 容器的发展势头。
