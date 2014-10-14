@@ -54,9 +54,9 @@ docker run 命令增加了一个新的参数 `—restart` ，用来指定以下�
 
 ## DockerCon Europe 2014
 
-继今年6月举行的 [DockerCon 旧金山大会](http://www.infoq.com/news/2014/06/dockercon2014) 之后，在欧洲组织的第一次正式会议将于12月4日到5日在阿姆斯特丹的NEMO科学中心举行。会议演讲者包括Docker公司CEO [Ben Golub](https://twitter.com/golubbe) 和联合创始人兼CTO [Solomon Hykes](https://twitter.com/solomonstre) 。大会的前一天，[Jérôme Petazzoni](https://twitter.com/jpetazzo) 将主持开展一场“介绍Docker”的培训，该课程将介绍Docker平台，内容贯穿安装、集成和运行。
+继今年6月举行的 [DockerCon 旧金山大会](http://www.infoq.com/news/2014/06/dockercon2014) 之后，在欧洲组织的第一次正式会议将于12月4日到5日在阿姆斯特丹的 NEMO 科学中心举行。会议演讲者包括 Docker 公司 CEO [Ben Golub](https://twitter.com/golubbe) 和联合创始人兼 CTO [Solomon Hykes](https://twitter.com/solomonstre) 。大会的前一天，[Jérôme Petazzoni](https://twitter.com/jpetazzo) 将主持开展一场“介绍 Docker ”的培训，该课程将介绍 Docker 平台，内容贯穿安装、集成和运行。
 
-另外，Docker已经宣布 [与 VMware 建立合作伙伴关系](http://blog.docker.com/2014/08/docker-vmware-1-1-3/)，致力于保证 Docker 运行在 VMware 的虚拟解决方案上、创建可互操作的管理工具以及就 Docker 社区的核心技术标准进行协作，尤其是 libcontainer 和 libswarm 的流程互操作技术。
+另外， Docker 已经宣布 [与 VMware 建立合作伙伴关系](http://blog.docker.com/2014/08/docker-vmware-1-1-3/)，致力于保证 Docker 运行在 VMware 的虚拟解决方案上、创建可互操作的管理工具以及就 Docker 社区的核心技术标准进行协作，尤其是 libcontainer 和 libswarm 的流程互操作技术。
 
 查看英文原文：[Docker Announces Version 1.2.0 and DockerCon Europe](http://www.infoq.com/news/2014/09/docker-1.2-dockercon-eu)
 
