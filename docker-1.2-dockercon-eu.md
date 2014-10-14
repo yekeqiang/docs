@@ -1,12 +1,10 @@
 # Docker 发布 1.2.0 版本，并宣布 DockerCon Europe
 
----
 
 ##### 作者：[Carlos Sanchez](http://www.infoq.com/cn/author/Carlos-Sanchez)
 
 ##### 译者：[马德奎](http://www.infoq.com/cn/author/%E9%A9%AC%E5%BE%B7%E5%A5%8E)
 
----
 
 Docker 发布了1.2.0版本，其中包括为容器指定重启策略、容器权限的细粒度控制等特性。该公司还将于今年12月在阿姆斯特丹主持召开它在欧洲的第一次正式会议 DockerCon Europe 。
 
