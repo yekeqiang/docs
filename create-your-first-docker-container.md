@@ -111,4 +111,4 @@ b2391f1efa6db419fad0271efc591be11d0a6d7f645c17487ef3d06ec54c6489
 
 ##### 这篇文章由 [James Coyle](https://twitter.com/Jamescoyle_uk) 撰写，点击 [这里](http://www.jamescoyle.net/how-to/1503-create-your-first-docker-container) 阅读原文。 [xanpeng](https://github.com/xanpeng) 翻译了本文，你可以通过 [撰写邮件](mailto:xanpeng@gmail.com) 与他联系。
 
-##### The article was contributed by [James Coyle](https://twitter.com/Jamescoyle_uk) , click [here]((http://www.jamescoyle.net/how-to/1503-create-your-first-docker-container)) to read the original publication. 
+##### The article was contributed by [James Coyle](https://twitter.com/Jamescoyle_uk) , click [here](http://www.jamescoyle.net/how-to/1503-create-your-first-docker-container) to read the original publication. 
