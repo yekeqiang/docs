@@ -1,4 +1,4 @@
-# Docker发布1.2.0版本，并宣布DockerCon Europe
+# Docker 发布 1.2.0 版本，并宣布 DockerCon Europe
 
 ---
 
