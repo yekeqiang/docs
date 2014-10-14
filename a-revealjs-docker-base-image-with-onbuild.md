@@ -90,6 +90,6 @@ $ docker build -t slideshow .
 更多的细节，可以查看 [源代码](https://github.com/parente/dockerfiles/tree/master/revealjs) 或者 [parente/revealjs repository](https://index.docker.io/u/parente/revealjs/) 。
 
 ---
-#####这篇文章由 [Peter Parente](https://twitter.com/parente) 发表， [Mark Shao](https://github.com/markshao) 翻译。你可以点击 [这里](http://mindtrove.info/a-reveal.js-docker-base-image-with-onbuild/) 阅读原文。
+##### 这篇文章由 [Peter Parente](https://twitter.com/parente) 发表， [Mark Shao](https://github.com/markshao) 翻译。你可以点击 [这里](http://mindtrove.info/a-reveal.js-docker-base-image-with-onbuild/) 阅读原文。
 
-#####The article was contributed by [Peter Parente](https://twitter.com/parente), click [here](http://mindtrove.info/a-reveal.js-docker-base-image-with-onbuild/) to read the original publication. 
+##### The article was contributed by [Peter Parente](https://twitter.com/parente), click [here](http://mindtrove.info/a-reveal.js-docker-base-image-with-onbuild/) to read the original publication. 
