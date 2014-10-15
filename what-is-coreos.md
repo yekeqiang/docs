@@ -14,7 +14,7 @@
 
 ## 2. CoreOS之禅
 
-云计算新星 Docker 正在以火箭般的速度发展，与它相关的生态圈也渐入佳境，CoreOS 就是其中之一。CoreOS 是一个全新的、面向数据中心设计的 Linux 操作系统，在2014年7月发布了首个稳定版本，目前已经完成了800万美元的A轮融资。 CoreOS 专门针对大型数据中心而设计，旨在以轻量的系统架构和灵活的应用程序部署能力简化数据中心的维护成本和复杂度。现在CoreOS 已经推出了付费产品。通过付费，用户可以使用可视化工具管理自己的 CoreOS 集群。
+云计算新星 Docker 正在以火箭般的速度发展，与它相关的生态圈也渐入佳境，CoreOS 就是其中之一。 [CoreOS](https://github.com/coreos) 是一个全新的、面向数据中心设计的 Linux 操作系统，在2014年7月发布了首个稳定版本，目前已经完成了800万美元的A轮融资。 CoreOS 专门针对大型数据中心而设计，旨在以轻量的系统架构和灵活的应用程序部署能力简化数据中心的维护成本和复杂度。现在CoreOS 已经推出了付费产品。通过付费，用户可以使用可视化工具管理自己的 CoreOS 集群。
 
 与其他历史悠久、使用广泛的 Linux 操作系统相比，CoreOS 拥有下面几个优点。
 
@@ -36,22 +36,26 @@
 
 ![alt](http://resource.docker.cn/etcd.png)
 
-在CoreOS 集群中处于骨架地位的是 etcd。 etcd 是一个分布式 key/value 存储服务，CoreOS 集群中的程序和服务可以通过 etcd 共享信息或做服务发现 。etcd 基于非常著名的 raft 一致性算法：通过选举形式在服务器之中选举 Lead 来同步数据，并以此确保集群之内信息始终一致和可用。etcd 以默认的形式安装于每个 CoreOS 系统之中。在默认的配置下，etcd 使用系统中的两个端口：4001和7001，其中4001提供给外部应用程序以HTTP+Json的形式读写数据，而7001则用作在每个 etcd 之间进行数据同步。用户更可以通过配置 CA Cert让 etcd 以 HTTPS 的方式读写及同步数据，进一步确保数据信息的安全性。
+在CoreOS 集群中处于骨架地位的是 [etcd](https://github.com/coreos/etcd)。 etcd 是一个分布式 key/value 存储服务，CoreOS 集群中的程序和服务可以通过 etcd 共享信息或做服务发现 。etcd 基于非常著名的 raft 一致性算法：通过选举形式在服务器之中选举 Lead 来同步数据，并以此确保集群之内信息始终一致和可用。etcd 以默认的形式安装于每个 CoreOS 系统之中。在默认的配置下，etcd 使用系统中的两个端口：4001和7001，其中4001提供给外部应用程序以HTTP+Json的形式读写数据，而7001则用作在每个 etcd 之间进行数据同步。用户更可以通过配置 CA Cert让 etcd 以 HTTPS 的方式读写及同步数据，进一步确保数据信息的安全性。
 
 ### 3.2. fleet
 
-fleet 是一个通过 Systemd对CoreOS 集群中进行控制和管理的工具。fleet 与 Systemd 之间通过 D-Bus API 进行交互，每个 fleet agent 之间通过 etcd 服务来注册和同步数据。fleet 提供的功能非常丰富，包括查看集群中服务器的状态、启动或终止 Docker container、读取日志内容等。更为重要的是 fleet 可以确保集群中的服务一直处于可用状态。当出现某个通过 fleet 创建的服务在集群中不可用时，如由于某台主机因为硬件或网络故障从集群中脱离时，原本运行在这台服务器中的一系列服务将通过fleet 被重新分配到其他可用服务器中。虽然当前 fleet 还处于非常早期的状态，但是其管理 CoreOS 集群的能力是非常有效的，并且仍然有很大的扩展空间，目前已提供简单的 API 接口供用户集成。
+[fleet](https://github.com/coreos/fleet) 是一个通过 Systemd对CoreOS 集群中进行控制和管理的工具。fleet 与 Systemd 之间通过 D-Bus API 进行交互，每个 fleet agent 之间通过 etcd 服务来注册和同步数据。fleet 提供的功能非常丰富，包括查看集群中服务器的状态、启动或终止 Docker container、读取日志内容等。更为重要的是 fleet 可以确保集群中的服务一直处于可用状态。当出现某个通过 fleet 创建的服务在集群中不可用时，如由于某台主机因为硬件或网络故障从集群中脱离时，原本运行在这台服务器中的一系列服务将通过fleet 被重新分配到其他可用服务器中。虽然当前 fleet 还处于非常早期的状态，但是其管理 CoreOS 集群的能力是非常有效的，并且仍然有很大的扩展空间，目前已提供简单的 API 接口供用户集成。
 
 ### 3.3. Kubernetes
 
-Kuberenetes 是由 Google 开源的一个适用于集群的 Docker containers 管理工具。用户可以将一组 containers 以 “POD” 形式通过 Kubernetes 部署到集群之中。与 fleet 更加侧重 CoreOS 集群的管理不同，Kubernetes 生来就是一个 Containers 的管理工具。Kubernetes 以 “POD” 为单位管理一系列彼此联系的 Containers，这些 Containers 被部署在同一台物理主机中、拥有同样地网络地址并共享存储配额。
+[Kuberenetes](https://github.com/GoogleCloudPlatform/kubernetes) 是由 Google 开源的一个适用于集群的 Docker containers 管理工具。用户可以将一组 containers 以 “POD” 形式通过 Kubernetes 部署到集群之中。与 fleet 更加侧重 CoreOS 集群的管理不同，Kubernetes 生来就是一个 Containers 的管理工具。Kubernetes 以 “POD” 为单位管理一系列彼此联系的 Containers，这些 Containers 被部署在同一台物理主机中、拥有同样地网络地址并共享存储配额。
 
 ### 3.4. flannel (rudder)
 
-flannel (rudder) 是 CoreOS 团队针对 Kubernetes 设计的一个覆盖网络 (overlay network) 工具，其目的在于帮助每一个使用 Kuberentes 的 CoreOS 主机拥有一个完整的子网。Kubernetes 会为每一个 POD 分配一个独立的 IP 地址，这样便于同一个 POD 中的 Containers 彼此连接，而之前的 CoreOS 并不具备这种能力。为了解决这一问题，flannel 通过在集群中创建一个覆盖网格网络 (overlay mesh network) 为主机设定一个子网。
+[flannel](https://github.com/coreos/flannel) (rudder) 是 CoreOS 团队针对 Kubernetes 设计的一个覆盖网络 (overlay network) 工具，其目的在于帮助每一个使用 Kuberentes 的 CoreOS 主机拥有一个完整的子网。Kubernetes 会为每一个 POD 分配一个独立的 IP 地址，这样便于同一个 POD 中的 Containers 彼此连接，而之前的 CoreOS 并不具备这种能力。为了解决这一问题，flannel 通过在集群中创建一个覆盖网格网络 (overlay mesh network) 为主机设定一个子网。
 
 ## 4. 下篇介绍
 
 在下一篇中，笔者将为大家展示如何建立一个 CoreOS 集群并通过 Kubernetes 管理其中的 Docker Containers。
 
-感谢[郭蕾](http://www.infoq.com/cn/author/%E9%83%AD%E8%95%BE)对本文的策划和审校。
+感谢[郭蕾](http://www.infoq.com/cn/author/%E9%83%AD%E8%95%BE)对本文的策划和审校。 
+
+---
+
+本文原载于 InfoQ 专栏，我们获得作者与 InfoQ 授权后将其转载。
