@@ -174,3 +174,7 @@ Docker社区一直在面对技术挑战，从容地给出自己的解决方案�
 - https://stackoverflow.com/questions/17989306/what-does-docker-add-to-just-plain-lxc
 
 感谢[郭蕾](http://www.infoq.com/cn/author/%E9%83%AD%E8%95%BE)对本文的审校。
+
+---
+
+本文来自于作者在 InfoQ 的 “深入浅出 Docker” 专栏。在得到作者及 InfoQ 授权后我们将其转载。
