@@ -35,7 +35,7 @@
 
 **Host 主机系统**是Docker后台进程的运行环境。从开发角度来看，它就是一台普通的单机OS系统，我们仅部署Docker后台进程以及集群工具，所以希望Host主机系统的开销越小越好。这里推荐给大家的Host主机系统是 [CoreOS](https://coreos.com/) ，它是目前开销最小的主机系统。另外，还有红帽的开源 [Atomic](http://www.projectatomic.io/) 主机系统，有基于 [Fedora](http://www.projectatomic.io/download/) 、 [CentOS](http://www.projectatomic.io/blog/2014/06/centos-atomic-host-sig-propposed/)、 [RHEL](http://rhelblog.redhat.com/2014/07/10/going-atomic-with-the-red-hat-enterprise-linux-7-high-touch-beta/) 多个版本的分支选择，也是不错的候选对象。另外一种情况是选择最小安装操作系统，自己定制Host主机系统。如果你的团队有这个实力，可以考虑自己定制这样的系统。
 
-## 3. 持续集成的构建系统
+## 3.  持续集成的构建系统
 
 当开发团队把代码提交到Git应用仓库的那一刻，我相信所有的开发者都希望有一个系统能帮助他们把这个应用程序部署到应用服务器上，以节省不必要的人工成本。但是，复杂的应用部署场景，让这个想法实现起来并不简单。
 
@@ -59,7 +59,7 @@ image source: google image search
 
 所以，使用Docker之后，任务的模块化很自然地被定义出来。通过管道图，可以查看每一步的执行时间。开发者也可以针对任务的需要，为每一个任务定义严格的性能标准，已作为之后测试工作的参考基础。
 
-## 4.最佳的发布环境
+## 4. 最佳的发布环境
 
 应用经过测试，接下来我们需要把它发布到测试环境和生产环境。这个阶段中如何更合理地使用Docker也是一个难点，开发团队需要考虑如何打造一个可伸缩扩展的分发环境。其实，这个环境就是基于Docker的私有云，更进一步我们可能期望的是提供API接口的PaaS云服务。为了构建此PaaS服务，这里推荐几款非常热门的工具方便大家参考，通过这些工具可以定制出企业私有的PaaS服务。
 
@@ -123,7 +123,7 @@ Docker的集成部署方案，是一套灵活简单的工具集解决方案。�
 
 肖德时, Red Hat Engineering Service/HSS 内部工具组Team Leader. Nodejs开源项目nodejs-cantas Lead Developer。擅长企业内部工具的设计以及实现。开源课程Rails Starter的发起人。rubygem: lazy_high_charts的Maintainer。twitter账号：xds2000，邮箱：xiaods@gmail.com
 
-## 7.下期预告
+## 7. 下期预告
 
 Docker在生产环境的应用实践已经给大家介绍，下期我将给大家介绍如何基于Docker快速构建开发环境，敬请期待！
 
