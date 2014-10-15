@@ -582,3 +582,7 @@ make gcc python-dev locales python-pip 338.3 MB
 [3] https://en.wikipedia.org/wiki/CIDR_notation#CIDR_notation
 
 感谢[郭蕾](http://www.infoq.com/cn/author/%E9%83%AD%E8%95%BE)对本文的策划和审校。
+
+---
+
+本文原载于作者在 InfoQ 的“深入浅出 Docker ”专栏。我们在得到作者与 InfoQ 的授权后将其转载。
