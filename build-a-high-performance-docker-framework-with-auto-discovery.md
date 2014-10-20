@@ -566,4 +566,4 @@ https://github.com/AVGP/forrest/blob/master/forrest.sh
 
 ---
 
-本文原载于作者刘天斯的 [博客](http://blog.liuts.com/index.php)，我们获得其授权后转载。如果您有任何疑问，可以通过 [邮件](mailto:liutiansi@gmail.com) 、[腾讯微博](http://t.qq.com/yorkoliu) 、 [新浪微博](http://weibo.com/u/1775431677) 与其交流。您也可以阅读这篇文章的 [原始版本](http://blog.liuts.com/post/242/)
+本文原载于作者刘天斯的[博客](http://blog.liuts.com/index.php)，我们获得其授权后转载。如果您有任何疑问，可以通过[邮件](mailto:liutiansi@gmail.com) 、[腾讯微博](http://t.qq.com/yorkoliu) 、[新浪微博](http://weibo.com/u/1775431677) 与其交流。您也可以阅读这篇文章的 [原始版本](http://blog.liuts.com/post/242/)。
