@@ -6,7 +6,10 @@ Linux 容器引擎 Docker 1.3 正式发布了，该版本会自动的使用数�
 
 此外新版本还支持 docker exec 注入新的进程，例如：
 
-?
-1
-$ docker exec ubuntu_bash -it bash
-支持使用 docker create 调整容器的生命周期，增加额外的安全参数 --security-opt，boot2docker 实现在 OS X 下的共享目录等等，详细的内容请看发行说明。
+```$ docker exec ubuntu_bash -it bash```
+
+支持使用 docker create 调整容器的生命周期，增加额外的安全参数 --security-opt，boot2docker 实现在 OS X 下的共享目录等等，详细的内容请看 [发行说明](发行说明) 。
+
+---
+
+本文原载于 [开源中国](http://www.oschina.net/) ，我们得到授权后将其转载。
