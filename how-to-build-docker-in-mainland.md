@@ -10,7 +10,7 @@
 
 ---
 
-在 [2014 Container 技术大会](http://con2.csdn.net) 讲述了如何构建 Docker 开发环境，本文是对演讲第一部分 **如何编译 Docker** 的总结，希望为国内从事 Docker 研究的开发者提供一个解决编译的办法。其中要感谢 **[无闻](http://www.weibo.com/Obahua)** 同学开发的  **[gopm](http://gopm.io)** 项目，为解决“特殊”网络环境下载 Golang 的 Library 提供了方案，同时他也是本文编译方法3的主要贡献者。
+笔者在 [2014 Container 技术大会](http://con2.csdn.net) 讲述了如何构建 Docker 开发环境，本文是对演讲第一部分 **如何编译 Docker** 的总结，希望为国内从事 Docker 研究的开发者提供一个解决编译的办法。其中要感谢 **[无闻](http://www.weibo.com/Obahua)** 同学开发的  **[gopm](http://gopm.io)** 项目，为解决“特殊”网络环境下载 Golang 的 Library 提供了方案，同时他也是本文编译方法3的主要贡献者。
 
 由于 Docker 编译需要依赖于 Docker Daemon ，所以只能在 64 位的 Linux 环境下先安装 Docker 程序，再从 Github 上克隆 Docker 的代码进行编译。
 
