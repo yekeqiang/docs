@@ -143,6 +143,10 @@ COPY	.	/go/src/github.com/docker/docker
 
 ---
 
+浏览/下载 [**如何编译 Docker**](http://resource.docker.cn/develop-docker-container-conference.pptx) 
+
+---
+
 **作者**
 
 马全一，docker.cn 创始人和 Docker 中文社区发起人。资深系统架构师、SAP FI/CO 顾问和 ITSM & BMC Remedy 实施顾问，现专注于 Docker 的研发，维护开源 Docker  镜像仓库项目 [Docker  Bucket ](https://github.com/dockercn/docker-bucket)。新浪微博：[马全一](https://weibo.com/genedna)、Twitter：[meaglith](https://twitter.com/genedna)、Email：meaglith AT docker.cn
