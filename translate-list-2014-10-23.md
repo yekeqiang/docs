@@ -1,4 +1,6 @@
-10月23日列表更新
+# 翻译列表
+
+*10月23日更新*
 
 - [Deploying and migrating a multi-node ElasticSearch-Lostach-Kibana cluster using Docker](https://clusterhq.com/blog/deploying-multi-node-elasticsearch-logstash-kibana-cluster-using-docker/) by Luke Marsden
  
@@ -49,7 +51,7 @@
   
 - [How to optimize your Dockerfile](http://blog.tutum.co/2014/10/22/how-to-optimize-your-dockerfile/) by Maxime Heckel
   
-[Web App health Checks in Docker](https://twelvemountains.com/2014/docker-status.html) by Adam McMaster
+- [Web App health Checks in Docker](https://twelvemountains.com/2014/docker-status.html) by Adam McMaster
  
 - [Speed up your cookbooks tests with Docker](http://odolbeau.fr/blog/speed-up-cookbooks-tests-docker.html) by Olivier Dolbeau
  
