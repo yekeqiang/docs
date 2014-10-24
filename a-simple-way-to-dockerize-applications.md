@@ -1,4 +1,4 @@
-## A Simple Way to Dockerize Applications
+# A Simple Way to Dockerize Applications
 
 ---
 
