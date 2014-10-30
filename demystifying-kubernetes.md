@@ -12,7 +12,7 @@ Kubernetes是Google开源的容器集群管理系统。它构建于docker技术�
 
 如下图所示是我初步阅读文档和源代码之后整理的总体概览，基本上可以从如下三个维度来认识Kubernetes。
 
-![Kubernetes概览](![alt](http://resource.docker.cn/kubernetes-zhangjun.png)
+![alt](http://resource.docker.cn/kubernetes-zhangjun.png)
 
 ### 操作对象
 
@@ -24,13 +24,13 @@ Kubernetes以RESTFul形式开放接口，用户可操作的REST对象有三个�
 
 可以看到，service和replicationController只是建立在pod之上的抽象，最终是要作用于pod的，那么它们如何跟pod联系起来呢？这就要引入label的概念：label其实很好理解，就是为pod加上可用于搜索或关联的一组key/value标签，而service和replicationController正是通过label来与pod关联的。如下图所示，有三个pod都有label为"app=backend"，创建service和replicationController时可以指定同样的label:"app=backend"，再通过label selector机制，就将它们与这三个pod关联起来了。例如，当有其他frontend pod访问该service时，自动会转发到其中的一个backend pod。
 
-![Kubernetes REST对象](![alt](http://resource.docker.cn/rest-objects.png)
+![alt](http://resource.docker.cn/rest-objects.png)
 
 ### 功能组件
 
 如下图所示是官方文档里的集群架构图，一个典型的master/slave模型。
 
-![Kubernetes架构图](![alt](http://resource.docker.cn/architecture.png)
+![alt](http://resource.docker.cn/architecture.png)
 
 master运行三个组件：
 
