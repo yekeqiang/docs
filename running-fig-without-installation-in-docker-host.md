@@ -108,12 +108,9 @@ docker@boot2docker:~/codingwithme-ansible$ docker run -it \
  larrycai/fig run ansible
 ```
 
-然后，它会启动Web堆栈容器（haproxy/web/database)，第一次它会花些时间下载docker的镜像），并运行到ansible容器中。
+然后，它会启动 Web 堆栈容器（haproxy/web/database)，第一次它会花些时间下载docker的镜像），并运行到 ansible 容器中。
 
-`-v /var/run/docker.sock:/docker.sock` is used to pass the docker daemon socket into docker container so docker inside can community outside `-v /home/docker/codingwithme-ansible:/app` is to share the host folder inside. 
-
-> 注：作者原文中本段有错误，需勘误，修正后会提供最新译文
-
+`-v /var/run/docker.sock:/docker.sock` 被用来传递 docker 守护进程的套接口（docker.sock)，以便 docker 容器内的 docker 客户端能和外面通信来控制 docker 的启动。 `-v /home/docker/codingwithme-ansible:/app` 是内部共享主机的文件夹到容器内。
 
 ### 提醒
 
