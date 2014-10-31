@@ -45,8 +45,8 @@ $ docker build -t library/app .
 
 现在，我们了解了docker的两种分发方式：
 
-	1. 你可以分发 container ，这样用户可以直接用它跑应用。
-	2. 你可以分发 Dockerfile ，用户可以用它自己生成 container ，然后跑应用。
+  1. 你可以分发 container ，这样用户可以直接用它跑应用。
+  2. 你可以分发 Dockerfile ，用户可以用它自己生成 container ，然后跑应用。
 
 但是到目前，我们也没有一个结论说哪种方式更好。从一个程序员的角度来讲，我更愿意开发和维护 Dockerfile ，因为当我们在 container 中用交互的方式去下载、安装、配置软件包时，或多或少我们都会遗留一些无用的东西在里面。
 
