@@ -117,6 +117,15 @@ scheduler
 -log_dir=./log  
 ```
 
+controller-manager
+
+```bash
+./controller-manager -master 127.0.0.1:8080 \
+-v=3 \
+-logtostderr=false \
+-log_dir=./log
+```
+
 kubelet
 
 ```bash
@@ -167,10 +176,68 @@ kubelet
 提交完后，通过kubecfg查看pod状态：
 
 ```bash
-./kubecfg list /pods  
+# ./kubecfg list /pods
+ID                  Image(s)            Host                Labels              Status
+----------          ----------          ----------          ----------          ----------
+redis               dockerfile/redis    127.0.0.1/          name=redis          Running
 ```
 
-如果Status是Running，就表示pod已经在容器里运行起来了，可以用"docker ps"命令来查看容器信息。
+Status是Running表示pod已经在容器里运行起来了，可以用"docker ps"命令来查看容器信息:
+
+```bash
+# docker ps
+CONTAINER ID        IMAGE                     COMMAND                CREATED             STATUS              PORTS                    NAMES
+ae83d1e4b1ec        dockerfile/redis:latest   "redis-server /etc/r   19 seconds ago      Up 19 seconds                                k8s_redis.caa18858_redis.default.etcd_1414684622_1b43fe35
+```
+
+####创建replicationController
+
+```json
+{
+    "id": "redisController",
+    "apiVersion": "v1beta1",
+    "kind": "ReplicationController",
+    "desiredState": {
+      "replicas": 1,
+      "replicaSelector": {"name": "redis"},
+      "podTemplate": {
+        "desiredState": {
+           "manifest": {
+             "version": "v1beta1",
+             "id": "redisController",
+             "containers": [{
+               "name": "redis",
+               "image": "dockerfile/redis",
+               "imagePullPolicy": "PullIfNotPresent",
+               "ports": [{
+                   "containerPort": 6379,
+                   "hostPort": 6379
+               }]
+             }]
+           }
+         },
+         "labels": {"name": "redis"}
+        }},
+    "labels": {"name": "redis"}
+  }
+```
+
+然后，通过命令行工具kubecfg提交：
+
+```bash
+./kubecfg -c redisController.json create /replicationControllers 
+```
+
+提交完后，通过kubecfg查看replicationController状态：
+
+```bash
+# ./kubecfg list /replicationControllers
+ID                  Image(s)            Selector            Replicas
+----------          ----------          ----------          ----------
+redisController     dockerfile/redis    name=redis          1
+```
+
+同时，1个pod也将被自动创建出来，即使我们故意删除该pod，replicationController也将保证创建1个新pod。
 
 ---
 
