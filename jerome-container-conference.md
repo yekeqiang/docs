@@ -63,7 +63,7 @@ VMware 北京办公室的听众们
 
 吃个饭还被各种问问题，当大神真不容易
 
-![alt](http://resource.docker.cnimg-2543.jpg)
+![alt](http://resource.docker.cn/img-2543.jpg)
 
 我会告诉你们大神有着特殊的使用筷子的技巧咩。
 
