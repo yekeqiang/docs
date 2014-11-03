@@ -8,16 +8,16 @@
 
 | Date | Start Time | End Time | Activities | 
 | ---- | ---------- | ---------| ---------- |
-| 10/14/2014 |       | 17:35 |Jerome 抵达上海 |	
+| 10/14/2014 |       | 17:35 | Jerome 抵达上海 |
 | 10/15/2014 | 10:00 | 12:00 | VMware 上海办公室演讲与问答 |
 | 10/15/2014 | 14:00 | 18:00 | EMC 上海办公室演讲与内部讨论 |
 | 10/15/2014 | 18:30 | 20:30 | 与 EMC 团队聚餐	|
 | 10/16/2014 | 13:30 | 15:30 | 飞抵北京 |
 | 10/16/2014 | 19:30 | 21:30 | Meetup with Jerome @VMware 北京办公室|
 | 10/17/2014 | 10:00 | 12:00 | 与 VMware 北京高级工程师团队闭门会议 |
-| 10/17/2014 | 14:00 | 15:30 | 面向 VMware 北京 R&D 团队的技术演讲 |	
-| 10/17/2014 | 15:30 | 18:00 | 与 Baidu 基础设施部门技术会谈 |	
-| 10/17/2014 | 18:30 | 21:00 | Container Conference 欢迎晚宴 |	
+| 10/17/2014 | 14:00 | 15:30 | 面向 VMware 北京 R&D 团队的技术演讲 |
+| 10/17/2014 | 15:30 | 18:00 | 与 Baidu 基础设施部门技术会谈 |
+| 10/17/2014 | 18:30 | 21:00 | Container Conference 欢迎晚宴 |
 | 10/18/2014 | 8:40  | 18:30 | 大会 Keynote 演讲 |	
 
 事后再看这个日程表，主页君真心觉得自己丧心病狂，居然给大神安排这么多活动，公开的，内部的，上海的，北京的。难怪大神在中国这些天每天睡眠时间不足4小时。
@@ -26,7 +26,7 @@
 
 本次 Jerome 来华布道，新进加入 Docker Inc 的 Katya 也一并随同。 Katya 负责 Docker 在亚洲市场的拓展，能讲一口流利的汉语。
 
-## Meetup with Jerome 
+## [Meetup with Jerome](http://www.meetup.com/Docker-Beijing/events/213278972/) 
 
 在16日早上我们决定在北京举行一场 meetup ，与 VMware 中国负责开源与开发者社区的喻勇联系后得到他的热烈响应，场地、嘉宾逐一确认，等到大神的飞机落地，一切安排都已就绪。
 
@@ -48,8 +48,6 @@
 
 ![alt](http://resource.docker.cn/beijing-meetup-vmware-jerome-orchestration.jpg)
 
-Jerome 本次 talk 的全文请点击 [查看](http://resource.docker.cn/docker-beijing-meetup-jerome-tips-and-tricks.pdf) 。
-
 本次 meetup 的另一位演讲嘉宾 [Thibault Bronchain](https://twitter.com/tbronchain) 是 while42 北京站点的负责人之一，他带来了服务发现的有关话题。
 
 ![alt](http://resource.docker.cn/beijing-meetup-vmware-thibault-bronchain.jpg)
@@ -69,6 +67,19 @@ VMware 北京办公室的听众们
 
 ![alt](http://resource.docker.cn/jerome-beijing-vmware-day-2.jpg)
 
+## Jerome 参加欢迎晚宴
+
+首先是大合照
+
+![alt](http://resource.docker.cn/img-2567.jpg)
+
+吃个饭还被各种问问题，当大神真不容易
+
+![alt](http://resource.docker.cnimg-2543.jpg)
+
+我会告诉你们大神有着特殊的使用筷子的技巧咩。
+
+
 ## Jerome 在 Container Conference
 
 一大早 Jerome 就在会场严阵以待。
@@ -83,6 +94,14 @@ VMware 北京办公室的听众们
 会议结束很久了，可狂热的粉丝们依然揪住大神不放，各种讨论各种请教。
 
 ![alt](http://resource.docker.cn/container-conference-jerome-fans.jpg)
+
+## 大神 talk 下载
+
+
+- 查看、下载大神在 [Meetup with Jerome](http://www.meetup.com/Docker-Beijing/events/213278972/) 的 [talk](http://resource.docker.cn/docker-beijing-meetup-jerome-tips-and-tricks.pdf) 
+
+- 查看、下载大神在 VMware 上海与北京的 [talk 1](http://resource.docker.cn/2014-10-14-shanghai-1.pdf) 、 [talk 2](http://resource.docker.cn/2014-10-14-shanghai-2.pdf)
+
 
 ## 致谢
 
