@@ -26,7 +26,7 @@ Docker 中文社区也加入这个联盟，致力于在中国推广 Docker 开�
 	- GitCafe
 	- LeanCloud
 	- Openstack
-	- Docker.cn
+	- docker.cn
 	- 七牛云存储
 - 关键词:开源精神、黑客文化、开源技术、IT行业发展
 
