@@ -2,7 +2,7 @@
 
 ---
 
-## DEVOPS ENGINEER @strikingly
+## #1. DEVOPS ENGINEER @strikingly
 
 #### 公司介绍
 
@@ -12,7 +12,7 @@ Strikingly 是一家位于上海的国际化的创业公司，得到 Y Combinato
 请访问公司网站了解更多信息：[http://www.strikingly.com/](http://www.strikingly.com/)
 
 
-####岗位职责
+#### 岗位职责
 
 - 设计、开发核心后端架构
 - 与其它工程部门紧密协作，支持新功能
