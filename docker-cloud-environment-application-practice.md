@@ -11,19 +11,19 @@
 
 ## 背景简介
 
-Docker以及一系列与之相关的容器化技术，经过多年的积累，在过去数月间得到了迅速的市场流行和关注，可谓厚积薄发。一方面是因为容器技术本身的优点，比如更节省测试，部署，弹性扩容和运维的成本及资源，另一方面也是由于业界的重要公司都十分重视并且投入容器虚拟技术，比如Google、RedHat、IBM、Facebook、Amazon以及微软。其中微软开放技术作为微软在开源社区领域的主要参与者，一直以来都积极的跟踪容器基础上的虚拟化技术，并且积极参与到相关的开源项目中，比如今年夏天宣布的由微软开放技术参与的，在微软公有云环境下对Google的Kubernetes和Docker的libswarm的支持。我们已经成功把Kubernetes和libswarm引入到Azure，使得容器技术超越简单部署迈向更加复杂拓扑的云端。
+Docker以及一系列与之相关的容器化技术，经过多年的积累，在过去数月间得到了迅速的市场流行和关注，可谓厚积薄发。一方面是因为容器技术本身的优点，比如更节省测试，部署，弹性扩容和运维的成本及资源，另一方面也是由于业界的重要公司都十分重视并且投入容器虚拟技术，比如Google、RedHat、IBM、Facebook、Amazon以及微软。其中微软开放技术作为微软在开源社区领域的主要参与者，一直以来都积极的跟踪容器基础上的虚拟化技术，并且积极参与到相关的开源项目中，比如今年夏天宣布的由微软开放技术参与的，在微软公有云环境下对Google的[Kubernetes](https://github.com/GoogleCloudPlatform/kubernetes)和Docker的[libswarm](https://github.com/docker/libswarm)的[支持](http://cn.msopentech.com/blog/2014/08/08/%E6%90%BA%E6%89%8B-google-%E5%92%8C-docker-%E4%B8%BA-microsoft-azure-%E5%B8%A6%E6%9D%A5%E5%85%A8%E6%96%B0%E7%9A%84%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/)。我们已经成功把Kubernetes和libswarm引入到Azure，使得容器技术超越简单部署迈向更加复杂拓扑的云端。
 
-2014年10月15日，Docker公司刚刚在美国与微软共同宣布，双方展开战略合作，在即将发布的Windows Server中，将为发展迅速的Docker分布式应用开放平台的全新容器技术提供支持。利用Docker技术开发容器应用的开发者与企业，将得以在Windows Server或Linux平台上共享快速成长的Docker生态系统，充分利用其中的用户、应用和工具等资源。
+2014年10月15日，[Docker公司](https://docker.com/)刚刚在美国与微软共同[宣布](http://blog.sina.com.cn/s/blog_6b8988220102v2nw.html)，双方展开战略合作，在即将发布的Windows Server中，将为发展迅速的Docker分布式应用开放平台的全新容器技术提供支持。利用Docker技术开发容器应用的开发者与企业，将得以在Windows Server或Linux平台上共享快速成长的Docker生态系统，充分利用其中的用户、应用和工具等资源。
 
 ## Docker在实际应用中的一些问题和局限性
 
-之前有文章讨论过，基于容器的云现在还没有成为主流，主要还是安全性的问题。但是我们在整个实验中也总结出一些在真实环境中遇到的安全性之外的问题。
+之前有[文章](http://www.infoq.com/cn/news/2014/10/containerized-cloud?utm_source=infoq&utm_medium=popular_links_homepage)讨论过，基于容器的云现在还没有成为主流，主要还是安全性的问题。但是我们在整个实验中也总结出一些在真实环境中遇到的安全性之外的问题。
 
 第一个就是很重要的Docker Hub的访问问题。我们知道在国内访问一些海外网站有时候会有稳定性的问题。Docker Hub在我们的实践中就经常出现访问不了的情况。但这种访问的问题并不是持续的，而是时有时无。由于大量的成熟Docker映像（image）都需要从Docker Hub下载，很多脚本在执行到这一步时，结果很难预料。一种方案是修改缺省的Docker Hub地址，改为采用国内的一些镜像（mirror）。但是在没有官方认证的成熟稳定的镜像网站时，Docker映像的更新不容易得到保证；另一种方案是自行搭建自己的Docker Hub。但是一来这样就失去了强大的社区贡献的映像资源，二来要花费很多精力来保持更新和同步。容器技术带来的简单化，又因为映像管理而复杂化，得不偿失。
 
 第二个就是容器技术的资源管理和运维。因为容器技术本身更适于解决大规模应用场景，所以通常都是集群基础上的部署、运维，但是目前对这一系列任务的自动化处理尚无统一的或者标准的框架。如果要让Docker真正在实际环境中发挥最大的效能并且易于维护，就需要有成熟稳定的资源编排（orchestration）、资源调度（scheduling）和部署（deployment）的支持，但是这方面暂时还没有很明显的最佳解决方案，所以大多数人都在摸索和搭建自己的解决方案。我们微软开放技术也是在一些开源技术的基础之上，自行开发了容器在微软公有云Azure上的资源管理调度和部署运维的系统，传统上的开发运维和持续集成，持续部署的技术，比如Chef，Puppet，Jenkins等，都可以很容易地与容器技术一起工作。
 
-市场上还有很多的比较有希望的相关新技术，比如Twitter的Apache Mesos，Facebook 的Tupperware，Docker自己的libswarm，以及Google的Kubernetes。其中Kubernetes因为在Google经历了数年的实战检验，加上最近微软、RedHat、IBM和Docker等也都宣布支持参与此项目，使得Kubernetes有着很好的前景。
+市场上还有很多的比较有希望的相关新技术，比如Twitter的Apache Mesos，Facebook 的Tupperware，Docker自己的libswarm，以及Google的Kubernetes。其中Kubernetes因为在Google经历了数年的实战检验，加上最近微软、RedHat、IBM和Docker等也都[宣布支持参与此项目](http://www.csdn.net/article/2014-07-11/2820620-welcome-microsoft-redhat-ibm-docker-and-more-to-the-kubernetes-community)，使得Kubernetes有着很好的前景。
 
 第三个是个对用户有益，但是对公有云运营商带来挑战的问题。因为实际评测中发现，同样的应用和负载，相比原有的虚拟化场景，容器化部署的资源花费通常只有10%甚至1%。意味着某些场景下的应用如果迁移至容器环境，用户会大量节约成本，从而促进用户向云环境迁移的意愿，但同时也给云服务商带来新的挑战。
 
@@ -73,12 +73,25 @@ Docker映像尺寸：500MB， Ubuntu 14.04，with ssh, ruby, python and a simple
 
 我们在微软公有云环境下的对Docker现实场景的应用实践，使我们得到了从用户角度出发，在类似场景下应用时可能遇到的问题及第一手资料。经过对某些特定场景下的资源利用效率评测，也更好的了解了以Docker为代表的容器化技术的适应对象和需要关注的问题。微软开放技术会一如既往的持续加大对容器技术的研发和投入。并希望和国内的开源社区一起推动容器技术的应用，使这项可以为用户节省大量资源的技术能在更多的产品环境中和应用场景中真真正正得到广泛而持久的应用。
 
+
+##  深度阅读
+
+- [携手 Google 和 Docker 为 Microsoft Azure 带来全新的开源容器技术](http://cn.msopentech.com/blog/2014/08/08/%E6%90%BA%E6%89%8B-google-%E5%92%8C-docker-%E4%B8%BA-microsoft-azure-%E5%B8%A6%E6%9D%A5%E5%85%A8%E6%96%B0%E7%9A%84%E5%BC%80%E6%BA%90%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/)
+- [Docker与微软展开战略合作，实现基于Container的跨平台应用开发](http://blog.sina.com.cn/s/blog_6b8988220102v2nw.html)
+- [Create a Docker Host on Microsoft Azure](http://msopentech.com/blog/2014/09/11/docker_host_in_azure/)
+- [Understanding Docker Containers on Microsoft Azure with Kubernetes Visualizer](http://msopentech.com/blog/2014/08/28/docker-containers-on-microsoft-azure-with-kubernetes-visualizer/)
+- [Getting Started with Docker on Microsoft Azure](http://msopentech.com/blog/2014/08/15/getting_started_docker_on_microsoft_azure/)
+
 ---
 
 ## 作者介绍
 
-商之狄，现任微软开放技术（中国）首席项目经理，从事开源技术、云计算和大数据相关的新技术研发与推广工作。商之狄曾在美国硅谷的start-up、互联网及电子商务领域工作多年：曾参与过用超级计算机进行最早的人类基因组全注释；用机器学习、并行计算和计算机视觉技术帮助全球最大的制药公司从数百万潜在药物中快速筛选抗癌新药；参与开发过语义基础上的垂直搜索引擎；在全球最大的支付企业技术研发部进行超高通量交易和欺诈检测业务向大规模云环境迁移的试验。在全球最大零售企业的电子商务部门任资深架构师时，领导开发了大数据基础上的全自动精准在线推广营销系统。
+商之狄，现任[微软开放技术（中国）](http://www.msopentech.cn/)首席项目经理，从事开源技术、云计算和大数据相关的新技术研发与推广工作。商之狄曾在美国硅谷的start-up、互联网及电子商务领域工作多年：曾参与过用超级计算机进行最早的人类基因组全注释；用机器学习、并行计算和计算机视觉技术帮助全球最大的制药公司从数百万潜在药物中快速筛选抗癌新药；参与开发过语义基础上的垂直搜索引擎；在全球最大的支付企业技术研发部进行超高通量交易和欺诈检测业务向大规模云环境迁移的试验。在全球最大零售企业的电子商务部门任资深架构师时，领导开发了大数据基础上的全自动精准在线推广营销系统。
 
 ---
 
-本文来源于“微软开放技术”公众帐号。
+感谢杨赛对本文的策划和审校。
+
+---
+
+本文原载于 [InfoQ](www.infoq.com) 中文站，原文地址：[Docker在云环境中的应用实践初探：优势、局限性与效能评测](http://www.infoq.com/cn/articles/docker-cloud-environment-application-practice)
