@@ -54,47 +54,48 @@ common.sh 脚本提供了一些通用的函数（如安装mysql、libmemcached �
 OS_NAME.sh 根据每个系统的不同，调用了对应的安装命令和系统默认路径。基本过程是：
 
     
-安装基本的开发环境：
+- 安装基本的开发环境：
     
 ```
 $ sudo apt-get install build-essential g++ git python-pip python-virtualenv python-dev memcached -yq
 ```
     
-安装 mysql 和相关的库：
+- 安装 mysql 和相关的库：
     
 ```
 $ sudo apt-get install mysql-client mysql-server libmysqlclient-dev -yq
 ```
 
-设置 memcached 端口为 11311 并重启 memcached：
+- 设置 memcached 端口为 11311 并重启 memcached：
     
 ```
 $ sudo sed -i "s/11211/11311/g" /etc/memcached.conf
 $ sudo /etc/init.d/memcached restart
 ```
     
-安装 libmemcached（即前面安装豆瓣打包过的 libmemcached ，这里不再赘述）
+- 安装 libmemcached（即前面安装豆瓣打包过的 libmemcached ，这里不再赘述）
     
-安装 douban/CODE ：
+- 安装 douban/CODE ：
     
 ```
-#clone CODE项目，并进入其目录：
+# clone CODE项目，并进入其目录：
 $ git clone https://github.com/douban/code.git
 $ cd code
     
-#mysql创建valentine数据库（如果设置了密码，需要加上-p参数，然后输入密码）：
+# mysql创建valentine数据库（如果设置了密码，需要加上-p参数，然后输入密码）：
 $ mysql -uroot -e 'drop database if exists valentine;' #先删除valentine数据库
 $ mysql -uroot -e 'create database valentine;'	        #重新创建valentine数据库
 $ mysql -uroot -D valentine < vilya/databases/schema.sql  #从CODE项目的sql语句导入表设计（注意当前在code目录下）
 ```	
     
-用 pip 安装 virtualenv :
+- 用 pip 安装 virtualenv :
     
 ```
 $ sudo pip install virtualenv
 ```
 
-创建并激活 Python 虚拟环境：
+- 创建并激活 Python 虚拟环境：
+
 
 ```
 # 激活后，命令行的前面会加上（venv）
@@ -102,26 +103,26 @@ $ virtualenv venv
 $ . venv/bin/activate
 ```
     
-pip 安装 cython 和 setuptools ：
+- pip 安装 cython 和 setuptools ：
     
 ```
 (venv)$ pip install cython
 (venv)$ pip install -U setuptools
 ```
 
-（如果系统是 archlinux ）安装 MySQL-python 的补丁:
+- （如果系统是 archlinux ）安装 MySQL-python 的补丁:
     
 ```
 （venv)$ pip install "distribute==0.6.29" 
 ```
     
-安装 CODE 项目中，requirements.txt 中指定的包：
+- 安装 CODE 项目中 requirements.txt 中指定的包：
     
 ```
 （venv)$ pip install -r requirements.txt
 ```
     
-对 IP 、端口进行一些配置：
+- 对 IP 、端口进行一些配置：
     
 ```    
 #把模板复制到vilya/local_config.py，CODE将从vilya/local_config.py文件中读取配置:
@@ -130,13 +131,13 @@ pip 安装 cython 和 setuptools ：
 （venv)$ vim vilya/local_config.py
 ```
     
-打开 vilya/local_config.py 后，可以看到里面的参数，包括 domain 、端口、 MySQL 的配置等等。如果 MySQL的root 用户需要密码访问，请在 42 行加上密码：
+- 打开 vilya/local_config.py 后，可以看到里面的参数，包括 domain 、端口、 MySQL 的配置等等。如果 MySQL的root 用户需要密码访问，请在 42 行加上密码：
     
 ```
 "master": "localhost:3306:valentine:root:YOUR_MYSQL_ROOT_PASSWORD"
 ```
     
-最后，启动 CODE 项目（注意：把下面的 127.0.0.1 换成真实的 IP ）：
+- 最后，启动 CODE 项目（注意：把下面的 127.0.0.1 换成真实的 IP ）：
     
 ```
 （venv)$ gunicorn -w 2 -b 127.0.0.1:8000 app:app
@@ -152,9 +153,9 @@ http://YOUR_IP:8000
 
 ![alt](http://resource.docker.cn/douban-code-interface.jpeg)    
 
-进入注册一个帐号，创建一个 git 库玩玩，everything dependes on you ^_<
+进入注册一个帐号，创建一个 git 库玩玩，everything dependes on you 
     
-另外，用 pip 安装 python 包的时候，可能会遇到访问国外镜像速度太慢的问题，可以换用豆瓣的镜像（这里要赞一下，豆瓣的镜像访问速度非常快，而且各种包都很全，相比下，清华大学的镜像很多包都是没有的）。具体方法是打开  `~/.pip/pip.conf` 文件（可能不存在，编辑后保存就可以）， 输入如下内容：
+另外，用 pip 安装 python 包的时候，可能会遇到访问国外镜像速度太慢的问题，可以换用豆瓣的镜像（这里要赞一下，豆瓣的镜像访问速度非常快，而且各种包都很全，相比下，清华大学的镜像很多包都是没有的）。具体方法是打开 `~/.pip/pip.conf` 文件（可能不存在，编辑后保存就可以）， 输入如下内容：
     
 ```    
 [global]                                  
@@ -169,6 +170,7 @@ index-url = http://pypi.douban.com/simple/
 有了在 Ubuntu 下部署 CODE 经验，在 Docker 中部署 CODE 就变得非常容易了。根据 Docker 的设计哲学，我们把数据和逻辑分开，为 MySQL 、 memcached 和 CODE 创建3个不同的镜像，然后彼此进行通信，就如同将三者部署到三台服务器上，而且部署速度更快、更容易。
 
 下面我们来看一下三个镜像的 Dockerfile ，先从 MySQL 开始：
+
 
 ```
 FROM   stackbrew/ubuntu:saucy
@@ -358,7 +360,6 @@ docker run -d -name memcached douban/memcached
 
 ```
 # 魔法就在-link参数上。
-
 # link参数的格式是：name:alias，以mysql为例。mysql是我们为MySQL镜像指定的名称，db是别名，这样，在CODE镜像访问MySQL时，环境变量中就有DB开头的MySQL路径和端口。请参考CODE镜像的start.sh脚本，其中对MySQL路径的替换，就是用$DB_PORT_3306_TCP_ADDR变量。
 # -p参数对Host和Docker容器进行端口的重定向，也就是说，把Host的8812端口定向到CODE镜像的8000端口，这样，外部就可以通过8812端口访问CODE啦。
 docker run -link mysql:db -link memcached:mem -p 8812:8000 douban/code
