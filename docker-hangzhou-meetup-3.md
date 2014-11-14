@@ -29,6 +29,11 @@ Docker 中文社区 Meetup 再度来袭。12 月 27 日下午 1 点，浙江大�
 - LeanCloud 的 Docker 实践：陈伟（LeanCloud）
 - 话题征集中……
 
+**第6个话题正在征集中**
+
+想与演讲嘉宾们谈笑风生、共话 docker ，我们这里虚位以待。请关注我们的微博 [Docker中文社区](www.weibo.com/dockerboard)，或者给我们发送 [邮件](mailto:fiona@docker.cn) 提交您的话题。一旦您的话题被采纳，我们将赠送您 [docker.cn](www.docker.cn) 独家定制卫衣，让这个冬天更温暖有爱。
+
+
 
 ## 活动组织
 
