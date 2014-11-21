@@ -401,3 +401,7 @@ The "hard work" is mostly managing the interactions between the various kernel s
 In future posts we will go into detail on how we jail the container's processes inside a root filesystem, aka a docker image, as well as using cgroups and Linux capabilities. By the end we should be able to pull all these things together to create a container.
 
 Also a thanks to tibor and everyone that helps review my brain dump of a first draft ;)
+
+---
+
+Original source: [Creating containers - Part 1: Namespaces](http://crosbymichael.com/creating-containers-part-1.html)
