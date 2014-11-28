@@ -2,7 +2,7 @@
 
 ---
 
-##### Author: Xena
+Author: Xena
 
 ---
 
@@ -21,7 +21,7 @@ docker:dev:spike ~
 
 I have made a simple [asciinema recording](https://asciinema.org/a/13158) describing the process of setting up and tearing down these containers. The development environments have the code you are working on mounted to ~/dev in the container.
 
-![alt](http://resource.docker.cn/asciinema-recording.png)
+![alt](http://resource.docker.cn/xena-snap.png)
 
 The containers are defined by a simple manifest file in yaml:
 
