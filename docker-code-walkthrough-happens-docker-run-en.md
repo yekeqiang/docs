@@ -12,7 +12,7 @@ In this blog I will answer the following question: What happens inside Docker du
 
 To get started let’s clone the [Docker Github repo](https://github.com/docker/docker) and inspect the code.
 
-``
+```
 $ git clone https://github.com/docker/docker
 ```
 
