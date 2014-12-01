@@ -5,7 +5,7 @@
 
 ---
 
-[Flynn](https://flynn.io/)是一个开源的PaaS平台，可自动构建部署任何应用到Docker容器集群上运行，其功能特性与组件设计大量参考了传统的PaaS平台[Heroku](https://www.heroku.com/)。本文旨在从使用动机、基本对象、层次架构、功能组件、基本工作流这几个方面对Flynn做总体的介绍。
+[Flynn](https://flynn.io/) 是一个开源的 PaaS 平台，可自动构建部署任何应用到 Docker 容器集群上运行，其功能特性与组件设计大量参考了传统的 PaaS 平台[Heroku](https://www.heroku.com/) 。本文旨在从使用动机、基本对象、层次架构、功能组件、基本工作流这几个方面对 Flynn 做总体的介绍。
 
 ## 为什么需要 Flynn
 
