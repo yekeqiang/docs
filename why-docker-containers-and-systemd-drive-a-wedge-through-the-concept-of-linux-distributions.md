@@ -7,7 +7,7 @@ Author : Chris Swan
 
 ---
 
-![](http://docker-cn.qiniudn.com/3464834890_6d92a1ed8c_b.jpg?imageView2/1/w/400/h/400)
+![](http://resource.docker.cn/3464834890_6d92a1ed8c_b.jpg)
 
 The [announcement of Rocket](https://coreos.com/blog/rocket/) by [CoreOS](https://coreos.com/) was perceived by many to be a direct challenge to Docker, particularly as it came on the eve of [DockerCon Europe](http://europe.dockercon.com/) and threatened to overshadow news coming out at the event. Docker, Inc. CEO Ben Golub was quick to fire back with his ‘[initial thoughts on the Rocket announcement](http://blog.docker.com/2014/12/initial-thoughts-on-the-rocket-announcement/)’. This piece isn’t about the politics of ecosystems and VC funded startups, which I’ll leave to [Colin Humphreys](http://blog.hatofmonkeys.com/blog/2014/12/03/docker) (and note an [excellent response from Docker Founder and CTO Solomon Hykes](http://blog.hatofmonkeys.com/blog/2014/12/03/docker/#comment-1723725845)). It also isn’t about managing open source community, which I’ll leave to Matt Asay. Here I want to look at [systemd](http://en.wikipedia.org/wiki/Systemd), which lies at the heart of the technical arguments.
 
