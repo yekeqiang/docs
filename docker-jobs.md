@@ -1,8 +1,39 @@
 # Docker Jobs
 
+
 ---
 
-## #1. DEVOPS ENGINEER @strikingly
+## #3. [Remote] Docker Distro 产品招 Docker, Kernel, Distro 存储工程师
+
+毋庸置疑，未来的云计算是属于 Docker 的，我们在做一套 Docker Distro，希望能成为 Docker 的 ESX，在每台服务器上高效稳定的运行 Container 。
+
+背景情况:
+- 已经拿过投资, 目前是 Stealth Mode
+- 要做一个 Docker Distro，但和 CoreOS 不一样
+- Distro 将会开源
+- 目标是成为 Docker 的 ESX
+
+技术要求:
+- 对 Docker/Container 非常熟悉，需要你参加 Upstream 的讨论和工作
+- C/C++/Golang 工程师, 同时对存储和网络有深入积累
+- Kernel, Distro 是加分项
+- 良好的英文读写能力，需要写英文 User Manual
+
+工作：
+- 地点在北京，但都可以 Remote，
+- 每天固定时间在线 Team Meeting
+- 每周一次在线 Review Meeting
+- 薪水：2-3W 起，不封顶，水平越高越好
+
+#### 简历投递邮箱：[duneos@outlook.com](mailto:duneos@outlook.com)
+
+*招聘信息原始页面：[[Remote] Docker Distro 产品，招 Docker, Kernel, Distro, 存储工程师](http://v2ex.com/t/159148)*
+
+> 公司虽然是匿名，但是团队的创始人和我们一直有交流，一直是国内 Docker 社区的积极参与者和推动者，公司状况良好，团队成员非常优秀，而且整个团队一直在 Remote 的模式下工作，有兴趣的朋友可以联系他们。
+
+---
+
+## #2. DEVOPS ENGINEER @strikingly
 
 #### 公司介绍
 
@@ -38,7 +69,7 @@ Strikingly 是一家位于上海的国际化的创业公司，得到 Y Combinato
 
 ---
 
-## #2. Docker Engineer @Genekang（基云惠康）
+## #1. Docker Engineer @Genekang（基云惠康）
 
 #### 公司介绍
 
