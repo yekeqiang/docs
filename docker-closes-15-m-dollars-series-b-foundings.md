@@ -1,4 +1,4 @@
-#DOCKER获得B轮1500万美元融资
+# DOCKER获得B轮1500万美元融资
 
 我们高兴地[宣布](http://www.businesswire.com/news/home/20140122005497/en/Docker-Closes-15M-Series-Funding#.Ut_b3hDTmUl) [ Docker Inc. ](http://www.docker.com/) 完成了 1500 万美元的 B 轮融资。该轮融资由[ Greylock Partners ](http://www.greylock.com/)领投，[ Insight Venture Partners ](http://www.insightpartners.com/)和我们 A 轮投资者[ Benchmark ](http://www.crunchbase.com/financial-organization/benchmark-2)（ Peter Fenton ）、[ Trinity Ventures ](http://www.trinityventures.com/)（ Dan Scholnick ）及[ Jerry Yang/AME Cloud Ventures ](http://www.amecloudventures.com/)跟投。
 
@@ -17,7 +17,7 @@
 3. 我们的未来计划
 
 
-##本轮融资细节
+## 本轮融资细节
 
 本轮我们的融资高达一千五百万美元，由 Greylock Ventures 的[ Jerry Chen ](http://www.greylock.com/teams/50-Jerry-Chen)领投完成，他也即将加入我们的董事会。
 
@@ -31,21 +31,21 @@ Greylock Ventures 是一家[顶级](http://www.forbes.com/sites/tomiogeron/2013/
 
 鉴于目前在我们的董事会里已经有了三位 “ Jerry ” ，加上我的名字，我们现在可是IT行业的 Ben & Jerry’s 了[2]。
 
-![Smaller icon](http://docker.u.qiniudn.com/ben-jerry.jpeg "Title here")
+![alt](http://resource.docker.cn/benjerry.jpeg)
 
-##我们的生态系统
+## 我们的生态系统
 
 Docker 生态系统持续迅速发展。在我们成立后的最初九个月里，我们被下载40万次，得到三百多位贡献者的欢迎，在公开 index 中有超过5000个基于 Docker 的应用发布。  eBay 、 Yandex 、Mailgun 、 CloudFlare 和 Baidu 等公司也公开[讨论](http://www.docker.com/about_docker/usecases/)他们对 Docker 的使用或支持。社区（的发展）促使 （ Docker ）被整合到 Chef 、 Puppet 、 Salt 、Jenkin 及其他重要的（开发）工具中。现在，Docker [线下聚会](https://www.docker.io/meetups/) 小组已经遍及全球40多个城市。最让我们兴奋的是 Docker 被[ Red Hat ](http://www.redhat.com/about/news/press-archive/2013/9/red-hat-and-dotcloud-collaborate-on-docker-to-bring-next-generation-linux-container-enhancements-to-openshift)、[ Google Compute Engine ](http://googlecloudplatform.blogspot.com/2013/12/google-compute-engine-is-now-generally-available.html) 、[ Rackspace ](http://developer.rackspace.com/blog/zero-to-peanut-butter-docker-time-in-78-seconds.html)和[ OpenStack ](http://blog.docker.io/tag/openstack-2/)等平台广泛使用。
 
-####Docker 生态系统
+#### Docker 生态系统
 
-![Smaller icon](http://docker.u.qiniudn.com/docker-ecosystem.jpeg "Title here")
+![alt](http://resource.docker.cn/docker-ecosystem.jpeg)
 
-####Docker 线下聚会小组
+#### Docker 线下聚会小组
 
-![Smaller icon](http://docker.u.qiniudn.com/docker-meetup.png "Title here")
+![alt](http://resource.docker.cn/docker-meetup.png)
 
-##我们将如何使用资金
+## 我们将如何使用资金
 
 如上所述，我们相信自己获得了绝佳的机会来从根本上改变代码构建、部署和规模化的方式。我们期望这些投资能被合理使用。
 
@@ -63,7 +63,7 @@ Docker 生态系统持续迅速发展。在我们成立后的最初九个月里�
 
 基于 Docker 本身免费、开源特质，我们加紧启动围绕 Docker 的托管服务和为 Docker 提供商业支持。我们最近聘请了[ James Turnbull ](http://www.jamesturnbull.net/) （前 Puppet 副总裁，负责技术操作和支持业务）来强化我们的支持团队。我们也聘请了[ Roger Egan ](http://www.linkedin.com/pub/roger-egan/5/622/548)（前 Red Hat副总裁，负责北美渠道/中小企业），以建设我们的销售团队和合作网络。能获得这两位开源领域的牛人的加入，我们何其有幸！我们的工程师团队也强化了托管服务，我们希望企业用户能够方便地将 Docker 部署在他们的产品中，[合作伙伴](http://www.docker.com/partners/)也能围绕 Docker 建立起牢固的商业发展。
 
-##结语
+## 结语
 
 我们度过了无比奇妙的2013年，我们期待更加精彩的2014以及未来。
 
@@ -72,6 +72,7 @@ Docker 生态系统持续迅速发展。在我们成立后的最初九个月里�
 ——
 
 [1] Solomon 和 dotCloud 的故事十分引人入胜，Peter Fento曾经说过：
+
 > 正是 Solomon 激励我们在 Docker 还是 dotCloud 的时代就进行投资。要将传统商业改造为一项纯净的开源项目，以及招募到像 Ben 这样能干的人，都需要极大的勇气。和 Solomon 一起工作是一件鼓舞人心的事情。 
 
 [2] Ben & Jerry's 是联合利华旗下生产冰激凌、冻酸奶和冰沙的乳品公司。(译者注)

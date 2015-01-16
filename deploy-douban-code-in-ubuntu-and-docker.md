@@ -1,173 +1,176 @@
-# Ubuntu下部署豆瓣CODE
----
+# 在 Ubuntu 和 Docker 下部署豆瓣 CODE
 
-###豆瓣CODE需要的依赖
+#### 作者：[巨震](http://weibo.com/1288360177)
 
- - python 2.7或更高
-
-    Ubuntu自带
-
- - pip1.4.1或更高
-
-        $ apt-get install python-pip
-
- - 豆瓣打过patch的libmemcached
-
-    有两种方式来安装，一种是下载原版libmemcached和豆瓣的patch，手动把patch打上去。另一种是下载豆瓣打好的libmemcached包。第一种方式，豆瓣给出的patch指定的路径存在问题（可能是libmemcached有更新，路径有所改变）。所以直接使用打好patch的包。
-    首先，我们来安装必要的库和g++编译器：
-    
-        $ sudo apt-get install build-essential g++
-    
-    然后下载、解压libmemcached包，编译安装：
-    
-    ```
-    $ wget  https://github.com/xtao/douban-patched/raw/master/libmemcached-douban-1.0.18.tar.gz
-    $ tar zxf libmemcached-douban-1.0.18.tar.gz
-    $ cd libmemcached-1.0.18
-    $ ./configure && make && sudo make install
-    $ cd ..
-    $ rm -rf python-libmemcached
-    $ rm -rf libmemcached*
-    $ sudo ldconfig
-    ```    
-    以上参考：http://douban-code.github.io/pages/python-libmemcached.html
-    请注意，最后一步load config的操作是必须的。make的时候，可以指定调用CPU内核的个数，一般比CPU实际内核数多1，例如，你的CPU是4核的，就指定： `make -j5`
+***
+## 在 Ubuntu 下部署豆瓣 CODE
 
 
+### 豆瓣 CODE 需要的依赖
+
+ - python 2.7 或更高
+
+    Ubuntu 自带
+
+ - pip1.4.1 或更高
+
+```
+$ apt-get install python-pip
+```
+
+ - 豆瓣打过 patch 的 libmemcached
+
+有两种方式来安装，一种是下载原版 libmemcached 和豆瓣的 patch ，手动把 patch 打上去。另一种是下载豆瓣打好的 libmemcached 包。第一种方式，豆瓣给出的 patch 指定的路径存在问题（可能是 libmemcached 有更新，路径有所改变）。所以直接使用打好 patch 的包。
+
+首先，我们来安装必要的库和g++编译器：
+
+```
+$ sudo apt-get install build-essential g++
+```
+
+然后下载、解压libmemcached包，编译安装：
+    
+```
+$ wget  https://github.com/xtao/douban-patched/raw/master/libmemcached-douban-1.0.18.tar.gz
+$ tar zxf libmemcached-douban-1.0.18.tar.gz
+$ cd libmemcached-1.0.18
+$ ./configure && make && sudo make install
+$ cd ..
+$ rm -rf python-libmemcached
+$ rm -rf libmemcached*
+$ sudo ldconfig
+```
+
+以上参考：http://douban-code.github.io/pages/python-libmemcached.html 。请注意，最后一步 load config 的操作是必须的。 make 的时候，可以指定调用 CPU 内核的个数，一般比 CPU 实际内核数多1，例如，你的CPU是4核的，就指定： `make -j5`
+
+### 下载执行豆瓣 CODE 的部署脚本
+
+豆瓣 CODE 的 git 主页上有相关的说明，但是提供的脚本在执行过程中还存在一些问题，下面以 Ubuntu 为例，把脚本的工作整理一下：
+
+脚本文件可以在 https://github.com/douban/code/tree/master/scripts 拿到，每个系统都有对应的脚本，目前支持archlinux，centos，fedora，gentoo，opensuse，ubuntu。
+    
+common.sh 脚本提供了一些通用的函数（如安装mysql、libmemcached ，如果已经安装好，则脚本会跳过这些软件的安装）。
+    
+OS_NAME.sh 根据每个系统的不同，调用了对应的安装命令和系统默认路径。基本过程是：
+
+    
+- 安装基本的开发环境：
+    
+```
+$ sudo apt-get install build-essential g++ git python-pip python-virtualenv python-dev memcached -yq
+```
+    
+- 安装 mysql 和相关的库：
+    
+```
+$ sudo apt-get install mysql-client mysql-server libmysqlclient-dev -yq
+```
+
+- 设置 memcached 端口为 11311 并重启 memcached：
+    
+```
+$ sudo sed -i "s/11211/11311/g" /etc/memcached.conf
+$ sudo /etc/init.d/memcached restart
+```
+    
+- 安装 libmemcached（即前面安装豆瓣打包过的 libmemcached ，这里不再赘述）
+    
+- 安装 douban/CODE ：
+    
+```
+# clone CODE项目，并进入其目录：
+$ git clone https://github.com/douban/code.git
+$ cd code
+    
+# mysql创建valentine数据库（如果设置了密码，需要加上-p参数，然后输入密码）：
+$ mysql -uroot -e 'drop database if exists valentine;' #先删除valentine数据库
+$ mysql -uroot -e 'create database valentine;'	        #重新创建valentine数据库
+$ mysql -uroot -D valentine < vilya/databases/schema.sql  #从CODE项目的sql语句导入表设计（注意当前在code目录下）
+```	
+    
+- 用 pip 安装 virtualenv :
+    
+```
+$ sudo pip install virtualenv
+```
+
+- 创建并激活 Python 虚拟环境：
 
 
-###下载执行豆瓣CODE的部署脚本
+```
+# 激活后，命令行的前面会加上（venv）
+$ virtualenv venv
+$ . venv/bin/activate
+```
+    
+- pip 安装 cython 和 setuptools ：
+    
+```
+(venv)$ pip install cython
+(venv)$ pip install -U setuptools
+```
 
-- ` `
+- （如果系统是 archlinux ）安装 MySQL-python 的补丁:
+    
+```
+（venv)$ pip install "distribute==0.6.29" 
+```
+    
+- 安装 CODE 项目中 requirements.txt 中指定的包：
+    
+```
+（venv)$ pip install -r requirements.txt
+```
+    
+- 对 IP 、端口进行一些配置：
+    
+```    
+#把模板复制到vilya/local_config.py，CODE将从vilya/local_config.py文件中读取配置:
+（venv)$ cp vilya/local_config.py.tmpl vilya/local_config.py
+#打开配置文件，进行设置
+（venv)$ vim vilya/local_config.py
+```
+    
+- 打开 vilya/local_config.py 后，可以看到里面的参数，包括 domain 、端口、 MySQL 的配置等等。如果 MySQL的root 用户需要密码访问，请在 42 行加上密码：
+    
+```
+"master": "localhost:3306:valentine:root:YOUR_MYSQL_ROOT_PASSWORD"
+```
+    
+- 最后，启动 CODE 项目（注意：把下面的 127.0.0.1 换成真实的 IP ）：
+    
+```
+（venv)$ gunicorn -w 2 -b 127.0.0.1:8000 app:app
+```
+    
+OK ，到这里 CODE 就部署完成了，打开浏览器，输入：
+    
+```
+http://YOUR_IP:8000
+```
+    
+就可以看到 CODE 的界面了：
 
-    豆瓣CODE的git主页上有相关的说明，但是提供的脚本在执行过程中还存在一些问题，下面以Ubuntu为例，把脚本的工作整理一下：
-    
-    脚本文件可以在 https://github.com/douban/code/tree/master/scripts 拿到，每个系统都有对应的脚本，目前支持archlinux，centos，fedora，gentoo，opensuse，ubuntu。
-    
-    common.sh脚本提供了一些通用的函数（如安装mysql、libmemcached，如果已经安装好，则脚本会跳过这些软件的安装）
-    
-    OS_NAME.sh根据每个系统的不同，调用了对应的安装命令和系统默认路径。基本过程是：
+![alt](http://resource.docker.cn/douban-code-interface.jpeg)    
 
+进入注册一个帐号，创建一个 git 库玩玩，everything dependes on you 
     
-    安装基本的开发环境：
+另外，用 pip 安装 python 包的时候，可能会遇到访问国外镜像速度太慢的问题，可以换用豆瓣的镜像（这里要赞一下，豆瓣的镜像访问速度非常快，而且各种包都很全，相比下，清华大学的镜像很多包都是没有的）。具体方法是打开 `~/.pip/pip.conf` 文件（可能不存在，编辑后保存就可以）， 输入如下内容：
     
-    ```
-    $ sudo apt-get install build-essential g++ git python-pip python-virtualenv python-dev memcached -yq
-    ```
+```    
+[global]                                  
+index-url = http://pypi.douban.com/simple/
+```
     
-    安装mysql和相关的库：
-    
-    ```
-    $ sudo apt-get install mysql-client mysql-server libmysqlclient-dev -yq
-    ```
-    
-    设置memcached端口为11311并重启memcached：
-    
-    ```
-    $ sudo sed -i "s/11211/11311/g" /etc/memcached.conf
-    $ sudo /etc/init.d/memcached restart
-    ```
-    
-    安装libmemcached（即前面安装豆瓣打包过的libmemcached，这里不再赘述）
-    
-    安装douban/CODE：
-    
-    ```
-    #clone CODE项目，并进入其目录：
-    $ git clone https://github.com/douban/code.git
-    $ cd code
-    
-    #mysql创建valentine数据库（如果设置了密码，需要加上-p参数，然后输入密码）：
-    $ mysql -uroot -e 'drop database if exists valentine;'    #先删除valentine数据库
-    $ mysql -uroot -e 'create database valentine;'	        #重新创建valentine数据库
-    $ mysql -uroot -D valentine < vilya/databases/schema.sql  #从CODE项目的sql语句导入表设计（注意当前在code目录下）
-    ```	
-    
-    用pip安装virtualenv:
-    
-    ```
-    $ sudo pip install virtualenv
-    ```
-    
-    创建并激活Python虚拟环境： 
-    ```
-    # 激活后，命令行的前面会加上（venv）
-    $ virtualenv venv
-    $ . venv/bin/activate
-    ```
-    
-    pip安装cython和setuptools：
-    
-    ```
-    (venv)$ pip install cython
-    (venv)$ pip install -U setuptools
-    ```
-    
-    （如果系统是archlinux）安MySQL-python的补丁:
-    
-    ```
-    （venv)$ pip install "distribute==0.6.29" 
-    ```
-    
-    安装CODE项目中，requirements.txt中指定的包：
-    
-    ```
-    （venv)$ pip install -r requirements.txt
-    ```
-    
-    		
-    对ip、端口进行一些配置：
-    
-    ```    
-    #把模板复制到vilya/local_config.py，CODE将从vilya/local_config.py文件中读取配置:
-    （venv)$ cp vilya/local_config.py.tmpl vilya/local_config.py
-    #打开配置文件，进行设置
-    （venv)$ vim vilya/local_config.py
-    ```
-    
-    打开vilya/local_config.py后，可以看到里面的参数，包括domain、端口、MySQL的配置等等。如果MySQL的root用户需要密码访问，请在42行加上密码：
-    
-    ```
-        "master": "localhost:3306:valentine:root:YOUR_MYSQL_ROOT_PASSWORD"
-    ```
-    
-    最后，启动CODE项目（注意把下面的127.0.0.1换成真实的IP）：
-    
-    ```
-    （venv)$ gunicorn -w 2 -b 127.0.0.1:8000 app:app
-    ```
-    
-    OK，到这里CODE就部署完成了，打开浏览器，输入：
-    
-    ```
-    http://YOUR_IP:8000
-    ```
-    
-    就可以看到CODE的界面了：
-
-    ![enter image description here][1]    
-
-    进入注册一个帐号，创建一个git库玩玩，everything dependes on you ^_<
-    
-    另外，用pip安装python包的时候，可能会遇到访问国外镜像速度太慢的问题，可以换用豆瓣的镜像（这里要赞一下，豆瓣的镜像访问速度非常快，而且各种包都很全，相比下，清华大学的镜像很多包都是没有的）。具体方法是打开 `~/.pip/pip.conf` 文件（可能不存在，编辑后保存就可以）， 输入如下内容：
-    
-    ```    
-    [global]                                  
-    index-url = http://pypi.douban.com/simple/
-    ```
-    
-    这样，就可以从豆瓣的镜像下载python的库了，速度杠杠滴啊，哈哈。
-    
-
-
-  
+这样，就可以从豆瓣的镜像下载 python 的库了，速度杠杠滴啊，哈哈。
+     
  
-#在Docker中部署豆瓣CODE
----
+## 在 Docker 中部署豆瓣 CODE
 
-有了在Ubuntu下部署CODE经验，在Docker中部署CODE就变得非常容易了。根据Docker的设计哲学，我们把数据和逻辑分开，为MySQL、memcached和CODE创建3个不同的镜像，然后彼此进行通信，就如同将三者部署到三台服务器上，而且部署速度更快、更容易。
+有了在 Ubuntu 下部署 CODE 经验，在 Docker 中部署 CODE 就变得非常容易了。根据 Docker 的设计哲学，我们把数据和逻辑分开，为 MySQL 、 memcached 和 CODE 创建3个不同的镜像，然后彼此进行通信，就如同将三者部署到三台服务器上，而且部署速度更快、更容易。
 
-下面我们来看一下三个镜像的Dockerfile，先从MySQL开始：
+下面我们来看一下三个镜像的 Dockerfile ，先从 MySQL 开始：
+
 
 ```
 FROM   stackbrew/ubuntu:saucy
@@ -211,7 +214,7 @@ EXPOSE 3306
 CMD ["/usr/bin/mysqld_safe", "--skip-syslog", "--log-error=/dev/null"]
 ```
 
-以上就是MySQL镜像的Dockerfile，只有短短的20行左右。下面我们再看memcached的Dockerfile：
+以上就是 MySQL 镜像的 Dockerfile ，只有短短的 20 行左右。下面我们再看 memcached 的 Dockerfile ：
 
 ```
 FROM ubuntu
@@ -242,7 +245,7 @@ EXPOSE 11311
 CMD memcached -u daemon
 ```
 
-基本上就是Ubuntu下部署的命令，非常简单。最后我们再来看CODE镜像的Dockerfile：
+基本上就是 Ubuntu 下部署的命令，非常简单。最后我们再来看 CODE 镜像的 Dockerfile ：
 
 ```
 FROM ubuntu
@@ -278,7 +281,7 @@ RUN chmod +x start.sh
 CMD /start.sh
 ```
 
-要从Host复制到镜像的install.sh脚本：
+要从 Host 复制到镜像的 install.sh 脚本：
 
 ```
 # 进入code目录并安装必要的python库
@@ -288,7 +291,8 @@ pip install -U setuptools
 pip install -r requirements.txt
 ```
 
-以及需要复制的start.sh脚本：
+以及需要复制的 start.sh 脚本：
+
 ```
 cd code
 cp vilya/local_config.py.tmpl vilya/local_config.py
@@ -306,9 +310,9 @@ virtualenv venv
 gunicorn -w 2 -b $CURRENT_IP:8000 app:app
 ```
 
-start.sh脚本主要开启虚拟环境，并启动CODE。
+start.sh 脚本主要开启虚拟环境，并启动 CODE 。
 
-OK，万事俱备，只欠东风，我们准备好三个目录，分别是douban-mysql,douban-memcached,douban-code，把三个镜像的Dockerfile放在对应的目录中，install.sh和start.sh放到douban-code目录中。然后进行镜像的构建：
+OK ，万事俱备，只欠东风，我们准备好三个目录，分别是 douban-mysql 、 douban-memcached 和 douban-code 。把三个镜像的 Dockerfile 放在对应的目录中， install.sh 和 start.sh 放到 douban-code 目录中，然后进行镜像的构建：
 
 ```
 # 首先来构建MySQL：
@@ -325,11 +329,12 @@ cd douban-code
 docker build -t douban/code .
 ```
 
-编译memcached的过程比较长，大家要耐心等待哦。当三个镜像都构建好时，我们来查一下镜像是否存在：
+编译 memcached 的过程比较长，大家要耐心等待哦。当三个镜像都构建好时，我们来查一下镜像是否存在：
 
 ```
 docker images
 ```
+
 输出结果：
 
 ```
@@ -341,7 +346,8 @@ helloworld          latest              861397c62c8a        2 weeks ago         
 ubuntu              13.10               9f676bd305a4        7 weeks ago         178 MB
 ......
 ```
-OK，我们已经拥有这三个镜像了，下面我们就把CODE跑起来。首先，启动MySQL和memcached：
+
+好了，我们已经拥有这三个镜像了，下面我们就把 CODE 跑起来。首先，启动 MySQL 和 memcached ：
 
 ```
 # -d参数让镜像以daemon模式（或者叫detached模式）来执行。因为mysql和memcached都是daemon模式运行的，所以不带-d参数，会一直挂起。
@@ -350,25 +356,21 @@ docker run -d -name mysql douban/mysql
 docker run -d -name memcached douban/memcached
 ```
 
-最后，是CODE镜像：
+最后，是 CODE 镜像：
 
 ```
 # 魔法就在-link参数上。
-
 # link参数的格式是：name:alias，以mysql为例。mysql是我们为MySQL镜像指定的名称，db是别名，这样，在CODE镜像访问MySQL时，环境变量中就有DB开头的MySQL路径和端口。请参考CODE镜像的start.sh脚本，其中对MySQL路径的替换，就是用$DB_PORT_3306_TCP_ADDR变量。
 # -p参数对Host和Docker容器进行端口的重定向，也就是说，把Host的8812端口定向到CODE镜像的8000端口，这样，外部就可以通过8812端口访问CODE啦。
 docker run -link mysql:db -link memcached:mem -p 8812:8000 douban/code
 ```
 
-我们这里没有指定-d参数，因为我们需要查看CODE运行的结果。CODE镜像运行时，先创建虚拟环境，然后执行gunicorn，当我们看到输出结果时候，就可以打开浏览器，输入：
+我们这里没有指定 -d 参数，因为我们需要查看 CODE 运行的结果。 CODE 镜像运行时，先创建虚拟环境，然后执行 gunicorn ，当我们看到输出结果时候，就可以打开浏览器，输入：
 
 ```
 http://HOST_IP:8812
 ```
 
-怎么样，熟悉的CODE界面是不是又回来了呢？
-![enter image description here][2]
+怎么样，熟悉的 CODE 界面是不是又回来了呢？
 
-
-  [1]: http://lanceju-com.qiniudn.com/lanceju%E8%B1%86%E7%93%A3CODE.jpg
-  [2]: http://lanceqiniutest.qiniudn.com/docker-douban-code%E8%B1%86%E7%93%A3CODE-Docker.jpg
+![alt](http://resource.docker.cn//douban-code-interface-firefox.jpeg)

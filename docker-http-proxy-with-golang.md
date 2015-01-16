@@ -1,4 +1,6 @@
-##使用 Golang 编写一个简单的 HTTP 代理
+# 使用 Golang 编写一个简单的 HTTP 代理
+
+##### 作者：[马全一](https://twiter.com/genedna)
 
 [goproxy](https://github.com/elazarl/goproxy) 是一个轻量级的 HTTP 代理库，可以很容易的编写一个仅供 [Docker](http://docker.io) 使用的代理 [程序](https://github.com/dockboard/docker-proxy) 。
 
@@ -30,9 +32,10 @@ func main() {
 
 程序在每次 HTTP 的请求过程中都检测目标地址的 URL，如果不是 docker.io 或子站会返回一个错误信息。这为了避免使用代理访问其它的网站，致使服务器被墙。
 
-##编写 Ubuntu init.d 的启动脚本
+## 编写 Ubuntu init.d 的启动脚本
 
 为了保证服务在后台运行，编写 Ubuntu init.d 的启动脚本管理 Proxy 服务。
+
 ```
 #!/bin/sh
 
@@ -112,7 +115,7 @@ esac
 exit 0
 ```
 
-##Ubuntu 中修改 Docker 的配置文件使用 HTTP Proxy
+## Ubuntu 中修改 Docker 的配置文件使用 HTTP Proxy
 
 修改 /etc/init/docker.conf 加入 http proxy 的环境变量。
 
@@ -154,4 +157,4 @@ http://192.241.209.203:8384
 
 目前 [dockboard](http://www.dockboard.org) 为了方便国内用户使用和学习 [docker](http://docker.io) 技术，使用 [DigitalOcean](http://www.digitalocean.com) 的 VPS 架设了一个代理。代理地址不保证 7x24 小时稳定，如果遇到网络问题，请咨询我们的微博账号：[Docker中文社区](http://weibo.com/dockboard)。
 
-如果开发者有闲置的 VPS 愿意架设 Docker 的代理为社区提供支持，我们非常愿意提供技术帮助，请联络：meaglith.ma@aliyun.com。
+如果开发者有闲置的 VPS 愿意架设 Docker 的代理为社区提供支持，我们非常愿意提供技术帮助，请通过 [邮件](mailto:meaglith.ma@aliyun.com) 与我们联络。

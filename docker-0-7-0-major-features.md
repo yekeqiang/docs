@@ -1,4 +1,6 @@
-![Why named docker?](http://docker.u.qiniudn.com/PPT_why_named_docker.jpg)
+# Docker 0.7 的主要功能
+
+![Why named docker?](http://resource.docker.cn/ppt-why-named-docker.jpg)
 
 嗨，Docker 0.7 终于和各位见面了！希望大家喜欢。自 0.6.0 发布以来，经过无数的 bug 修复和使用细节的改进，新版本增加了 7 个主要功能：
 
@@ -12,7 +14,7 @@
 
 您可以在 [Git库更新日志](https://github.com/dotcloud/docker/blob/v0.7.0/CHANGELOG.md) 查看详情，也可以查看下文来了解各个新功能的详情。
 
-###致谢！
+## 致谢！
 
 130 名杰出的朋友参加了 Docker 的发布！部分人士列举如下：
 
@@ -20,14 +22,14 @@ Alex Larsson、Josh Poimboeuf、Lokesh Mandvekar、Vincent Batts、Adam Miller�
 
 向以上各位，以及所有对 Docker 的发布伸出援助之手的人们致以谢意：谢谢你们！
 
-###功能1：标准 Linux 支持
+## 功能1：标准 Linux 支持
 
 _0.7.0 版引入该功能，为此特别感谢 aufs 的作者们：Alex Larsson、（Red Hat 团队）、Junjiro R. Okajima。_
 
 0.7.0 版引入了几个主要的新功能，其中最受期待的无疑是对标准 Linux 的支持。如今，使用 Docker 已经不再需要向 Linux 内核打补丁，感谢 Alex Larsson 为我们贡献了一个新的存储驱动（请参考下一个功能“存储驱动”）。这意味着 Docker 将会跳出内核限制，运行于所有主流 Linux 发行版中，包括 Fedora、RHEL、Ubuntu、Debian、Suse、 Gentoo、Arch 等）。[猛击此处](http://docs.docker.io/en/latest/installation/) 来查看你最喜爱的 Linux 发行版的 Docker 安装文档。
  
  
-###功能2：存储驱动
+## 功能2：存储驱动
 
 _0.7.0 版本引入_
 
@@ -38,7 +40,7 @@ Docker 0.7 通过引入一个存储驱动 API 来处理不同驱动的传输，�
 
 Docker 的后台程序在启动时会根据情况自动选择一种合适的驱动。如果系统支持 AUFS，Docker 会自动选择 AUFS，升级后所有的容器和镜像都是可用的；如果系统不支持 AUFS，Docker 将使用 devicemapper 作为默认的驱动。同一台机器中的驱动之间不能共享数据，但驱动产生的镜像可以互相兼容，同时也兼容之前任何版本的 Docker。这意味着 [列表](http://index.docker.io) 中的所有镜像（包括 [此处](http://blog.docker.io/2013/11/introducing-trusted-builds/) 列出的受信任镜像），在任何已安装的 Docker 中都可以使用。
 
-###功能3：离线传输
+## 功能3：离线传输
 
 _0.6.7 版中引入，特别感谢：Frederic Kautz_
 
@@ -48,7 +50,7 @@ _0.6.7 版中引入，特别感谢：Frederic Kautz_
 
 正如 Github 企业版团队的 David Calavera 所说：“有了离线传输，用 Docker 容器构建内部部署[^1]的软件产品变得非常容易。无需注册，你的容器就可以部署到任何地方。”
 
-###功能4：高级端口重定向
+## 功能4：高级端口重定向
 
 _0.6.5版中引入_
 
@@ -78,7 +80,7 @@ _注意：这项功能使安全性获得了两个突破性的小改进。本节�
 
 非常抱歉，我们不得不对 Docker 进行了这样的"突破性"的改动。我们尽量减小改动带来的不便，也希望大家看到，这些改进是值得的！
 
-###功能5：链接
+## 功能5：链接
 
 _0.6.5 版引入_
 
@@ -106,7 +108,7 @@ _0.6.5 版引入_
 
 `-link` 中指定的参数将作为环境变量的前缀。另外，我们推荐您阅读 Docker 文档中的例子《 [Building a redis container to link as a child of our web application](http://docs.docker.io/en/latest/use/working_with_links_names/#links-service-discovery-for-docker) 》。
 
-###功能6：容器命名
+## 功能6：容器命名
 
 _0.6.5 版开始支持_
 
@@ -127,7 +129,7 @@ _0.6.5 版开始支持_
 - `docker kill mysql`
  
 
-###Quality功能7：软件质量
+## 功能7：软件质量
 
 _特别感谢：Tianon Gravi、 Andy Rothfusz 和 Sven Dowideit_
 
@@ -147,11 +149,11 @@ Docker 的活跃发展令人难以置信，而且在短时间内获得了巨大�
 
 Solomon、 Michael、 Victor、 Guillaume 以及所有的 Docker 维护者们，加油！
 
-#####[^1] 原文为" on-premises software "，是指运行在用户自己的生产、营业场所的软件产品，区别于部署在远程的软件。维基百科页面：http://en.wikipedia.org/wiki/On-premises_software （译者注）
+##### [^1] 原文为" on-premises software "，是指运行在用户自己的生产、营业场所的软件产品，区别于部署在远程的软件。维基百科页面：http://en.wikipedia.org/wiki/On-premises_software （译者注）
 
-#####[^2] 银弹（ _Silver Bullet_ ）的典故在 IT 经典图书《人月神话——软件项目管理之道》（ _The Mythical Man-Month: Essays on Software Engineering_ ）中提到过。在古老的传说中，只有银弹才能杀死巫士、巨人、狼人等。一般是指威力无穷或者效率高超的武器/技术，或者万灵药，或者是妙手回春之高招。（译者注）
+##### [^2] 银弹（ _Silver Bullet_ ）的典故在 IT 经典图书《人月神话——软件项目管理之道》（ _The Mythical Man-Month: Essays on Software Engineering_ ）中提到过。在古老的传说中，只有银弹才能杀死巫士、巨人、狼人等。一般是指威力无穷或者效率高超的武器/技术，或者万灵药，或者是妙手回春之高招。（译者注）
 
 ----
-这篇文章由[ Solomon Hykes ](http://blog.docker.io/author/solomon/)发表，点击[此处](http://blog.docker.io/2013/11/docker-0-7-docker-now-runs-on-any-linux-distribution/)可查阅原文。
+##### 这篇文章由[ Solomon Hykes ](http://blog.docker.io/author/solomon/)发表，点击[此处](http://blog.docker.io/2013/11/docker-0-7-docker-now-runs-on-any-linux-distribution/)可查阅原文。
 
-The article was contributed by [Solomon Hykes](http://blog.docker.io/author/solomon/), click [here](http://blog.docker.io/2013/11/docker-0-7-docker-now-runs-on-any-linux-distribution/) to read the original publication.
+##### The article was contributed by [Solomon Hykes](http://blog.docker.io/author/solomon/), click [here](http://blog.docker.io/2013/11/docker-0-7-docker-now-runs-on-any-linux-distribution/) to read the original publication. 
